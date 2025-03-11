@@ -33,15 +33,15 @@ function SidebarItemContent({
 
   return (
     <>
-      <span className="flex-between flex w-full min-w-0 gap-4">
+      <div className="flex-between flex w-full min-w-0 gap-4">
         {(() => {
           if (!isMainSidebarItem) {
             return (
-              <span className="block w-full min-w-0 truncate">
+              <div className="block w-full min-w-0 truncate">
                 {needTranslate
                   ? t([`${namespace}:sidebar.${_.camelCase(name)}`, name])
                   : name}
-              </span>
+              </div>
             );
           }
 
@@ -82,7 +82,7 @@ function SidebarItemContent({
             {number.toLocaleString()}
           </span>
         )}
-      </span>
+      </div>
       {!active && hamburgerMenuItems !== undefined && (
         <HamburgerMenu
           smallerPadding
