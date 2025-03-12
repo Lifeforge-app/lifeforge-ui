@@ -1,37 +1,39 @@
-import { Icon } from "@iconify/react";
+import { Icon } from '@iconify/react'
+import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import OtpInput from 'react-otp-input'
+import { toast } from 'react-toastify'
 
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import OtpInput from "react-otp-input";
-import { toast } from "react-toastify";
-import { Button } from "@components/buttons";
-import { encrypt } from "@utils/encryption";
-import fetchAPI from "@utils/fetchAPI";
+import { Button } from '@components/buttons'
+
+import { encrypt } from '@utils/encryption'
+import fetchAPI from '@utils/fetchAPI'
 
 function OTPInputBox({
   verityOTP,
-  verifyOtpLoading,
+  verifyOtpLoading
 }: {
-  verityOTP: (otp: string) => Promise<void>;
-  verifyOtpLoading: boolean;
+  verityOTP: (otp: string) => Promise<void>
+  verifyOtpLoading: boolean
 }) {
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState('')
 
   return (
     <>
       <OtpInput
         shouldAutoFocus
         numInputs={6}
-        renderInput={(props) => (
+        renderInput={props => (
           <input
             {...props}
             className="border-bg-200 bg-bg-50 text-bg-800 shadow-custom dark:border-bg-800 dark:bg-bg-900 dark:text-bg-200 mx-2 size-12! rounded-md border-[1.5px] text-lg md:size-16! md:text-2xl"
             inputMode="numeric"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                verityOTP(otp).catch((err) => {
-                  console.error(err);
-                });
+            onKeyDown={e => {
+              if (e.key === 'Enter') {
+                verityOTP(otp).catch(err => {
+                  console.error(err)
+                })
               }
             }}
           />
@@ -47,27 +49,27 @@ function OTPInputBox({
         namespace="common.vault"
         tKey="otp"
         onClick={() => {
-          verityOTP(otp).catch((err) => {
-            console.error(err);
-          });
+          verityOTP(otp).catch(err => {
+            console.error(err)
+          })
         }}
       >
         verify
       </Button>
     </>
-  );
+  )
 }
 
 function ResendOTPButton({
   otpCooldown,
   sendOtpLoading,
-  requestOTP,
+  requestOTP
 }: {
-  otpCooldown: number;
-  sendOtpLoading: boolean;
-  requestOTP: () => void;
+  otpCooldown: number
+  sendOtpLoading: boolean
+  requestOTP: () => void
 }) {
-  const { t } = useTranslation("common.vault");
+  const { t } = useTranslation('common.vault')
 
   return (
     <Button
@@ -78,116 +80,117 @@ function ResendOTPButton({
       variant="secondary"
       onClick={requestOTP}
     >
-      {t("otp.buttons.resend")} {otpCooldown > 0 && `(${otpCooldown}s)`}
+      {t('otp.buttons.resend')} {otpCooldown > 0 && `(${otpCooldown}s)`}
     </Button>
-  );
+  )
 }
 
 function OTPScreen({
   endpoint,
-  callback,
+  callback
 }: {
-  endpoint: string;
-  callback: () => void;
+  endpoint: string
+  callback: () => void
 }) {
-  const { t } = useTranslation("common.vault");
-  const [otpSent, setOtpSent] = useState(false);
-  const [otpId, setOtpId] = useState(localStorage.getItem("otpId") ?? "");
+  const { apiHost } = useLifeforgeUIContext()
+  const { t } = useTranslation('common.vault')
+  const [otpSent, setOtpSent] = useState(false)
+  const [otpId, setOtpId] = useState(localStorage.getItem('otpId') ?? '')
   const [otpCooldown, setOtpCooldown] = useState(
-    localStorage.getItem("otpCooldown")
+    localStorage.getItem('otpCooldown')
       ? Math.floor(
-          (Number(localStorage.getItem("otpCooldown")) - new Date().getTime()) /
+          (Number(localStorage.getItem('otpCooldown')) - new Date().getTime()) /
             1000
         )
       : 0
-  );
-  const [sendOtpLoading, setSendOtpLoading] = useState(false);
-  const [verifyOtpLoading, setVerifyOtpLoading] = useState(false);
+  )
+  const [sendOtpLoading, setSendOtpLoading] = useState(false)
+  const [verifyOtpLoading, setVerifyOtpLoading] = useState(false)
 
   async function requestOTP(): Promise<void> {
     if (otpCooldown > 0) {
-      toast.error(t("otp.messages.cooldown"));
-      return;
+      toast.error(t('otp.messages.cooldown'))
+      return
     }
 
-    setSendOtpLoading(true);
+    setSendOtpLoading(true)
 
     try {
-      const data = await fetchAPI<string>("user/auth/otp", {
-        method: "GET",
-      });
+      const data = await fetchAPI<string>(apiHost, 'user/auth/otp', {
+        method: 'GET'
+      })
 
-      setOtpSent(true);
-      setOtpId(data);
-      setOtpCooldown(60);
-      const coolDown = new Date().getTime() + 60000;
-      localStorage.setItem("otpCooldown", coolDown.toString());
-      toast.success(t("otp.messages.success"));
+      setOtpSent(true)
+      setOtpId(data)
+      setOtpCooldown(60)
+      const coolDown = new Date().getTime() + 60000
+      localStorage.setItem('otpCooldown', coolDown.toString())
+      toast.success(t('otp.messages.success'))
     } catch {
-      toast.error(t("otp.messages.failed"));
+      toast.error(t('otp.messages.failed'))
     } finally {
-      setSendOtpLoading(false);
+      setSendOtpLoading(false)
     }
   }
 
   async function verityOTP(otp: string): Promise<void> {
     if (otp.length !== 6) {
-      toast.error(t("otp.messages.invalid"));
-      return;
+      toast.error(t('otp.messages.invalid'))
+      return
     }
 
-    setVerifyOtpLoading(true);
+    setVerifyOtpLoading(true)
 
     try {
-      const challenge = await fetchAPI<string>(`${endpoint}/challenge`);
+      const challenge = await fetchAPI<string>(apiHost, `${endpoint}/challenge`)
 
-      const data = await fetchAPI<boolean>(`${endpoint}/otp`, {
-        method: "POST",
+      const data = await fetchAPI<boolean>(apiHost, `${endpoint}/otp`, {
+        method: 'POST',
         body: {
           otp: encrypt(otp, challenge),
-          otpId,
-        },
-      });
+          otpId
+        }
+      })
 
       if (data) {
-        callback();
-        localStorage.removeItem("otpCooldown");
-        toast.success(t("otp.messages.verify.success"));
+        callback()
+        localStorage.removeItem('otpCooldown')
+        toast.success(t('otp.messages.verify.success'))
       } else {
-        toast.error(t("otp.messages.verify.failed"));
+        toast.error(t('otp.messages.verify.failed'))
       }
     } catch {
-      toast.error(t("otp.messages.verify.failed"));
+      toast.error(t('otp.messages.verify.failed'))
     } finally {
-      setVerifyOtpLoading(false);
+      setVerifyOtpLoading(false)
     }
   }
 
   useEffect(() => {
     if (otpCooldown > 0) {
-      setOtpSent(true);
+      setOtpSent(true)
       const interval = setInterval(() => {
-        setOtpCooldown((prev) => prev - 1);
+        setOtpCooldown(prev => prev - 1)
 
         if (otpCooldown === 0) {
-          setOtpSent(false);
-          clearInterval(interval);
+          setOtpSent(false)
+          clearInterval(interval)
         }
-      }, 1000);
+      }, 1000)
       return () => {
-        clearInterval(interval);
-      };
+        clearInterval(interval)
+      }
     }
-  }, [otpCooldown, otpSent]);
+  }, [otpCooldown, otpSent])
 
   return (
     <div className="flex-center size-full flex-1 flex-col gap-4">
       <Icon className="size-28" icon="tabler:shield-lock" />
       <h2 className="text-center text-4xl font-semibold">
-        {t("otp.messages.required.title")}
+        {t('otp.messages.required.title')}
       </h2>
       <p className="text-bg-500 mb-8 text-center text-lg">
-        {t("otp.messages.required.desc")}
+        {t('otp.messages.required.desc')}
       </p>
       {otpSent ? (
         <>
@@ -214,7 +217,7 @@ function OTPScreen({
         </Button>
       )}
     </div>
-  );
+  )
 }
 
-export default OTPScreen;
+export default OTPScreen

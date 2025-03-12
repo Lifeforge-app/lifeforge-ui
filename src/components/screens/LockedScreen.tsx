@@ -1,65 +1,69 @@
-import { Icon } from "@iconify/react";
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
-import { Button } from "@components/buttons";
-import { TextInput } from "@components/inputs";
-import { encrypt } from "@utils/encryption";
-import fetchAPI from "@utils/fetchAPI";
+import { Icon } from '@iconify/react'
+import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
+import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
+
+import { Button } from '@components/buttons'
+import { TextInput } from '@components/inputs'
+
+import { encrypt } from '@utils/encryption'
+import fetchAPI from '@utils/fetchAPI'
 
 function LockedScreen({
   endpoint,
-  setMasterPassword,
+  setMasterPassword
 }: {
-  endpoint: string;
-  setMasterPassword: React.Dispatch<React.SetStateAction<string>>;
+  endpoint: string
+  setMasterPassword: React.Dispatch<React.SetStateAction<string>>
 }) {
+  const { apiHost } = useLifeforgeUIContext()
   const [masterPassWordInputContent, setMasterPassWordInputContent] =
-    useState<string>("");
-  const [loading, setLoading] = useState(false);
-  const { t } = useTranslation("common.vault");
+    useState<string>('')
+  const [loading, setLoading] = useState(false)
+  const { t } = useTranslation('common.vault')
 
   async function onSubmit(): Promise<void> {
-    if (masterPassWordInputContent.trim() === "") {
-      toast.error("Please fill in all the field");
-      return;
+    if (masterPassWordInputContent.trim() === '') {
+      toast.error('Please fill in all the field')
+      return
     }
 
-    setLoading(true);
+    setLoading(true)
 
     try {
-      const challenge = await fetchAPI<string>(`${endpoint}/challenge`);
+      const challenge = await fetchAPI<string>(apiHost, `${endpoint}/challenge`)
 
-      const data = await fetchAPI<boolean>(`${endpoint}/verify`, {
-        method: "POST",
+      const data = await fetchAPI<boolean>(apiHost, `${endpoint}/verify`, {
+        method: 'POST',
         body: {
-          password: encrypt(masterPassWordInputContent, challenge),
-        },
-      });
+          password: encrypt(masterPassWordInputContent, challenge)
+        }
+      })
 
       if (data === true) {
         toast.info(
-          t("fetch.success", {
-            action: t("fetch.unlock"),
+          t('fetch.success', {
+            action: t('fetch.unlock')
           })
-        );
-        setMasterPassword(masterPassWordInputContent);
-        setMasterPassWordInputContent("");
+        )
+        setMasterPassword(masterPassWordInputContent)
+        setMasterPassWordInputContent('')
       } else {
         toast.error(
-          t("fetch.failure", {
-            action: t("fetch.unlock"),
+          t('fetch.failure', {
+            action: t('fetch.unlock')
           })
-        );
+        )
       }
     } catch {
       toast.error(
-        t("fetch.failure", {
-          action: t("fetch.unlock"),
+        t('fetch.failure', {
+          action: t('fetch.unlock')
         })
-      );
+      )
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
@@ -78,13 +82,13 @@ function LockedScreen({
         icon="tabler:lock"
         name="Master Password"
         namespace="common.vault"
-        placeholder={"••••••••••••••••"}
+        placeholder={'••••••••••••••••'}
         setValue={setMasterPassWordInputContent}
         tKey="vault"
         value={masterPassWordInputContent}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            onSubmit().catch(console.error);
+        onKeyDown={e => {
+          if (e.key === 'Enter') {
+            onSubmit().catch(console.error)
           }
         }}
       />
@@ -95,13 +99,13 @@ function LockedScreen({
         namespace="common.vault"
         tKey="vault"
         onClick={() => {
-          onSubmit().catch(console.error);
+          onSubmit().catch(console.error)
         }}
       >
         Unlock
       </Button>
     </div>
-  );
+  )
 }
 
-export default LockedScreen;
+export default LockedScreen

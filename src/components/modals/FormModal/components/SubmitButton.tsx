@@ -17,6 +17,7 @@ function SubmitButton({
     <>
       {['create', 'update'].includes(openType ?? '') ? (
         <Button
+          className="mt-6"
           icon={openType === 'create' ? 'tabler:plus' : 'tabler:pencil'}
           loading={submitLoading}
           onClick={() => {

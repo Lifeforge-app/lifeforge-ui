@@ -1,65 +1,68 @@
 /* eslint-disable sonarjs/pseudo-random */
-import { Icon } from "@iconify/react";
+import { Icon } from '@iconify/react'
+import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
+import React, { useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
-import React, { useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
-import { Button } from "@components/buttons";
-import { TextInput } from "@components/inputs";
-import { ModalWrapper } from "@components/modals";
-import fetchAPI from "@utils/fetchAPI";
+import { Button } from '@components/buttons'
+import { TextInput } from '@components/inputs'
+import { ModalWrapper } from '@components/modals'
+
+import fetchAPI from '@utils/fetchAPI'
 
 function CreatePasswordScreen({ endpoint }: { endpoint: string }) {
-  const { t } = useTranslation("common.vault");
-  const [newPassword, setNewPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [loading, setLoading] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const inputRef2 = useRef<HTMLInputElement>(null);
-  const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
+  const { apiHost } = useLifeforgeUIContext()
+  const { t } = useTranslation('common.vault')
+  const [newPassword, setNewPassword] = useState<string>('')
+  const [confirmPassword, setConfirmPassword] = useState<string>('')
+  const [loading, setLoading] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef2 = useRef<HTMLInputElement>(null)
+  const [confirmationModalOpen, setConfirmationModalOpen] = useState(false)
 
   async function onSubmit(): Promise<void> {
-    if (newPassword.trim() === "" || confirmPassword.trim() === "") {
-      toast.error(t("input.error.fieldEmpty"));
+    if (newPassword.trim() === '' || confirmPassword.trim() === '') {
+      toast.error(t('input.error.fieldEmpty'))
 
-      return;
+      return
     }
     if (newPassword.trim() !== confirmPassword.trim()) {
-      toast.error("Passwords do not match");
+      toast.error('Passwords do not match')
 
-      return;
+      return
     }
 
-    setLoading(true);
+    setLoading(true)
 
     try {
-      await fetchAPI(endpoint, {
-        method: "POST",
-        body: { password: newPassword },
-      });
+      await fetchAPI(apiHost, endpoint, {
+        method: 'POST',
+        body: { password: newPassword }
+      })
 
-      window.location.reload();
+      window.location.reload()
     } catch {
-      toast.error("An error occurred");
+      toast.error('An error occurred')
     } finally {
-      setLoading(false);
-      setConfirmationModalOpen(false);
+      setLoading(false)
+      setConfirmationModalOpen(false)
     }
   }
 
   function confirmAction(): void {
-    if (newPassword.trim() === "" || confirmPassword.trim() === "") {
-      toast.error(t("input.error.fieldEmpty"));
+    if (newPassword.trim() === '' || confirmPassword.trim() === '') {
+      toast.error(t('input.error.fieldEmpty'))
 
-      return;
+      return
     }
     if (newPassword.trim() !== confirmPassword.trim()) {
-      toast.error("Passwords do not match");
+      toast.error('Passwords do not match')
 
-      return;
+      return
     }
 
-    setConfirmationModalOpen(true);
+    setConfirmationModalOpen(true)
   }
 
   return (
@@ -67,10 +70,10 @@ function CreatePasswordScreen({ endpoint }: { endpoint: string }) {
       <div className="flex-center size-full flex-1 flex-col gap-4">
         <Icon className="size-28" icon="tabler:lock-plus" />
         <h2 className="text-4xl font-semibold">
-          {t("vault.createPassword.title")}
+          {t('vault.createPassword.title')}
         </h2>
         <p className="text-bg-500 mb-8 w-1/2 text-center text-lg">
-          {t("vault.createPassword.desc")}
+          {t('vault.createPassword.desc')}
         </p>
         <TextInput
           key="newPassword"
@@ -88,20 +91,20 @@ function CreatePasswordScreen({ endpoint }: { endpoint: string }) {
           tKey="vault"
           value={newPassword}
           onActionButtonClick={() => {
-            const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            const lowerCase = "abcdefghijklmnopqrstuvwxyz";
-            const special = "!@#$%^&*()_+";
-            const numbers = "0123456789";
+            const upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            const lowerCase = 'abcdefghijklmnopqrstuvwxyz'
+            const special = '!@#$%^&*()_+'
+            const numbers = '0123456789'
 
-            const all = upperCase + lowerCase + numbers + special;
-            let password = "";
+            const all = upperCase + lowerCase + numbers + special
+            let password = ''
             for (let i = 0; i < 12; i++) {
-              password += all[Math.floor(Math.random() * all.length)];
+              password += all[Math.floor(Math.random() * all.length)]
             }
-            setNewPassword(password);
-            setConfirmPassword(password);
+            setNewPassword(password)
+            setConfirmPassword(password)
 
-            toast.success("Random password generated successfully");
+            toast.success('Random password generated successfully')
           }}
         />
         <TextInput
@@ -118,9 +121,9 @@ function CreatePasswordScreen({ endpoint }: { endpoint: string }) {
           setValue={setConfirmPassword}
           tKey="vault"
           value={confirmPassword}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              confirmAction();
+          onKeyDown={e => {
+            if (e.key === 'Enter') {
+              confirmAction()
             }
           }}
         />
@@ -149,7 +152,7 @@ function CreatePasswordScreen({ endpoint }: { endpoint: string }) {
             icon=""
             variant="secondary"
             onClick={() => {
-              setConfirmationModalOpen(false);
+              setConfirmationModalOpen(false)
             }}
           >
             Cancel
@@ -159,15 +162,15 @@ function CreatePasswordScreen({ endpoint }: { endpoint: string }) {
             icon="tabler:check"
             loading={loading}
             onClick={() => {
-              onSubmit().catch(console.error);
+              onSubmit().catch(console.error)
             }}
           >
-            {!loading ? "Confirm" : ""}
+            {!loading ? 'Confirm' : ''}
           </Button>
         </div>
       </ModalWrapper>
     </>
-  );
+  )
 }
 
-export default CreatePasswordScreen;
+export default CreatePasswordScreen

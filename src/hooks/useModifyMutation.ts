@@ -1,7 +1,10 @@
 /* eslint-disable sonarjs/use-type-alias */
-import { useMutation, UseMutationResult } from '@tanstack/react-query'
+import { UseMutationResult, useMutation } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
+
 import fetchAPI from '@utils/fetchAPI'
+
+import { useLifeforgeUIContext } from '../providers/LifeforgeUIProvider'
 
 function useModifyMutation<T>(
   type: 'create' | 'update',
@@ -12,6 +15,8 @@ function useModifyMutation<T>(
     onError?: () => void
   }
 ): UseMutationResult<T, Error, Partial<T>, unknown> {
+  const { apiHost } = useLifeforgeUIContext()
+
   return useMutation<T, Error, Partial<T>>({
     mutationFn: async (data: Partial<T>) => {
       if (
@@ -20,7 +25,7 @@ function useModifyMutation<T>(
             value instanceof File ||
             (typeof value === 'object' &&
               (value as { image: File | 'string' | null })?.image instanceof
-              File)
+                File)
         )
       ) {
         const formData = new FormData()
@@ -39,7 +44,7 @@ function useModifyMutation<T>(
           }
         })
 
-        return fetchAPI(endpoint, {
+        return fetchAPI(apiHost, endpoint, {
           method: type === 'create' ? 'POST' : 'PATCH',
           body: formData
         })
@@ -66,7 +71,7 @@ function useModifyMutation<T>(
         }
       })
 
-      return fetchAPI(endpoint, {
+      return fetchAPI(apiHost, endpoint, {
         method: type === 'create' ? 'POST' : 'PATCH',
         body: data
       })

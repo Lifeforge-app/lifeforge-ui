@@ -1,5 +1,4 @@
 import { cookieParse } from 'pocketbase'
-import { useLifeforgeUIContext } from '../providers/LifeforgeUIProvider'
 
 interface ApiResponse<T> {
   state: 'success' | 'error'
@@ -16,6 +15,7 @@ function getRequestBody(body: any, isJSON: boolean): any {
 }
 
 export default async function fetchAPI<T>(
+  apiHost: string,
   endpoint: string,
   {
     method = 'GET',
@@ -29,8 +29,6 @@ export default async function fetchAPI<T>(
     raiseError?: boolean
   } = {}
 ): Promise<T> {
-  const { apiHost } = useLifeforgeUIContext()
-
   const isJSON =
     !!body &&
     !(
