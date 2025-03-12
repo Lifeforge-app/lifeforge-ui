@@ -1,39 +1,40 @@
-import { Menu, MenuButton, MenuItems } from "@headlessui/react";
-import { Icon } from "@iconify/react";
-import clsx from "clsx";
-import _ from "lodash";
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { Menu, MenuButton, MenuItems } from '@headlessui/react'
+import { Icon } from '@iconify/react'
+import clsx from 'clsx'
+import _ from 'lodash'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { Button } from "@components/buttons";
-import { useLifeforgeUIContext } from "@lifeforge/ui/providers/LifeforgeUIProvider";
+import { useLifeforgeUIContext } from '@lifeforge/ui/providers/LifeforgeUIProvider'
+
+import { Button } from '@components/buttons'
 
 interface ModuleHeaderProps {
-  icon?: string;
-  title: string | React.ReactNode;
-  totalItems?: number;
-  tips?: string;
-  hamburgerMenuItems?: React.ReactNode;
-  hamburgerMenuClassName?: string;
-  actionButton?: React.ReactNode;
-  customElement?: React.ReactNode;
+  icon?: string
+  title: string | React.ReactNode
+  totalItems?: number
+  tips?: string
+  hamburgerMenuItems?: React.ReactNode
+  hamburgerMenuClassName?: string
+  actionButton?: React.ReactNode
+  customElement?: React.ReactNode
 }
 
 function ModuleHeader({
   icon,
   title,
   totalItems,
-  tips = "",
+  tips = '',
   hamburgerMenuItems,
   hamburgerMenuClassName,
   actionButton,
-  customElement,
+  customElement
 }: ModuleHeaderProps) {
   const { t } = useTranslation([
-    `modules.${_.camelCase(title?.toString() ?? "")}`,
-    "common.misc",
-  ]);
-  const { toggleSidebar, sidebarExpanded } = useLifeforgeUIContext();
+    `modules.${_.camelCase(title?.toString() ?? '')}`,
+    'common.misc'
+  ])
+  const { toggleSidebar, sidebarExpanded } = useLifeforgeUIContext()
 
   return (
     <header className="flex-between z-9980 flex w-full min-w-0 gap-8">
@@ -42,7 +43,7 @@ function ModuleHeader({
           <Button
             className="flex sm:hidden"
             icon="tabler:menu"
-            variant="no-bg"
+            variant="plain"
             onClick={toggleSidebar}
           />
         )}
@@ -53,21 +54,21 @@ function ModuleHeader({
         )}
         <div className="w-full min-w-0 sm:space-y-1">
           <h1 className="flex w-full min-w-0 items-end gap-3 whitespace-nowrap text-2xl font-semibold sm:text-3xl">
-            <span className="block truncate">{t("title")}</span>
+            <span className="block truncate">{t('title')}</span>
             <span className="text-bg-500 min-w-0 text-sm font-medium sm:text-base">
               {totalItems !== undefined
                 ? `(${totalItems.toLocaleString()})`
-                : ""}
+                : ''}
             </span>
           </h1>
           <div className="text-bg-500 w-full min-w-0 truncate whitespace-nowrap text-sm sm:text-base">
-            {t("description")}
+            {t('description')}
           </div>
         </div>
       </div>
       <div className="flex items-center gap-2">
         {actionButton}
-        {tips !== "" && (
+        {tips !== '' && (
           <div className="relative hidden md:block">
             <Menu as="div" className="relative z-50">
               <MenuButton className="text-bg-500 hover:bg-bg-200/50 hover:text-bg-800 dark:hover:bg-bg-900 dark:hover:text-bg-50 rounded-lg p-4 transition-all">
@@ -81,7 +82,7 @@ function ModuleHeader({
                 <div className="text-bg-800 dark:border-bg-700 dark:text-bg-200 flex items-center gap-2 p-4">
                   <Icon className="size-6" icon="tabler:question-circle" />
                   <h2 className="text-lg font-semibold">
-                    {t("common.misc:tipsAndTricks")}
+                    {t('common.misc:tipsAndTricks')}
                   </h2>
                 </div>
                 <div className="text-bg-500 p-4 pt-0">{tips}</div>
@@ -94,7 +95,7 @@ function ModuleHeader({
           <Menu
             as="div"
             className={clsx(
-              "relative z-50 overscroll-contain",
+              'relative z-50 overscroll-contain',
               hamburgerMenuClassName
             )}
           >
@@ -112,7 +113,7 @@ function ModuleHeader({
         )}
       </div>
     </header>
-  );
+  )
 }
 
-export default ModuleHeader;
+export default ModuleHeader

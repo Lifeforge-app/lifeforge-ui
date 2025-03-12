@@ -1,3 +1,5 @@
+import tinycolor from 'tinycolor2'
+
 export const generateBaseClass = (
   hasChildren: boolean,
   iconAtEnd: boolean
@@ -6,25 +8,48 @@ export const generateBaseClass = (
     hasChildren && (iconAtEnd ? 'pl-5' : 'pr-5')
   } font-medium tracking-wide transition-all disabled:cursor-not-allowed`
 
-export const generateColorClass = (isRed: boolean, variant: string): string => {
+export const generateColorClass = (
+  isRed: boolean,
+  variant: string,
+  themeColor: string
+): string => {
   if (isRed) {
-    return variant !== 'no-bg'
-      ? 'bg-red-500 hover:bg-red-600 text-bg-50 dark:text-bg-800'
-      : 'text-red-500 hover:text-red-600 hover:bg-red-500/10'
+    switch (variant) {
+      case 'plain':
+        return 'hover:bg-red-500/10 dark:hover:bg-red-500/10 text-red-500 hover:text-red-500 dark:hover:text-red-500'
+      case 'tertiary':
+        return 'text-red-500 hover:bg-red-500/10 dark:hover:bg-red-500/10 disabled:hover:text-red-500'
+      case 'secondary':
+        return 'border-[1.6px] border-red-500 shadow-custom text-red-500 disabled:border-red-500 disabled:text-red-500 disabled:hover:border-red-500 disabled:hover:text-red-500'
+      case 'primary':
+      default:
+        return `bg-red-500 shadow-custom hover:bg-red-600 ${
+          tinycolor(themeColor).isLight()
+            ? 'text-bg-800 dark:text-bg-800'
+            : 'text-bg-50 dark:text-bg-50'
+        } disabled:bg-red-500/10 disabled:text-red-500 disabled:hover:bg-red-500/10 dark:disabled:bg-red-500/10 dark:disabled:text-red-500 dark:disabled:hover:bg-red-500/10`
+    }
   }
 
   switch (variant) {
-    case 'primary':
-      return 'bg-custom-500 shadow-custom hover:bg-custom-600 text-bg-50 dark:text-bg-800 disabled:bg-bg-500 disabled:hover:bg-bg-500'
-    case 'no-bg':
-      return 'hover:bg-bg-200/50 dark:hover:bg-bg-800/50 text-bg-500 hover:text-bg-800 dark:hover:text-bg-50! disabled:hover:text-bg-500 disabled:dark:hover:text-bg-500 disabled:dark:hover:bg-transparent disabled:text-bg-500'
+    case 'plain':
+      return 'hover:bg-bg-200/50 dark:hover:bg-bg-800/50 text-bg-500 hover:text-bg-800 dark:hover:text-bg-50! disabled:hover:text-bg-500 disabled:dark:hover:text-bg-500 disabled:hover:bg-transparent disabled:dark:hover:bg-transparent disabled:text-bg-500'
+    case 'tertiary':
+      return 'text-custom-500 hover:bg-custom-500/15 disabled:hover:shadow-none disabled:hover:bg-transparent hover:shadow-custom disabled:text-bg-500 disabled:hover:text-bg-500'
     case 'secondary':
+      return 'border-[1.6px] border-custom-500 shadow-custom text-custom-500 disabled:border-bg-500 disabled:text-bg-500 disabled:hover:border-bg-500 disabled:hover:text-bg-500'
+    case 'primary':
     default:
-      return 'bg-bg-300 shadow-custom text-bg-500 dark:text-bg-800 dark:bg-bg-600 hover:bg-bg-400/50 dark:hover:bg-bg-500/80'
+      return `bg-custom-500 shadow-custom hover:bg-custom-600 ${
+        tinycolor(themeColor).isLight()
+          ? 'text-bg-800 dark:text-bg-800'
+          : 'text-bg-50 dark:text-bg-50'
+      } disabled:bg-bg-200 disabled:text-bg-500 disabled:hover:bg-bg-200 dark:disabled:bg-bg-800 dark:disabled:text-bg-500 dark:disabled:hover:bg-bg-800`
   }
 }
 
 export const generateClassName = (
+  themeColor: string,
   hasChildren: boolean,
   iconAtEnd: boolean,
   isRed: boolean,
@@ -33,5 +58,6 @@ export const generateClassName = (
 ): string =>
   `${generateBaseClass(hasChildren, iconAtEnd)} ${generateColorClass(
     isRed,
-    variant
+    variant,
+    themeColor
   )} ${className}`

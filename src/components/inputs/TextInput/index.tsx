@@ -1,54 +1,55 @@
-import React, { memo, useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import Button from "../../buttons/Button";
-import InputActionButton from "../shared/InputActionButton";
-import InputBox from "../shared/InputBox";
-import InputIcon from "../shared/InputIcon";
-import InputLabel from "../shared/InputLabel";
-import InputWrapper from "../shared/InputWrapper";
-import _ from "lodash";
+import _ from 'lodash'
+import React, { memo, useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import Button from '../../buttons/Button'
+import InputActionButton from '../shared/InputActionButton'
+import InputBox from '../shared/InputBox'
+import InputIcon from '../shared/InputIcon'
+import InputLabel from '../shared/InputLabel'
+import InputWrapper from '../shared/InputWrapper'
 
 interface IInputProps {
-  icon: string;
-  name: string;
-  placeholder: string;
-  value: string;
-  setValue: (value: string) => void;
+  icon: string
+  name: string
+  placeholder: string
+  value: string
+  setValue: (value: string) => void
 
   inputMode?:
-    | "text"
-    | "none"
-    | "tel"
-    | "url"
-    | "email"
-    | "numeric"
-    | "decimal"
-    | "search";
-  actionButtonIcon?: string;
-  actionButtonLoading?: boolean;
-  autoFocus?: boolean;
-  className?: string;
-  darker?: boolean;
-  disabled?: boolean;
-  isPassword?: boolean;
-  noAutoComplete?: boolean;
-  onActionButtonClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  ref?: React.RefObject<HTMLInputElement | null>;
-  required?: boolean;
-  namespace: string | false;
-  tKey?: string;
+    | 'text'
+    | 'none'
+    | 'tel'
+    | 'url'
+    | 'email'
+    | 'numeric'
+    | 'decimal'
+    | 'search'
+  actionButtonIcon?: string
+  actionButtonLoading?: boolean
+  autoFocus?: boolean
+  className?: string
+  darker?: boolean
+  disabled?: boolean
+  isPassword?: boolean
+  noAutoComplete?: boolean
+  onActionButtonClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
+  ref?: React.RefObject<HTMLInputElement | null>
+  required?: boolean
+  namespace: string | false
+  tKey?: string
 }
 
 function TextInput({
-  actionButtonIcon = "",
+  actionButtonIcon = '',
   actionButtonLoading = false,
   autoFocus = false,
-  className = "",
+  className = '',
   darker = false,
   disabled = false,
   icon,
-  inputMode = "text",
+  inputMode = 'text',
   isPassword = false,
   name,
   noAutoComplete = true,
@@ -60,17 +61,17 @@ function TextInput({
   setValue: setValue,
   value,
   namespace,
-  tKey,
+  tKey
 }: IInputProps) {
-  const { t } = useTranslation(namespace ? namespace : undefined);
-  const [showPassword, setShowPassword] = useState(false);
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const { t } = useTranslation(namespace ? namespace : undefined)
+  const [showPassword, setShowPassword] = useState(false)
+  const inputRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
     if (autoFocus && inputRef.current) {
-      inputRef.current.focus();
+      inputRef.current.focus()
     }
-  }, [autoFocus]);
+  }, [autoFocus])
 
   return (
     <InputWrapper
@@ -79,19 +80,17 @@ function TextInput({
       disabled={disabled}
       inputRef={inputRef}
     >
-      <InputIcon active={String(value).length > 0} icon={icon} />
+      <InputIcon active={value && String(value).length > 0} icon={icon} />
       <div className="flex w-full items-center gap-2">
         <InputLabel
-          active={String(value).length > 0}
+          active={value && String(value).length > 0}
           label={
             namespace !== false
               ? t([
-                  [tKey, "inputs", _.camelCase(name), "label"]
-                    .filter((e) => e)
-                    .join("."),
-                  [tKey, "inputs", _.camelCase(name)]
-                    .filter((e) => e)
-                    .join("."),
+                  [tKey, 'inputs', _.camelCase(name), 'label']
+                    .filter(e => e)
+                    .join('.'),
+                  [tKey, 'inputs', _.camelCase(name)].filter(e => e).join('.')
                 ])
               : name
           }
@@ -113,19 +112,19 @@ function TextInput({
         {isPassword && (
           <Button
             className="mr-2"
-            icon={showPassword ? "tabler:eye" : "tabler:eye-off"}
-            variant="no-bg"
+            icon={showPassword ? 'tabler:eye' : 'tabler:eye-off'}
+            variant="plain"
             onMouseDown={() => {
-              setShowPassword(true);
+              setShowPassword(true)
             }}
             onMouseUp={() => {
-              setShowPassword(false);
+              setShowPassword(false)
             }}
             onTouchEnd={() => {
-              setShowPassword(false);
+              setShowPassword(false)
             }}
             onTouchStart={() => {
-              setShowPassword(true);
+              setShowPassword(true)
             }}
           />
         )}
@@ -138,7 +137,7 @@ function TextInput({
         )}
       </div>
     </InputWrapper>
-  );
+  )
 }
 
-export default memo(TextInput);
+export default memo(TextInput)

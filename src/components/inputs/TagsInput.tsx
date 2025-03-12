@@ -1,31 +1,32 @@
-import { Icon } from "@iconify/react";
-import React, { useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import InputBox from "./shared/InputBox";
-import InputIcon from "./shared/InputIcon";
-import InputLabel from "./shared/InputLabel";
-import InputWrapper from "./shared/InputWrapper";
-import Button from "../buttons/Button";
-import _ from "lodash";
+import { Icon } from '@iconify/react'
+import _ from 'lodash'
+import React, { useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import Button from '../buttons/Button'
+import InputBox from './shared/InputBox'
+import InputIcon from './shared/InputIcon'
+import InputLabel from './shared/InputLabel'
+import InputWrapper from './shared/InputWrapper'
 
 interface ITagsInputProps {
-  name: string;
-  icon: string;
-  placeholder: string;
-  value: string[];
-  setValue: (tags: string[]) => void;
-  maxTags?: number;
-  disabled?: boolean;
-  className?: string;
-  darker?: boolean;
+  name: string
+  icon: string
+  placeholder: string
+  value: string[]
+  setValue: (tags: string[]) => void
+  maxTags?: number
+  disabled?: boolean
+  className?: string
+  darker?: boolean
   existedTags?: Array<{
-    name: string;
-    icon: string;
-    color: string;
-  }>;
-  required?: boolean;
-  namespace: string;
-  tKey?: string;
+    name: string
+    icon: string
+    color: string
+  }>
+  required?: boolean
+  namespace: string
+  tKey?: string
 }
 
 function TagsInput({
@@ -36,37 +37,37 @@ function TagsInput({
   setValue,
   maxTags = 100,
   disabled = false,
-  className = "",
+  className = '',
   darker,
   existedTags,
   required,
   namespace,
-  tKey = "",
+  tKey = ''
 }: ITagsInputProps) {
-  const { t } = useTranslation(namespace);
-  const [currentTag, setCurrentTag] = useState<string>("");
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const { t } = useTranslation(namespace)
+  const [currentTag, setCurrentTag] = useState<string>('')
+  const inputRef = useRef<HTMLInputElement | null>(null)
 
   const addTag = (): void => {
-    if (currentTag.trim() !== "" && value.length < maxTags) {
-      setValue([...value, currentTag.trim()]);
-      setCurrentTag("");
+    if (currentTag.trim() !== '' && value.length < maxTags) {
+      setValue([...value, currentTag.trim()])
+      setCurrentTag('')
     }
-  };
+  }
 
   const removeTag = (index: number): void => {
-    const newTags = value.filter((_, i) => i !== index);
-    setValue(newTags);
-  };
+    const newTags = value.filter((_, i) => i !== index)
+    setValue(newTags)
+  }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
-    if (e.key === "Enter" || e.key === ",") {
-      e.preventDefault();
-      addTag();
-    } else if (e.key === "Backspace" && currentTag === "" && value.length > 0) {
-      removeTag(value.length - 1);
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault()
+      addTag()
+    } else if (e.key === 'Backspace' && currentTag === '' && value.length > 0) {
+      removeTag(value.length - 1)
     }
-  };
+  }
 
   return (
     <InputWrapper
@@ -80,16 +81,16 @@ function TagsInput({
         <InputLabel
           active={String(value).length > 0}
           label={t([
-            [tKey, "inputs", _.camelCase(name)].filter((e) => e).join("."),
-            [tKey, "inputs", _.camelCase(name), "label"]
-              .filter((e) => e)
-              .join("."),
+            [tKey, 'inputs', _.camelCase(name)].filter(e => e).join('.'),
+            [tKey, 'inputs', _.camelCase(name), 'label']
+              .filter(e => e)
+              .join('.')
           ])}
           required={required === true}
         />
         <div className="mt-12 mb-4 ml-[14px] flex flex-wrap items-center gap-2">
           {value.map((tag, index) => {
-            const existedTag = existedTags?.find((t) => t.name === tag);
+            const existedTag = existedTags?.find(t => t.name === tag)
 
             return (
               <div
@@ -109,14 +110,14 @@ function TagsInput({
                     className="m-0! h-4! w-4! p-0!"
                     icon="tabler:x"
                     iconClassName="size-3"
-                    variant="no-bg"
+                    variant="plain"
                     onClick={() => {
-                      removeTag(index);
+                      removeTag(index)
                     }}
                   />
                 )}
               </div>
-            );
+            )
           })}
           {!disabled && (
             <InputBox
@@ -133,7 +134,7 @@ function TagsInput({
         </div>
       </div>
     </InputWrapper>
-  );
+  )
 }
 
-export default TagsInput;
+export default TagsInput

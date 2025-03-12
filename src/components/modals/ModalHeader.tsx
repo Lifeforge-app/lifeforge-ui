@@ -1,10 +1,11 @@
-import { Icon } from "@iconify/react";
-import { useDebounce } from "@uidotdev/usehooks";
-import clsx from "clsx";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { Button } from "@components/buttons";
-import _ from "lodash";
+import { Icon } from '@iconify/react'
+import { useDebounce } from '@uidotdev/usehooks'
+import clsx from 'clsx'
+import _ from 'lodash'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+
+import { Button } from '@components/buttons'
 
 function ModalHeader({
   title,
@@ -15,28 +16,28 @@ function ModalHeader({
   actionButtonIcon,
   actionButtonIsRed = false,
   onActionButtonClick,
-  className = "",
+  className = '',
   appendTitle,
-  namespace = "common.modals",
+  namespace = 'common.modals'
 }: {
-  title: string;
-  needTranslate?: boolean;
-  icon: string;
-  hasAI?: boolean;
-  onClose: () => void;
-  actionButtonIcon?: string;
-  actionButtonIsRed?: boolean;
-  onActionButtonClick?: () => void;
-  className?: string;
-  appendTitle?: React.ReactElement;
-  namespace?: string;
+  title: string
+  needTranslate?: boolean
+  icon: string
+  hasAI?: boolean
+  onClose: () => void
+  actionButtonIcon?: string
+  actionButtonIsRed?: boolean
+  onActionButtonClick?: () => void
+  className?: string
+  appendTitle?: React.ReactElement
+  namespace?: string
 }): React.ReactElement {
-  const { t } = useTranslation(namespace);
-  const innerTitle = useDebounce(title, 100);
-  const innerIcon = useDebounce(icon, 100);
+  const { t } = useTranslation(namespace)
+  const innerTitle = useDebounce(title, 100)
+  const innerIcon = useDebounce(icon, 100)
 
   return (
-    <div className={clsx("flex-between mb-4 flex gap-4", className)}>
+    <div className={clsx('flex-between mb-4 flex gap-4', className)}>
       <h1 className="flex w-full min-w-0 items-center gap-3 text-2xl font-semibold">
         <Icon className="size-7 shrink-0" icon={innerIcon} />
         <span className="min-w-0 truncate">
@@ -49,7 +50,7 @@ function ModalHeader({
                 `${innerTitle}.title`,
                 `${innerTitle}`,
                 `modals.${innerTitle}.title`,
-                `modals.${innerTitle}`,
+                `modals.${innerTitle}`
               ])
             : innerTitle}
         </span>
@@ -65,10 +66,10 @@ function ModalHeader({
         {actionButtonIcon !== undefined && (
           <button
             className={clsx(
-              "hover:bg-bg-100 dark:hover:bg-bg-800 rounded-md p-2 transition-all",
+              'hover:bg-bg-100 dark:hover:bg-bg-800 rounded-md p-2 transition-all',
               actionButtonIsRed
-                ? "text-red-500 hover:text-red-600"
-                : "text-bg-500 hover:text-bg-200"
+                ? 'text-red-500 hover:text-red-600'
+                : 'text-bg-500 hover:text-bg-200'
             )}
             onClick={onActionButtonClick}
           >
@@ -78,14 +79,14 @@ function ModalHeader({
         <Button
           icon="tabler:x"
           iconClassName="size-6"
-          variant="no-bg"
+          variant="plain"
           onClick={() => {
-            onClose();
+            onClose()
           }}
         />
       </div>
     </div>
-  );
+  )
 }
 
-export default ModalHeader;
+export default ModalHeader

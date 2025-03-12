@@ -1,9 +1,10 @@
-import { Icon } from "@iconify/react";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import Zoom from "react-medium-image-zoom";
-import { Button } from "@components/buttons";
-import _ from "lodash";
+import { Icon } from '@iconify/react'
+import _ from 'lodash'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import Zoom from 'react-medium-image-zoom'
+
+import { Button } from '@components/buttons'
 
 function ImageAndFileInput({
   icon,
@@ -16,28 +17,28 @@ function ImageAndFileInput({
   setImagePickerModalOpen,
   onImageRemoved,
   required,
-  namespace,
+  namespace
 }: {
-  icon: string;
-  name: string;
-  reminderText?: string;
-  image: string | File | null;
-  preview: string | null;
-  setPreview: (value: string | null) => void;
-  setImage: (value: string | File | null) => void;
-  setImagePickerModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  onImageRemoved?: () => void;
-  required?: boolean;
-  namespace: string;
+  icon: string
+  name: string
+  reminderText?: string
+  image: string | File | null
+  preview: string | null
+  setPreview: (value: string | null) => void
+  setImage: (value: string | File | null) => void
+  setImagePickerModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  onImageRemoved?: () => void
+  required?: boolean
+  namespace: string
 }) {
-  const { t } = useTranslation([namespace, "common.buttons"]);
+  const { t } = useTranslation([namespace, 'common.buttons'])
 
   return (
     <div className="bg-bg-200/50 shadow-custom dark:bg-bg-800/50 flex w-full flex-col rounded-md p-6">
       <div className="text-bg-500 flex items-center gap-4">
         <Icon className="size-6" icon={icon} />
         <span className="font-medium">
-          {t(`${namespace}:inputs.${_.camelCase(name)}`)}{" "}
+          {t(`${namespace}:inputs.${_.camelCase(name)}`)}{' '}
           {required === true && <span className="text-red-500">*</span>}
         </span>
       </div>
@@ -56,9 +57,9 @@ function ImageAndFileInput({
           className="mt-6 w-full"
           icon="tabler:x"
           onClick={() => {
-            setPreview(null);
-            setImage(null);
-            onImageRemoved?.();
+            setPreview(null)
+            setImage(null)
+            onImageRemoved?.()
           }}
         >
           Remove
@@ -70,10 +71,10 @@ function ImageAndFileInput({
           <Button
             className="p-2!"
             icon="tabler:x"
-            variant="no-bg"
+            variant="plain"
             onClick={() => {
-              setImage(null);
-              onImageRemoved?.();
+              setImage(null)
+              onImageRemoved?.()
             }}
           />
         </div>
@@ -85,16 +86,16 @@ function ImageAndFileInput({
             icon="tabler:upload"
             variant="secondary"
             onClick={() => {
-              setImagePickerModalOpen(true);
+              setImagePickerModalOpen(true)
             }}
           >
-            {t("common.buttons:upload")}
+            {t('common.buttons:upload')}
           </Button>
           <p className="text-bg-500 text-xs">{reminderText}</p>
         </div>
       )}
     </div>
-  );
+  )
 }
 
-export default ImageAndFileInput;
+export default ImageAndFileInput

@@ -1,107 +1,58 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable sonarjs/no-internal-api-use */
 import {
   Menu,
   MenuButton,
   MenuItems,
   Transition,
-  TransitionChild,
-} from "@headlessui/react";
-import { Icon } from "@iconify/react";
-import clsx from "clsx";
-import React, { useState } from "react";
+  TransitionChild
+} from '@headlessui/react'
+import clsx from 'clsx'
+import { AnchorProps } from 'node_modules/@headlessui/react/dist/internal/floating'
+import React, { useState } from 'react'
+
+import Button from '../Button'
 
 interface MenuProps {
-  children: React.ReactNode;
-  className?: string;
-  customTailwindColor?: string;
-  customHoverColor?: string;
-  style?: React.CSSProperties;
-  lighter?: boolean;
-  largerPadding?: boolean;
-  largerIcon?: boolean;
-  smallerPadding?: boolean;
-  customWidth?: string;
-  customIcon?: string;
-  onButtonClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onClose?: () => void;
-}
-
-function getPaddingClass(
-  largerPadding?: boolean,
-  smallerPadding?: boolean
-): string {
-  if (largerPadding === true) {
-    return "p-4";
-  } else if (smallerPadding === true) {
-    return "p-1";
-  } else {
-    return "p-2";
+  children: React.ReactNode
+  anchor?: AnchorProps
+  classNames?: {
+    wrapper?: string
+    button?: string
+    icon?: string
+    menu?: string
   }
-}
-
-function getColorClass(lighter?: boolean): string {
-  if (lighter === true) {
-    return "text-bg-50 hover:bg-bg-700/50";
-  } else {
-    return "text-bg-500 hover:bg-bg-200/50 hover:text-bg-800 dark:hover:text-bg-50 dark:hover:bg-bg-700/30";
-  }
+  iconClassName?: string
+  customIcon?: string
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+  onClose?: () => void
 }
 
 function HamburgerMenu(props: MenuProps) {
-  const {
-    children,
-    className,
-    customTailwindColor,
-    style = {},
-    customHoverColor,
-    lighter,
-    largerPadding,
-    largerIcon,
-    smallerPadding,
-    customWidth,
-    customIcon,
-    onButtonClick,
-    onClose,
-  } = props;
+  const { children, anchor, classNames, customIcon, onClick, onClose } = props
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <Menu as="div" className={className}>
-      <MenuButton
-        className={clsx(
-          "rounded-md transition-all",
-          getPaddingClass(largerPadding, smallerPadding),
-          (style.color === undefined && customTailwindColor) ??
-            getColorClass(lighter)
-        )}
-        style={style}
-        onClick={(e) => {
-          e.stopPropagation();
-          setIsOpen(!isOpen);
-          if (onButtonClick !== undefined) {
-            onButtonClick(e);
+    <Menu as="div" className={classNames?.wrapper}>
+      <Button
+        as={MenuButton}
+        className={classNames?.button}
+        icon={customIcon ?? 'tabler:dots-vertical'}
+        iconClassName={classNames?.icon}
+        variant="plain"
+        onClick={e => {
+          e.stopPropagation()
+          setIsOpen(!isOpen)
+          if (onClick !== undefined) {
+            onClick(e)
           }
         }}
-        onMouseEnter={(e) => {
-          if (customHoverColor !== undefined) {
-            e.currentTarget.style.backgroundColor = customHoverColor;
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (customHoverColor !== undefined) {
-            e.currentTarget.style.backgroundColor = "";
-          }
-        }}
-      >
-        <Icon
-          className={largerIcon === true ? "size-6" : "size-5"}
-          icon={customIcon ?? "tabler:dots-vertical"}
-        />
-      </MenuButton>
+      />
       <Transition
         afterLeave={() => {
           if (onClose !== undefined) {
-            onClose();
+            onClose()
           }
         }}
         enter="transition-opacity duration-200"
@@ -114,10 +65,10 @@ function HamburgerMenu(props: MenuProps) {
         <TransitionChild>
           <MenuItems
             transition
-            anchor="bottom end"
+            anchor={anchor ?? 'bottom end'}
             className={clsx(
-              customWidth,
-              "border-bg-200 bg-bg-100 dark:border-bg-700 dark:bg-bg-800 z-9991 mt-2 overflow-hidden overscroll-contain rounded-md border shadow-lg outline-hidden transition duration-100 ease-out focus:outline-hidden data-closed:scale-95 data-closed:opacity-0"
+              'min-w-[var(--button-width)] border-bg-200 dark:border-bg-700 z-9999 overflow-auto rounded-md border bg-bg-100 text-bg-500 text-base shadow-lg transition duration-100 ease-out [--anchor-gap:12px] dark:border-bg-700 dark:bg-bg-800 empty:invisible focus:outline-hidden data-closed:scale-95 data-closed:opacity-0',
+              classNames?.menu
             )}
           >
             {children}
@@ -125,7 +76,7 @@ function HamburgerMenu(props: MenuProps) {
         </TransitionChild>
       </Transition>
     </Menu>
-  );
+  )
 }
 
-export default HamburgerMenu;
+export default HamburgerMenu

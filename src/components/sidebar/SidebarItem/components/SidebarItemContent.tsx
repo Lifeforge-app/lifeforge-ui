@@ -1,9 +1,10 @@
-import { Icon } from "@iconify/react";
-import clsx from "clsx";
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { HamburgerMenu } from "@components/buttons";
-import _ from "lodash";
+import { Icon } from '@iconify/react'
+import clsx from 'clsx'
+import _ from 'lodash'
+import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import { HamburgerMenu } from '@components/buttons'
 
 function SidebarItemContent({
   name,
@@ -15,21 +16,21 @@ function SidebarItemContent({
   active,
   onCancelButtonClick,
   namespace,
-  needTranslate,
+  needTranslate
 }: {
-  name: string;
-  sidebarExpanded: boolean;
-  isMainSidebarItem: boolean;
-  hasAI: boolean;
-  number?: number;
-  hamburgerMenuItems?: React.ReactElement;
-  active: boolean;
-  onCancelButtonClick?: () => void;
-  namespace?: string;
-  needTranslate?: boolean;
+  name: string
+  sidebarExpanded: boolean
+  isMainSidebarItem: boolean
+  hasAI: boolean
+  number?: number
+  hamburgerMenuItems?: React.ReactElement
+  active: boolean
+  onCancelButtonClick?: () => void
+  namespace?: string
+  needTranslate?: boolean
 }): React.ReactElement {
-  const { t } = useTranslation([namespace, "common.sidebar"]);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useTranslation([namespace, 'common.sidebar'])
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
     <>
@@ -42,7 +43,7 @@ function SidebarItemContent({
                   ? t([`${namespace}:sidebar.${_.camelCase(name)}`, name])
                   : name}
               </div>
-            );
+            )
           }
 
           return (
@@ -59,22 +60,22 @@ function SidebarItemContent({
                 )}
               </span>
             )
-          );
+          )
         })()}
         {number !== undefined && (
           <span
             className={clsx(
-              "pr-2 text-sm",
+              'pr-2 text-sm',
               (() => {
                 if (
                   isMenuOpen ||
                   (onCancelButtonClick !== undefined && active)
                 ) {
-                  return "hidden";
+                  return 'hidden'
                 } else if (hamburgerMenuItems !== undefined) {
-                  return "group-hover:hidden";
+                  return 'group-hover:hidden'
                 } else {
-                  return "block";
+                  return 'block'
                 }
               })()
             )}
@@ -87,22 +88,22 @@ function SidebarItemContent({
         <HamburgerMenu
           smallerPadding
           className={clsx(
-            "relative overscroll-contain",
-            !isMenuOpen && "hidden group-hover:block"
+            'relative overscroll-contain',
+            !isMenuOpen && 'hidden group-hover:block'
           )}
-          onButtonClick={(e) => {
-            e.stopPropagation();
-            setIsMenuOpen(true);
+          onClick={e => {
+            e.stopPropagation()
+            setIsMenuOpen(true)
           }}
           onClose={() => {
-            setIsMenuOpen(false);
+            setIsMenuOpen(false)
           }}
         >
           {hamburgerMenuItems}
         </HamburgerMenu>
       )}
     </>
-  );
+  )
 }
 
-export default SidebarItemContent;
+export default SidebarItemContent

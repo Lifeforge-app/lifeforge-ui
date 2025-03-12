@@ -1,7 +1,9 @@
-import { useMemo } from 'react'
 import THEME_COLOR_HEX from '@constants/theme_color_hex'
+import _ from 'lodash'
+import { useMemo } from 'react'
+
 import { getColorPalette } from '@utils/colors'
-import _ from "lodash"
+
 import { useLifeforgeUIContext } from '../providers/LifeforgeUIProvider'
 
 const bgTheme = {
@@ -87,10 +89,10 @@ export default function useThemeColors(): {
   const finalTheme = useMemo(() => {
     return !themeColor.startsWith('#')
       ? THEME_COLOR_HEX[
-      _.camelCase(
-        themeColor.replace('theme-', '').replace(/-/g, ' ')
-      ) as keyof typeof THEME_COLOR_HEX
-      ]
+          _.camelCase(
+            themeColor.replace('theme-', '').replace(/-/g, ' ')
+          ) as keyof typeof THEME_COLOR_HEX
+        ]
       : themeColor
   }, [themeColor])
 
@@ -98,18 +100,18 @@ export default function useThemeColors(): {
     return !bgTemp.startsWith('#')
       ? bgTheme[bgTemp.replace('bg-', '') as keyof typeof bgTheme]
       : getColorPalette(
-        bgTemp,
-        'bg',
-        (() => {
-          if (theme === 'system') {
-            return window.matchMedia('(prefers-color-scheme: dark)').matches
-              ? 'dark'
-              : 'light'
-          }
+          bgTemp,
+          'bg',
+          (() => {
+            if (theme === 'system') {
+              return window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+            }
 
-          return theme
-        })()
-      )
+            return theme
+          })()
+        )
   }, [bgTemp])
 
   const componentBg = useMemo(() => {
@@ -140,7 +142,7 @@ export default function useThemeColors(): {
     if (bgImage !== '') {
       return 'bg-bg-50/50 backdrop-blur-xs dark:bg-bg-800/50 hover:bg-bg-200/50 dark:hover:bg-bg-700/50 transition-all'
     }
-    return 'bg-bg-200/50 dark:bg-bg-800/50 dark:hover:bg-bg-800/80 hover:bg-bg-200 transition-all'
+    return 'bg-bg-200 dark:bg-bg-800/50 dark:hover:bg-bg-800/80 hover:bg-bg-200 transition-all'
   }, [bgImage])
 
   return {

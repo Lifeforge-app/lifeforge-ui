@@ -1,5 +1,6 @@
-import React from "react";
-import { Button } from "@components/buttons";
+import React from 'react'
+
+import { Button } from '@components/buttons'
 
 function PreviewContainer({
   preview,
@@ -7,14 +8,14 @@ function PreviewContainer({
   file,
   setFile,
   fileName,
-  onRemove,
+  onRemove
 }: {
-  preview: string | null;
-  setPreview: (preview: string | null) => void;
-  file: File | null;
-  setFile: (file: File | null) => void;
-  fileName?: string;
-  onRemove?: () => void;
+  preview: string | null
+  setPreview: (preview: string | null) => void
+  file: File | null
+  setFile: (file: File | null) => void
+  fileName?: string
+  onRemove?: () => void
 }) {
   return (
     <div className="flex-center flex-1">
@@ -24,11 +25,11 @@ function PreviewContainer({
             <p className="w-full truncate">{fileName ?? file?.name}</p>
             <Button
               icon="tabler:x"
-              variant="no-bg"
+              variant="plain"
               onClick={() => {
-                setPreview(null);
-                setFile(null);
-                onRemove?.();
+                setPreview(null)
+                setFile(null)
+                onRemove?.()
               }}
             />
           </div>
@@ -41,17 +42,17 @@ function PreviewContainer({
           <Button
             className="p-2!"
             icon="tabler:x"
-            variant="no-bg"
+            variant="plain"
             onClick={() => {
-              setPreview(null);
-              setFile(null);
-              onRemove?.();
+              setPreview(null)
+              setFile(null)
+              onRemove?.()
             }}
           />
         </div>
       )}
     </div>
-  );
+  )
 }
 
-export default PreviewContainer;
+export default PreviewContainer
