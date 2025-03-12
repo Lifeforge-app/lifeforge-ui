@@ -86,11 +86,13 @@ function SidebarItemContent({
       </div>
       {!active && hamburgerMenuItems !== undefined && (
         <HamburgerMenu
-          smallerPadding
-          className={clsx(
-            'relative overscroll-contain',
-            !isMenuOpen && 'hidden group-hover:block'
-          )}
+          classNames={{
+            wrapper: clsx(
+              'relative overscroll-contain',
+              !isMenuOpen && 'hidden group-hover:block'
+            ),
+            button: 'p-2!'
+          }}
           onClick={e => {
             e.stopPropagation()
             setIsMenuOpen(true)

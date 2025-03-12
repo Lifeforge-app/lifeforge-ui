@@ -1,39 +1,42 @@
-import React from "react";
-import { CreateOrModifyButton, Button } from "@components/buttons";
+import React from 'react'
+
+import { Button } from '@components/buttons'
 
 function SubmitButton({
   submitButtonProps,
   submitLoading,
   openType,
-  onSubmitButtonClick,
+  onSubmitButtonClick
 }: {
-  submitButtonProps: React.ComponentProps<typeof Button>;
-  submitLoading: boolean;
-  openType?: "create" | "update" | null;
-  onSubmitButtonClick: () => Promise<void>;
+  submitButtonProps: React.ComponentProps<typeof Button>
+  submitLoading: boolean
+  openType?: 'create' | 'update' | null
+  onSubmitButtonClick: () => Promise<void>
 }) {
   return (
     <>
-      {["create", "update"].includes(openType ?? "") ? (
-        <CreateOrModifyButton
+      {['create', 'update'].includes(openType ?? '') ? (
+        <Button
+          icon={openType === 'create' ? 'tabler:plus' : 'tabler:pencil'}
           loading={submitLoading}
-          type={openType as "create" | "update"}
           onClick={() => {
-            onSubmitButtonClick().catch(console.error);
+            onSubmitButtonClick().catch(console.error)
           }}
-        />
+        >
+          {openType === 'create' ? 'Create' : 'Update'}
+        </Button>
       ) : (
         <Button
           className="mt-4"
           {...submitButtonProps}
           loading={submitLoading}
           onClick={() => {
-            onSubmitButtonClick().catch(console.error);
+            onSubmitButtonClick().catch(console.error)
           }}
         />
       )}
     </>
-  );
+  )
 }
 
-export default SubmitButton;
+export default SubmitButton

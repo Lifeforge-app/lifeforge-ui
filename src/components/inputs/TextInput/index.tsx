@@ -9,7 +9,7 @@ import InputIcon from '../shared/InputIcon'
 import InputLabel from '../shared/InputLabel'
 import InputWrapper from '../shared/InputWrapper'
 
-interface IInputProps {
+export interface IInputProps {
   icon: string
   name: string
   placeholder: string
@@ -80,10 +80,10 @@ function TextInput({
       disabled={disabled}
       inputRef={inputRef}
     >
-      <InputIcon active={value && String(value).length > 0} icon={icon} />
+      <InputIcon active={!!value && String(value).length > 0} icon={icon} />
       <div className="flex w-full items-center gap-2">
         <InputLabel
-          active={value && String(value).length > 0}
+          active={!!value && String(value).length > 0}
           label={
             namespace !== false
               ? t([
