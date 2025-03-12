@@ -1,10 +1,10 @@
 import {
   ListboxOption as HeadlessListboxOption,
-  ComboboxOption as HeadlessComboboxOption
-} from '@headlessui/react'
-import { Icon } from '@iconify/react'
-import clsx from 'clsx'
-import React from 'react'
+  ComboboxOption as HeadlessComboboxOption,
+} from "@headlessui/react";
+import { Icon } from "@iconify/react";
+import clsx from "clsx";
+import React from "react";
 
 function ListboxOrComboboxOption({
   value,
@@ -12,21 +12,21 @@ function ListboxOrComboboxOption({
   icon,
   iconAtEnd = false,
   color,
-  type = 'listbox',
+  type = "listbox",
   matchedSubstrings,
-  noCheckmark = false
+  noCheckmark = false,
 }: {
-  value: string | number | Record<string, any> | null
-  text: string
-  icon?: string | React.ReactElement
-  iconAtEnd?: boolean
-  color?: string
-  type?: 'listbox' | 'combobox'
-  matchedSubstrings?: Array<{ length: number; offset: number }>
-  noCheckmark?: boolean
-}): React.ReactElement {
+  value: string | number | Record<string, any> | null;
+  text: string;
+  icon?: string | React.ReactElement;
+  iconAtEnd?: boolean;
+  color?: string;
+  type?: "listbox" | "combobox";
+  matchedSubstrings?: Array<{ length: number; offset: number }>;
+  noCheckmark?: boolean;
+}) {
   const Element =
-    type === 'listbox' ? HeadlessListboxOption : HeadlessComboboxOption
+    type === "listbox" ? HeadlessListboxOption : HeadlessComboboxOption;
 
   const getCharClassNames = (
     matchedSubstrings: Array<{ length: number; offset: number }> | undefined,
@@ -38,10 +38,10 @@ function ListboxOrComboboxOption({
         ({ offset, length }) => index >= offset && index < offset + length
       )
     )
-      return ''
+      return "";
 
-    return 'font-medium text-bg-800 dark:text-bg-100'
-  }
+    return "font-medium text-bg-800 dark:text-bg-100";
+  };
 
   return (
     <Element
@@ -52,25 +52,25 @@ function ListboxOrComboboxOption({
         <>
           <div
             className={clsx(
-              'flex w-full items-center',
-              color !== undefined ? 'gap-3' : 'gap-2',
-              selected && 'text-bg-800 dark:text-bg-100 font-semibold',
-              iconAtEnd && 'flex-between flex flex-row-reverse'
+              "flex w-full items-center",
+              color !== undefined ? "gap-3" : "gap-2",
+              selected && "text-bg-800 dark:text-bg-100 font-semibold",
+              iconAtEnd && "flex-between flex flex-row-reverse"
             )}
           >
             {icon !== undefined ? (
               <span
-                className={clsx('rounded-md', color ? 'p-2' : 'pr-2')}
+                className={clsx("rounded-md", color ? "p-2" : "pr-2")}
                 style={
                   color !== undefined
                     ? {
-                        backgroundColor: color + '20',
-                        color
+                        backgroundColor: color + "20",
+                        color,
                       }
                     : {}
                 }
               >
-                {typeof icon === 'string' ? (
+                {typeof icon === "string" ? (
                   <Icon className="size-5" icon={icon} />
                 ) : (
                   icon
@@ -85,7 +85,7 @@ function ListboxOrComboboxOption({
               )
             )}
             <span>
-              {text.split('').map((char, index) => (
+              {text.split("").map((char, index) => (
                 <span
                   key={index}
                   className={getCharClassNames(matchedSubstrings, index)}
@@ -104,7 +104,7 @@ function ListboxOrComboboxOption({
         </>
       )}
     </Element>
-  )
+  );
 }
 
-export default ListboxOrComboboxOption
+export default ListboxOrComboboxOption;

@@ -21,7 +21,7 @@ function DashboardItem({
   children?: React.ReactNode;
   componentBesideTitle?: React.ReactNode;
   namespace?: string;
-}): React.ReactElement {
+}) {
   const { t } = useTranslation(namespace);
   const { componentBg } = useThemeColors();
 

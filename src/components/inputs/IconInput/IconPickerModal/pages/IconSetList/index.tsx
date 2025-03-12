@@ -28,7 +28,7 @@ export default function IconSetList({
       search?: string;
     } | null>
   >;
-}): React.ReactElement {
+}) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [iconFilterTerm, setIconFilterTerm] = useState("");

@@ -18,7 +18,7 @@ function IconInput({
   setIcon: (icon: string) => void;
   setIconSelectorOpen: React.Dispatch<React.SetStateAction<boolean>>;
   namespace: string;
-}): React.ReactElement {
+}) {
   const { t } = useTranslation(namespace);
   const ref = useRef<HTMLInputElement | null>(null);
 

@@ -17,7 +17,7 @@ function SidebarItemSubsection({
   sidebarExpanded: boolean;
   toggleSidebar: () => void;
   subsectionExpanded: boolean;
-}): React.ReactElement {
+}) {
   const { t } = useTranslation("common.sidebar");
   const location = useLocation();
 

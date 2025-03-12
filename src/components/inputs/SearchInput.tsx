@@ -33,7 +33,7 @@ function SearchInput({
   className?: string;
   namespace: string;
   tKey?: string;
-}): React.ReactElement {
+}) {
   const { t } = useTranslation(["common.misc", namespace]);
   const { bgImage } = useLifeforgeUIContext();
   const componentBgLighterWithHover = useMemo(() => {

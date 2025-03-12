@@ -28,7 +28,7 @@ function Header({
   setSelectedCategory: React.Dispatch<React.SetStateAction<string | null>>;
   iconFilterTerm: string;
   setIconFilterTerm: React.Dispatch<React.SetStateAction<string>>;
-}): React.ReactElement {
+}) {
   const categories = useMemo(
     () => [
       ...new Set(

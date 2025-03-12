@@ -29,7 +29,7 @@ function ImageAndFileInput({
   onImageRemoved?: () => void;
   required?: boolean;
   namespace: string;
-}): React.ReactElement {
+}) {
   const { t } = useTranslation([namespace, "common.buttons"]);
 
   return (

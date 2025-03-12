@@ -1,13 +1,9 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
-import Button from './Button'
+import React from "react";
+import { useTranslation } from "react-i18next";
+import Button from "./Button";
 
-function GoBackButton({
-  onClick
-}: {
-  onClick: () => void
-}): React.ReactElement {
-  const { t } = useTranslation('common.misc')
+function GoBackButton({ onClick }: { onClick: () => void }) {
+  const { t } = useTranslation("common.misc");
 
   return (
     <Button
@@ -16,9 +12,9 @@ function GoBackButton({
       variant="no-bg"
       onClick={onClick}
     >
-      {t('buttons.goBack')}
+      {t("buttons.goBack")}
     </Button>
-  )
+  );
 }
 
-export default GoBackButton
+export default GoBackButton;

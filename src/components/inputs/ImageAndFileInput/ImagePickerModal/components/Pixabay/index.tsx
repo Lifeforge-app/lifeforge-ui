@@ -26,7 +26,7 @@ function Pixabay({
   setPreview: React.Dispatch<React.SetStateAction<string | null>>;
   filters: IPixabaySearchFilter;
   setIsSearchFilterModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}): React.ReactElement {
+}) {
   const [query, setQuery] = useState("");
 
   const [results, setResults] = useState<"error" | IPixabaySearchResult | null>(

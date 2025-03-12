@@ -73,7 +73,7 @@ function FormModal<T extends Record<string, any | any[]>>({
     create?: (newData: any) => void;
     update?: (newData: any) => void;
   };
-}): React.ReactElement {
+}) {
   const queryClient = useQueryClient();
   const [colorPickerOpen, setColorPickerOpen] = useState<string | null>(null);
   const [iconSelectorOpen, setIconSelectorOpen] = useState<string | null>(null);

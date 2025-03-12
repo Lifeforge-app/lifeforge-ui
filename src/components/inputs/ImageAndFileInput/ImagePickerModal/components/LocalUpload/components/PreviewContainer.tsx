@@ -15,7 +15,7 @@ function PreviewContainer({
   setFile: (file: File | null) => void;
   fileName?: string;
   onRemove?: () => void;
-}): React.ReactElement {
+}) {
   return (
     <div className="flex-center flex-1">
       {preview !== null && (

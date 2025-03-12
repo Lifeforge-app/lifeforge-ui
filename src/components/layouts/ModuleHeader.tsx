@@ -28,7 +28,7 @@ function ModuleHeader({
   hamburgerMenuClassName,
   actionButton,
   customElement,
-}: ModuleHeaderProps): React.ReactElement {
+}: ModuleHeaderProps) {
   const { t } = useTranslation([
     `modules.${_.camelCase(title?.toString() ?? "")}`,
     "common.misc",

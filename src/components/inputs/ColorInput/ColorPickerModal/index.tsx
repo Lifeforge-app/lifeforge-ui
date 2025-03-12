@@ -24,7 +24,7 @@ function ColorPickerModal({
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   color: string;
   setColor: (color: string) => void;
-}): React.ReactElement {
+}) {
   const [innerColor, setInnerColor] = useState(color.toLowerCase());
   const [morandiColorPaletteModalOpen, setMorandiColorPaletteModalOpen] =
     useState(false);

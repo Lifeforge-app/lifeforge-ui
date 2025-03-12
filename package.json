@@ -20,11 +20,15 @@
         ]
     },
     "devDependencies": {
+        "@eslint/js": "^9.22.0",
+        "@trivago/prettier-plugin-sort-imports": "^5.2.2",
         "@types/crypto-js": "^4.2.2",
         "@types/javascript-color-gradient": "^2.4.2",
         "@types/lodash": "^4.17.16",
         "@types/react": "^19.0.10",
         "@types/react-virtualized": "^9.22.0",
+        "eslint": "^9.22.0",
+        "prettier-plugin-tailwindcss": "^0.6.11",
         "tsup": "^8.4.0",
         "typescript": "^5.7.3"
     },

@@ -8,7 +8,7 @@ function SidebarCollapseButton({
 }: {
   onClick: () => void;
   isCollapsed: boolean;
-}): React.ReactElement {
+}) {
   return (
     <Button
       className="p-2!"

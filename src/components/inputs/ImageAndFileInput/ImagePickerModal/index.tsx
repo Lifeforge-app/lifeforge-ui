@@ -51,7 +51,7 @@ function ImagePickerModal({
   enableUrl?: boolean;
   acceptedMimeTypes: Record<string, string[]>;
   onSelect: (file: string | File, preview: string | null) => Promise<void>;
-}): React.ReactElement {
+}) {
   const { t } = useTranslation("common.modals");
   const [file, setFile] = useState<File | string | null>(null);
   const [preview, setPreview] = useState<string | null>(null);

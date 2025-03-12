@@ -49,7 +49,7 @@ function Button<C extends React.ElementType = "button">({
   icon,
   onClick,
   ...props
-}: ButtonComponentProps<C>): React.ReactElement {
+}: ButtonComponentProps<C>) {
   const Component = as || "button";
   const finalProps = React.useMemo(
     () => ({ ...defaultProps, ...props }),

@@ -46,7 +46,7 @@ function getColorClass(lighter?: boolean): string {
   }
 }
 
-function HamburgerMenu(props: MenuProps): React.ReactElement {
+function HamburgerMenu(props: MenuProps) {
   const {
     children,
     className,

@@ -13,7 +13,7 @@ function TailwindCSSColorsModal({
   onClose: () => void;
   color: string;
   setColor: React.Dispatch<React.SetStateAction<string>>;
-}): React.ReactElement {
+}) {
   return (
     <ModalWrapper isOpen={isOpen} minWidth="70vw">
       <ModalHeader

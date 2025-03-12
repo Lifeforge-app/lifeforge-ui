@@ -42,7 +42,7 @@ function TagsInput({
   required,
   namespace,
   tKey = "",
-}: ITagsInputProps): React.ReactElement {
+}: ITagsInputProps) {
   const { t } = useTranslation(namespace);
   const [currentTag, setCurrentTag] = useState<string>("");
   const inputRef = useRef<HTMLInputElement | null>(null);

@@ -9,7 +9,7 @@ function ModuleWrapper({
 }: {
   children: any;
   className?: string;
-}): React.ReactElement {
+}) {
   return (
     <Scrollbar
       className={clsx(

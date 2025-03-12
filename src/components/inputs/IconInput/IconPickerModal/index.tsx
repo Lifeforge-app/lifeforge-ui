@@ -14,7 +14,7 @@ function IconPickerModal({
   isOpen: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedIcon: (icon: string) => void;
-}): React.ReactElement {
+}) {
   const [currentIconSet, setCurrentIconSet] = useState<{
     iconSet?: string;
     search?: string;

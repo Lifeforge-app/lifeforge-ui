@@ -22,7 +22,7 @@ function ColorInput({
   hasTopMargin?: boolean;
   className?: string;
   namespace: string;
-}): React.ReactElement {
+}) {
   const { t } = useTranslation(namespace);
   const ref = useRef<HTMLInputElement | null>(null);
 

@@ -38,7 +38,7 @@ function DeleteConfirmationModal({
   customOnClick?: () => Promise<void>;
   queryKey?: unknown[] | unknown[][];
   multiQueryKey?: boolean;
-}): React.ReactElement {
+}) {
   const { t } = useTranslation("common.modals");
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
@@ -48,7 +48,7 @@ function DeleteConfirmationModal({
     setLoading(true);
 
     await fetchAPI(
-      `${apiEndpoint}/${!Array.isArray(data) ? (data?.id ?? "") : ""}`,
+      `${apiEndpoint}/${!Array.isArray(data) ? data?.id ?? "" : ""}`,
       {
         method: "DELETE",
         body: !Array.isArray(data) ? undefined : { ids: data },
@@ -98,8 +98,8 @@ function DeleteConfirmationModal({
             itemName: nameKey
               ? data?.[nameKey]
               : Array.isArray(data)
-                ? `${data.length} ${itemName}`
-                : `the ${itemName}`,
+              ? `${data.length} ${itemName}`
+              : `the ${itemName}`,
           })}
       </h1>
       <p className="text-bg-500 mt-2">

@@ -38,7 +38,7 @@ function IconSet({
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   iconSet: string;
   setSelectedIcon: (icon: string) => void;
-}): React.ReactElement {
+}) {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentTag, setCurrentTag] = useState<string | null>(null);
   const [iconData, setIconData] = useState<IIconSetData | null>(null);

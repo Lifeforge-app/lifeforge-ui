@@ -61,7 +61,7 @@ function TextInput({
   value,
   namespace,
   tKey,
-}: IInputProps): React.ReactElement {
+}: IInputProps) {
   const { t } = useTranslation(namespace ? namespace : undefined);
   const [showPassword, setShowPassword] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);

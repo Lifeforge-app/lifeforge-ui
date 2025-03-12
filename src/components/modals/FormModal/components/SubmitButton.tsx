@@ -11,7 +11,7 @@ function SubmitButton({
   submitLoading: boolean;
   openType?: "create" | "update" | null;
   onSubmitButtonClick: () => Promise<void>;
-}): React.ReactElement {
+}) {
   return (
     <>
       {["create", "update"].includes(openType ?? "") ? (

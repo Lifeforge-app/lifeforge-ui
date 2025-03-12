@@ -14,7 +14,7 @@ function OTPInputBox({
 }: {
   verityOTP: (otp: string) => Promise<void>;
   verifyOtpLoading: boolean;
-}): React.ReactElement {
+}) {
   const [otp, setOtp] = useState("");
 
   return (
@@ -66,7 +66,7 @@ function ResendOTPButton({
   otpCooldown: number;
   sendOtpLoading: boolean;
   requestOTP: () => void;
-}): React.ReactElement {
+}) {
   const { t } = useTranslation("common.vault");
 
   return (
@@ -89,7 +89,7 @@ function OTPScreen({
 }: {
   endpoint: string;
   callback: () => void;
-}): React.ReactElement {
+}) {
   const { t } = useTranslation("common.vault");
   const [otpSent, setOtpSent] = useState(false);
   const [otpId, setOtpId] = useState(localStorage.getItem("otpId") ?? "");

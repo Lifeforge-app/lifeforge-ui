@@ -46,7 +46,7 @@ function LocationInput({
   setLocation: (value: string | null) => void;
   namespace: string;
   label?: string;
-}): React.ReactElement {
+}) {
   const { googleAPIKey: apiKey } = useLifeforgeUIContext();
   const [query, setQuery] = useState("");
   const debouncedQuery = useDebounce(query, 500);

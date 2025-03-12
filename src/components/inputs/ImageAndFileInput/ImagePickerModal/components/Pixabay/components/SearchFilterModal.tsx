@@ -74,7 +74,7 @@ function SearchFilterModal({
   onClose: () => void;
   filters: IPixabaySearchFilter;
   updateFilters: React.ActionDispatch<[action: PixabaySearchFilterAction]>;
-}): React.ReactElement {
+}) {
   const { t } = useTranslation("common.misc");
 
   return (

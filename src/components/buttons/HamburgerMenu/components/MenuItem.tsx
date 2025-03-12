@@ -39,7 +39,7 @@ function MenuItem({
   preventDefault?: boolean;
   namespace?: string | false;
   loading?: boolean;
-}): React.ReactElement {
+}) {
   const { t } = useTranslation(namespace ? namespace : "common.buttons");
 
   return (

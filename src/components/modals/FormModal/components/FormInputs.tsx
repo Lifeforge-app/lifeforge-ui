@@ -31,7 +31,7 @@ function FormInputs<T>({
   setIconSelectorOpen: (id: string) => void;
   setImagePickerModalOpen: (id: string) => void;
   setQrScannerModalOpen: (id: string) => void;
-}): React.ReactElement {
+}) {
   const handleChange = (field: IFieldProps<T>) => {
     return (
       value:

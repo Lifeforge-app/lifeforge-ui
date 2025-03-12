@@ -1,11 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 
-function SidebarDivider({
-  noMargin = false,
-}: {
-  noMargin?: boolean;
-}): React.ReactElement {
+function SidebarDivider({ noMargin = false }: { noMargin?: boolean }) {
   return (
     <li
       className={clsx(

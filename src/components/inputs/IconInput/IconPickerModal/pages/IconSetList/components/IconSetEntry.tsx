@@ -8,7 +8,7 @@ function IconSetEntry({
 }: {
   iconSet: IIconSet;
   setCurrentIconSet: ({ iconSet }: { iconSet: string }) => void;
-}): React.ReactElement {
+}) {
   return (
     <button
       key={iconSet.prefix}

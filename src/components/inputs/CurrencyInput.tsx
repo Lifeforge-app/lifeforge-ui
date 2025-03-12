@@ -27,7 +27,7 @@ function CurrencyInputComponent({
   className?: string;
   required?: boolean;
   namespace: string;
-}): React.ReactElement {
+}) {
   const { t } = useTranslation(namespace);
 
   return (

@@ -31,7 +31,7 @@ function PickerModals<T extends Record<string, any | any[]>>({
   setImagePickerModalOpen: (id: string | null) => void;
   qrScannerModalOpen: string | null;
   setQRScannerModalOpen: (id: string | null) => void;
-}): React.ReactElement {
+}) {
   return (
     <>
       {fields.some((f) => f.type === "color") && (

@@ -20,7 +20,7 @@ function SearchResults({
   setFile: React.Dispatch<React.SetStateAction<string | File | null>>;
   setPreview: React.Dispatch<React.SetStateAction<string | null>>;
   onSearch: (page: number) => Promise<void>;
-}): React.ReactElement {
+}) {
   return (
     <Scrollbar className="size-full min-h-[50vh] flex-1">
       <Pagination

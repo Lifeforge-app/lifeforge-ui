@@ -12,7 +12,7 @@ function DnDContainer({
   getRootProps: any;
   getInputProps: any;
   isDragActive: boolean;
-}): React.ReactElement {
+}) {
   const { t } = useTranslation("common.misc");
 
   return (

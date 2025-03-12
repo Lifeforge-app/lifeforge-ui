@@ -34,7 +34,6 @@
             ],
         },
         "declaration": true,
-        "declarationMap": true,
         "emitDeclarationOnly": false,
         "outDir": "dist",
         "esModuleInterop": true,

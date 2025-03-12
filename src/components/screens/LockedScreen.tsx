@@ -13,7 +13,7 @@ function LockedScreen({
 }: {
   endpoint: string;
   setMasterPassword: React.Dispatch<React.SetStateAction<string>>;
-}): React.ReactElement {
+}) {
   const [masterPassWordInputContent, setMasterPassWordInputContent] =
     useState<string>("");
   const [loading, setLoading] = useState(false);

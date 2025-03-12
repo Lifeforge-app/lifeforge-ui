@@ -13,7 +13,7 @@ function SidebarWrapper({
   setOpen: (value: boolean) => void;
   customHeight?: string;
   children: React.ReactNode;
-}): React.ReactElement {
+}) {
   return (
     <aside
       className={clsx(

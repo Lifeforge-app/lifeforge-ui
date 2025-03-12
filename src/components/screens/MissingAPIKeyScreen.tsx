@@ -9,7 +9,7 @@ function MissingAPIKeyScreen({
   requiredAPIKeys,
 }: {
   requiredAPIKeys: string[];
-}): React.ReactElement {
+}) {
   const { t } = useTranslation("modules.apiKeys");
 
   return (

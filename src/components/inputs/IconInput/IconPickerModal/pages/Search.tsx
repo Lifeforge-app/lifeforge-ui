@@ -79,7 +79,7 @@ function Search({
       search?: string;
     } | null>
   >;
-}): React.ReactElement {
+}) {
   const [currentIconSet, setCurrentIconSet] = useState<string | null>(null);
   const [iconData, setIconData] = useState<IIconSearchResult | null>(null);
   const [filteredIconList, setFilteredIconList] = useState<string[]>([]);

@@ -9,11 +9,7 @@ import { TextInput } from "@components/inputs";
 import { ModalWrapper } from "@components/modals";
 import fetchAPI from "@utils/fetchAPI";
 
-function CreatePasswordScreen({
-  endpoint,
-}: {
-  endpoint: string;
-}): React.ReactElement {
+function CreatePasswordScreen({ endpoint }: { endpoint: string }) {
   const { t } = useTranslation("common.vault");
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");

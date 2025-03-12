@@ -10,7 +10,7 @@ function QRCodeScanner({
   isOpen: boolean;
   onClose: () => void;
   onScanned: (data: string) => void;
-}): React.ReactElement {
+}) {
   return (
     <ModalWrapper isOpen={isOpen} minHeight="30rem">
       <ModalHeader

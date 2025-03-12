@@ -1,11 +1,7 @@
-import { Transition } from '@headlessui/react'
-import React, { Fragment } from 'react'
+import { Transition } from "@headlessui/react";
+import React, { Fragment } from "react";
 
-function ListboxTransition({
-  children
-}: {
-  children: React.ReactNode
-}): React.ReactElement {
+function ListboxTransition({ children }: { children: React.ReactNode }) {
   return (
     <Transition
       as={Fragment}
@@ -18,7 +14,7 @@ function ListboxTransition({
     >
       {children}
     </Transition>
-  )
+  );
 }
 
-export default ListboxTransition
+export default ListboxTransition;

@@ -10,7 +10,7 @@ function ImageURL({
   file: string | File | null;
   setFile: React.Dispatch<React.SetStateAction<string | File | null>>;
   setPreview: React.Dispatch<React.SetStateAction<string | null>>;
-}): React.ReactElement {
+}) {
   return (
     <>
       <TextInput

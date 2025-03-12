@@ -27,7 +27,7 @@ function ConfigColumn({
   wrapWhen?: "sm" | "md" | "lg" | "xl";
   noDefaultBreakpoints?: boolean;
   className?: string;
-}): React.ReactElement {
+}) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
