@@ -4,6 +4,7 @@ export * from "./components/modals";
 export * from "./components/sidebar";
 export * from "./components/screens";
 export * from "./components/utilities";
+export * from "./components/layouts";
 export * from "./providers/LifeforgeUIProvider";
 
 export type { IFieldProps } from "./interfaces/modal_interfaces";

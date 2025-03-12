@@ -1,6 +1,6 @@
 import React, { ReactNode, useContext, createContext } from "react";
 
-interface IThemeData {
+interface IContextData {
   apiHost: string;
   googleAPIKey: string;
   theme: "light" | "dark" | "system";
@@ -12,13 +12,15 @@ interface IThemeData {
   setBgTemp: (color: string) => void;
   setBgImage: (image: string) => void;
   language: string;
+  toggleSidebar?: () => void;
+  sidebarExpanded?: boolean;
 }
 
-const LifeforgeUIContext = createContext<IThemeData | undefined>(undefined);
+const LifeforgeUIContext = createContext<IContextData | undefined>(undefined);
 
 interface LifeforgeUIProviderProps {
   children: ReactNode;
-  personalization?: IThemeData;
+  personalization?: IContextData;
 }
 
 export const LifeforgeUIProvider: React.FC<LifeforgeUIProviderProps> = ({
@@ -26,7 +28,7 @@ export const LifeforgeUIProvider: React.FC<LifeforgeUIProviderProps> = ({
   personalization,
 }: {
   children: ReactNode;
-  personalization?: IThemeData;
+  personalization?: IContextData;
 }) => {
   return (
     <LifeforgeUIContext.Provider
@@ -43,6 +45,8 @@ export const LifeforgeUIProvider: React.FC<LifeforgeUIProviderProps> = ({
           setBgTemp: () => {},
           setBgImage: () => {},
           language: "en",
+          toggleSidebar: () => {},
+          sidebarExpanded: true,
         }
       }
     >
