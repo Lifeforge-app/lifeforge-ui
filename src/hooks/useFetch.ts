@@ -4,8 +4,9 @@ import { toast } from 'react-toastify'
 
 import { type Loadable } from '@interfaces/common'
 
+import { useLifeforgeUIContext } from '../providers/LifeforgeUIProvider'
+
 function useFetch<T>(
-  apiHost: string,
   endpoint: string,
   criteriaMet: boolean = true,
   method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET',
@@ -17,6 +18,7 @@ function useFetch<T>(
   refresh: () => void,
   setData: React.Dispatch<React.SetStateAction<Loadable<T>>>
 ] {
+  const { apiHost } = useLifeforgeUIContext()
   const [data, setData] = useState<Loadable<T>>('loading')
 
   function fetchData(): void {
