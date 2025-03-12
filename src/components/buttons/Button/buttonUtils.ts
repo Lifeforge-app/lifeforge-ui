@@ -20,7 +20,7 @@ export const generateColorClass = (
       case 'tertiary':
         return 'text-red-500 hover:bg-red-500/10 dark:hover:bg-red-500/10 disabled:hover:text-red-500'
       case 'secondary':
-        return 'border-[1.6px] border-red-500 shadow-custom text-red-500 disabled:border-red-500 disabled:text-red-500 disabled:hover:border-red-500 disabled:hover:text-red-500'
+        return 'border-[1.6px] border-red-500 shadow-custom text-red-500 disabled:border-red-500 hover:bg-red-500/15 disabled:text-red-500 disabled:hover:border-red-500 disabled:hover:text-red-500'
       case 'primary':
       default:
         return `bg-red-500 shadow-custom hover:bg-red-600 ${
@@ -37,7 +37,7 @@ export const generateColorClass = (
     case 'tertiary':
       return 'text-custom-500 hover:bg-custom-500/15 disabled:hover:shadow-none disabled:hover:bg-transparent hover:shadow-custom disabled:text-bg-500 disabled:hover:text-bg-500'
     case 'secondary':
-      return 'border-[1.6px] border-custom-500 shadow-custom text-custom-500 disabled:border-bg-500 disabled:text-bg-500 disabled:hover:border-bg-500 disabled:hover:text-bg-500'
+      return 'border-[1.6px] border-custom-500 shadow-custom text-custom-500 hover:bg-custom-500/10 disabled:border-bg-500 disabled:text-bg-500 disabled:hover:border-bg-500 disabled:hover:text-bg-500'
     case 'primary':
     default:
       return `bg-custom-500 shadow-custom hover:bg-custom-600 ${
