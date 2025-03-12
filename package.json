@@ -1,11 +1,11 @@
 {
     "name": "@lifeforge/ui",
     "description": "LifeForge UI component library",
-    "version": "25.11.6",
+    "version": "25.11.10",
     "moduleResolution": "node",
     "sideEffects": false,
     "scripts": {
-        "build": "tsup src/index.ts --format esm,cjs --dts --out-dir dist"
+        "build": "tsc && tsup src/index.ts --format esm,cjs --dts --out-dir dist"
     },
     "files": [
         "dist"
