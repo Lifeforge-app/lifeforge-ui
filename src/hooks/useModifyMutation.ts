@@ -4,10 +4,9 @@ import { toast } from 'react-toastify'
 
 import fetchAPI from '@utils/fetchAPI'
 
-import { useLifeforgeUIContext } from '../providers/LifeforgeUIProvider'
-
 function useModifyMutation<T>(
   type: 'create' | 'update',
+  apiHost: string,
   endpoint: string,
   options?: {
     onSuccess?: (newData: T) => void
@@ -15,8 +14,6 @@ function useModifyMutation<T>(
     onError?: () => void
   }
 ): UseMutationResult<T, Error, Partial<T>, unknown> {
-  const { apiHost } = useLifeforgeUIContext()
-
   return useMutation<T, Error, Partial<T>>({
     mutationFn: async (data: Partial<T>) => {
       if (

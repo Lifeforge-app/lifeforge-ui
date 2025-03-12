@@ -1,14 +1,19 @@
-import { useQueryClient } from "@tanstack/react-query";
-import React, { useState } from "react";
-import { Button } from "@components/buttons";
-import { LoadingScreen } from "@components/screens";
-import useModifyMutation from "@hooks/useModifyMutation";
-import { type IFieldProps } from "@interfaces/modal_interfaces";
-import FormInputs from "./components/FormInputs";
-import PickerModals from "./components/PickerModals";
-import SubmitButton from "./components/SubmitButton";
-import ModalHeader from "../ModalHeader";
-import ModalWrapper from "../ModalWrapper";
+import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
+import { useQueryClient } from '@tanstack/react-query'
+import React, { useState } from 'react'
+
+import { type IFieldProps } from '@interfaces/modal_interfaces'
+
+import { Button } from '@components/buttons'
+import { LoadingScreen } from '@components/screens'
+
+import useModifyMutation from '@hooks/useModifyMutation'
+
+import ModalHeader from '../ModalHeader'
+import ModalWrapper from '../ModalWrapper'
+import FormInputs from './components/FormInputs'
+import PickerModals from './components/PickerModals'
+import SubmitButton from './components/SubmitButton'
 
 function FormModal<T extends Record<string, any | any[]>>({
   // fields stuff
@@ -33,8 +38,8 @@ function FormModal<T extends Record<string, any | any[]>>({
   sortBy,
   sortMode,
   submitButtonProps = {
-    children: "Submit",
-    icon: "tabler:check",
+    children: 'Submit',
+    icon: 'tabler:check'
   },
   customUpdateDataList,
 
@@ -45,117 +50,124 @@ function FormModal<T extends Record<string, any | any[]>>({
 
   // misc stuff
   namespace,
-  modalRef,
+  modalRef
 }: {
-  modalRef?: React.RefObject<HTMLDivElement | null>;
-  fields: IFieldProps<T>[];
-  data: T;
-  setData: React.Dispatch<React.SetStateAction<T>>;
-  title: string;
-  icon: string;
-  isOpen: boolean;
-  openType?: "create" | "update" | null;
-  onClose: () => void;
-  submitButtonProps?: React.ComponentProps<typeof Button>;
-  onSubmit?: () => Promise<void>;
-  queryKey?: unknown[];
-  endpoint?: string;
-  id?: string;
-  loading?: boolean;
-  actionButtonIcon?: string;
-  actionButtonIsRed?: boolean;
-  onActionButtonClick?: () => void;
-  namespace: string;
-  getFinalData?: (originalData: T) => Promise<Record<string, any>>;
-  sortBy?: keyof T;
-  sortMode?: "asc" | "desc";
+  modalRef?: React.RefObject<HTMLDivElement | null>
+  fields: IFieldProps<T>[]
+  data: T
+  setData: React.Dispatch<React.SetStateAction<T>>
+  title: string
+  icon: string
+  isOpen: boolean
+  openType?: 'create' | 'update' | null
+  onClose: () => void
+  submitButtonProps?: React.ComponentProps<typeof Button>
+  onSubmit?: () => Promise<void>
+  queryKey?: unknown[]
+  endpoint?: string
+  id?: string
+  loading?: boolean
+  actionButtonIcon?: string
+  actionButtonIsRed?: boolean
+  onActionButtonClick?: () => void
+  namespace: string
+  getFinalData?: (originalData: T) => Promise<Record<string, any>>
+  sortBy?: keyof T
+  sortMode?: 'asc' | 'desc'
   customUpdateDataList?: {
-    create?: (newData: any) => void;
-    update?: (newData: any) => void;
-  };
+    create?: (newData: any) => void
+    update?: (newData: any) => void
+  }
 }) {
-  const queryClient = useQueryClient();
-  const [colorPickerOpen, setColorPickerOpen] = useState<string | null>(null);
-  const [iconSelectorOpen, setIconSelectorOpen] = useState<string | null>(null);
+  const { apiHost } = useLifeforgeUIContext()
+  const queryClient = useQueryClient()
+  const [colorPickerOpen, setColorPickerOpen] = useState<string | null>(null)
+  const [iconSelectorOpen, setIconSelectorOpen] = useState<string | null>(null)
   const [imagePickerModalOpen, setImagePickerModalOpen] = useState<
     string | null
-  >(null);
+  >(null)
   const [qrCodeScannerModalOpen, setQRCodeScannerModalOpen] = useState<
     string | null
-  >(null);
-  const [submitLoading, setSubmitLoading] = useState(false);
-  const entryCreateMutation = useModifyMutation<T>("create", endpoint ?? "", {
-    onSettled: () => {
-      setSubmitLoading(false);
-    },
-    onSuccess: (newData: T) => {
-      if (customUpdateDataList?.create) {
-        customUpdateDataList.create(newData);
-      } else {
-        queryClient.setQueryData(queryKey ?? [], (old: T[]) => {
-          return [...old, newData].sort((a, b) => {
-            if (sortBy) {
-              if (sortMode === "asc") {
-                return a[sortBy] > b[sortBy] ? 1 : -1;
+  >(null)
+  const [submitLoading, setSubmitLoading] = useState(false)
+  const entryCreateMutation = useModifyMutation<T>(
+    'create',
+    apiHost,
+    endpoint ?? '',
+    {
+      onSettled: () => {
+        setSubmitLoading(false)
+      },
+      onSuccess: (newData: T) => {
+        if (customUpdateDataList?.create) {
+          customUpdateDataList.create(newData)
+        } else {
+          queryClient.setQueryData(queryKey ?? [], (old: T[]) => {
+            return [...old, newData].sort((a, b) => {
+              if (sortBy) {
+                if (sortMode === 'asc') {
+                  return a[sortBy] > b[sortBy] ? 1 : -1
+                }
+                return a[sortBy] < b[sortBy] ? 1 : -1
               }
-              return a[sortBy] < b[sortBy] ? 1 : -1;
-            }
-            return 0;
-          });
-        });
+              return 0
+            })
+          })
+        }
+        onClose()
       }
-      onClose();
-    },
-  });
+    }
+  )
   const entryUpdateMutation = useModifyMutation<T>(
-    "update",
+    'update',
+    apiHost,
     `${endpoint}/${id}`,
     {
       onSettled: () => {
-        setSubmitLoading(false);
+        setSubmitLoading(false)
       },
       onSuccess: (newData: T) => {
         if (customUpdateDataList?.update) {
-          customUpdateDataList.update(newData);
+          customUpdateDataList.update(newData)
         } else {
           queryClient.setQueryData(queryKey ?? [], (old: T[]) => {
             return old
-              .map((entry) => {
+              .map(entry => {
                 if (entry.id === newData.id) {
-                  return newData;
+                  return newData
                 }
-                return entry;
+                return entry
               })
               .sort((a, b) => {
                 if (sortBy) {
-                  if (sortMode === "asc") {
-                    return a[sortBy] > b[sortBy] ? 1 : -1;
+                  if (sortMode === 'asc') {
+                    return a[sortBy] > b[sortBy] ? 1 : -1
                   }
-                  return a[sortBy] < b[sortBy] ? 1 : -1;
+                  return a[sortBy] < b[sortBy] ? 1 : -1
                 }
-                return 0;
-              });
-          });
+                return 0
+              })
+          })
         }
-        onClose();
-      },
+        onClose()
+      }
     }
-  );
+  )
 
   async function onSubmitButtonClick(): Promise<void> {
-    setSubmitLoading(true);
+    setSubmitLoading(true)
 
-    const finalData = getFinalData ? await getFinalData(data) : data;
+    const finalData = getFinalData ? await getFinalData(data) : data
 
-    if (openType === "create") {
-      entryCreateMutation.mutate(finalData as any);
-    } else if (openType === "update") {
-      entryUpdateMutation.mutate(finalData as any);
+    if (openType === 'create') {
+      entryCreateMutation.mutate(finalData as any)
+    } else if (openType === 'update') {
+      entryUpdateMutation.mutate(finalData as any)
     }
 
     if (onSubmit) {
-      await onSubmit();
-      setSubmitLoading(false);
+      await onSubmit()
+      setSubmitLoading(false)
     }
   }
 
@@ -208,7 +220,7 @@ function FormModal<T extends Record<string, any | any[]>>({
         setQRScannerModalOpen={setQRCodeScannerModalOpen}
       />
     </>
-  );
+  )
 }
 
-export default FormModal;
+export default FormModal
