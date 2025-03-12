@@ -1,13 +1,13 @@
-import { Icon } from "@iconify/react";
-import React from "react";
-import { type IIconSet } from "@interfaces/icon_selector_interfaces";
+import { Icon } from '@iconify/react'
+
+import { type IIconSet } from '@interfaces/icon_selector_interfaces'
 
 function IconSetEntry({
   iconSet,
-  setCurrentIconSet,
+  setCurrentIconSet
 }: {
-  iconSet: IIconSet;
-  setCurrentIconSet: ({ iconSet }: { iconSet: string }) => void;
+  iconSet: IIconSet
+  setCurrentIconSet: ({ iconSet }: { iconSet: string }) => void
 }) {
   return (
     <button
@@ -15,12 +15,12 @@ function IconSetEntry({
       className="bg-bg-50 shadow-custom dark:bg-bg-800 dark:hover:bg-bg-700/50 flex w-full grow flex-col overflow-hidden rounded-md transition-all hover:bg-bg-200/70"
       type="button"
       onClick={() => {
-        setCurrentIconSet({ iconSet: iconSet.prefix });
+        setCurrentIconSet({ iconSet: iconSet.prefix })
       }}
     >
       <div className="flex w-full shrink-0 flex-col font-medium">
         <div className="flex-center size-full gap-5 px-4 py-6">
-          {iconSet.samples?.map((sampleIcon) => (
+          {iconSet.samples?.map(sampleIcon => (
             <Icon
               key={sampleIcon}
               className="size-8 shrink-0"
@@ -50,7 +50,7 @@ function IconSetEntry({
         </div>
       </div>
     </button>
-  );
+  )
 }
 
-export default IconSetEntry;
+export default IconSetEntry

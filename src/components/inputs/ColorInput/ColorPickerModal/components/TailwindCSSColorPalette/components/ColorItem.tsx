@@ -1,28 +1,30 @@
-import { Icon } from "@iconify/react";
-import clsx from "clsx";
-import React, { useMemo } from "react";
-import { isLightColor, oklchToHex } from "@utils/colors";
+import { Icon } from '@iconify/react'
+import clsx from 'clsx'
+import { useMemo } from 'react'
+import tinycolor from 'tinycolor2'
+
+import { oklchToHex } from '@utils/colors'
 
 function ColorItem({
   name,
   value,
   selected,
-  onSelect,
+  onSelect
 }: {
-  name: string;
-  value: string;
-  selected: string;
-  onSelect: (color: string) => void;
+  name: string
+  value: string
+  selected: string
+  onSelect: (color: string) => void
 }) {
-  const colorHex = useMemo(() => oklchToHex(value), [value]);
+  const colorHex = useMemo(() => oklchToHex(value), [value])
 
   return (
     <li key={value} className="w-full">
       <button
         className={clsx(
-          "flex-center shadow-custom aspect-square w-full cursor-pointer rounded-md",
+          'flex-center shadow-custom aspect-square w-full cursor-pointer rounded-md',
           selected === value &&
-            "ring-bg-900 ring-offset-bg-100 dark:ring-bg-50 dark:ring-offset-bg-900 ring-2 ring-offset-2"
+            'ring-bg-900 ring-offset-bg-100 dark:ring-bg-50 dark:ring-offset-bg-900 ring-2 ring-offset-2'
         )}
         style={{ backgroundColor: value }}
         onClick={() => onSelect(colorHex)}
@@ -30,8 +32,8 @@ function ColorItem({
         {selected === colorHex && (
           <Icon
             className={clsx(
-              isLightColor(colorHex) ? "text-bg-800" : "text-bg-50",
-              "size-8"
+              tinycolor(colorHex).isLight() ? 'text-bg-800' : 'text-bg-50',
+              'size-8'
             )}
             icon="tabler:check"
           />
@@ -40,7 +42,7 @@ function ColorItem({
       <p className="mt-2 text-xs font-medium">{name}</p>
       <code className="text-bg-500 block text-xs font-medium">{colorHex}</code>
     </li>
-  );
+  )
 }
 
-export default ColorItem;
+export default ColorItem

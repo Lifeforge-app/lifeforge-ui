@@ -3,25 +3,6 @@
 /* eslint-disable prefer-const */
 import Gradient from 'javascript-color-gradient'
 
-export function isLightColor(color: string): boolean {
-  let r = 0
-  let g = 0
-  let b = 0
-  if (color.startsWith('#')) {
-    r = parseInt(color.substr(1, 2), 16)
-    g = parseInt(color.substr(3, 2), 16)
-    b = parseInt(color.substr(5, 2), 16)
-  }
-  if (color.startsWith('rgb')) {
-    const match = color.match(/(\d+)/g)
-    r = parseInt(match![0])
-    g = parseInt(match![1])
-    b = parseInt(match![2])
-  }
-  const brightness = (r * 299 + g * 587 + b * 114) / 1000
-  return brightness > 155
-}
-
 export function hexToRgb(hex: string): number[] {
   return hex
     .replace(

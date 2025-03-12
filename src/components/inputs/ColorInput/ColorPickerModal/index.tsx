@@ -1,59 +1,61 @@
-import { Colorful, type ColorResult, EditableInput } from "@uiw/react-color";
-import React, { useCallback, useEffect, useState } from "react";
-import { Button } from "@components/buttons";
-import { ModalHeader } from "@components/modals";
-import MorandiColorPaletteModal from "./components/MorandiColorPaletteModal.js";
-import TailwindCSSColorsModal from "./components/TailwindCSSColorPalette/index.js";
-import ModalWrapper from "../../../modals/ModalWrapper";
+import { type ColorResult, Colorful, EditableInput } from '@uiw/react-color'
+import React, { useCallback, useEffect, useState } from 'react'
+
+import { Button } from '@components/buttons'
+import { ModalHeader } from '@components/modals'
+
+import ModalWrapper from '../../../modals/ModalWrapper'
+import MorandiColorPaletteModal from './components/MorandiColorPaletteModal'
+import TailwindCSSColorsModal from './components/TailwindCSSColorPalette'
 
 function checkContrast(hexColor: string): string {
-  const r = parseInt(hexColor.substr(1, 2), 16);
-  const g = parseInt(hexColor.substr(3, 2), 16);
-  const b = parseInt(hexColor.substr(5, 2), 16);
-  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
-  return yiq >= 128 ? "#000000" : "#ffffff";
+  const r = parseInt(hexColor.substr(1, 2), 16)
+  const g = parseInt(hexColor.substr(3, 2), 16)
+  const b = parseInt(hexColor.substr(5, 2), 16)
+  const yiq = (r * 299 + g * 587 + b * 114) / 1000
+  return yiq >= 128 ? '#000000' : '#ffffff'
 }
 
 function ColorPickerModal({
   isOpen,
   setOpen,
   color,
-  setColor,
+  setColor
 }: {
-  isOpen: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  color: string;
-  setColor: (color: string) => void;
+  isOpen: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  color: string
+  setColor: (color: string) => void
 }) {
-  const [innerColor, setInnerColor] = useState(color.toLowerCase());
+  const [innerColor, setInnerColor] = useState(color.toLowerCase())
   const [morandiColorPaletteModalOpen, setMorandiColorPaletteModalOpen] =
-    useState(false);
+    useState(false)
   const [tailwindCSSColorsModalOpen, setTailwindCSSColorsModalOpen] =
-    useState(false);
+    useState(false)
 
   const confirmColor = useCallback(() => {
-    setColor(innerColor);
-    setOpen(false);
-  }, [innerColor, setColor, setOpen]);
+    setColor(innerColor)
+    setOpen(false)
+  }, [innerColor, setColor, setOpen])
 
   const handleClose = useCallback(() => {
-    setOpen(false);
-  }, [setOpen]);
+    setOpen(false)
+  }, [setOpen])
 
   const handleColorChange = useCallback((color: ColorResult) => {
-    setInnerColor(color.hex);
-  }, []);
+    setInnerColor(color.hex)
+  }, [])
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setInnerColor(`#${e.target.value}`);
+      setInnerColor(`#${e.target.value}`)
     },
     []
-  );
+  )
 
   useEffect(() => {
-    setInnerColor(color.toLowerCase());
-  }, [color]);
+    setInnerColor(color.toLowerCase())
+  }, [color])
 
   return (
     <>
@@ -74,7 +76,7 @@ function ColorPickerModal({
             __html: `.w-color-editable-input input {
           background-color: ${innerColor} !important;
           color: ${checkContrast(innerColor)} !important;
-        }`,
+        }`
           }}
         />
         <EditableInput
@@ -88,7 +90,7 @@ function ColorPickerModal({
           icon="tabler:flower"
           variant="secondary"
           onClick={() => {
-            setMorandiColorPaletteModalOpen(true);
+            setMorandiColorPaletteModalOpen(true)
           }}
         >
           Morandi Color Palette
@@ -98,7 +100,7 @@ function ColorPickerModal({
           icon="tabler:brand-tailwind"
           variant="primary"
           onClick={() => {
-            setTailwindCSSColorsModalOpen(true);
+            setTailwindCSSColorsModalOpen(true)
           }}
         >
           Tailwind CSS Color Palette
@@ -112,7 +114,7 @@ function ColorPickerModal({
         isOpen={morandiColorPaletteModalOpen}
         setColor={setInnerColor}
         onClose={() => {
-          setMorandiColorPaletteModalOpen(false);
+          setMorandiColorPaletteModalOpen(false)
         }}
       />
       <TailwindCSSColorsModal
@@ -120,11 +122,11 @@ function ColorPickerModal({
         isOpen={tailwindCSSColorsModalOpen}
         setColor={setInnerColor}
         onClose={() => {
-          setTailwindCSSColorsModalOpen(false);
+          setTailwindCSSColorsModalOpen(false)
         }}
       />
     </>
-  );
+  )
 }
 
-export default ColorPickerModal;
+export default ColorPickerModal
