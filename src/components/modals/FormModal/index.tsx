@@ -157,7 +157,9 @@ function FormModal<T extends Record<string, any | any[]>>({
   async function onSubmitButtonClick(): Promise<void> {
     setSubmitLoading(true)
 
-    const finalData = getFinalData ? await getFinalData(data) : data
+    const finalData = JSON.parse(
+      JSON.stringify(getFinalData ? await getFinalData(data) : data)
+    )
 
     if (openType === 'create') {
       entryCreateMutation.mutate(finalData as any)

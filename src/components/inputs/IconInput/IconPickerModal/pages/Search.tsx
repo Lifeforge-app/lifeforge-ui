@@ -1,66 +1,64 @@
-import React, { useEffect, useState } from "react";
-import AutoSizer from "react-virtualized/dist/commonjs/AutoSizer";
-import List from "react-virtualized/dist/commonjs/List";
-import { Button } from "@components/buttons";
-import { SearchInput } from "@components/inputs";
-import { EmptyStateScreen } from "@components/screens";
-import ChipSelector from "../components/ChipSelector";
-import IconEntry from "../components/IconEntry";
+import React, { useEffect, useState } from 'react'
+import { AutoSizer, List } from 'react-virtualized'
 
-const AS = AutoSizer as any;
-const L = List as any;
+import { Button } from '@components/buttons'
+import { SearchInput } from '@components/inputs'
+import { EmptyStateScreen } from '@components/screens'
+
+import ChipSelector from '../components/ChipSelector'
+import IconEntry from '../components/IconEntry'
 
 export interface IIconSearchResult {
-  iconList: string[];
-  iconSets: Record<string, IIconSetEntry>;
+  iconList: string[]
+  iconSets: Record<string, IIconSetEntry>
 }
 
 export interface IIconSetEntry {
-  name: string;
-  total: number;
+  name: string
+  total: number
   author: {
-    name: string;
-    url: string;
-  };
+    name: string
+    url: string
+  }
   license: {
-    title: string;
-    spdx: string;
-    url: string;
-  };
-  samples: string[];
-  height?: number;
-  displayHeight?: number;
-  category: string;
-  palette: boolean;
-  version?: string;
+    title: string
+    spdx: string
+    url: string
+  }
+  samples: string[]
+  height?: number
+  displayHeight?: number
+  category: string
+  palette: boolean
+  version?: string
 }
 
 export interface Author {
-  name: string;
-  url: string;
+  name: string
+  url: string
 }
 
 async function getIconSet(searchTerm: string): Promise<any> {
   try {
     const res = await fetch(
       `https://api.iconify.design/search?query=${searchTerm}&limit=9999`
-    );
-    const data = await res.json();
-    let iconList = [];
+    )
+    const data = await res.json()
+    let iconList = []
     if (data.icons.length > 0) {
-      iconList = data.icons;
+      iconList = data.icons
     } else {
-      iconList = [];
+      iconList = []
     }
-    const iconSets = data.collections;
+    const iconSets = data.collections
 
     return {
       iconList,
-      iconSets,
-    };
+      iconSets
+    }
   } catch (err) {
-    console.error(err);
-    return null;
+    console.error(err)
+    return null
   }
 }
 
@@ -68,47 +66,47 @@ function Search({
   setOpen,
   searchTerm,
   setSelectedIcon,
-  setCurrentIconSetProp,
+  setCurrentIconSetProp
 }: {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  searchTerm: string;
-  setSelectedIcon: (icon: string) => void;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  searchTerm: string
+  setSelectedIcon: (icon: string) => void
   setCurrentIconSetProp: React.Dispatch<
     React.SetStateAction<{
-      iconSet?: string;
-      search?: string;
+      iconSet?: string
+      search?: string
     } | null>
-  >;
+  >
 }) {
-  const [currentIconSet, setCurrentIconSet] = useState<string | null>(null);
-  const [iconData, setIconData] = useState<IIconSearchResult | null>(null);
-  const [filteredIconList, setFilteredIconList] = useState<string[]>([]);
-  const [searchQuery, setSearchQuery] = useState(searchTerm ?? "");
+  const [currentIconSet, setCurrentIconSet] = useState<string | null>(null)
+  const [iconData, setIconData] = useState<IIconSearchResult | null>(null)
+  const [filteredIconList, setFilteredIconList] = useState<string[]>([])
+  const [searchQuery, setSearchQuery] = useState(searchTerm ?? '')
 
   useEffect(() => {
-    setIconData(null);
+    setIconData(null)
     getIconSet(searchTerm)
-      .then((data) => {
-        setIconData(data);
-        setFilteredIconList(data.iconList);
-        setCurrentIconSet(null);
+      .then(data => {
+        setIconData(data)
+        setFilteredIconList(data.iconList)
+        setCurrentIconSet(null)
       })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [searchTerm]);
+      .catch(err => {
+        console.error(err)
+      })
+  }, [searchTerm])
 
   useEffect(() => {
     if (iconData !== null) {
       setFilteredIconList(
         currentIconSet !== null
           ? iconData.iconList.filter(
-              (e) => e.split(":").shift() === currentIconSet
+              e => e.split(':').shift() === currentIconSet
             )
           : iconData.iconList
-      );
+      )
     }
-  }, [currentIconSet, iconData]);
+  }, [currentIconSet, iconData])
 
   return iconData !== null ? (
     <div className="flex min-h-0 w-full flex-1 flex-col">
@@ -120,9 +118,9 @@ function Search({
           setSearchQuery={setSearchQuery}
           stuffToSearch="icon"
           tKey="iconPicker"
-          onKeyUp={(e) => {
-            if (e.key === "Enter" && searchQuery !== "") {
-              setCurrentIconSetProp({ search: searchQuery });
+          onKeyUp={e => {
+            if (e.key === 'Enter' && searchQuery !== '') {
+              setCurrentIconSetProp({ search: searchQuery })
             }
           }}
         />
@@ -130,8 +128,8 @@ function Search({
           iconAtEnd
           icon="tabler:arrow-right"
           onClick={() => {
-            if (searchQuery !== "") {
-              setCurrentIconSetProp({ search: searchQuery });
+            if (searchQuery !== '') {
+              setCurrentIconSetProp({ search: searchQuery })
             }
           }}
         >
@@ -145,12 +143,12 @@ function Search({
       />
       <div className="flex min-h-0 flex-1 flex-col">
         {filteredIconList.length > 0 ? (
-          <AS className="mt-6">
+          <AutoSizer className="mt-6">
             {({ width, height }: { width: number; height: number }) => {
-              const itemsPerRow = Math.floor(width / 160) || 1;
+              const itemsPerRow = Math.floor(width / 160) || 1
 
               return (
-                <L
+                <List
                   height={height - 12}
                   itemsPerRow={Math.floor(width / filteredIconList.length) || 1}
                   rowCount={Math.ceil(filteredIconList.length / itemsPerRow)}
@@ -158,14 +156,14 @@ function Search({
                   rowRenderer={({
                     index,
                     key,
-                    style,
+                    style
                   }: {
-                    index: number;
-                    key: string;
-                    style: React.CSSProperties;
+                    index: number
+                    key: string
+                    style: React.CSSProperties
                   }) => {
-                    const fromIndex = index * itemsPerRow;
-                    const toIndex = fromIndex + itemsPerRow;
+                    const fromIndex = index * itemsPerRow
+                    const toIndex = fromIndex + itemsPerRow
 
                     return (
                       <div
@@ -175,23 +173,23 @@ function Search({
                       >
                         {filteredIconList
                           .slice(fromIndex, toIndex)
-                          .map((icon) => (
+                          .map(icon => (
                             <IconEntry
                               key={icon}
-                              icon={icon.split(":").pop() ?? ""}
-                              iconSet={icon.split(":").shift() ?? ""}
+                              icon={icon.split(':').pop() ?? ''}
+                              iconSet={icon.split(':').shift() ?? ''}
                               setOpen={setOpen}
                               setSelectedIcon={setSelectedIcon}
                             />
                           ))}
                       </div>
-                    );
+                    )
                   }}
                   width={width}
                 />
-              );
+              )
             }}
-          </AS>
+          </AutoSizer>
         ) : (
           <div className="flex-center h-full flex-1">
             <EmptyStateScreen
@@ -208,7 +206,7 @@ function Search({
     <div className="flex w-full justify-center pb-8">
       <span className="loader"></span>
     </div>
-  );
+  )
 }
 
-export default Search;
+export default Search
