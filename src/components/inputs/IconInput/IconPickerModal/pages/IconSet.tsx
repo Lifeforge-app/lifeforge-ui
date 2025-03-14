@@ -1,74 +1,72 @@
-import React, { useEffect, useMemo, useState } from "react";
-import AutoSizer from "react-virtualized/dist/commonjs/AutoSizer";
-import List from "react-virtualized/dist/commonjs/List";
-import { SearchInput } from "@components/inputs";
-import { EmptyStateScreen } from "@components/screens";
-import ChipSelector from "../components/ChipSelector";
-import IconEntry from "../components/IconEntry";
+import React, { useEffect, useMemo, useState } from 'react'
+import { AutoSizer, List } from 'react-virtualized'
 
-const AS = AutoSizer as any;
-const L = List as any;
+import { SearchInput } from '@components/inputs'
+import { EmptyStateScreen } from '@components/screens'
+
+import ChipSelector from '../components/ChipSelector'
+import IconEntry from '../components/IconEntry'
 
 export interface IIconSetData {
-  title: string;
-  total: number;
-  prefix: string;
-  uncategorized: string[];
-  categories: Record<string, string[]>;
+  title: string
+  total: number
+  prefix: string
+  uncategorized: string[]
+  categories: Record<string, string[]>
 }
 
 async function getIconSet(prefix: string): Promise<any> {
   try {
     const res: IIconSetData = await fetch(
       `https://api.iconify.design/collection?prefix=${prefix}`
-    ).then(async (res) => await res.json());
+    ).then(async res => await res.json())
 
-    return res;
+    return res
   } catch (err) {
-    console.error(err);
-    return null;
+    console.error(err)
+    return null
   }
 }
 
 function IconSet({
   setOpen,
   iconSet,
-  setSelectedIcon,
+  setSelectedIcon
 }: {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  iconSet: string;
-  setSelectedIcon: (icon: string) => void;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  iconSet: string
+  setSelectedIcon: (icon: string) => void
 }) {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [currentTag, setCurrentTag] = useState<string | null>(null);
-  const [iconData, setIconData] = useState<IIconSetData | null>(null);
+  const [searchTerm, setSearchTerm] = useState('')
+  const [currentTag, setCurrentTag] = useState<string | null>(null)
+  const [iconData, setIconData] = useState<IIconSetData | null>(null)
 
   const filteredIconList = useMemo(() => {
     const allIcons = [
       ...(iconData?.uncategorized ?? []),
-      ...Object.values(iconData?.categories ?? {}).flat(),
-    ];
+      ...Object.values(iconData?.categories ?? {}).flat()
+    ]
 
-    if (!iconData) return [];
+    if (!iconData) return []
 
     if (!currentTag) {
-      return allIcons.filter((icon) =>
+      return allIcons.filter(icon =>
         icon.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      )
     }
 
-    return (iconData.categories[currentTag] || []).filter((icon) =>
+    return (iconData.categories[currentTag] || []).filter(icon =>
       icon.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [searchTerm, currentTag, iconData]);
+    )
+  }, [searchTerm, currentTag, iconData])
 
   useEffect(() => {
     getIconSet(iconSet)
-      .then((data) => {
-        setIconData(data);
+      .then(data => {
+        setIconData(data)
       })
-      .catch(console.error);
-  }, []);
+      .catch(console.error)
+  }, [])
 
   return iconData ? (
     <div className="flex size-full min-h-0 flex-1 flex-col">
@@ -90,12 +88,12 @@ function IconSet({
       />
       <div className="flex min-h-0 flex-1 flex-col">
         {filteredIconList.length ? (
-          <AS className="mt-6">
+          <AutoSizer className="mt-6">
             {({ width, height }: { width: number; height: number }) => {
-              const itemsPerRow = Math.floor(width / 160) || 1;
+              const itemsPerRow = Math.floor(width / 160) || 1
 
               return (
-                <L
+                <List
                   height={height - 12}
                   itemsPerRow={Math.floor(width / filteredIconList.length) || 1}
                   rowCount={Math.ceil(filteredIconList.length / itemsPerRow)}
@@ -103,14 +101,14 @@ function IconSet({
                   rowRenderer={({
                     index,
                     key,
-                    style,
+                    style
                   }: {
-                    index: number;
-                    key: string;
-                    style: React.CSSProperties;
+                    index: number
+                    key: string
+                    style: React.CSSProperties
                   }) => {
-                    const fromIndex = index * itemsPerRow;
-                    const toIndex = fromIndex + itemsPerRow;
+                    const fromIndex = index * itemsPerRow
+                    const toIndex = fromIndex + itemsPerRow
 
                     return (
                       <div
@@ -120,7 +118,7 @@ function IconSet({
                       >
                         {filteredIconList
                           .slice(fromIndex, toIndex)
-                          .map((icon) => (
+                          .map(icon => (
                             <IconEntry
                               key={icon}
                               icon={icon}
@@ -130,13 +128,13 @@ function IconSet({
                             />
                           ))}
                       </div>
-                    );
+                    )
                   }}
                   width={width}
                 />
-              );
+              )
             }}
-          </AS>
+          </AutoSizer>
         ) : (
           <div className="flex-center flex-1">
             <EmptyStateScreen
@@ -153,7 +151,7 @@ function IconSet({
     <div className="flex w-full justify-center pb-8">
       <span className="loader"></span>
     </div>
-  );
+  )
 }
 
-export default IconSet;
+export default IconSet
