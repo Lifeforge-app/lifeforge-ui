@@ -15,7 +15,9 @@ const withBodyClass = (Story, context) => {
       'theme-lime',
       'bg-zinc',
       'transition-all',
-      context.globals.theme === 'dark' ? 'bg-bg-900' : 'bg-bg-50'
+      ...(context.globals.theme === 'dark'
+        ? ['bg-bg-900', 'text-bg-100']
+        : ['bg-bg-50', 'text-bg-800'])
     )
 
     if (context.globals.theme === 'dark') {

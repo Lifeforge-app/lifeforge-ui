@@ -1,17 +1,19 @@
-import { Icon } from "@iconify/react";
-import React from "react";
+import { Icon } from '@iconify/react'
+import React from 'react'
+
+import { IFieldProps } from '@interfaces/modal_interfaces'
+
 import {
-  TextInput,
-  DateInput,
-  ListboxOrComboboxInput,
-  ListboxNullOption,
-  ListboxOrComboboxOption,
   ColorInput,
+  DateInput,
   IconInput,
   ImageAndFileInput,
+  ListboxNullOption,
+  ListboxOrComboboxInput,
+  ListboxOrComboboxOption,
   LocationInput,
-} from "@components/inputs";
-import { IFieldProps } from "@interfaces/modal_interfaces";
+  TextInput
+} from '@components/inputs'
 
 function FormInputs<T>({
   fields,
@@ -21,16 +23,16 @@ function FormInputs<T>({
   setColorPickerOpen,
   setIconSelectorOpen,
   setImagePickerModalOpen,
-  setQrScannerModalOpen,
+  setQrScannerModalOpen
 }: {
-  fields: IFieldProps<T>[];
-  data: T;
-  setData: React.Dispatch<React.SetStateAction<T>>;
-  namespace: string;
-  setColorPickerOpen: (id: string) => void;
-  setIconSelectorOpen: (id: string) => void;
-  setImagePickerModalOpen: (id: string) => void;
-  setQrScannerModalOpen: (id: string) => void;
+  fields: IFieldProps<T>[]
+  data: T
+  setData: React.Dispatch<React.SetStateAction<T>>
+  namespace: string
+  setColorPickerOpen: (id: string) => void
+  setIconSelectorOpen: (id: string) => void
+  setImagePickerModalOpen: (id: string) => void
+  setQrScannerModalOpen: (id: string) => void
 }) {
   const handleChange = (field: IFieldProps<T>) => {
     return (
@@ -38,26 +40,26 @@ function FormInputs<T>({
         | string
         | string[]
         | {
-            image: string | File | null;
-            preview: string | null;
+            image: string | File | null
+            preview: string | null
           }
     ) => {
-      setData((prev) => ({ ...prev, [field.id]: value }));
-    };
-  };
+      setData(prev => ({ ...prev, [field.id]: value }))
+    }
+  }
 
   return (
     <div className="space-y-4">
-      {fields.map((field) => {
-        const selectedData = data[field.id];
+      {fields.map(field => {
+        const selectedData = data[field.id]
 
         switch (field.type) {
-          case "text":
+          case 'text':
             return (
               <TextInput
                 key={field.id as string}
                 darker
-                actionButtonIcon={field.qrScanner ? "tabler:qrcode" : ""}
+                actionButtonIcon={field.qrScanner ? 'tabler:qrcode' : ''}
                 disabled={field.disabled}
                 icon={field.icon}
                 isPassword={field.isPassword}
@@ -67,11 +69,11 @@ function FormInputs<T>({
                 setValue={handleChange(field)}
                 value={selectedData as string}
                 onActionButtonClick={() => {
-                  setQrScannerModalOpen(field.id as string);
+                  setQrScannerModalOpen(field.id as string)
                 }}
               />
-            );
-          case "datetime":
+            )
+          case 'datetime':
             return (
               <DateInput
                 key={field.id as string}
@@ -85,8 +87,8 @@ function FormInputs<T>({
                 namespace={namespace}
                 setDate={handleChange(field)}
               />
-            );
-          case "listbox":
+            )
+          case 'listbox':
             return (
               <ListboxOrComboboxInput
                 key={field.id as string}
@@ -100,13 +102,13 @@ function FormInputs<T>({
                               key={item}
                               className="size-5"
                               icon={
-                                field.options.find((l) => l.value === item)
-                                  ?.icon ?? ""
+                                field.options.find(l => l.value === item)
+                                  ?.icon ?? ''
                               }
                             />
                             <span className="-mt-px block truncate">
-                              {field.options.find((l) => l.value === item)
-                                ?.text ?? "None"}
+                              {field.options.find(l => l.value === item)
+                                ?.text ?? 'None'}
                             </span>
                             {i !== selectedData.length - 1 && (
                               <Icon
@@ -127,20 +129,25 @@ function FormInputs<T>({
                     </>
                   ) : (
                     <>
-                      <Icon
-                        className="size-5"
-                        icon={
-                          field.options.find((l) => l.value === selectedData)
-                            ?.icon ??
-                          field.nullOption ??
-                          ""
-                        }
-                        style={{
-                          color: field.options.find(
-                            (l) => l.value === selectedData
-                          )?.color,
-                        }}
-                      />
+                      {!!(
+                        field.options.find(l => l.value === selectedData)
+                          ?.icon ?? field.nullOption
+                      ) && (
+                        <Icon
+                          className="size-5"
+                          icon={
+                            field.options.find(l => l.value === selectedData)
+                              ?.icon ??
+                            field.nullOption ??
+                            ''
+                          }
+                          style={{
+                            color: field.options.find(
+                              l => l.value === selectedData
+                            )?.color
+                          }}
+                        />
+                      )}
                       {field.options.length &&
                         field.options[0].icon === undefined &&
                         field.options[0].color !== undefined && (
@@ -148,14 +155,14 @@ function FormInputs<T>({
                             className="size-2 rounded-full"
                             style={{
                               backgroundColor: field.options.find(
-                                (l) => l.value === selectedData
-                              )?.color,
+                                l => l.value === selectedData
+                              )?.color
                             }}
                           />
                         )}
                       <span className="-mt-px block truncate">
-                        {field.options.find((l) => l.value === selectedData)
-                          ?.text ?? "None"}
+                        {field.options.find(l => l.value === selectedData)
+                          ?.text ?? 'None'}
                       </span>
                     </>
                   )
@@ -184,8 +191,8 @@ function FormInputs<T>({
                   />
                 ))}
               </ListboxOrComboboxInput>
-            );
-          case "color":
+            )
+          case 'color':
             return (
               <ColorInput
                 key={field.id as string}
@@ -194,11 +201,11 @@ function FormInputs<T>({
                 namespace={namespace}
                 setColor={handleChange(field)}
                 setColorPickerOpen={() => {
-                  setColorPickerOpen(field.id as string);
+                  setColorPickerOpen(field.id as string)
                 }}
               />
-            );
-          case "icon":
+            )
+          case 'icon':
             return (
               <IconInput
                 key={field.id as string}
@@ -207,30 +214,30 @@ function FormInputs<T>({
                 namespace={namespace}
                 setIcon={handleChange(field)}
                 setIconSelectorOpen={() => {
-                  setIconSelectorOpen(field.id as string);
+                  setIconSelectorOpen(field.id as string)
                 }}
               />
-            );
+            )
 
-          case "location":
+          case 'location':
             return (
               <LocationInput
                 key={field.id as string}
                 label={field.label}
                 location={selectedData as string}
                 namespace={namespace}
-                setLocation={(value) => handleChange(field)(value ?? "")}
+                setLocation={value => handleChange(field)(value ?? '')}
               />
-            );
-          case "file":
+            )
+          case 'file':
             return (
               <ImageAndFileInput
                 icon="tabler:file"
                 image={
                   (
                     selectedData as {
-                      image: string | File | null;
-                      preview: string | null;
+                      image: string | File | null
+                      preview: string | null
                     }
                   ).image
                 }
@@ -239,47 +246,47 @@ function FormInputs<T>({
                 preview={
                   (
                     selectedData as {
-                      image: string | File | null;
-                      preview: string | null;
+                      image: string | File | null
+                      preview: string | null
                     }
                   ).preview
                 }
-                setImage={(value) =>
+                setImage={value =>
                   handleChange(field)({
                     ...(selectedData as {
-                      image: string | File | null;
-                      preview: string | null;
+                      image: string | File | null
+                      preview: string | null
                     }),
-                    image: value,
+                    image: value
                   })
                 }
                 setImagePickerModalOpen={() => {
-                  setImagePickerModalOpen(field.id as string);
-                  field.onFileRemoved?.();
+                  setImagePickerModalOpen(field.id as string)
+                  field.onFileRemoved?.()
                 }}
-                setPreview={(value) =>
+                setPreview={value =>
                   handleChange(field)({
                     ...(selectedData as {
-                      image: string | File | null;
-                      preview: string | null;
+                      image: string | File | null
+                      preview: string | null
                     }),
-                    preview: value,
+                    preview: value
                   })
                 }
                 onImageRemoved={() =>
                   handleChange(field)({
                     image: null,
-                    preview: null,
+                    preview: null
                   })
                 }
               />
-            );
+            )
           default:
-            return <></>;
+            return <></>
         }
       })}
     </div>
-  );
+  )
 }
 
-export default FormInputs;
+export default FormInputs

@@ -1,11 +1,13 @@
-import React from "react";
+import React from 'react'
+
+import { IFieldProps } from '@interfaces/modal_interfaces'
+
 import {
   ColorPickerModal,
   IconPickerModal,
   ImagePickerModal,
-} from "@components/inputs";
-import { QRCodeScanner } from "@components/inputs";
-import { IFieldProps } from "@interfaces/modal_interfaces";
+  QRCodeScanner
+} from '@components/inputs'
 
 function PickerModals<T extends Record<string, any | any[]>>({
   fields,
@@ -18,89 +20,89 @@ function PickerModals<T extends Record<string, any | any[]>>({
   imagePickerModalOpen,
   setImagePickerModalOpen,
   qrScannerModalOpen,
-  setQRScannerModalOpen,
+  setQRScannerModalOpen
 }: {
-  fields: IFieldProps<T>[];
-  data: T;
-  setData: React.Dispatch<React.SetStateAction<T>>;
-  colorPickerOpen: string | null;
-  setColorPickerOpen: (id: string | null) => void;
-  iconSelectorOpen: string | null;
-  setIconSelectorOpen: (id: string | null) => void;
-  imagePickerModalOpen: string | null;
-  setImagePickerModalOpen: (id: string | null) => void;
-  qrScannerModalOpen: string | null;
-  setQRScannerModalOpen: (id: string | null) => void;
+  fields: IFieldProps<T>[]
+  data: T
+  setData: React.Dispatch<React.SetStateAction<T>>
+  colorPickerOpen: string | null
+  setColorPickerOpen: (id: string | null) => void
+  iconSelectorOpen: string | null
+  setIconSelectorOpen: (id: string | null) => void
+  imagePickerModalOpen: string | null
+  setImagePickerModalOpen: (id: string | null) => void
+  qrScannerModalOpen: string | null
+  setQRScannerModalOpen: (id: string | null) => void
 }) {
   return (
     <>
-      {fields.some((f) => f.type === "color") && (
+      {fields.some(f => f.type === 'color') && (
         <ColorPickerModal
-          color={(data[colorPickerOpen ?? ""] as string) ?? "#FFFFFF"}
+          color={(data[colorPickerOpen ?? ''] as string) ?? '#FFFFFF'}
           isOpen={colorPickerOpen !== null}
-          setColor={(value) => {
-            setData((prev) => ({
+          setColor={value => {
+            setData(prev => ({
               ...prev,
-              [colorPickerOpen ?? ""]: value,
-            }));
+              [colorPickerOpen ?? '']: value
+            }))
           }}
           setOpen={() => {
-            setColorPickerOpen(null);
+            setColorPickerOpen(null)
           }}
         />
       )}
-      {fields.some((f) => f.type === "icon") && (
+      {fields.some(f => f.type === 'icon') && (
         <IconPickerModal
           isOpen={iconSelectorOpen !== null}
           setOpen={() => {
-            setIconSelectorOpen(null);
+            setIconSelectorOpen(null)
           }}
-          setSelectedIcon={(value) => {
-            setData((prev) => ({
+          setSelectedIcon={value => {
+            setData(prev => ({
               ...prev,
-              [iconSelectorOpen ?? ""]: value,
-            }));
+              [iconSelectorOpen ?? '']: value
+            }))
           }}
         />
       )}
-      {fields.some((f) => f.type === "file") && (
+      {fields.some(f => f.type === 'file') && (
         <ImagePickerModal
           enablePixaBay
           enableUrl
           acceptedMimeTypes={{
-            images: ["image/png", "image/jpeg", "image/webp"],
+            images: ['image/png', 'image/jpeg', 'image/webp']
           }}
           isOpen={imagePickerModalOpen !== null}
           onClose={() => {
-            setImagePickerModalOpen(null);
+            setImagePickerModalOpen(null)
           }}
           onSelect={async (file, preview) => {
-            setData((prev) => ({
+            setData(prev => ({
               ...prev,
-              [imagePickerModalOpen ?? ""]: {
+              [imagePickerModalOpen ?? '']: {
                 image: file,
-                preview,
-              },
-            }));
+                preview
+              }
+            }))
           }}
         />
       )}
-      {fields.some((f) => Object.keys(f).includes("qrScanner")) && (
+      {fields.some(f => Object.keys(f).includes('qrScanner')) && (
         <QRCodeScanner
           isOpen={qrScannerModalOpen !== null}
           onClose={() => {
-            setQRScannerModalOpen(null);
+            setQRScannerModalOpen(null)
           }}
-          onScanned={(data) => {
-            setData((prev) => ({
+          onScanned={data => {
+            setData(prev => ({
               ...prev,
-              [qrScannerModalOpen ?? ""]: data,
-            }));
+              [qrScannerModalOpen ?? '']: data
+            }))
           }}
         />
       )}
     </>
-  );
+  )
 }
 
-export default PickerModals;
+export default PickerModals
