@@ -1,11 +1,11 @@
 {
   "name": "@lifeforge/ui",
   "description": "LifeForge UI component library",
-  "version": "0.25.11-22",
+  "version": "0.25.11-23",
   "moduleResolution": "node",
   "sideEffects": false,
   "scripts": {
-    "build": "tsc && tsup src/index.ts",
+    "build": "rm -rf dist && tsc && tsup src/index.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
