@@ -15,6 +15,7 @@ interface IGeneralProps {
   icon: string
   value: any
   setValue: (value: any) => void
+  disabled?: boolean
   className?: string
   children: React.ReactNode
   customActive?: boolean
@@ -45,6 +46,7 @@ function ListboxOrComboboxInput(
     icon,
     value,
     setValue,
+    disabled,
     type,
     children,
     required,
@@ -60,6 +62,7 @@ function ListboxOrComboboxInput(
       return (
         <ListboxInputWrapper
           className={props.className}
+          disabled={disabled}
           multiple={props.multiple}
           value={value}
           onChange={setValue}
@@ -104,6 +107,7 @@ function ListboxOrComboboxInput(
       return (
         <ComboboxInputWrapper
           className={props.className}
+          disabled={disabled}
           setQuery={props.setQuery}
           value={value}
           onChange={setValue}

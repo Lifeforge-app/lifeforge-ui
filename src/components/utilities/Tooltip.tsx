@@ -6,11 +6,13 @@ import { Tooltip as ReactTooltip } from 'react-tooltip'
 export default function Tooltip({
   id,
   icon,
-  children
+  children,
+  tooltipProps
 }: {
   id: string
   icon: string
   children: React.ReactNode
+  tooltipProps?: Record<string, unknown>
 }) {
   return (
     <>
@@ -24,6 +26,7 @@ export default function Tooltip({
         opacity={1}
         place="top-start"
         positionStrategy="fixed"
+        {...tooltipProps}
       >
         {children}
       </ReactTooltip>

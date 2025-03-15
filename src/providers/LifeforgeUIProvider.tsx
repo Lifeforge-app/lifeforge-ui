@@ -2,7 +2,6 @@ import React, { ReactNode, createContext, useContext } from 'react'
 
 interface IContextData {
   apiHost: string
-  googleAPIKey: string
   theme: 'light' | 'dark' | 'system'
   themeColor: string
   bgTemp: string
@@ -31,7 +30,6 @@ export const LifeforgeUIProvider: React.FC<LifeforgeUIProviderProps> = ({
     <LifeforgeUIContext.Provider
       value={{
         apiHost: '',
-        googleAPIKey: '',
         theme: 'dark',
         themeColor: 'lime',
         bgTemp: 'zinc',

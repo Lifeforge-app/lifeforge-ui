@@ -7,20 +7,23 @@ function ListboxInputWrapper({
   onChange,
   multiple = false,
   className,
-  children
+  children,
+  disabled
 }: {
   value: string | string[] | null
   onChange: (value: any) => void
   multiple?: boolean
   className?: string
   children: React.ReactNode
+  disabled?: boolean
 }) {
   return (
     <Listbox
       as="div"
       className={clsx(
         'border-bg-500 bg-bg-200/50 shadow-custom hover:bg-bg-200 data-open:border-custom-500! dark:bg-bg-800/50 dark:hover:bg-bg-800/80 relative flex items-center gap-1 rounded-t-lg border-b-2 transition-all',
-        className
+        className,
+        disabled ? 'pointer-events-none! opacity-50' : ''
       )}
       multiple={multiple}
       value={value}
