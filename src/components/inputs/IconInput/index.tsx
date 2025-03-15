@@ -1,29 +1,30 @@
-import { Icon } from "@iconify/react";
-import clsx from "clsx";
-import React, { useRef } from "react";
-import { useTranslation } from "react-i18next";
-import InputIcon from "../shared/InputIcon";
-import InputWrapper from "../shared/InputWrapper";
-import _ from "lodash";
+import { Icon } from '@iconify/react'
+import clsx from 'clsx'
+import _ from 'lodash'
+import React, { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import InputIcon from '../shared/InputIcon'
+import InputWrapper from '../shared/InputWrapper'
 
 function IconInput({
   name,
   icon,
   setIcon,
   setIconSelectorOpen,
-  namespace,
+  namespace
 }: {
-  name: string;
-  icon: string;
-  setIcon: (icon: string) => void;
-  setIconSelectorOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  namespace: string;
+  name: string
+  icon: string
+  setIcon: (icon: string) => void
+  setIconSelectorOpen: React.Dispatch<React.SetStateAction<boolean>>
+  namespace: string
 }) {
-  const { t } = useTranslation(namespace);
-  const ref = useRef<HTMLInputElement | null>(null);
+  const { t } = useTranslation(namespace)
+  const ref = useRef<HTMLInputElement | null>(null)
 
   function updateIcon(e: React.ChangeEvent<HTMLInputElement>): void {
-    setIcon(e.target.value);
+    setIcon(e.target.value)
   }
 
   return (
@@ -33,10 +34,10 @@ function IconInput({
         <div className="flex w-full items-center gap-2">
           <span
             className={clsx(
-              "text-bg-500 group-focus-within:!text-custom-500 pointer-events-none absolute left-[4.2rem] font-medium tracking-wide transition-all",
+              'text-bg-500 group-focus-within:!text-custom-500 pointer-events-none absolute left-[4.2rem] font-medium tracking-wide transition-all',
               icon.length === 0
-                ? "top-1/2 -translate-y-1/2 group-focus-within:top-6 group-focus-within:text-[14px]"
-                : "top-6 -translate-y-1/2 text-[14px]"
+                ? 'top-1/2 -translate-y-1/2 group-focus-within:top-6 group-focus-within:text-[14px]'
+                : 'top-6 -translate-y-1/2 text-[14px]'
             )}
           >
             {t(`inputs.${_.camelCase(name)}`)}
@@ -44,11 +45,11 @@ function IconInput({
           <div className="mt-6 mr-12 flex w-full items-center gap-2 pl-4">
             <Icon
               className={clsx(
-                "size-4 shrink-0",
+                'size-4 shrink-0',
                 !icon &&
-                  "pointer-events-none opacity-0 group-focus-within:opacity-100"
+                  'pointer-events-none opacity-0 group-focus-within:opacity-100'
               )}
-              icon={icon || "tabler:question-mark"}
+              icon={icon || 'tabler:question-mark'}
             />
             <input
               ref={ref}
@@ -61,7 +62,7 @@ function IconInput({
           <button
             className="text-bg-500 hover:bg-bg-300 hover:text-bg-800 dark:hover:bg-bg-700/70 dark:hover:text-bg-200 mr-4 shrink-0 rounded-lg p-2 transition-all focus:outline-hidden"
             onClick={() => {
-              setIconSelectorOpen(true);
+              setIconSelectorOpen(true)
             }}
           >
             <Icon className="size-5" icon="tabler:chevron-down" />
@@ -69,7 +70,7 @@ function IconInput({
         </div>
       </InputWrapper>
     </>
-  );
+  )
 }
 
-export default IconInput;
+export default IconInput

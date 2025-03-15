@@ -1,18 +1,20 @@
-import React from "react";
-import colors from "tailwindcss/colors";
-import { ModalWrapper, ModalHeader } from "@components/modals";
-import ColorItem from "./components/ColorItem";
+import React from 'react'
+import colors from 'tailwindcss/colors'
+
+import { ModalHeader, ModalWrapper } from '@components/modals'
+
+import ColorItem from './components/ColorItem'
 
 function TailwindCSSColorsModal({
   isOpen,
   onClose,
   color,
-  setColor,
+  setColor
 }: {
-  isOpen: boolean;
-  onClose: () => void;
-  color: string;
-  setColor: React.Dispatch<React.SetStateAction<string>>;
+  isOpen: boolean
+  onClose: () => void
+  color: string
+  setColor: React.Dispatch<React.SetStateAction<string>>
 }) {
   return (
     <ModalWrapper isOpen={isOpen} minWidth="70vw">
@@ -24,14 +26,14 @@ function TailwindCSSColorsModal({
       <div className="space-y-3 overflow-y-auto">
         {([...Object.keys(colors)] as Array<keyof typeof colors>)
           .filter(
-            (colorGroup) =>
-              typeof colors[colorGroup] === "object" &&
+            colorGroup =>
+              typeof colors[colorGroup] === 'object' &&
               ![
-                "warmGray",
-                "coolGray",
-                "blueGray",
-                "trueGray",
-                "lightBlue",
+                'warmGray',
+                'coolGray',
+                'blueGray',
+                'trueGray',
+                'lightBlue'
               ].includes(colorGroup)
           )
           .map((colorGroup, index) => (
@@ -51,9 +53,9 @@ function TailwindCSSColorsModal({
                     name={colorName}
                     selected={color}
                     value={colorValue}
-                    onSelect={(color) => {
-                      setColor(color);
-                      onClose();
+                    onSelect={color => {
+                      setColor(color)
+                      onClose()
                     }}
                   />
                 ))}
@@ -62,7 +64,7 @@ function TailwindCSSColorsModal({
           ))}
       </div>
     </ModalWrapper>
-  );
+  )
 }
 
-export default TailwindCSSColorsModal;
+export default TailwindCSSColorsModal

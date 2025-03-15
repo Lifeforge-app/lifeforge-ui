@@ -1,11 +1,13 @@
-import { collections as importedCollections } from "@iconify/collections";
-import { type IconifyInfo } from "@iconify/types";
-import React, { useMemo } from "react";
-import { Button } from "@components/buttons";
-import { SearchInput } from "@components/inputs";
-import Chip from "../../../components/Chip";
+import { collections as importedCollections } from '@iconify/collections'
+import { type IconifyInfo } from '@iconify/types'
+import React, { useMemo } from 'react'
 
-const collections: Record<string, IconifyInfo> = importedCollections;
+import { Button } from '@components/buttons'
+import { SearchInput } from '@components/inputs'
+
+import Chip from '../../../components/Chip'
+
+const collections: Record<string, IconifyInfo> = importedCollections
 
 function Header({
   searchQuery,
@@ -14,31 +16,31 @@ function Header({
   selectedCategory,
   setSelectedCategory,
   iconFilterTerm,
-  setIconFilterTerm,
+  setIconFilterTerm
 }: {
-  searchQuery: string;
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  searchQuery: string
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>
   setCurrentIconSet: React.Dispatch<
     React.SetStateAction<{
-      iconSet?: string;
-      search?: string;
+      iconSet?: string
+      search?: string
     } | null>
-  >;
-  selectedCategory: string | null;
-  setSelectedCategory: React.Dispatch<React.SetStateAction<string | null>>;
-  iconFilterTerm: string;
-  setIconFilterTerm: React.Dispatch<React.SetStateAction<string>>;
+  >
+  selectedCategory: string | null
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string | null>>
+  iconFilterTerm: string
+  setIconFilterTerm: React.Dispatch<React.SetStateAction<string>>
 }) {
   const categories = useMemo(
     () => [
       ...new Set(
         Object.values(collections)
-          .map((e) => e.category)
-          .filter((e) => e !== undefined)
-      ),
+          .map(e => e.category)
+          .filter(e => e !== undefined)
+      )
     ],
     []
-  );
+  )
 
   return (
     <>
@@ -50,9 +52,9 @@ function Header({
           setSearchQuery={setSearchQuery}
           stuffToSearch="icon"
           tKey="iconPicker"
-          onKeyUp={(e) => {
-            if (e.key === "Enter" && searchQuery !== "") {
-              setCurrentIconSet({ search: searchQuery });
+          onKeyUp={e => {
+            if (e.key === 'Enter' && searchQuery !== '') {
+              setCurrentIconSet({ search: searchQuery })
             }
           }}
         />
@@ -60,7 +62,7 @@ function Header({
           iconAtEnd
           icon="tabler:arrow-right"
           onClick={() => {
-            if (searchQuery !== "") setCurrentIconSet({ search: searchQuery });
+            if (searchQuery !== '') setCurrentIconSet({ search: searchQuery })
           }}
         >
           Search
@@ -68,7 +70,7 @@ function Header({
       </div>
       <div className="flex w-full flex-col items-center gap-8 lg:flex-row">
         <div className="mt-4 flex w-full flex-wrap gap-2">
-          {categories.map((category) => (
+          {categories.map(category => (
             <Chip
               key={category}
               selected={selectedCategory === category}
@@ -76,7 +78,7 @@ function Header({
               onClick={() => {
                 setSelectedCategory(
                   selectedCategory === category ? null : category
-                );
+                )
               }}
             />
           ))}
@@ -94,7 +96,7 @@ function Header({
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default Header;
+export default Header

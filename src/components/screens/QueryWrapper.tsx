@@ -1,26 +1,27 @@
-import { UseQueryResult } from "@tanstack/react-query";
-import React from "react";
-import ErrorScreen from "./ErrorScreen";
-import LoadingScreen from "./LoadingScreen";
+import { UseQueryResult } from '@tanstack/react-query'
+import React from 'react'
+
+import ErrorScreen from './ErrorScreen'
+import LoadingScreen from './LoadingScreen'
 
 function QueryWrapper<T>({
   query,
   children,
-  showLoading = true,
+  showLoading = true
 }: {
-  query: UseQueryResult<T, Error>;
-  children: (data: T) => React.ReactElement | false;
-  showLoading?: boolean;
+  query: UseQueryResult<T, Error>
+  children: (data: T) => React.ReactElement | false
+  showLoading?: boolean
 }) {
   if (query.isLoading) {
-    return showLoading ? <LoadingScreen /> : <></>;
+    return showLoading ? <LoadingScreen /> : <></>
   }
 
   if (query.isError || query.data === undefined) {
-    return <ErrorScreen message="Failed to fetch data from server." />;
+    return <ErrorScreen message="Failed to fetch data from server." />
   }
 
-  return <>{children(query.data)}</>;
+  return <>{children(query.data)}</>
 }
 
-export default QueryWrapper;
+export default QueryWrapper

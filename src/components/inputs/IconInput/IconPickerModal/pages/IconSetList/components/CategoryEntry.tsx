@@ -1,22 +1,24 @@
-import React from "react";
-import { type IIconSet } from "@interfaces/icon_selector_interfaces";
-import IconSetEntry from "./IconSetEntry";
+import React from 'react'
+
+import { type IIconSet } from '@interfaces/icon_selector_interfaces'
+
+import IconSetEntry from './IconSetEntry'
 
 function CategoryEntry({
   category,
   iconSets,
   iconFilterTerm,
-  setCurrentIconSet,
+  setCurrentIconSet
 }: {
-  category: string;
-  iconSets: IIconSet[];
-  iconFilterTerm: string;
+  category: string
+  iconSets: IIconSet[]
+  iconFilterTerm: string
   setCurrentIconSet: React.Dispatch<
     React.SetStateAction<{
-      iconSet?: string;
-      search?: string;
+      iconSet?: string
+      search?: string
     } | null>
-  >;
+  >
 }) {
   return (
     <div className="mb-6 w-full overflow-hidden">
@@ -25,8 +27,8 @@ function CategoryEntry({
       </div>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] flex-wrap gap-4">
         {iconSets.map(
-          (iconSet) =>
-            (iconFilterTerm.trim() === "" ||
+          iconSet =>
+            (iconFilterTerm.trim() === '' ||
               iconSet.name
                 .toLowerCase()
                 .includes(iconFilterTerm.trim().toLowerCase())) && (
@@ -39,7 +41,7 @@ function CategoryEntry({
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default CategoryEntry;
+export default CategoryEntry

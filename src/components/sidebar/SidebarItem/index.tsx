@@ -1,78 +1,79 @@
-import React, { useMemo, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
-import SidebarCancelButton from "./components/SidebarCancelButton";
-import SidebarCollapseButton from "./components/SidebarCollapseButton";
-import SidebarItemContent from "./components/SidebarItemContent";
-import SidebarItemIcon from "./components/SidebarItemIcon";
-import SidebarItemSubsection from "./components/SidebarItemSubsection";
-import SidebarItemSubsectionExpandIcon from "./components/SidebarItemSubsectionExpandIcon";
-import SidebarItemWrapper from "./components/SidebarItemWrapper";
-import _ from "lodash";
+import _ from 'lodash'
+import React, { useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router'
+
+import SidebarCancelButton from './components/SidebarCancelButton'
+import SidebarCollapseButton from './components/SidebarCollapseButton'
+import SidebarItemContent from './components/SidebarItemContent'
+import SidebarItemIcon from './components/SidebarItemIcon'
+import SidebarItemSubsection from './components/SidebarItemSubsection'
+import SidebarItemSubsectionExpandIcon from './components/SidebarItemSubsectionExpandIcon'
+import SidebarItemWrapper from './components/SidebarItemWrapper'
 
 type SidebarItemAutoActiveProps =
   | {
-      autoActive: true;
-      active?: never;
+      autoActive: true
+      active?: never
     }
   | {
-      autoActive?: false;
-      active: boolean;
-    };
+      autoActive?: false
+      active: boolean
+    }
 
 interface MainSidebarItemProps {
-  isMainSidebarItem: true;
+  isMainSidebarItem: true
 
-  showAIIcon: boolean;
-  subsection?: string[][];
-  prefix?: string;
-  sidebarExpanded: boolean;
-  toggleSidebar: () => void;
+  showAIIcon: boolean
+  subsection?: string[][]
+  prefix?: string
+  sidebarExpanded: boolean
+  toggleSidebar: () => void
 
-  sideStripColor?: never;
-  onClick?: never;
+  sideStripColor?: never
+  onClick?: never
 
-  number?: never;
-  onCancelButtonClick?: never;
-  hamburgerMenuItems?: never;
+  number?: never
+  onCancelButtonClick?: never
+  hamburgerMenuItems?: never
 
-  isCollapsed?: never;
-  onCollapseButtonClick?: never;
-  showCollapseSpacer?: never;
-  namespace?: never;
-  needTranslate?: never;
+  isCollapsed?: never
+  onCollapseButtonClick?: never
+  showCollapseSpacer?: never
+  namespace?: never
+  needTranslate?: never
 }
 
 interface SubSidebarItemProps {
-  isMainSidebarItem?: false;
+  isMainSidebarItem?: false
 
-  showAIIcon?: never;
-  subsection?: never;
-  prefix?: never;
-  sidebarExpanded?: never;
-  toggleSidebar?: never;
+  showAIIcon?: never
+  subsection?: never
+  prefix?: never
+  sidebarExpanded?: never
+  toggleSidebar?: never
 
-  onClick: () => void;
-  sideStripColor?: string;
+  onClick: () => void
+  sideStripColor?: string
 
-  number?: number;
-  onCancelButtonClick?: () => void;
-  hamburgerMenuItems?: React.ReactElement;
+  number?: number
+  onCancelButtonClick?: () => void
+  hamburgerMenuItems?: React.ReactElement
 
-  isCollapsed?: boolean;
-  onCollapseButtonClick?: () => void;
-  showCollapseSpacer?: boolean;
-  namespace?: string;
-  needTranslate?: boolean;
+  isCollapsed?: boolean
+  onCollapseButtonClick?: () => void
+  showCollapseSpacer?: boolean
+  namespace?: string
+  needTranslate?: boolean
 }
 
 interface SidebarItemBaseProps {
-  name: string;
-  icon?: string | React.ReactElement;
+  name: string
+  icon?: string | React.ReactElement
 }
 
 type SidebarItemProps = SidebarItemAutoActiveProps &
   (MainSidebarItemProps | SubSidebarItemProps) &
-  SidebarItemBaseProps;
+  SidebarItemBaseProps
 
 function SidebarItem({
   name,
@@ -86,7 +87,7 @@ function SidebarItem({
   onClick,
   autoActive = false,
   active = false,
-  prefix = "",
+  prefix = '',
   number,
   onCancelButtonClick,
   hamburgerMenuItems,
@@ -95,25 +96,25 @@ function SidebarItem({
   onCollapseButtonClick,
   showCollapseSpacer,
   namespace,
-  needTranslate = true,
+  needTranslate = true
 }: SidebarItemProps): React.ReactElement {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const location = useLocation()
+  const navigate = useNavigate()
 
   const [subsectionExpanded, setSubsectionExpanded] = isMainSidebarItem
     ? useState(
         subsection !== undefined &&
           location.pathname.slice(1).startsWith(_.kebabCase(name))
       )
-    : [false, () => {}];
+    : [false, () => {}]
 
   const isLocationMatched = useMemo(
     () =>
       location.pathname
         .slice(1)
-        .startsWith((prefix !== "" ? `${prefix}/` : "") + _.kebabCase(name)),
+        .startsWith((prefix !== '' ? `${prefix}/` : '') + _.kebabCase(name)),
     [location.pathname, prefix, name]
-  );
+  )
 
   return (
     <>
@@ -121,18 +122,20 @@ function SidebarItem({
         active={autoActive ? isLocationMatched : active}
         onClick={() => {
           if (window.innerWidth < 1024) {
-            toggleSidebar?.();
+            toggleSidebar?.()
           }
           if (onClick !== undefined) {
-            onClick();
-            return;
+            onClick()
+            return
           }
 
           if (isMainSidebarItem) {
-            setSubsectionExpanded(true);
-            navigate(
-              `./${prefix !== "" ? prefix + "/" : ""}${_.kebabCase(name)}`
-            );
+            setSubsectionExpanded(!subsectionExpanded)
+            if (!subsection?.length) {
+              navigate(
+                `./${prefix !== '' ? prefix + '/' : ''}${_.kebabCase(name)}`
+              )
+            }
           }
         }}
       >
@@ -152,7 +155,7 @@ function SidebarItem({
           <span
             className="block h-8 w-1 shrink-0 rounded-full"
             style={{
-              backgroundColor: sideStripColor,
+              backgroundColor: sideStripColor
             }}
           />
         )}
@@ -176,7 +179,7 @@ function SidebarItem({
           <SidebarItemSubsectionExpandIcon
             subsectionExpanded={subsectionExpanded}
             toggleSubsection={() => {
-              setSubsectionExpanded(!subsectionExpanded);
+              setSubsectionExpanded(!subsectionExpanded)
             }}
           />
         )}
@@ -194,7 +197,7 @@ function SidebarItem({
         />
       )}
     </>
-  );
+  )
 }
 
-export default SidebarItem;
+export default SidebarItem

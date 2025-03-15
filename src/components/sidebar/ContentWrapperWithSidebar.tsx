@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react'
 
 function ContentWrapperWithSidebar({
-  children,
+  children
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  return <div className="flex h-full flex-1 flex-col lg:ml-6">{children}</div>;
+  return <div className="flex h-full flex-1 flex-col lg:ml-6">{children}</div>
 }
 
-export default ContentWrapperWithSidebar;
+export default ContentWrapperWithSidebar

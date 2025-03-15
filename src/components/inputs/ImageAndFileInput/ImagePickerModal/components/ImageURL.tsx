@@ -1,15 +1,16 @@
-import { Icon } from "@iconify/react";
-import React from "react";
-import { TextInput } from "@components/inputs";
+import { Icon } from '@iconify/react'
+import React from 'react'
+
+import { TextInput } from '@components/inputs'
 
 function ImageURL({
   file,
   setFile,
-  setPreview,
+  setPreview
 }: {
-  file: string | File | null;
-  setFile: React.Dispatch<React.SetStateAction<string | File | null>>;
-  setPreview: React.Dispatch<React.SetStateAction<string | null>>;
+  file: string | File | null
+  setFile: React.Dispatch<React.SetStateAction<string | File | null>>
+  setPreview: React.Dispatch<React.SetStateAction<string | null>>
 }) {
   return (
     <>
@@ -21,10 +22,10 @@ function ImageURL({
         placeholder="https://example.com/image.jpg"
         tKey="imageUpload"
         setValue={(value: string) => {
-          setFile(value);
-          setPreview(value);
+          setFile(value)
+          setPreview(value)
         }}
-        value={file === null ? "" : (file as string)}
+        value={file === null ? '' : (file as string)}
       />
 
       <div className="bg-bg-200 dark:bg-bg-800/50 relative isolate mt-4 flex min-h-0 flex-1 flex-col overflow-hidden rounded-md">
@@ -35,7 +36,7 @@ function ImageURL({
         />
       </div>
     </>
-  );
+  )
 }
 
-export default ImageURL;
+export default ImageURL

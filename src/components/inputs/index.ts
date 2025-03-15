@@ -23,5 +23,5 @@ export { default as InputLabel } from './shared/InputLabel'
 
 export { default as QRCodeScanner } from './QRCodeScanner'
 
-export { default as DnDContainer } from "./ImageAndFileInput/ImagePickerModal/components/LocalUpload/components/DnDContainer"
-export { default as PreviewContainer } from "./ImageAndFileInput/ImagePickerModal/components/LocalUpload/components/PreviewContainer"
+export { default as DnDContainer } from './ImageAndFileInput/ImagePickerModal/components/LocalUpload/components/DnDContainer'
+export { default as PreviewContainer } from './ImageAndFileInput/ImagePickerModal/components/LocalUpload/components/PreviewContainer'

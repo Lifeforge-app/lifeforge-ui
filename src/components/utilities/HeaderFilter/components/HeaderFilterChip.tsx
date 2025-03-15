@@ -1,30 +1,31 @@
-import { Icon } from "@iconify/react";
-import clsx from "clsx";
-import React from "react";
-import useThemeColors from "@hooks/useThemeColor";
+import { Icon } from '@iconify/react'
+import clsx from 'clsx'
+import React from 'react'
+
+import useThemeColors from '@hooks/useThemeColor'
 
 function FilterChip({
   icon,
   text,
   color,
-  onRemove,
+  onRemove
 }: {
-  icon: string;
-  text: string;
-  color?: string;
-  onRemove: () => void;
+  icon: string
+  text: string
+  color?: string
+  onRemove: () => void
 }) {
-  const { componentBgLighter } = useThemeColors();
+  const { componentBgLighter } = useThemeColors()
 
   return (
     <span
       className={clsx(
-        "flex-center gap-1 rounded-full px-2 py-1 text-sm",
+        'flex-center gap-1 rounded-full px-2 py-1 text-sm',
         color === undefined &&
           `text-bg-500 dark:text-bg-400 ${componentBgLighter}`
       )}
       style={
-        color !== undefined ? { backgroundColor: color + "20", color } : {}
+        color !== undefined ? { backgroundColor: color + '20', color } : {}
       }
     >
       <Icon className="size-4" icon={icon} />
@@ -33,7 +34,7 @@ function FilterChip({
         <Icon className="size-4" icon="tabler:x" />
       </button>
     </span>
-  );
+  )
 }
 
-export default FilterChip;
+export default FilterChip

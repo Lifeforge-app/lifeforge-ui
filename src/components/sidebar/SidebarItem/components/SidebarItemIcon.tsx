@@ -1,21 +1,21 @@
-import { Icon } from "@iconify/react";
-import clsx from "clsx";
-import React from "react";
+import { Icon } from '@iconify/react'
+import clsx from 'clsx'
+import React from 'react'
 
 function SidebarItemIcon({
   icon,
-  active,
+  active
 }: {
-  icon?: string | React.ReactElement;
-  active: boolean;
+  icon?: string | React.ReactElement
+  active: boolean
 }) {
   return (
     <>
       {icon !== undefined && (
         <>
-          {typeof icon === "string" ? (
+          {typeof icon === 'string' ? (
             <Icon
-              className={clsx("size-6 shrink-0", active && "text-custom-500")}
+              className={clsx('size-6 shrink-0', active && 'text-custom-500')}
               icon={icon}
             />
           ) : (
@@ -24,7 +24,7 @@ function SidebarItemIcon({
         </>
       )}
     </>
-  );
+  )
 }
 
-export default SidebarItemIcon;
+export default SidebarItemIcon

@@ -1,37 +1,40 @@
-import { collections as importedCollections } from "@iconify/collections";
-import { type IconifyInfo } from "@iconify/types";
-import React, { useState } from "react";
-import { Scrollbar } from "@components/utilities";
-import { type IIconSet } from "@interfaces/icon_selector_interfaces";
-import CategoryEntry from "./components/CategoryEntry";
-import Header from "./components/Header";
+import { collections as importedCollections } from '@iconify/collections'
+import { type IconifyInfo } from '@iconify/types'
+import React, { useState } from 'react'
 
-const collections: Record<string, IconifyInfo> = importedCollections;
+import { type IIconSet } from '@interfaces/icon_selector_interfaces'
+
+import { Scrollbar } from '@components/utilities'
+
+import CategoryEntry from './components/CategoryEntry'
+import Header from './components/Header'
+
+const collections: Record<string, IconifyInfo> = importedCollections
 
 const COLLECTIONS = Object.entries(collections).reduce<
   Record<string, IIconSet[]>
 >((acc, [key, value]) => {
-  const cat = value.category ?? "Uncategorized";
+  const cat = value.category ?? 'Uncategorized'
   if (acc[cat] === undefined) {
-    acc[cat] = [];
+    acc[cat] = []
   }
-  acc[cat].push({ ...value, prefix: key });
-  return acc;
-}, {});
+  acc[cat].push({ ...value, prefix: key })
+  return acc
+}, {})
 
 export default function IconSetList({
-  setCurrentIconSet,
+  setCurrentIconSet
 }: {
   setCurrentIconSet: React.Dispatch<
     React.SetStateAction<{
-      iconSet?: string;
-      search?: string;
+      iconSet?: string
+      search?: string
     } | null>
-  >;
+  >
 }) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [iconFilterTerm, setIconFilterTerm] = useState("");
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [iconFilterTerm, setIconFilterTerm] = useState('')
 
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col">
@@ -53,8 +56,8 @@ export default function IconSetList({
                   (selectedCategory === null ||
                     selectedCategory === category) &&
                     iconSets.filter(
-                      (iconSet) =>
-                        iconFilterTerm.trim() === "" ||
+                      iconSet =>
+                        iconFilterTerm.trim() === '' ||
                         iconSet.name
                           .toLowerCase()
                           .includes(iconFilterTerm.trim().toLowerCase())
@@ -73,5 +76,5 @@ export default function IconSetList({
         </div>
       </Scrollbar>
     </div>
-  );
+  )
 }

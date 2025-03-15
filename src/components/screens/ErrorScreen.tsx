@@ -1,5 +1,5 @@
-import { Icon } from "@iconify/react";
-import React from "react";
+import { Icon } from '@iconify/react'
+import React from 'react'
 
 function ErrorScreen({ message }: { message: string }) {
   return (
@@ -7,7 +7,7 @@ function ErrorScreen({ message }: { message: string }) {
       <Icon className="size-12 text-red-500" icon="tabler:alert-triangle" />
       <p className="text-center text-lg font-medium text-red-500">{message}</p>
     </div>
-  );
+  )
 }
 
-export default ErrorScreen;
+export default ErrorScreen

@@ -1,18 +1,18 @@
-import { ListboxOption } from "@headlessui/react";
-import { Icon } from "@iconify/react";
-import clsx from "clsx";
-import React from "react";
+import { ListboxOption } from '@headlessui/react'
+import { Icon } from '@iconify/react'
+import clsx from 'clsx'
+import React from 'react'
 
 function ListboxNullOption({
   icon,
-  value = "",
+  value = '',
   hasBgColor = false,
-  text = "None",
+  text = 'None'
 }: {
-  icon: string;
-  value?: any;
-  hasBgColor?: boolean;
-  text?: string;
+  icon: string
+  value?: any
+  hasBgColor?: boolean
+  text?: string
 }) {
   return (
     <ListboxOption
@@ -24,17 +24,17 @@ function ListboxNullOption({
         <>
           <div
             className={clsx(
-              "flex items-center font-medium",
-              hasBgColor ? "gap-4" : "gap-2",
-              selected && "text-bg-800 dark:text-bg-100"
+              'flex items-center font-medium',
+              hasBgColor ? 'gap-4' : 'gap-2',
+              selected && 'text-bg-800 dark:text-bg-100'
             )}
           >
             <span
               className={clsx(
-                "rounded-md",
+                'rounded-md',
                 hasBgColor
-                  ? "bg-bg-200 text-bg-500 dark:bg-bg-700/50 p-2"
-                  : "pr-2"
+                  ? 'bg-bg-200 text-bg-500 dark:bg-bg-700/50 p-2'
+                  : 'pr-2'
               )}
             >
               <Icon className="size-5" icon={icon} />
@@ -50,7 +50,7 @@ function ListboxNullOption({
         </>
       )}
     </ListboxOption>
-  );
+  )
 }
 
-export default ListboxNullOption;
+export default ListboxNullOption

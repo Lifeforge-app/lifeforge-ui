@@ -1,16 +1,16 @@
-import { Icon } from "@iconify/react";
-import React from "react";
+import { Icon } from '@iconify/react'
+import React from 'react'
 
 function HamburgerSelectorWrapper({
   icon,
   title,
   children,
-  className,
+  className
 }: {
-  icon: string;
-  title: string;
-  children: React.ReactNode;
-  className?: string;
+  icon: string
+  title: string
+  children: React.ReactNode
+  className?: string
 }) {
   return (
     <div className={className}>
@@ -24,7 +24,7 @@ function HamburgerSelectorWrapper({
         </ul>
       </div>
     </div>
-  );
+  )
 }
 
-export default HamburgerSelectorWrapper;
+export default HamburgerSelectorWrapper

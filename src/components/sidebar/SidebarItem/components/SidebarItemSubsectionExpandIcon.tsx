@@ -1,13 +1,13 @@
-import { Icon } from "@iconify/react";
-import clsx from "clsx";
-import React from "react";
+import { Icon } from '@iconify/react'
+import clsx from 'clsx'
+import React from 'react'
 
 function SidebarItemSubsectionExpandIcon({
   toggleSubsection,
-  subsectionExpanded,
+  subsectionExpanded
 }: {
-  toggleSubsection: () => void;
-  subsectionExpanded: boolean;
+  toggleSubsection: () => void
+  subsectionExpanded: boolean
 }) {
   return (
     <div className="flex-between relative flex">
@@ -17,14 +17,14 @@ function SidebarItemSubsectionExpandIcon({
       >
         <Icon
           className={clsx(
-            "text-bg-500 stroke-[2px] transition-all",
-            subsectionExpanded && "rotate-90"
+            'text-bg-500 stroke-[2px] transition-all',
+            subsectionExpanded && 'rotate-90'
           )}
           icon="tabler:chevron-right"
         />
       </button>
     </div>
-  );
+  )
 }
 
-export default SidebarItemSubsectionExpandIcon;
+export default SidebarItemSubsectionExpandIcon

@@ -1,28 +1,30 @@
-import { Icon } from "@iconify/react";
-import React, { useState } from "react";
-import { GoBackButton } from "@components/buttons";
-import { ModalWrapper, ModalHeader } from "@components/modals";
-import IconSet from "./pages/IconSet";
-import IconSetList from "./pages/IconSetList/index";
-import Search from "./pages/Search";
+import { Icon } from '@iconify/react'
+import React, { useState } from 'react'
+
+import { GoBackButton } from '@components/buttons'
+import { ModalHeader, ModalWrapper } from '@components/modals'
+
+import IconSet from './pages/IconSet'
+import IconSetList from './pages/IconSetList/index'
+import Search from './pages/Search'
 
 function IconPickerModal({
   isOpen,
   setOpen,
-  setSelectedIcon,
+  setSelectedIcon
 }: {
-  isOpen: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedIcon: (icon: string) => void;
+  isOpen: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setSelectedIcon: (icon: string) => void
 }) {
   const [currentIconSet, setCurrentIconSet] = useState<{
-    iconSet?: string;
-    search?: string;
-  } | null>(null);
+    iconSet?: string
+    search?: string
+  } | null>(null)
 
   function renderContent() {
     if (currentIconSet === null) {
-      return <IconSetList setCurrentIconSet={setCurrentIconSet} />;
+      return <IconSetList setCurrentIconSet={setCurrentIconSet} />
     }
 
     if (currentIconSet.search !== undefined) {
@@ -33,16 +35,16 @@ function IconPickerModal({
           setOpen={setOpen}
           setSelectedIcon={setSelectedIcon}
         />
-      );
+      )
     }
 
     return (
       <IconSet
-        iconSet={currentIconSet.iconSet ?? ""}
+        iconSet={currentIconSet.iconSet ?? ''}
         setOpen={setOpen}
         setSelectedIcon={setSelectedIcon}
       />
-    );
+    )
   }
 
   return (
@@ -53,9 +55,9 @@ function IconPickerModal({
           <button
             className="text-bg-500 hover:bg-bg-100 hover:text-bg-800 dark:hover:bg-bg-800 dark:hover:text-bg-50 rounded-md p-2 transition-all"
             onClick={() => {
-              setCurrentIconSet(null);
-              setSelectedIcon("");
-              setOpen(false);
+              setCurrentIconSet(null)
+              setSelectedIcon('')
+              setOpen(false)
             }}
           >
             <Icon className="size-6" icon="tabler:x" />
@@ -79,13 +81,13 @@ function IconPickerModal({
           icon="tabler:icons"
           title="iconPicker.title"
           onClose={() => {
-            setOpen(false);
+            setOpen(false)
           }}
         />
       )}
       {renderContent()}
     </ModalWrapper>
-  );
+  )
 }
 
-export default IconPickerModal;
+export default IconPickerModal

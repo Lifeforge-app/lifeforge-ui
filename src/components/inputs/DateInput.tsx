@@ -1,31 +1,32 @@
-import { Icon } from "@iconify/react";
-import clsx from "clsx";
-import React, { useRef } from "react";
-import DatePicker from "react-date-picker";
-import DateTimePicker from "react-datetime-picker";
-import { useTranslation } from "react-i18next";
-import InputIcon from "./shared/InputIcon";
-import InputLabel from "./shared/InputLabel";
-import InputWrapper from "./shared/InputWrapper";
-import { useLifeforgeUIContext } from "@providers/LifeforgeUIProvider";
-import _ from "lodash";
+import { Icon } from '@iconify/react'
+import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
+import clsx from 'clsx'
+import _ from 'lodash'
+import React, { useRef } from 'react'
+import DatePicker from 'react-date-picker'
+import DateTimePicker from 'react-datetime-picker'
+import { useTranslation } from 'react-i18next'
 
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+import InputIcon from './shared/InputIcon'
+import InputLabel from './shared/InputLabel'
+import InputWrapper from './shared/InputWrapper'
+
+type ValuePiece = Date | null
+type Value = ValuePiece | [ValuePiece, ValuePiece]
 
 interface DateInputProps {
-  date: string;
-  setDate: (date: string) => void;
-  name: string;
-  icon: string;
-  hasMargin?: boolean;
-  className?: string;
-  darker?: boolean;
-  modalRef?: React.RefObject<HTMLElement | null>;
-  index?: number;
-  required?: boolean;
-  hasTime?: boolean;
-  namespace: string;
+  date: string
+  setDate: (date: string) => void
+  name: string
+  icon: string
+  hasMargin?: boolean
+  className?: string
+  darker?: boolean
+  modalRef?: React.RefObject<HTMLElement | null>
+  index?: number
+  required?: boolean
+  hasTime?: boolean
+  namespace: string
 }
 
 const DateInput: React.FC<DateInputProps> = ({
@@ -34,69 +35,69 @@ const DateInput: React.FC<DateInputProps> = ({
   name,
   icon,
   hasMargin = true,
-  className = "",
+  className = '',
   darker = false,
   modalRef,
   index = 0,
   required,
   hasTime = false,
-  namespace,
+  namespace
 }) => {
-  const FinalComponent = hasTime ? DateTimePicker : DatePicker;
-  const { t } = useTranslation(namespace);
-  const { language } = useLifeforgeUIContext();
-  const ref = useRef<HTMLInputElement | null>(null);
+  const FinalComponent = hasTime ? DateTimePicker : DatePicker
+  const { t } = useTranslation(namespace)
+  const { language } = useLifeforgeUIContext()
+  const ref = useRef<HTMLInputElement | null>(null)
 
   function updateCalendarLocation(): void {
     setTimeout(() => {
       if (modalRef?.current === null || ref.current === null) {
-        return;
+        return
       }
 
-      const reactCalendar = document.querySelectorAll(".react-calendar")[
+      const reactCalendar = document.querySelectorAll('.react-calendar')[
         index
-      ] as HTMLElement;
+      ] as HTMLElement
 
       const calendarInput = ref.current.querySelector(
-        hasTime ? ".react-datetime-picker" : ".react-date-picker"
-      );
+        hasTime ? '.react-datetime-picker' : '.react-date-picker'
+      )
 
       if (!reactCalendar || !calendarInput) {
-        return;
+        return
       }
 
-      const inputRect = calendarInput.getBoundingClientRect();
+      const inputRect = calendarInput.getBoundingClientRect()
 
       if (hasTime) {
         const reactClock = document.querySelectorAll(
-          ".react-datetime-picker__clock"
-        )[index] as HTMLElement;
+          '.react-datetime-picker__clock'
+        )[index] as HTMLElement
 
         if (reactClock) {
-          reactClock.style.position = "absolute";
+          reactClock.style.position = 'absolute'
 
           reactClock.style.top = `${
             inputRect.top + inputRect.height + window.scrollY
-          }px`;
+          }px`
 
-          reactClock.style.left = `${inputRect.left + window.scrollX}px`;
+          reactClock.style.left = `${inputRect.left + window.scrollX}px`
         }
       }
 
       reactCalendar.style.top = `${
         inputRect.top + inputRect.height + window.scrollY
-      }px`;
+      }px`
 
-      reactCalendar.style.left = `${inputRect.left + window.scrollX}px`;
-    }, 10);
+      reactCalendar.style.left = `${inputRect.left + window.scrollX}px`
+    }, 10)
   }
 
   return (
     <InputWrapper
-      className={clsx(className, hasMargin && "mt-4")}
+      className={clsx(className, hasMargin && 'mt-4')}
       darker={darker}
     >
-      <InputIcon active={date !== ""} icon={icon} />
+      <InputIcon active={date !== ''} icon={icon} />
       <div ref={ref} className="flex w-full items-center gap-2">
         <InputLabel
           active
@@ -107,34 +108,34 @@ const DateInput: React.FC<DateInputProps> = ({
           calendarIcon={null}
           calendarProps={{
             className:
-              "bg-bg-200! dark:bg-bg-800! absolute z-9999 outline-hidden border-bg-200! dark:border-bg-700! rounded-lg p-4",
+              'bg-bg-200! dark:bg-bg-800! absolute z-9999 outline-hidden border-bg-200! dark:border-bg-700! rounded-lg p-4',
             tileClassName:
-              "hover:bg-bg-300 dark:hover:bg-bg-700/50! rounded-md disabled:text-bg-500 disabled:bg-transparent disabled:cursor-not-allowed disabled:hover:bg-transparent! dark:disabled:hover:bg-transparent!",
+              'hover:bg-bg-300 dark:hover:bg-bg-700/50! rounded-md disabled:text-bg-500 disabled:bg-transparent disabled:cursor-not-allowed disabled:hover:bg-transparent! dark:disabled:hover:bg-transparent!',
             locale: language,
             prevLabel: <Icon icon="tabler:chevron-left" />,
             nextLabel: <Icon icon="tabler:chevron-right" />,
             prev2Label: <Icon icon="tabler:chevrons-left" />,
-            next2Label: <Icon icon="tabler:chevrons-right" />,
+            next2Label: <Icon icon="tabler:chevrons-right" />
           }}
           className="focus:placeholder:text-bg-500 mt-6 h-10 w-full rounded-lg border-none bg-transparent px-4 tracking-wider outline-hidden placeholder:text-transparent focus:outline-hidden"
           clearIcon={null}
-          format={hasTime ? "dd-MM-yyyy HH:mm" : "dd-MM-yyyy"}
+          format={hasTime ? 'dd-MM-yyyy HH:mm' : 'dd-MM-yyyy'}
           portalContainer={
-            modalRef?.current ?? (document.querySelector("#app") as HTMLElement)
+            modalRef?.current ?? (document.querySelector('#app') as HTMLElement)
           }
           value={date}
           onCalendarOpen={updateCalendarLocation}
           onChange={(newDate: Value) => {
-            setDate(newDate as any); //TODO
+            setDate(newDate as any) //TODO
           }}
           onClockOpen={updateCalendarLocation}
         />
-        {date !== "" && (
+        {date !== '' && (
           <button
             aria-label="Clear date"
             className="text-bg-500 hover:bg-bg-300 hover:text-bg-800 dark:hover:bg-bg-700/70 dark:hover:text-bg-200 mr-4 shrink-0 rounded-lg p-2 transition-all focus:outline-hidden"
             onClick={() => {
-              setDate("");
+              setDate('')
             }}
           >
             <Icon className="size-6" icon="tabler:x" />
@@ -142,7 +143,7 @@ const DateInput: React.FC<DateInputProps> = ({
         )}
       </div>
     </InputWrapper>
-  );
-};
+  )
+}
 
-export default DateInput;
+export default DateInput

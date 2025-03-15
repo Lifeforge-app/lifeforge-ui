@@ -1,19 +1,19 @@
-import { Icon } from "@iconify/react";
+import { Icon } from '@iconify/react'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { Button } from "@components/buttons";
+import { Button } from '@components/buttons'
 
 function DnDContainer({
   getRootProps,
   getInputProps,
-  isDragActive,
+  isDragActive
 }: {
-  getRootProps: any;
-  getInputProps: any;
-  isDragActive: boolean;
+  getRootProps: any
+  getInputProps: any
+  isDragActive: boolean
 }) {
-  const { t } = useTranslation("common.misc");
+  const { t } = useTranslation('common.misc')
 
   return (
     <div
@@ -23,10 +23,10 @@ function DnDContainer({
       <input {...getInputProps()} />
       <Icon className="text-bg-500 size-20" icon="tabler:drag-drop" />
       <div className="text-bg-500 mt-4 text-center text-2xl font-medium">
-        {isDragActive ? t("dnd.dropHere") : t("dnd.dragAndDropToUpload")}
+        {isDragActive ? t('dnd.dropHere') : t('dnd.dragAndDropToUpload')}
       </div>
       <div className="text-bg-500 mt-4 text-center text-lg font-semibold tracking-widest uppercase">
-        {t("dnd.or")}
+        {t('dnd.or')}
       </div>
       <Button
         as="label"
@@ -37,7 +37,7 @@ function DnDContainer({
         upload
       </Button>
     </div>
-  );
+  )
 }
 
-export default DnDContainer;
+export default DnDContainer

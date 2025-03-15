@@ -1,25 +1,27 @@
-import React from "react";
-import { Loadable } from "@interfaces/common";
-import ErrorScreen from "./ErrorScreen";
-import LoadingScreen from "./LoadingScreen";
+import React from 'react'
+
+import { Loadable } from '@interfaces/common'
+
+import ErrorScreen from './ErrorScreen'
+import LoadingScreen from './LoadingScreen'
 
 function APIFallbackComponent<T>({
   data,
   children,
-  showLoading = true,
+  showLoading = true
 }: {
-  data: Loadable<T>;
-  children: (data: T) => React.ReactElement | false;
-  showLoading?: boolean;
+  data: Loadable<T>
+  children: (data: T) => React.ReactElement | false
+  showLoading?: boolean
 }) {
   switch (data) {
-    case "loading":
-      return showLoading ? <LoadingScreen /> : <></>;
-    case "error":
-      return <ErrorScreen message="Failed to fetch data from server." />;
+    case 'loading':
+      return showLoading ? <LoadingScreen /> : <></>
+    case 'error':
+      return <ErrorScreen message="Failed to fetch data from server." />
     default:
-      return <>{children(data)}</>;
+      return <>{children(data)}</>
   }
 }
 
-export default APIFallbackComponent;
+export default APIFallbackComponent

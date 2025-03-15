@@ -1,48 +1,49 @@
-import { parse } from "file-type-mime";
-import React, { useCallback } from "react";
-import { useDropzone } from "react-dropzone";
-import DnDContainer from "./components/DnDContainer";
-import PreviewContainer from "./components/PreviewContainer";
+import { parse } from 'file-type-mime'
+import React, { useCallback } from 'react'
+import { useDropzone } from 'react-dropzone'
+
+import DnDContainer from './components/DnDContainer'
+import PreviewContainer from './components/PreviewContainer'
 
 function LocalUpload({
   acceptedMimeTypes,
   setFile,
   file,
   setPreview,
-  preview,
+  preview
 }: {
-  acceptedMimeTypes: Record<string, string[]>;
-  setFile: (file: File | string | null) => void;
-  file: File | string | null;
-  setPreview: (preview: string | null) => void;
-  preview: string | null;
+  acceptedMimeTypes: Record<string, string[]>
+  setFile: (file: File | string | null) => void
+  file: File | string | null
+  setPreview: (preview: string | null) => void
+  preview: string | null
 }) {
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    setPreview(null);
+    setPreview(null)
     acceptedFiles[0]
       .arrayBuffer()
-      .then((buffer) => {
-        const mimeType = parse(buffer);
+      .then(buffer => {
+        const mimeType = parse(buffer)
 
-        if (mimeType !== undefined && mimeType.mime.startsWith("image")) {
-          const file = new FileReader();
+        if (mimeType !== undefined && mimeType.mime.startsWith('image')) {
+          const file = new FileReader()
 
           file.onload = function () {
-            setPreview(file.result as string);
-          };
+            setPreview(file.result as string)
+          }
 
-          file.readAsDataURL(acceptedFiles[0]);
+          file.readAsDataURL(acceptedFiles[0])
         }
 
-        setFile(acceptedFiles[0]);
+        setFile(acceptedFiles[0])
       })
-      .catch(console.error);
-  }, []);
+      .catch(console.error)
+  }, [])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: acceptedMimeTypes,
-  });
+    accept: acceptedMimeTypes
+  })
 
   return file === null ? (
     <DnDContainer
@@ -57,7 +58,7 @@ function LocalUpload({
       setFile={setFile}
       setPreview={setPreview}
     />
-  );
+  )
 }
 
-export default LocalUpload;
+export default LocalUpload
