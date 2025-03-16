@@ -1,7 +1,6 @@
 import { ComboboxInput, ListboxButton } from '@headlessui/react'
 import { Icon } from '@iconify/react'
 import _ from 'lodash'
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import InputIcon from '../shared/InputIcon'

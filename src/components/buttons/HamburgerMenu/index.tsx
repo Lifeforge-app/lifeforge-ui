@@ -9,7 +9,7 @@ import {
 } from '@headlessui/react'
 import clsx from 'clsx'
 import { AnchorProps } from 'node_modules/@headlessui/react/dist/internal/floating'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import Button from '../Button'
 

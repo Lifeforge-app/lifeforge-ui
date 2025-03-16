@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@components/buttons'
@@ -89,7 +89,7 @@ function ImagePickerModal({
             )}
             items={[
               {
-                name: t('imagePicker.pixabay'),
+                name: t('imagePicker.local'),
                 icon: 'tabler:upload',
                 id: 'local'
               },

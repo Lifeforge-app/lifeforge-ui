@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import React from 'react'
 import PhotoAlbum from 'react-photo-album'
 
 import { type IPixabaySearchResult } from '@interfaces/pixabay_interfaces'

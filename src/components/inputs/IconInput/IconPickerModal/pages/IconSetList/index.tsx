@@ -1,6 +1,6 @@
 import { collections as importedCollections } from '@iconify/collections'
 import { type IconifyInfo } from '@iconify/types'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { type IIconSet } from '@interfaces/icon_selector_interfaces'
 

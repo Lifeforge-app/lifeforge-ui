@@ -2,7 +2,6 @@ import { Menu, MenuButton, MenuItems } from '@headlessui/react'
 import { Icon } from '@iconify/react'
 import clsx from 'clsx'
 import _ from 'lodash'
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { useLifeforgeUIContext } from '@lifeforge/ui/providers/LifeforgeUIProvider'

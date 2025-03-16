@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Loadable } from '@interfaces/common'
 
 import ErrorScreen from './ErrorScreen'

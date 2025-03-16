@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import React from 'react'
 import { type ScrollbarProps, Scrollbars } from 'react-custom-scrollbars'
 
 function Scrollbar({

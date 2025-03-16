@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AutoSizer, List } from 'react-virtualized'
 
 import { Button } from '@components/buttons'

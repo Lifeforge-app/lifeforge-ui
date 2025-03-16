@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 
 function InputBox({
   value,

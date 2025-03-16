@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/react'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import '../src/index.css'
 import { LifeforgeUIProvider } from '../src/providers/LifeforgeUIProvider'
@@ -50,7 +50,7 @@ const withBodyClass = (Story, context) => {
 const preview: Preview = {
   parameters: {
     toolbar: {
-      hidden: ['DARK_MODE', 'zoom', 'grid'] // 你可以移除多个按钮
+      hidden: ['DARK_MODE', 'zoom', 'grid']
     },
     controls: {
       matchers: {
@@ -64,9 +64,9 @@ const preview: Preview = {
     theme: {
       name: 'Theme',
       description: 'Light / Dark mode',
-      defaultValue: 'light', // 默认是 Light Mode
+      defaultValue: 'light',
       toolbar: {
-        icon: 'circlehollow', // Storybook Toolbar 图标
+        icon: 'circlehollow',
         items: [
           {
             value: 'light',
@@ -78,7 +78,7 @@ const preview: Preview = {
             title: 'Dark Mode',
             icon: 'moon'
           }
-        ], // 切换选项
+        ],
         showName: true,
         dynamicTitle: true
       }

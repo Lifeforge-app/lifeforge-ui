@@ -1,5 +1,4 @@
 import { Icon } from '@iconify/react'
-import React from 'react'
 
 import { TextInput } from '@components/inputs'
 
@@ -18,13 +17,13 @@ function ImageURL({
         darker
         icon="tabler:link"
         name="Image link"
-        namespace="common.misc"
+        namespace="common.modals"
         placeholder="https://example.com/image.jpg"
-        tKey="imageUpload"
         setValue={(value: string) => {
           setFile(value)
           setPreview(value)
         }}
+        tKey="imagePicker"
         value={file === null ? '' : (file as string)}
       />
 

@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react'
 import clsx from 'clsx'
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 import Tooltip from './Tooltip'
 

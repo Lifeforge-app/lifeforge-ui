@@ -1,5 +1,4 @@
 import { Scanner } from '@yudiel/react-qr-scanner'
-import React from 'react'
 
 import { ModalHeader, ModalWrapper } from '@components/modals'
 

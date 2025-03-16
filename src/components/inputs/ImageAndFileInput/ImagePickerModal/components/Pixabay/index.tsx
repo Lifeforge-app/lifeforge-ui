@@ -1,5 +1,5 @@
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { toast } from 'react-toastify'
 
 import { Button } from '@components/buttons'

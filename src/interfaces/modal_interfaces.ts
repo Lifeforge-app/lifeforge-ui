@@ -64,4 +64,13 @@ type IFieldProps<T> = (
   id: keyof T
 }
 
-export type { IFieldProps }
+export type {
+  IFieldProps,
+  ITextInputFieldProps,
+  IDateInputFieldProps,
+  IListboxInputFieldProps,
+  IColorInputFieldProps,
+  IIconInputFieldProps,
+  IImageAndFileInputFieldProps,
+  ILocationInputFieldProps
+}

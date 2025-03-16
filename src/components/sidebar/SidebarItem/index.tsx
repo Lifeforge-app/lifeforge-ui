@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 
 import SidebarCancelButton from './components/SidebarCancelButton'

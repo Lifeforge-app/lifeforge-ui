@@ -2,7 +2,6 @@ import { MORANDI_COLORS } from '@constants/morandi_colors'
 import { Icon } from '@iconify/react'
 import clsx from 'clsx'
 import { sortFn } from 'color-sorter'
-import React from 'react'
 import tinycolor from 'tinycolor2'
 
 import { ModalHeader, ModalWrapper } from '@components/modals'

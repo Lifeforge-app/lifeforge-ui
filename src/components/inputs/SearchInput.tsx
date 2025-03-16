@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react'
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import clsx from 'clsx'
 import _ from 'lodash'
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 function SearchInput({

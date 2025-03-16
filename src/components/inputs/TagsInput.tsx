@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react'
 import _ from 'lodash'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Button from '../buttons/Button'

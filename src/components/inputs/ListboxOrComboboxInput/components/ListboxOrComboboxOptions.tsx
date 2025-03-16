@@ -3,7 +3,6 @@ import {
   ListboxOptions as HeadlessListboxOptions
 } from '@headlessui/react'
 import clsx from 'clsx'
-import React from 'react'
 
 function ListboxOrComboboxOptions({
   type = 'listbox',

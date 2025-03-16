@@ -1,5 +1,5 @@
 import { parse } from 'file-type-mime'
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import DnDContainer from './components/DnDContainer'

@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react'
 import clsx from 'clsx'
 import _ from 'lodash'
-import React, { memo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import useThemeColors from '@hooks/useThemeColor'
@@ -55,10 +55,7 @@ function Button<C extends React.ElementType = 'button'>({
 }: ButtonComponentProps<C>) {
   const { theme } = useThemeColors()
   const Component = as || 'button'
-  const finalProps = React.useMemo(
-    () => ({ ...defaultProps, ...props }),
-    [props]
-  )
+  const finalProps = useMemo(() => ({ ...defaultProps, ...props }), [props])
   const finalClassName = generateClassName(
     theme,
     Boolean(children),
@@ -69,7 +66,7 @@ function Button<C extends React.ElementType = 'button'>({
   )
   const { t } = useTranslation(finalProps.namespace)
 
-  const memoizedOnClick = React.useCallback(
+  const memoizedOnClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       if (onClick) onClick(e)
     },

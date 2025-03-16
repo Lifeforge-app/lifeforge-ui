@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { type IIconSet } from '@interfaces/icon_selector_interfaces'
 
 import IconSetEntry from './IconSetEntry'

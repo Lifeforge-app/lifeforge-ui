@@ -1,6 +1,5 @@
 import { Icon } from '@iconify/react/dist/iconify.js'
 import _ from 'lodash'
-import React from 'react'
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 
 export default function Tooltip({

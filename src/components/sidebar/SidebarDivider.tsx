@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import React from 'react'
 
 function SidebarDivider({ noMargin = false }: { noMargin?: boolean }) {
   return (

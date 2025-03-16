@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { AutoSizer, List } from 'react-virtualized'
 
 import { SearchInput } from '@components/inputs'

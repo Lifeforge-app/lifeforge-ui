@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { IFieldProps } from '@interfaces/modal_interfaces'
 
 import {

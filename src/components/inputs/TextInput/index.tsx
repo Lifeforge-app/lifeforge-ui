@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import React, { memo, useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Button from '../../buttons/Button'

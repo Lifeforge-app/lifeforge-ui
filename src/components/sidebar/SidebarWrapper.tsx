@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import React from 'react'
 
 import { GoBackButton } from '@components/buttons'
 import { Scrollbar } from '@components/utilities'

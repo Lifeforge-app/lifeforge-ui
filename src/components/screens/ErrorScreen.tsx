@@ -1,5 +1,4 @@
 import { Icon } from '@iconify/react'
-import React from 'react'
 
 function ErrorScreen({ message }: { message: string }) {
   return (

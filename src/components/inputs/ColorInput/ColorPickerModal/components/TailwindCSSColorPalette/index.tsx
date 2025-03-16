@@ -1,4 +1,3 @@
-import React from 'react'
 import colors from 'tailwindcss/colors'
 
 import { ModalHeader, ModalWrapper } from '@components/modals'
