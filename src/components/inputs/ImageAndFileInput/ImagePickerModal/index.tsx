@@ -83,6 +83,7 @@ function ImagePickerModal({
             active={mode}
             enabled={(['local', 'url', 'pixabay'] as const).filter(
               name =>
+                name === 'local' ||
                 (name === 'pixabay' && enablePixaBay) ||
                 (name === 'url' && enableUrl)
             )}
