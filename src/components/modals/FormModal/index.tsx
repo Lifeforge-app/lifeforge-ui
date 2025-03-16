@@ -157,8 +157,15 @@ function FormModal<T extends Record<string, any | any[]>>({
   async function onSubmitButtonClick(): Promise<void> {
     setSubmitLoading(true)
 
-    const finalData = JSON.parse(
-      JSON.stringify(getFinalData ? await getFinalData(data) : data)
+    const finalData = Object.fromEntries(
+      Object.entries(getFinalData ? await getFinalData(data) : data).map(
+        ([key, value]) => {
+          if (typeof value === 'object' && 'image' in value) {
+            return [key, value.image]
+          }
+          return JSON.parse(JSON.stringify([key, value]))
+        }
+      )
     )
 
     if (openType === 'create') {
