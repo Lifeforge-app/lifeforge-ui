@@ -4,7 +4,6 @@ interface ITextInputFieldProps {
   type: 'text'
   isPassword?: boolean
   placeholder: string
-  disabled?: boolean
   qrScanner?: boolean
 }
 
@@ -64,6 +63,7 @@ type IFieldProps<T> = (
   id: keyof T
   hidden?: boolean
   required?: boolean
+  disabled?: boolean
 }
 
 export type {

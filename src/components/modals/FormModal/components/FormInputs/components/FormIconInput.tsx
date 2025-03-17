@@ -19,6 +19,7 @@ function FormIconInput<T>({
 }: FormIconInputProps<T>) {
   return (
     <IconInput
+      disabled={field.disabled}
       icon={selectedData}
       name={field.label}
       namespace={namespace}

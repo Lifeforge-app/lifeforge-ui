@@ -27,6 +27,7 @@ interface DateInputProps {
   required?: boolean
   hasTime?: boolean
   namespace: string
+  disabled?: boolean
 }
 
 const DateInput: React.FC<DateInputProps> = ({
@@ -41,7 +42,8 @@ const DateInput: React.FC<DateInputProps> = ({
   index = 0,
   required,
   hasTime = false,
-  namespace
+  namespace,
+  disabled
 }) => {
   const FinalComponent = hasTime ? DateTimePicker : DatePicker
   const { t } = useTranslation(namespace)
@@ -96,6 +98,7 @@ const DateInput: React.FC<DateInputProps> = ({
     <InputWrapper
       className={clsx(className, hasMargin && 'mt-4')}
       darker={darker}
+      disabled={disabled}
     >
       <InputIcon active={date !== ''} icon={icon} />
       <div ref={ref} className="flex w-full items-center gap-2">

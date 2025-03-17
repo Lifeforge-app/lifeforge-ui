@@ -16,7 +16,8 @@ function ColorInput({
   hasTopMargin = true,
   className,
   namespace,
-  required
+  required,
+  disabled
 }: {
   name: string
   color: string
@@ -26,6 +27,7 @@ function ColorInput({
   className?: string
   namespace: string
   required?: boolean
+  disabled?: boolean
 }) {
   const { t } = useTranslation(namespace)
   const ref = useRef<HTMLInputElement | null>(null)
@@ -38,6 +40,7 @@ function ColorInput({
     <InputWrapper
       darker
       className={clsx(hasTopMargin && 'mt-4', className)}
+      disabled={disabled}
       inputRef={ref}
     >
       <InputIcon active={color !== ''} icon="tabler:palette" />

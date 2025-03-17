@@ -23,6 +23,7 @@ function FormColorInput<T>({
   return (
     <ColorInput
       color={selectedData}
+      disabled={field.disabled}
       name={field.label}
       namespace={namespace}
       required={field.required}

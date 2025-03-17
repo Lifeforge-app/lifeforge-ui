@@ -19,6 +19,7 @@ function FormDateInput<T>({
     <DateInput
       darker
       date={selectedData}
+      disabled={field.disabled}
       hasTime={field.hasTime}
       icon={field.icon}
       index={field.index}

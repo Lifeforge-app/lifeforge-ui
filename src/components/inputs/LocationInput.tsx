@@ -48,13 +48,15 @@ function LocationInput({
   setLocation,
   namespace,
   label,
-  required
+  required,
+  disabled
 }: {
   location: string | null
   setLocation: (value: string | null) => void
   namespace: string
   label?: string
   required?: boolean
+  disabled?: boolean
 }) {
   const { t } = useTranslation('common.misc')
   const { apiHost } = useLifeforgeUIContext()
@@ -83,7 +85,7 @@ function LocationInput({
       <ListboxOrComboboxInput
         className="w-full"
         customActive={Boolean(location)}
-        disabled={!enabled}
+        disabled={!enabled || disabled}
         displayValue={(value: string) => value}
         icon="tabler:map-pin"
         name={label || 'Location'}

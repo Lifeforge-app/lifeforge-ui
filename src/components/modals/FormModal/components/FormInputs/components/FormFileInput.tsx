@@ -28,6 +28,7 @@ function FormFileInput<T>({
 }: FormFileInputProps<T>) {
   return (
     <ImageAndFileInput
+      disabled={field.disabled}
       icon="tabler:file"
       image={selectedData.image}
       name={field.label}

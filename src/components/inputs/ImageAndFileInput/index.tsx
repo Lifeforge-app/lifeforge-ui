@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react'
+import clsx from 'clsx'
 import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
 import Zoom from 'react-medium-image-zoom'
@@ -16,7 +17,8 @@ function ImageAndFileInput({
   setImagePickerModalOpen,
   onImageRemoved,
   required,
-  namespace
+  namespace,
+  disabled
 }: {
   icon: string
   name: string
@@ -29,11 +31,17 @@ function ImageAndFileInput({
   onImageRemoved?: () => void
   required?: boolean
   namespace: string
+  disabled?: boolean
 }) {
   const { t } = useTranslation([namespace, 'common.buttons'])
 
   return (
-    <div className="bg-bg-200/50 shadow-custom dark:bg-bg-800/50 flex w-full flex-col rounded-md p-6">
+    <div
+      className={clsx(
+        'bg-bg-200/50 shadow-custom dark:bg-bg-800/50 flex w-full flex-col rounded-md p-6',
+        disabled ? 'pointer-events-none! opacity-50' : 'cursor-pointer'
+      )}
+    >
       <div className="text-bg-500 flex items-center gap-4">
         <Icon className="size-6" icon={icon} />
         <span className="font-medium">

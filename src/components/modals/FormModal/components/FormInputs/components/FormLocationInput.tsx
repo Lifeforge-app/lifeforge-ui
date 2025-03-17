@@ -20,6 +20,7 @@ function FormLocationInput<T>({
 }: FormLocationInputProps<T>) {
   return (
     <LocationInput
+      disabled={field.disabled}
       label={field.label}
       location={selectedData}
       namespace={namespace}

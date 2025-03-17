@@ -11,6 +11,7 @@ import InputWrapper from '../shared/InputWrapper'
 function IconInput({
   name,
   icon,
+  disabled,
   setIcon,
   setIconSelectorOpen,
   namespace,
@@ -18,6 +19,7 @@ function IconInput({
 }: {
   name: string
   icon: string
+  disabled?: boolean
   setIcon: (icon: string) => void
   setIconSelectorOpen: React.Dispatch<React.SetStateAction<boolean>>
   namespace: string
@@ -32,7 +34,7 @@ function IconInput({
 
   return (
     <>
-      <InputWrapper darker className="mt-4" inputRef={ref}>
+      <InputWrapper darker className="mt-4" disabled={disabled} inputRef={ref}>
         <InputIcon active={!!icon} icon="tabler:icons" />
         <div className="flex w-full items-center gap-2">
           <InputLabel
