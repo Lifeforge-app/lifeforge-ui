@@ -5,6 +5,7 @@ import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import InputIcon from '../shared/InputIcon'
+import InputLabel from '../shared/InputLabel'
 import InputWrapper from '../shared/InputWrapper'
 
 function IconInput({
@@ -12,13 +13,15 @@ function IconInput({
   icon,
   setIcon,
   setIconSelectorOpen,
-  namespace
+  namespace,
+  required
 }: {
   name: string
   icon: string
   setIcon: (icon: string) => void
   setIconSelectorOpen: React.Dispatch<React.SetStateAction<boolean>>
   namespace: string
+  required?: boolean
 }) {
   const { t } = useTranslation(namespace)
   const ref = useRef<HTMLInputElement | null>(null)
@@ -32,16 +35,11 @@ function IconInput({
       <InputWrapper darker className="mt-4" inputRef={ref}>
         <InputIcon active={!!icon} icon="tabler:icons" />
         <div className="flex w-full items-center gap-2">
-          <span
-            className={clsx(
-              'text-bg-500 group-focus-within:!text-custom-500 pointer-events-none absolute left-[4.2rem] font-medium tracking-wide transition-all',
-              icon.length === 0
-                ? 'top-1/2 -translate-y-1/2 group-focus-within:top-6 group-focus-within:text-[14px]'
-                : 'top-6 -translate-y-1/2 text-[14px]'
-            )}
-          >
-            {t(`inputs.${_.camelCase(name)}`)}
-          </span>
+          <InputLabel
+            active={!!icon}
+            label={t(`inputs.${_.camelCase(name)}`)}
+            required={required}
+          />
           <div className="mt-6 mr-12 flex w-full items-center gap-2 pl-4">
             <Icon
               className={clsx(

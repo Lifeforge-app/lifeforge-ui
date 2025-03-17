@@ -62,6 +62,8 @@ type IFieldProps<T> = (
   | ILocationInputFieldProps
 ) & {
   id: keyof T
+  hidden?: boolean
+  required?: boolean
 }
 
 export type {

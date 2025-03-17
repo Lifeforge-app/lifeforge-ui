@@ -22,6 +22,7 @@ function FormIconInput<T>({
       icon={selectedData}
       name={field.label}
       namespace={namespace}
+      required={field.required}
       setIcon={handleChange}
       setIconSelectorOpen={setIconSelectorOpen}
     />

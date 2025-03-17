@@ -27,6 +27,7 @@ function FormTextInput<T>({
       name={field.label}
       namespace={namespace}
       placeholder={field.placeholder}
+      required={field.required}
       setValue={handleChange}
       value={selectedData}
       onActionButtonClick={() => {

@@ -46,6 +46,10 @@ function FormInputs<T>({
       {fields.map(field => {
         const selectedData = data[field.id]
 
+        if (field.hidden) {
+          return <></>
+        }
+
         switch (field.type) {
           case 'text':
             return (

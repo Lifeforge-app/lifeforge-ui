@@ -25,6 +25,7 @@ function FormDateInput<T>({
       modalRef={field.modalRef}
       name={field.label}
       namespace={namespace}
+      required={field.required}
       setDate={handleChange}
     />
   )

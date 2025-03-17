@@ -96,6 +96,7 @@ function FormListboxInput<T>({
       multiple={field.multiple}
       name={field.label}
       namespace={namespace}
+      required={field.required}
       setValue={handleChange}
       type="listbox"
       value={selectedData}

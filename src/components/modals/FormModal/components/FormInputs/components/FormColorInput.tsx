@@ -25,6 +25,7 @@ function FormColorInput<T>({
       color={selectedData}
       name={field.label}
       namespace={namespace}
+      required={field.required}
       setColor={handleChange}
       setColorPickerOpen={setColorPickerOpen}
     />

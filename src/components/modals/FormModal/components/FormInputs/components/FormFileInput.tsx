@@ -33,6 +33,7 @@ function FormFileInput<T>({
       name={field.label}
       namespace={namespace}
       preview={selectedData.preview}
+      required={field.required}
       setImage={value =>
         handleChange({
           ...selectedData,

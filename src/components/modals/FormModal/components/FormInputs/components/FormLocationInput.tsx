@@ -23,6 +23,7 @@ function FormLocationInput<T>({
       label={field.label}
       location={selectedData}
       namespace={namespace}
+      required={field.required}
       setLocation={value => handleChange(value ?? '')}
     />
   )

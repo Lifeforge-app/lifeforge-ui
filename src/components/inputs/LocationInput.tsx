@@ -47,12 +47,14 @@ function LocationInput({
   location,
   setLocation,
   namespace,
-  label
+  label,
+  required
 }: {
   location: string | null
   setLocation: (value: string | null) => void
   namespace: string
   label?: string
+  required?: boolean
 }) {
   const { t } = useTranslation('common.misc')
   const { apiHost } = useLifeforgeUIContext()
@@ -86,6 +88,7 @@ function LocationInput({
         icon="tabler:map-pin"
         name={label || 'Location'}
         namespace={namespace}
+        required={required}
         setQuery={setQuery}
         setValue={setLocation}
         type="combobox"
