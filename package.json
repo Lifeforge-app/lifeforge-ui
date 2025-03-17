@@ -1,7 +1,7 @@
 {
   "name": "@lifeforge/ui",
   "description": "LifeForge UI component library",
-  "version": "0.25.12-6",
+  "version": "0.25.12-7",
   "moduleResolution": "node",
   "sideEffects": false,
   "scripts": {
@@ -16,11 +16,6 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "paths": {
-    "@lifeforge/ui/*": [
-      "./src/*"
-    ]
-  },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.5",
     "@eslint/js": "^9.22.0",

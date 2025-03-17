@@ -1,10 +1,9 @@
 import { Menu, MenuButton, MenuItems } from '@headlessui/react'
 import { Icon } from '@iconify/react'
+import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import clsx from 'clsx'
 import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
-
-import { useLifeforgeUIContext } from '@lifeforge/ui/providers/LifeforgeUIProvider'
 
 import { Button } from '@components/buttons'
 
@@ -31,6 +30,7 @@ function ModuleHeader({
 }: ModuleHeaderProps) {
   const { t } = useTranslation([
     `modules.${_.camelCase(title?.toString() ?? '')}`,
+    `core.${_.camelCase(title?.toString() ?? '')}`,
     'common.misc'
   ])
   const { toggleSidebar, sidebarExpanded } = useLifeforgeUIContext()
