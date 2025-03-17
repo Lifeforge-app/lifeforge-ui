@@ -60,8 +60,8 @@ function ModuleHeader({
           <h1 className="flex w-full min-w-0 items-end gap-3 whitespace-nowrap text-2xl font-semibold sm:text-3xl">
             <span className="block truncate">
               {t([
-                `${namespace}:${tKey}.title`,
-                `${namespace}:title`,
+                `${namespace}:${tKey}.${_.camelCase(title?.toString() ?? '')}.title`,
+                `${namespace}:${_.camelCase(title?.toString() ?? '')}.title`,
                 `modules.${_.camelCase(title?.toString() ?? '')}:title`,
                 `core.${_.camelCase(title?.toString() ?? '')}:title`,
                 'common.misc:title',
@@ -77,8 +77,8 @@ function ModuleHeader({
           </h1>
           <div className="text-bg-500 w-full min-w-0 truncate whitespace-nowrap text-sm sm:text-base">
             {t([
-              `${namespace}:${tKey}.description`,
-              `${namespace}:description`,
+              `${namespace}:${tKey}.${_.camelCase(title?.toString() ?? '')}.description`,
+              `${namespace}:${_.camelCase(title?.toString() ?? '')}.description`,
               `modules.${_.camelCase(title?.toString() ?? '')}:description`,
               `core.${_.camelCase(title?.toString() ?? '')}:description`,
               'common.misc:description',
