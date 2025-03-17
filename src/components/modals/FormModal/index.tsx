@@ -1,6 +1,7 @@
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { type IFieldProps } from '@interfaces/modal_interfaces'
 
@@ -156,6 +157,23 @@ function FormModal<T extends Record<string, any | any[]>>({
 
   async function onSubmitButtonClick(): Promise<void> {
     setSubmitLoading(true)
+
+    const requiredFields = fields.filter(field => field.required)
+    const missingFields = requiredFields.filter(
+      field =>
+        !data[field.id] ||
+        (typeof data[field.id] === 'string' && !data[field.id].trim())
+    )
+
+    if (missingFields.length) {
+      toast.error(
+        `The following fields are required: ${missingFields
+          .map(field => field.label)
+          .join(', ')}`
+      )
+      setSubmitLoading(false)
+      return
+    }
 
     const finalData = Object.fromEntries(
       Object.entries(getFinalData ? await getFinalData(data) : data).map(
