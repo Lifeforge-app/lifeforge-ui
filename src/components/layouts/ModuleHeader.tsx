@@ -16,6 +16,8 @@ interface ModuleHeaderProps {
   hamburgerMenuClassName?: string
   actionButton?: React.ReactNode
   customElement?: React.ReactNode
+  namespace?: string
+  tKey?: string
 }
 
 function ModuleHeader({
@@ -26,12 +28,15 @@ function ModuleHeader({
   hamburgerMenuItems,
   hamburgerMenuClassName,
   actionButton,
-  customElement
+  customElement,
+  namespace,
+  tKey
 }: ModuleHeaderProps) {
   const { t } = useTranslation([
     `modules.${_.camelCase(title?.toString() ?? '')}`,
     `core.${_.camelCase(title?.toString() ?? '')}`,
-    'common.misc'
+    'common.misc',
+    namespace ?? ''
   ])
   const { toggleSidebar, sidebarExpanded } = useLifeforgeUIContext()
 
@@ -55,6 +60,8 @@ function ModuleHeader({
           <h1 className="flex w-full min-w-0 items-end gap-3 whitespace-nowrap text-2xl font-semibold sm:text-3xl">
             <span className="block truncate">
               {t([
+                `${namespace}:${tKey}.title`,
+                `${namespace}:title`,
                 `modules.${_.camelCase(title?.toString() ?? '')}:title`,
                 `core.${_.camelCase(title?.toString() ?? '')}:title`,
                 'common.misc:title',
@@ -70,6 +77,8 @@ function ModuleHeader({
           </h1>
           <div className="text-bg-500 w-full min-w-0 truncate whitespace-nowrap text-sm sm:text-base">
             {t([
+              `${namespace}:${tKey}.description`,
+              `${namespace}:description`,
               `modules.${_.camelCase(title?.toString() ?? '')}:description`,
               `core.${_.camelCase(title?.toString() ?? '')}:description`,
               'common.misc:description',

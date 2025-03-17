@@ -156,13 +156,12 @@ function FormModal<T extends Record<string, any | any[]>>({
   )
 
   async function onSubmitButtonClick(): Promise<void> {
-    setSubmitLoading(true)
-
     const requiredFields = fields.filter(field => field.required)
     const missingFields = requiredFields.filter(
       field =>
         !data[field.id] ||
-        (typeof data[field.id] === 'string' && !data[field.id].trim())
+        (typeof data[field.id] === 'string' && !data[field.id].trim()) ||
+        (typeof data[field.id] === 'object' && !data[field.id].image)
     )
 
     if (missingFields.length) {
@@ -171,9 +170,10 @@ function FormModal<T extends Record<string, any | any[]>>({
           .map(field => field.label)
           .join(', ')}`
       )
-      setSubmitLoading(false)
       return
     }
+
+    setSubmitLoading(true)
 
     const finalData = Object.fromEntries(
       Object.entries(getFinalData ? await getFinalData(data) : data).map(
