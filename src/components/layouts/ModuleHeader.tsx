@@ -53,7 +53,15 @@ function ModuleHeader({
         )}
         <div className="w-full min-w-0 sm:space-y-1">
           <h1 className="flex w-full min-w-0 items-end gap-3 whitespace-nowrap text-2xl font-semibold sm:text-3xl">
-            <span className="block truncate">{t('title')}</span>
+            <span className="block truncate">
+              {t([
+                `modules.${_.camelCase(title?.toString() ?? '')}:title`,
+                `core.${_.camelCase(title?.toString() ?? '')}:title`,
+                'common.misc:title',
+                'title',
+                title?.toString() ?? ''
+              ])}
+            </span>
             <span className="text-bg-500 min-w-0 text-sm font-medium sm:text-base">
               {totalItems !== undefined
                 ? `(${totalItems.toLocaleString()})`
@@ -61,7 +69,13 @@ function ModuleHeader({
             </span>
           </h1>
           <div className="text-bg-500 w-full min-w-0 truncate whitespace-nowrap text-sm sm:text-base">
-            {t('description')}
+            {t([
+              `modules.${_.camelCase(title?.toString() ?? '')}:description`,
+              `core.${_.camelCase(title?.toString() ?? '')}:description`,
+              'common.misc:description',
+              'description',
+              `Description for ${title?.toString() ?? ''}`
+            ])}
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ function DashboardItem({
   title,
   children,
   componentBesideTitle,
-  namespace = 'modules.dashboard'
+  namespace = 'core.dashboard'
 }: {
   ref?: React.Ref<any>
   className?: string
