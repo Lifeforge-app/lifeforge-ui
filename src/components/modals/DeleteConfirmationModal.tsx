@@ -24,6 +24,7 @@ function DeleteConfirmationModal({
   customConfirmButtonText,
   customOnClick,
   queryKey,
+  queryUpdateType = 'mutate',
   multiQueryKey = false
 }: {
   itemName?: string
@@ -40,6 +41,7 @@ function DeleteConfirmationModal({
   customConfirmButtonText?: string
   customOnClick?: () => Promise<void>
   queryKey?: unknown[] | unknown[][]
+  queryUpdateType?: 'mutate' | 'invalidate'
   multiQueryKey?: boolean
 }) {
   const { apiHost } = useLifeforgeUIContext()
@@ -85,10 +87,20 @@ function DeleteConfirmationModal({
 
         if (multiQueryKey) {
           ;(queryKey as unknown[][]).forEach(key => {
-            queryClient.setQueryData(key, updateFunc)
+            if (queryUpdateType === 'mutate') {
+              queryClient.setQueryData(key, updateFunc)
+            }
+            if (queryUpdateType === 'invalidate') {
+              queryClient.invalidateQueries({ queryKey: key })
+            }
           })
         } else {
-          queryClient.setQueryData(queryKey, updateFunc)
+          if (queryUpdateType === 'mutate') {
+            queryClient.setQueryData(queryKey as unknown[], updateFunc)
+          }
+          if (queryUpdateType === 'invalidate') {
+            queryClient.invalidateQueries({ queryKey: queryKey as unknown[] })
+          }
         }
       }
       setLoading(false)

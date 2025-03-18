@@ -24,7 +24,11 @@ interface MainSidebarItemProps {
   isMainSidebarItem: true
 
   showAIIcon: boolean
-  subsection?: string[][]
+  subsection?: {
+    name: string
+    icon: string | React.ReactElement
+    path: string
+  }[]
   prefix?: string
   sidebarExpanded: boolean
   toggleSidebar: () => void

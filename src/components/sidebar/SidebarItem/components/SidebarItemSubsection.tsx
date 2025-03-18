@@ -11,7 +11,11 @@ function SidebarItemSubsection({
   toggleSidebar,
   subsectionExpanded
 }: {
-  subsection: string[][]
+  subsection: {
+    name: string
+    icon: string | React.ReactElement
+    path: string
+  }[]
   name: string
   sidebarExpanded: boolean
   toggleSidebar: () => void
@@ -33,7 +37,7 @@ function SidebarItemSubsection({
           !sidebarExpanded && 'bg-bg-800'
         )}
       >
-        {subsection.map(([subsectionName, subsectionIcon, subsectionLink]) => (
+        {subsection.map(({ name: subsectionName, icon, path }) => (
           <Link
             key={subsectionName}
             className={clsx(
@@ -41,7 +45,7 @@ function SidebarItemSubsection({
               !sidebarExpanded ? 'justify-center' : '',
               sidebarExpanded ? 'pl-[3.8rem]' : 'px-2',
               location.pathname.split('/').slice(1)[0] === _.kebabCase(name) &&
-                (location.pathname.split('/').slice(1)[1] === subsectionLink ||
+                (location.pathname.split('/').slice(1)[1] === path ||
                   (location.pathname
                     .replace(_.kebabCase(name), '')
                     .replace(/\//g, '') === '' &&
@@ -49,7 +53,7 @@ function SidebarItemSubsection({
                 ? 'bg-bg-200/30 shadow-custom dark:bg-bg-800'
                 : 'text-bg-500'
             )}
-            to={`./${_.kebabCase(name)}/${subsectionLink}`}
+            to={`./${_.kebabCase(name)}/${path}`}
             onClick={() => {
               if (window.innerWidth < 1024) {
                 toggleSidebar()
@@ -57,7 +61,11 @@ function SidebarItemSubsection({
             }}
           >
             <div className="flex size-7 items-center justify-center">
-              <Icon className="size-6" icon={subsectionIcon} />
+              {typeof icon === 'string' ? (
+                <Icon className="size-6" icon={icon} />
+              ) : (
+                icon
+              )}
             </div>
 
             {sidebarExpanded && (
