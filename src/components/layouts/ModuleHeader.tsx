@@ -33,7 +33,7 @@ function ModuleHeader({
   tKey
 }: ModuleHeaderProps) {
   const { t } = useTranslation([
-    `modules.${_.camelCase(title?.toString() ?? '')}`,
+    `apps.${_.camelCase(title?.toString() ?? '')}`,
     `core.${_.camelCase(title?.toString() ?? '')}`,
     'common.misc',
     namespace ?? ''
@@ -62,7 +62,7 @@ function ModuleHeader({
               {t([
                 `${namespace}:${tKey}.${_.camelCase(title?.toString() ?? '')}.title`,
                 `${namespace}:${_.camelCase(title?.toString() ?? '')}.title`,
-                `modules.${_.camelCase(title?.toString() ?? '')}:title`,
+                `apps..camelCase(title?.toString() ?? '')}:title`,
                 `core.${_.camelCase(title?.toString() ?? '')}:title`,
                 'common.misc:title',
                 'title',
@@ -79,7 +79,7 @@ function ModuleHeader({
             {t([
               `${namespace}:${tKey}.${_.camelCase(title?.toString() ?? '')}.description`,
               `${namespace}:${_.camelCase(title?.toString() ?? '')}.description`,
-              `modules.${_.camelCase(title?.toString() ?? '')}:description`,
+              `apps..camelCase(title?.toString() ?? '')}:description`,
               `core.${_.camelCase(title?.toString() ?? '')}:description`,
               'common.misc:description',
               'description',

@@ -50,7 +50,7 @@ function SidebarItemContent({
             sidebarExpanded && (
               <span className="flex-between flex w-full gap-2 truncate">
                 <span className="max-w-48 min-w-0 truncate">
-                  {t(`common.sidebar:modules.${_.camelCase(name)}.title`)}
+                  {t(`common.sidebar:apps.${_.camelCase(name)}.title`)}
                 </span>
                 {hasAI && (
                   <Icon

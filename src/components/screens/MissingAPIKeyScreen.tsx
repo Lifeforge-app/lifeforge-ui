@@ -9,7 +9,7 @@ function MissingAPIKeyScreen({
 }: {
   requiredAPIKeys: string[]
 }) {
-  const { t } = useTranslation('modules.apiKeys')
+  const { t } = useTranslation('apps.apiKeys')
 
   return (
     <div className="flex-center size-full flex-1 flex-col gap-4">
