@@ -20,7 +20,7 @@ function QueryWrapper<T>({
     return <ErrorScreen message="Failed to fetch data from server." />
   }
 
-  return <>{children(query.data)}</>
+  return <>{children(query.data as T)}</>
 }
 
 export default QueryWrapper

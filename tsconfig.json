@@ -11,6 +11,9 @@
       "esnext"
     ],
     "paths": {
+      "@lifeforge/ui/*": [
+        "./src/*"
+      ],
       "@providers/*": [
         "./src/providers/*"
       ],
