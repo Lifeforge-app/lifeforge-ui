@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { useMemo, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 
 import SidebarCancelButton from './components/SidebarCancelButton'
 import SidebarCollapseButton from './components/SidebarCollapseButton'
@@ -102,7 +102,6 @@ function SidebarItem({
   namespace,
   needTranslate = true
 }: SidebarItemProps): React.ReactElement {
-  const location = useLocation()
   const navigate = useNavigate()
 
   const [subsectionExpanded, setSubsectionExpanded] = useState(
