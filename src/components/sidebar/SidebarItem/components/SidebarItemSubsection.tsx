@@ -41,7 +41,7 @@ function SidebarItemSubsection({
           <Link
             key={subsectionName}
             className={clsx(
-              'hover:bg-bg-100/50 dark:hover:bg-bg-800/50 mx-4 flex w-full items-center gap-4 rounded-lg py-4 font-medium transition-all',
+              'mx-4 flex w-full items-center gap-4 rounded-lg py-4 font-medium transition-all hover:bg-bg-100/50 dark:hover:bg-bg-800/50',
               !sidebarExpanded ? 'justify-center' : '',
               sidebarExpanded ? 'pl-[3.8rem]' : 'px-2',
               location.pathname.split('/').slice(1)[0] === _.kebabCase(name) &&

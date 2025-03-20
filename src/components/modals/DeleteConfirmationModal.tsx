@@ -119,7 +119,7 @@ function DeleteConfirmationModal({
                 : `the ${itemName}`
           })}
       </h1>
-      <p className="text-bg-500 mt-2">
+      <p className="mt-2 text-bg-500">
         {customText ?? t('deleteConfirmation.desc', { itemName })}
       </p>
       <div className="mt-6 flex w-full flex-col-reverse justify-around gap-2 sm:flex-row">

@@ -39,8 +39,8 @@ const EditorsChoiceSwitch: React.FC<EditorsChoiceSwitchProps> = ({
           className={clsx(
             'inline-block size-4 rounded-full transition',
             isEditorsChoice
-              ? 'bg-bg-100 translate-x-6'
-              : 'bg-bg-100 dark:bg-bg-500 translate-x-1'
+              ? 'translate-x-6 bg-bg-100'
+              : 'translate-x-1 bg-bg-100 dark:bg-bg-500'
           )}
         />
       </Switch>

@@ -54,7 +54,7 @@ function SidebarItemContent({
                 </span>
                 {hasAI && (
                   <Icon
-                    className="text-custom-500 size-4"
+                    className="size-4 text-custom-500"
                     icon="mage:stars-c"
                   />
                 )}

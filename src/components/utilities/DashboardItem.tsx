@@ -29,12 +29,12 @@ function DashboardItem({
     <div
       ref={ref}
       className={clsx(
-        'shadow-custom flex size-full flex-col gap-4 rounded-lg p-6',
+        'flex size-full flex-col gap-4 rounded-lg p-6 shadow-custom',
         componentBg,
         className
       )}
     >
-      <div className="flex-between mb-2 flex">
+      <div className="mb-2 flex-between flex">
         <h2 className="flex items-center gap-2 text-xl font-semibold">
           <Icon className="text-2xl" icon={icon} />
           <span className="ml-2">

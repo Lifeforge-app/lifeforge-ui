@@ -66,7 +66,7 @@ function ListboxOrComboboxInput(
           value={value}
           onChange={setValue}
         >
-          <ListboxButton className="group min-w-64 flex w-full items-center pl-6">
+          <ListboxButton className="group flex w-full min-w-64 items-center pl-6">
             <InputIcon
               active={!!value || customActive === true}
               icon={icon}

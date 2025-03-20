@@ -50,10 +50,10 @@ function IconPickerModal({
   return (
     <ModalWrapper isOpen={isOpen} minHeight="80vh" minWidth="80vw">
       {currentIconSet !== null ? (
-        <div className="flex-between mb-8 flex w-full">
+        <div className="mb-8 flex-between flex w-full">
           <GoBackButton onClick={() => setCurrentIconSet(null)} />
           <button
-            className="text-bg-500 hover:bg-bg-100 hover:text-bg-800 dark:hover:bg-bg-800 dark:hover:text-bg-50 rounded-md p-2 transition-all"
+            className="rounded-md p-2 text-bg-500 transition-all hover:bg-bg-100 hover:text-bg-800 dark:hover:bg-bg-800 dark:hover:text-bg-50"
             onClick={() => {
               setCurrentIconSet(null)
               setSelectedIcon('')

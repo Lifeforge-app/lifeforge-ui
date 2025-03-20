@@ -95,7 +95,7 @@ function TagsInput({
             return (
               <div
                 key={index}
-                className="bg-bg-200 dark:bg-bg-700/50 flex items-center rounded-full py-1 pr-2 pl-3"
+                className="flex items-center rounded-full bg-bg-200 py-1 pr-2 pl-3 dark:bg-bg-700/50"
               >
                 {existedTag !== undefined && (
                   <Icon

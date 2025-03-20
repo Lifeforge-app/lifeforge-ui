@@ -8,10 +8,10 @@ function NotFoundScreen() {
 
   return (
     <div className="flex-center w-full flex-col gap-6">
-      <span className="text-custom-500 text-[10rem]">;-;</span>
+      <span className="text-[10rem] text-custom-500">;-;</span>
       <h1 className="text-4xl font-semibold">{t('notFound.title')}</h1>
-      <p className="text-bg-500 text-xl">{t('notFound.description')}</p>
-      <div className="flex-center mt-6 gap-4">
+      <p className="text-xl text-bg-500">{t('notFound.description')}</p>
+      <div className="mt-6 flex-center gap-4">
         <Button as={Link} icon="tabler:arrow-left" to="/">
           {t('buttons.goBack')}
         </Button>

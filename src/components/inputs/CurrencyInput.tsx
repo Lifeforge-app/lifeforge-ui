@@ -40,7 +40,7 @@ function CurrencyInputComponent({
           required={required === true}
         />
         <CurrencyInput
-          className="focus:placeholder:text-bg-500 mt-6 h-8 w-full rounded-lg bg-transparent p-6 pl-4 tracking-wider placeholder:text-transparent focus:outline-hidden"
+          className="mt-6 h-8 w-full rounded-lg bg-transparent p-6 pl-4 tracking-wider placeholder:text-transparent focus:outline-hidden focus:placeholder:text-bg-500"
           decimalsLimit={2}
           name={name}
           placeholder={placeholder}

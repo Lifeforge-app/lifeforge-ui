@@ -105,12 +105,12 @@ function SidebarItem({
   const location = useLocation()
   const navigate = useNavigate()
 
-  const [subsectionExpanded, setSubsectionExpanded] = isMainSidebarItem
-    ? useState(
-        subsection !== undefined &&
+  const [subsectionExpanded, setSubsectionExpanded] = useState(
+    isMainSidebarItem
+      ? false
+      : subsection !== undefined &&
           location.pathname.slice(1).startsWith(_.kebabCase(name))
-      )
-    : [false, () => {}]
+  )
 
   const isLocationMatched = useMemo(
     () =>
@@ -125,9 +125,6 @@ function SidebarItem({
       <SidebarItemWrapper
         active={autoActive ? isLocationMatched : active}
         onClick={() => {
-          if (window.innerWidth < 1024) {
-            toggleSidebar?.()
-          }
           if (onClick !== undefined) {
             onClick()
             return
@@ -135,11 +132,18 @@ function SidebarItem({
 
           if (isMainSidebarItem) {
             setSubsectionExpanded(!subsectionExpanded)
-            if (!subsection?.length) {
-              navigate(
-                `./${prefix !== '' ? prefix + '/' : ''}${_.kebabCase(name)}`
-              )
+
+            if (subsection?.length) {
+              return
             }
+
+            navigate(
+              `./${prefix !== '' ? prefix + '/' : ''}${_.kebabCase(name)}`
+            )
+          }
+
+          if (window.innerWidth < 1024) {
+            toggleSidebar?.()
           }
         }}
       >

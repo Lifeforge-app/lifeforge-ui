@@ -38,11 +38,11 @@ function ImageAndFileInput({
   return (
     <div
       className={clsx(
-        'bg-bg-200/50 shadow-custom dark:bg-bg-800/50 flex w-full flex-col rounded-md p-6',
+        'flex w-full flex-col rounded-md bg-bg-200/50 p-6 shadow-custom dark:bg-bg-800/50',
         disabled ? 'pointer-events-none! opacity-50' : 'cursor-pointer'
       )}
     >
-      <div className="text-bg-500 flex items-center gap-4">
+      <div className="flex items-center gap-4 text-bg-500">
         <Icon className="size-6" icon={icon} />
         <span className="font-medium">
           {t(`${namespace}:inputs.${_.camelCase(name)}`)}{' '}
@@ -98,7 +98,7 @@ function ImageAndFileInput({
           >
             {t('common.buttons:upload')}
           </Button>
-          <p className="text-bg-500 text-xs">{reminderText}</p>
+          <p className="text-xs text-bg-500">{reminderText}</p>
         </div>
       )}
     </div>

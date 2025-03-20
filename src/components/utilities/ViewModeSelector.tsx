@@ -19,7 +19,7 @@ function ViewModeSelector<T extends string>({
   return (
     <div
       className={clsx(
-        'shadow-custom mt-4 flex items-center gap-2 rounded-md p-2',
+        'mt-4 flex items-center gap-2 rounded-md p-2 shadow-custom',
         componentBg,
         className
       )}

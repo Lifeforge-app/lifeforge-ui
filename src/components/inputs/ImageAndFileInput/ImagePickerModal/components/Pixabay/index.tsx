@@ -129,7 +129,7 @@ function Pixabay({
                   <LoadingScreen />
                 </div>
               ) : (
-                <div className="flex-center mb-6 size-full flex-1">
+                <div className="mb-6 flex-center size-full flex-1">
                   <EmptyStateScreen
                     icon="simple-icons:pixabay"
                     name="pixabay"

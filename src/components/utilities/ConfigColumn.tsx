@@ -55,7 +55,7 @@ function ConfigColumn({
         )}
       >
         <div className="flex shrink items-center gap-4">
-          <Icon className="text-bg-500 size-6 shrink-0" icon={icon} />
+          <Icon className="size-6 shrink-0 text-bg-500" icon={icon} />
           <div>
             <h3 className="flex w-full items-center gap-2 text-xl leading-normal font-medium md:w-auto">
               {title}
@@ -73,7 +73,7 @@ function ConfigColumn({
         </div>
       </div>
       {hasDivider && (
-        <div className="border-bg-200 dark:border-bg-800/50 my-6 w-full border-b-[1.5px]" />
+        <div className="my-6 w-full border-b-[1.5px] border-bg-200 dark:border-bg-800/50" />
       )}
     </>
   )

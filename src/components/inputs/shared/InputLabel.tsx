@@ -38,7 +38,7 @@ const InputLabel: React.FC<InputLabelProps> = ({
   return (
     <span
       className={clsx(
-        'text-bg-500 pointer-events-none absolute left-[4.2rem] font-medium tracking-wide transition-all',
+        'pointer-events-none absolute left-[4.2rem] font-medium tracking-wide text-bg-500 transition-all',
         labelColorClasses,
         labelPositionClasses
       )}

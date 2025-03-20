@@ -35,7 +35,7 @@ function SidebarTitle({
         actionButtonIcon !== undefined ? 'pb-2' : 'pb-4'
       )}
     >
-      <h3 className="text-bg-600 text-sm font-semibold tracking-widest whitespace-nowrap uppercase">
+      <h3 className="text-sm font-semibold tracking-widest whitespace-nowrap text-bg-600 uppercase">
         {t([
           `sidebar.${_.camelCase(name)}`,
           `common.sidebar:categories.${_.camelCase(name)}`,
@@ -46,7 +46,7 @@ function SidebarTitle({
         (actionButtonIcon !== undefined && (
           <button
             className={clsx(
-              'text-bg-600 flex items-center rounded-md p-2 transition-all',
+              'flex items-center rounded-md p-2 text-bg-600 transition-all',
               'hover:bg-bg-100 dark:hover:bg-bg-800 dark:hover:text-bg-50'
             )}
             onClick={actionButtonOnClick}

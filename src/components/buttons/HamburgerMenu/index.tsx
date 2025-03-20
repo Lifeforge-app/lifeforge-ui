@@ -67,7 +67,7 @@ function HamburgerMenu(props: MenuProps) {
             transition
             anchor={anchor ?? 'bottom end'}
             className={clsx(
-              'min-w-[var(--button-width)] border-bg-200 dark:border-bg-700 z-9999 overflow-auto rounded-md border bg-bg-100 text-bg-500 text-base shadow-lg transition duration-100 ease-out [--anchor-gap:12px] dark:border-bg-700 dark:bg-bg-800 empty:invisible focus:outline-hidden data-closed:scale-95 data-closed:opacity-0',
+              'z-9999 min-w-[var(--button-width)] overflow-auto rounded-md border border-bg-200 bg-bg-100 text-base text-bg-500 shadow-lg transition duration-100 ease-out [--anchor-gap:12px] empty:invisible focus:outline-hidden data-closed:scale-95 data-closed:opacity-0 dark:border-bg-700 dark:bg-bg-800',
               classNames?.menu
             )}
           >

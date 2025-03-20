@@ -44,7 +44,7 @@ function ListboxOrComboboxOption({
 
   return (
     <Element
-      className="flex-between hover:bg-bg-200 dark:hover:bg-bg-700/50 relative flex cursor-pointer gap-8 p-4 transition-all select-none"
+      className="relative flex-between flex cursor-pointer gap-8 p-4 transition-all select-none hover:bg-bg-200 dark:hover:bg-bg-700/50"
       value={value}
     >
       {({ selected }: { selected: boolean }) => (
@@ -53,7 +53,7 @@ function ListboxOrComboboxOption({
             className={clsx(
               'flex w-full items-center',
               color !== undefined ? 'gap-3' : 'gap-2',
-              selected && 'text-bg-800 dark:text-bg-100 font-semibold',
+              selected && 'font-semibold text-bg-800 dark:text-bg-100',
               iconAtEnd && 'flex-between flex flex-row-reverse'
             )}
           >
@@ -78,7 +78,7 @@ function ListboxOrComboboxOption({
             ) : (
               color !== undefined && (
                 <span
-                  className="border-bg-200 dark:border-bg-700 block size-4 rounded-full border"
+                  className="block size-4 rounded-full border border-bg-200 dark:border-bg-700"
                   style={{ backgroundColor: color }}
                 />
               )
@@ -96,7 +96,7 @@ function ListboxOrComboboxOption({
           </div>
           {!noCheckmark && selected && (
             <Icon
-              className="text-custom-500 block shrink-0 text-lg"
+              className="block shrink-0 text-lg text-custom-500"
               icon="tabler:check"
             />
           )}

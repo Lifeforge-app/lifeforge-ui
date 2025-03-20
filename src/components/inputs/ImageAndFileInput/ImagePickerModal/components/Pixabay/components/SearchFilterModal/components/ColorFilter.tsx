@@ -18,7 +18,7 @@ const ColorFilter: React.FC<ColorFilterProps> = ({ colors, updateFilters }) => {
       buttonContent={
         <>
           <div
-            className="border-bg-200 dark:border-bg-700 size-3 rounded-full border"
+            className="size-3 rounded-full border border-bg-200 dark:border-bg-700"
             style={{
               backgroundColor: COLORS.find(l => l.id === colors)?.color
             }}

@@ -13,12 +13,12 @@ function HamburgerSelectorWrapper({
 }) {
   return (
     <div className={className}>
-      <span className="text-bg-500 flex items-center gap-4 p-4">
+      <span className="flex items-center gap-4 p-4 text-bg-500">
         <Icon className="size-5" icon={icon} />
         {title}
       </span>
       <div className="p-4 pt-0">
-        <ul className="divide-bg-200 dark:divide-bg-700 bg-bg-200/50 shadow-custom dark:bg-bg-700/50 flex flex-col divide-y overflow-hidden rounded-md">
+        <ul className="flex flex-col divide-y divide-bg-200 overflow-hidden rounded-md bg-bg-200/50 shadow-custom dark:divide-bg-700 dark:bg-bg-700/50">
           {children}
         </ul>
       </div>

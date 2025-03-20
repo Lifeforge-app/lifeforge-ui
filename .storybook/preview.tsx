@@ -36,7 +36,7 @@ const withBodyClass = (Story, context) => {
     >
       <div className="bg-white">
         <div
-          className={`w-full min-h-dvh flex items-center justify-center bg-zinc theme-blue transition-all ${
+          className={`bg-zinc theme-blue flex min-h-dvh w-full items-center justify-center transition-all ${
             context.globals.theme === 'dark' ? 'dark' : ''
           } ${context.globals.theme === 'dark' ? 'bg-bg-900' : 'bg-bg-200/50'}`}
         >
