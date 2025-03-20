@@ -12,4 +12,4 @@ export * from './components/utilities'
 export * from './components/layouts'
 export * from './providers/LifeforgeUIProvider'
 
-export type { IFieldProps } from './interfaces/modal_interfaces'
+export type { IFieldProps, IFormState } from './interfaces/modal_interfaces'

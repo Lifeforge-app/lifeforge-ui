@@ -66,8 +66,14 @@ type IFieldProps<T> = (
   disabled?: boolean
 }
 
+type IFormState = Record<
+  string,
+  string | string[] | { image: File | string | null; preview: string | null }
+>
+
 export type {
   IFieldProps,
+  IFormState,
   ITextInputFieldProps,
   IDateInputFieldProps,
   IListboxInputFieldProps,

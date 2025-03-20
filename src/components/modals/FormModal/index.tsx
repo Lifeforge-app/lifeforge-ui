@@ -1,9 +1,10 @@
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import { useQueryClient } from '@tanstack/react-query'
+import type { RecordModel } from 'pocketbase'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { type IFieldProps } from '@interfaces/modal_interfaces'
+import type { IFieldProps, IFormState } from '@interfaces/modal_interfaces'
 
 import { Button } from '@components/buttons'
 import { LoadingScreen } from '@components/screens'
@@ -16,16 +17,7 @@ import FormInputs from './components/FormInputs'
 import PickerModals from './components/PickerModals'
 import SubmitButton from './components/SubmitButton'
 
-function FormModal<
-  T extends Record<
-    string,
-    | string
-    | {
-        image: string | File | null
-        preview: string | null
-      }
-  >
->({
+function FormModal<T extends IFormState, U extends RecordModel>({
   // fields stuff
   fields,
   data,
@@ -82,11 +74,11 @@ function FormModal<
   onActionButtonClick?: () => void
   namespace: string
   getFinalData?: (originalData: T) => Promise<Record<string, unknown>>
-  sortBy?: keyof T
+  sortBy?: keyof U
   sortMode?: 'asc' | 'desc'
   customUpdateDataList?: {
-    create?: (newData: T) => void
-    update?: (newData: T) => void
+    create?: (newData: U) => void
+    update?: (newData: U) => void
   }
 }) {
   const { apiHost } = useLifeforgeUIContext()
@@ -100,7 +92,7 @@ function FormModal<
     string | null
   >(null)
   const [submitLoading, setSubmitLoading] = useState(false)
-  const entryCreateMutation = useModifyMutation<T>(
+  const entryCreateMutation = useModifyMutation<U>(
     'create',
     apiHost,
     endpoint ?? '',
@@ -108,11 +100,11 @@ function FormModal<
       onSettled: () => {
         setSubmitLoading(false)
       },
-      onSuccess: (newData: T) => {
+      onSuccess: (newData: U) => {
         if (customUpdateDataList?.create) {
           customUpdateDataList.create(newData)
         } else {
-          queryClient.setQueryData(queryKey ?? [], (old: T[]) => {
+          queryClient.setQueryData(queryKey ?? [], (old: U[]) => {
             return [...old, newData].sort((a, b) => {
               if (sortBy) {
                 if (sortMode === 'asc') {
@@ -128,7 +120,7 @@ function FormModal<
       }
     }
   )
-  const entryUpdateMutation = useModifyMutation<T>(
+  const entryUpdateMutation = useModifyMutation<U>(
     'update',
     apiHost,
     `${endpoint}/${id}`,
@@ -136,11 +128,11 @@ function FormModal<
       onSettled: () => {
         setSubmitLoading(false)
       },
-      onSuccess: (newData: T) => {
+      onSuccess: (newData: U) => {
         if (customUpdateDataList?.update) {
           customUpdateDataList.update(newData)
         } else {
-          queryClient.setQueryData(queryKey ?? [], (old: T[]) => {
+          queryClient.setQueryData(queryKey ?? [], (old: U[]) => {
             return old
               .map(entry => {
                 if (entry.id === newData.id) {
@@ -171,7 +163,7 @@ function FormModal<
       return (
         !value ||
         (typeof value === 'string' && !value.trim()) ||
-        (typeof value === 'object' && !value.image)
+        (typeof value === 'object' && !Array.isArray(value) && !value.image)
       )
     })
 
@@ -198,9 +190,9 @@ function FormModal<
     )
 
     if (openType === 'create') {
-      entryCreateMutation.mutate(finalData as Partial<T>)
+      entryCreateMutation.mutate(finalData as Partial<U>)
     } else if (openType === 'update') {
-      entryUpdateMutation.mutate(finalData as Partial<T>)
+      entryUpdateMutation.mutate(finalData as Partial<U>)
     }
 
     if (onSubmit) {

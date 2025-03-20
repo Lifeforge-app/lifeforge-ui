@@ -1,4 +1,4 @@
-import { IFieldProps } from '@interfaces/modal_interfaces'
+import { IFieldProps, IFormState } from '@interfaces/modal_interfaces'
 
 import {
   ColorPickerModal,
@@ -7,12 +7,7 @@ import {
   QRCodeScanner
 } from '@components/inputs'
 
-function PickerModals<
-  T extends Record<
-    string,
-    string | { image: string | File | null; preview: string | null }
-  >
->({
+function PickerModals<T extends IFormState>({
   fields,
   data,
   setData,

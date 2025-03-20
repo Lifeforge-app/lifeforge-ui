@@ -1,6 +1,6 @@
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import { useQueryClient } from '@tanstack/react-query'
-import { RecordModel } from 'pocketbase'
+import type { RecordModel } from 'pocketbase'
 import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
