@@ -1,7 +1,7 @@
 {
   "name": "@lifeforge/ui",
   "description": "LifeForge UI component library",
-  "version": "0.25.12-35",
+  "version": "0.25.12-39",
   "moduleResolution": "node",
   "sideEffects": false,
   "scripts": {
@@ -10,7 +10,8 @@
     "lint:fix": "eslint ./src --ext .ts,.tsx --fix",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "bump-and-publish": "bun scripts/bump-version.cjs"
   },
   "files": [
     "dist",
