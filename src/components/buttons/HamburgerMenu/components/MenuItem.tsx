@@ -68,13 +68,22 @@ function MenuItem({
               onClick(e, close)
             }}
           >
-            {loading ? (
-              <Icon className="size-5 shrink-0" icon="svg-spinners:180-ring" />
-            ) : typeof icon === 'string' ? (
-              <Icon className="size-5 shrink-0" icon={icon} />
-            ) : (
-              icon
-            )}
+            {(() => {
+              if (loading) {
+                return (
+                  <Icon
+                    className="size-5 shrink-0"
+                    icon="svg-spinners:180-ring"
+                  />
+                )
+              }
+
+              if (typeof icon === 'string') {
+                return <Icon className="size-5 shrink-0" icon={icon} />
+              }
+
+              return icon
+            })()}
             <span className="w-full truncate whitespace-nowrap">
               {namespace !== false
                 ? t([_.camelCase(text), `buttons.${_.camelCase(text)}`, text])

@@ -1,7 +1,7 @@
 import { Listbox } from '@headlessui/react'
 import clsx from 'clsx'
 
-function ListboxInputWrapper({
+function ListboxInputWrapper<T>({
   value,
   onChange,
   multiple = false,
@@ -9,8 +9,8 @@ function ListboxInputWrapper({
   children,
   disabled
 }: {
-  value: string | string[] | null
-  onChange: (value: any) => void
+  value: T
+  onChange: (value: T) => void
   multiple?: boolean
   className?: string
   children: React.ReactNode

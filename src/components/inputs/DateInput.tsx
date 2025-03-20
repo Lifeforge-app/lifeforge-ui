@@ -30,7 +30,7 @@ interface DateInputProps {
   disabled?: boolean
 }
 
-const DateInput: React.FC<DateInputProps> = ({
+function DateInput({
   date,
   setDate,
   name,
@@ -44,7 +44,7 @@ const DateInput: React.FC<DateInputProps> = ({
   hasTime = false,
   namespace,
   disabled
-}) => {
+}: DateInputProps) {
   const FinalComponent = hasTime ? DateTimePicker : DatePicker
   const { t } = useTranslation(namespace)
   const { language } = useLifeforgeUIContext()
@@ -129,7 +129,7 @@ const DateInput: React.FC<DateInputProps> = ({
           value={date}
           onCalendarOpen={updateCalendarLocation}
           onChange={(newDate: Value) => {
-            setDate(newDate as any) //TODO
+            setDate(newDate?.toString() ?? '')
           }}
           onClockOpen={updateCalendarLocation}
         />

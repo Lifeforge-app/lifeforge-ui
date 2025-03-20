@@ -1,6 +1,9 @@
 import { Icon } from '@iconify/react'
 
-import { type PixabaySearchFilterAction } from '@interfaces/pixabay_interfaces'
+import {
+  IPixabaySearchFilter,
+  type PixabaySearchFilterAction
+} from '@interfaces/pixabay_interfaces'
 
 import {
   ListboxOrComboboxInput,
@@ -10,14 +13,11 @@ import {
 import { CATEGORIES } from '../constants/filterOptions'
 
 interface CategoryFilterProps {
-  category: string
+  category: IPixabaySearchFilter['category']
   updateFilters: React.ActionDispatch<[action: PixabaySearchFilterAction]>
 }
 
-const CategoryFilter: React.FC<CategoryFilterProps> = ({
-  category,
-  updateFilters
-}) => {
+function CategoryFilter({ category, updateFilters }: CategoryFilterProps) {
   return (
     <ListboxOrComboboxInput
       buttonContent={

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 /* eslint-disable sonarjs/no-internal-api-use */
 import {
   Menu,

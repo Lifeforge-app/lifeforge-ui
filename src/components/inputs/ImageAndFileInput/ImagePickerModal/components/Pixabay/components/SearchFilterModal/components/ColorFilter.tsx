@@ -1,4 +1,7 @@
-import { type PixabaySearchFilterAction } from '@interfaces/pixabay_interfaces'
+import {
+  IPixabaySearchFilter,
+  type PixabaySearchFilterAction
+} from '@interfaces/pixabay_interfaces'
 
 import {
   ListboxOrComboboxInput,
@@ -8,11 +11,11 @@ import {
 import { COLORS } from '../constants/filterOptions'
 
 interface ColorFilterProps {
-  colors: string
+  colors: IPixabaySearchFilter['colors']
   updateFilters: React.ActionDispatch<[action: PixabaySearchFilterAction]>
 }
 
-const ColorFilter: React.FC<ColorFilterProps> = ({ colors, updateFilters }) => {
+function ColorFilter({ colors, updateFilters }: ColorFilterProps) {
   return (
     <ListboxOrComboboxInput
       buttonContent={

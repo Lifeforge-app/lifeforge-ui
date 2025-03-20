@@ -1,6 +1,7 @@
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import { useQueryClient } from '@tanstack/react-query'
-import { useState } from 'react'
+import { RecordModel } from 'pocketbase'
+import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
@@ -9,7 +10,7 @@ import fetchAPI from '@utils/fetchAPI'
 import Button from '../buttons/Button'
 import ModalWrapper from './ModalWrapper'
 
-function DeleteConfirmationModal({
+function DeleteConfirmationModal<T extends RecordModel>({
   itemName,
   isOpen,
   onClose,
@@ -30,12 +31,12 @@ function DeleteConfirmationModal({
   itemName?: string
   isOpen: boolean
   onClose: () => void
-  data?: any | string[]
+  data?: T | T[]
   updateDataList?: () => void
   apiEndpoint?: string
   customTitle?: string
   customText?: string
-  nameKey?: string
+  nameKey?: keyof T
   customCallback?: () => Promise<void>
   customConfirmButtonIcon?: string
   customConfirmButtonText?: string
@@ -48,6 +49,49 @@ function DeleteConfirmationModal({
   const { t } = useTranslation('common.modals')
   const [loading, setLoading] = useState(false)
   const queryClient = useQueryClient()
+  const finalItemName = useMemo(() => {
+    if (Array.isArray(data)) {
+      return `${data.length} ${itemName}`
+    }
+
+    if (nameKey) {
+      return data?.[nameKey]
+    }
+
+    return `the ${itemName}`
+  }, [data, itemName, nameKey])
+
+  const updateFunc = useCallback(
+    (old: T[]) => {
+      if (!Array.isArray(data)) {
+        return old.filter(item => item.id !== data!.id)
+      }
+      return old.filter(item => !data.some(d => d.id === item.id))
+    },
+    [data]
+  )
+
+  const mutateData = useCallback(() => {
+    if (!data || !queryKey) return
+
+    if (multiQueryKey) {
+      ;(queryKey as unknown[][]).forEach(key => {
+        if (queryUpdateType === 'mutate') {
+          queryClient.setQueryData(key, updateFunc)
+        }
+        if (queryUpdateType === 'invalidate') {
+          queryClient.invalidateQueries({ queryKey: key })
+        }
+      })
+    } else {
+      if (queryUpdateType === 'mutate') {
+        queryClient.setQueryData(queryKey as unknown[], updateFunc)
+      }
+      if (queryUpdateType === 'invalidate') {
+        queryClient.invalidateQueries({ queryKey: queryKey as unknown[] })
+      }
+    }
+  }, [data, queryKey, queryUpdateType, multiQueryKey, updateFunc])
 
   async function deleteData(): Promise<void> {
     if (data === null) return
@@ -77,32 +121,7 @@ function DeleteConfirmationModal({
     } catch {
       toast.error(t('deleteConfirmation.error'))
     } finally {
-      if (queryKey) {
-        const updateFunc = (old: any[]) => {
-          if (!Array.isArray(data)) {
-            return old.filter(item => item.id !== data.id)
-          }
-          return old.filter(item => !data.includes(item.id))
-        }
-
-        if (multiQueryKey) {
-          ;(queryKey as unknown[][]).forEach(key => {
-            if (queryUpdateType === 'mutate') {
-              queryClient.setQueryData(key, updateFunc)
-            }
-            if (queryUpdateType === 'invalidate') {
-              queryClient.invalidateQueries({ queryKey: key })
-            }
-          })
-        } else {
-          if (queryUpdateType === 'mutate') {
-            queryClient.setQueryData(queryKey as unknown[], updateFunc)
-          }
-          if (queryUpdateType === 'invalidate') {
-            queryClient.invalidateQueries({ queryKey: queryKey as unknown[] })
-          }
-        }
-      }
+      mutateData()
       setLoading(false)
     }
   }
@@ -112,11 +131,7 @@ function DeleteConfirmationModal({
       <h1 className="text-2xl font-semibold">
         {customTitle ??
           t('deleteConfirmation.title', {
-            itemName: nameKey
-              ? data?.[nameKey]
-              : Array.isArray(data)
-                ? `${data.length} ${itemName}`
-                : `the ${itemName}`
+            itemName: finalItemName
           })}
       </h1>
       <p className="mt-2 text-bg-500">

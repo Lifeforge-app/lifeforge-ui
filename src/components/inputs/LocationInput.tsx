@@ -63,10 +63,10 @@ function LocationInput({
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebounce(query, 500)
   const [enabled, setEnabled] = useState(false)
-  const [data, , setData] = useFetch<any>(
-    `/locations?q=${debouncedQuery}`,
-    debouncedQuery.trim() !== ''
-  )
+  const [data, , setData] = useFetch<{
+    predictions: Prediction[]
+    status: string
+  }>(`/locations?q=${debouncedQuery}`, debouncedQuery.trim() !== '')
 
   useEffect(() => {
     if (query.trim() === '') {
@@ -86,7 +86,7 @@ function LocationInput({
         className="w-full"
         customActive={Boolean(location)}
         disabled={!enabled || disabled}
-        displayValue={(value: string) => value}
+        displayValue={value => value ?? ''}
         icon="tabler:map-pin"
         name={label || 'Location'}
         namespace={namespace}
@@ -98,7 +98,7 @@ function LocationInput({
       >
         {query.trim() !== '' && (
           <APIFallbackComponent data={data}>
-            {(data: any) => (
+            {data => (
               <>
                 {data.predictions.map((prediction: Prediction) => (
                   <ListboxOrComboboxOption

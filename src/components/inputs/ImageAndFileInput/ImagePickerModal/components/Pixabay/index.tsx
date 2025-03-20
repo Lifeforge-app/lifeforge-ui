@@ -53,7 +53,7 @@ function Pixabay({
 
     const params = new URLSearchParams({
       q: query,
-      page: page.toString(), // TODO
+      page: page.toString(),
       type: filters.imageType,
       category: filters.category,
       colors: filters.colors,

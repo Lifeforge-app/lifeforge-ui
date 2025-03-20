@@ -42,14 +42,14 @@ function reducer(
 function ImagePickerModal({
   isOpen,
   onClose,
-  enablePixaBay = false,
+  enablePixabay = false,
   enableUrl = false,
   acceptedMimeTypes,
   onSelect
 }: {
   isOpen: boolean
   onClose: () => void
-  enablePixaBay?: boolean
+  enablePixabay?: boolean
   enableUrl?: boolean
   acceptedMimeTypes: Record<string, string[]>
   onSelect: (file: string | File, preview: string | null) => Promise<void>
@@ -78,13 +78,13 @@ function ImagePickerModal({
           title="imagePicker.title"
           onClose={onClose}
         />
-        {(enablePixaBay || enableUrl) && (
+        {(enablePixabay || enableUrl) && (
           <Tabs
             active={mode}
             enabled={(['local', 'url', 'pixabay'] as const).filter(
               name =>
                 name === 'local' ||
-                (name === 'pixabay' && enablePixaBay) ||
+                (name === 'pixabay' && enablePixabay) ||
                 (name === 'url' && enableUrl)
             )}
             items={[

@@ -7,7 +7,12 @@ import {
   QRCodeScanner
 } from '@components/inputs'
 
-function PickerModals<T extends Record<string, any | any[]>>({
+function PickerModals<
+  T extends Record<
+    string,
+    string | { image: string | File | null; preview: string | null }
+  >
+>({
   fields,
   data,
   setData,
@@ -65,7 +70,7 @@ function PickerModals<T extends Record<string, any | any[]>>({
       )}
       {fields.some(f => f.type === 'file') && (
         <ImagePickerModal
-          enablePixaBay
+          enablePixabay
           enableUrl
           acceptedMimeTypes={{
             images: ['image/png', 'image/jpeg', 'image/webp']

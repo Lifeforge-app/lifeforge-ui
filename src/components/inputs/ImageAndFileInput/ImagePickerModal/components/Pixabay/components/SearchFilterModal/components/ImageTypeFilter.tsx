@@ -1,7 +1,10 @@
 import { Icon } from '@iconify/react'
 import { useTranslation } from 'react-i18next'
 
-import { type PixabaySearchFilterAction } from '@interfaces/pixabay_interfaces'
+import {
+  IPixabaySearchFilter,
+  type PixabaySearchFilterAction
+} from '@interfaces/pixabay_interfaces'
 
 import {
   ListboxOrComboboxInput,
@@ -11,14 +14,11 @@ import {
 import { IMAGE_TYPES } from '../constants/filterOptions'
 
 interface ImageTypeFilterProps {
-  imageType: string
+  imageType: IPixabaySearchFilter['imageType']
   updateFilters: React.ActionDispatch<[action: PixabaySearchFilterAction]>
 }
 
-const ImageTypeFilter: React.FC<ImageTypeFilterProps> = ({
-  imageType,
-  updateFilters
-}) => {
+function ImageTypeFilter({ imageType, updateFilters }: ImageTypeFilterProps) {
   const { t } = useTranslation('common.modals')
 
   return (

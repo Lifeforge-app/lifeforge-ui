@@ -38,7 +38,9 @@ export interface Author {
   url: string
 }
 
-async function getIconSet(searchTerm: string): Promise<any> {
+async function getIconSet(
+  searchTerm: string
+): Promise<IIconSearchResult | null> {
   try {
     const res = await fetch(
       `https://api.iconify.design/search?query=${searchTerm}&limit=9999`
@@ -87,6 +89,7 @@ function Search({
     setIconData(null)
     getIconSet(searchTerm)
       .then(data => {
+        if (!data) return
         setIconData(data)
         setFilteredIconList(data.iconList)
         setCurrentIconSet(null)

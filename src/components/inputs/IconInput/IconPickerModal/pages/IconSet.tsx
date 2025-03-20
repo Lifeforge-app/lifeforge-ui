@@ -15,7 +15,7 @@ export interface IIconSetData {
   categories: Record<string, string[]>
 }
 
-async function getIconSet(prefix: string): Promise<any> {
+async function getIconSet(prefix: string): Promise<IIconSetData | null> {
   try {
     const res: IIconSetData = await fetch(
       `https://api.iconify.design/collection?prefix=${prefix}`

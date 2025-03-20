@@ -9,11 +9,11 @@ import ComboboxInputWrapper from './components/ComboboxInputWrapper'
 import ListboxInputWrapper from './components/ListboxInputWrapper'
 import ListboxOrComboboxOptions from './components/ListboxOrComboboxOptions'
 
-interface IGeneralProps {
+interface IGeneralProps<T> {
   name: string
   icon: string
-  value: any
-  setValue: (value: any) => void
+  value: T
+  setValue: (value: T) => void
   disabled?: boolean
   className?: string
   children: React.ReactNode
@@ -23,22 +23,22 @@ interface IGeneralProps {
   tKey?: string
 }
 
-interface IListboxProps extends IGeneralProps {
+interface IListboxProps<T> extends IGeneralProps<T> {
   type: 'listbox'
   buttonContent: React.ReactElement
   multiple?: boolean
 }
 
-interface IComboboxProps extends IGeneralProps {
+interface IComboboxProps<T> extends IGeneralProps<T> {
   type: 'combobox'
   setQuery: (query: string) => void
-  displayValue: (value: any) => string
+  displayValue: (value: T) => string
 }
 
-type IListboxOrComboboxInputProps = IListboxProps | IComboboxProps
+type IListboxOrComboboxInputProps<T> = IListboxProps<T> | IComboboxProps<T>
 
-function ListboxOrComboboxInput(
-  props: IListboxOrComboboxInputProps
+function ListboxOrComboboxInput<T>(
+  props: IListboxOrComboboxInputProps<T>
 ): React.ReactElement {
   const {
     name,
@@ -129,7 +129,7 @@ function ListboxOrComboboxInput(
             <ComboboxInput
               className="relative mt-10 mb-3 flex w-full items-center gap-2 rounded-lg bg-transparent! pr-5 pl-17.5 text-left focus:outline-hidden"
               displayValue={props.displayValue}
-              onChange={(e: any) => {
+              onChange={e => {
                 props.setQuery(e.target.value)
               }}
             />

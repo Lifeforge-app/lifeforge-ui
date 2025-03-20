@@ -1,7 +1,7 @@
 import { Combobox } from '@headlessui/react'
 import clsx from 'clsx'
 
-function ComboboxInputWrapper({
+function ComboboxInputWrapper<T>({
   value,
   onChange,
   setQuery,
@@ -9,8 +9,8 @@ function ComboboxInputWrapper({
   className,
   disabled
 }: {
-  value: string | string[] | undefined
-  onChange: (value: any) => void
+  value: T
+  onChange: (value: T) => void
   setQuery: (query: string) => void
   children: React.ReactNode
   className?: string

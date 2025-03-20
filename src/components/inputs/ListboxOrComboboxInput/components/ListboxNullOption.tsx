@@ -9,7 +9,7 @@ function ListboxNullOption({
   text = 'None'
 }: {
   icon: string
-  value?: any
+  value?: unknown
   hasBgColor?: boolean
   text?: string
 }) {

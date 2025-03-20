@@ -15,7 +15,7 @@ function ListboxOrComboboxOption({
   matchedSubstrings,
   noCheckmark = false
 }: {
-  value: string | number | Record<string, any> | null
+  value: unknown
   text: string
   icon?: string | React.ReactElement
   iconAtEnd?: boolean

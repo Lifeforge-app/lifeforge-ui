@@ -10,10 +10,10 @@ interface EditorsChoiceSwitchProps {
   updateFilters: React.ActionDispatch<[action: PixabaySearchFilterAction]>
 }
 
-const EditorsChoiceSwitch: React.FC<EditorsChoiceSwitchProps> = ({
+function EditorsChoiceSwitch({
   isEditorsChoice,
   updateFilters
-}) => {
+}: EditorsChoiceSwitchProps) {
   const { t } = useTranslation('common.modals')
 
   return (

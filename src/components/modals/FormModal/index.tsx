@@ -16,7 +16,16 @@ import FormInputs from './components/FormInputs'
 import PickerModals from './components/PickerModals'
 import SubmitButton from './components/SubmitButton'
 
-function FormModal<T extends Record<string, any | any[]>>({
+function FormModal<
+  T extends Record<
+    string,
+    | string
+    | {
+        image: string | File | null
+        preview: string | null
+      }
+  >
+>({
   // fields stuff
   fields,
   data,
@@ -72,12 +81,12 @@ function FormModal<T extends Record<string, any | any[]>>({
   actionButtonIsRed?: boolean
   onActionButtonClick?: () => void
   namespace: string
-  getFinalData?: (originalData: T) => Promise<Record<string, any>>
+  getFinalData?: (originalData: T) => Promise<Record<string, unknown>>
   sortBy?: keyof T
   sortMode?: 'asc' | 'desc'
   customUpdateDataList?: {
-    create?: (newData: any) => void
-    update?: (newData: any) => void
+    create?: (newData: T) => void
+    update?: (newData: T) => void
   }
 }) {
   const { apiHost } = useLifeforgeUIContext()
@@ -157,12 +166,14 @@ function FormModal<T extends Record<string, any | any[]>>({
 
   async function onSubmitButtonClick(): Promise<void> {
     const requiredFields = fields.filter(field => field.required)
-    const missingFields = requiredFields.filter(
-      field =>
-        !data[field.id] ||
-        (typeof data[field.id] === 'string' && !data[field.id].trim()) ||
-        (typeof data[field.id] === 'object' && !data[field.id].image)
-    )
+    const missingFields = requiredFields.filter(field => {
+      const value = data[field.id]
+      return (
+        !value ||
+        (typeof value === 'string' && !value.trim()) ||
+        (typeof value === 'object' && !value.image)
+      )
+    })
 
     if (missingFields.length) {
       toast.error(
@@ -178,8 +189,8 @@ function FormModal<T extends Record<string, any | any[]>>({
     const finalData = Object.fromEntries(
       Object.entries(getFinalData ? await getFinalData(data) : data).map(
         ([key, value]) => {
-          if (typeof value === 'object' && 'image' in value) {
-            return [key, value.image]
+          if (typeof value === 'object' && 'image' in (value ?? {})) {
+            return [key, (value as { image: string | File | null }).image]
           }
           return JSON.parse(JSON.stringify([key, value]))
         }
@@ -187,9 +198,9 @@ function FormModal<T extends Record<string, any | any[]>>({
     )
 
     if (openType === 'create') {
-      entryCreateMutation.mutate(finalData as any)
+      entryCreateMutation.mutate(finalData as Partial<T>)
     } else if (openType === 'update') {
-      entryUpdateMutation.mutate(finalData as any)
+      entryUpdateMutation.mutate(finalData as Partial<T>)
     }
 
     if (onSubmit) {

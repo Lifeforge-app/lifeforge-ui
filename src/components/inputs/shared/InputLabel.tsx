@@ -9,13 +9,13 @@ interface InputLabelProps {
   required?: boolean
 }
 
-const InputLabel: React.FC<InputLabelProps> = ({
+function InputLabel({
   label,
   active,
   isListboxOrCombobox = false,
   isCombobox = false,
   required = false
-}) => {
+}: InputLabelProps) {
   const labelPositionClasses = useMemo(() => {
     if (!active) {
       return `top-1/2 -translate-y-1/2 ${

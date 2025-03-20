@@ -14,7 +14,7 @@ function DashboardItem({
   componentBesideTitle,
   namespace = 'core.dashboard'
 }: {
-  ref?: React.Ref<any>
+  ref?: React.Ref<HTMLDivElement>
   className?: string
   icon: string
   title: string

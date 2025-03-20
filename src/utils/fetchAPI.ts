@@ -10,8 +10,11 @@ interface CookieData {
   token?: string
 }
 
-function getRequestBody(body: any, isJSON: boolean): any {
-  return isJSON ? JSON.stringify(body) : body
+function getRequestBody(
+  body: BodyInit | Record<string, unknown>,
+  isJSON: boolean
+): BodyInit {
+  return isJSON ? JSON.stringify(body) : (body as BodyInit)
 }
 
 export default async function fetchAPI<T>(
@@ -24,7 +27,7 @@ export default async function fetchAPI<T>(
     raiseError = true
   }: {
     method?: string
-    body?: string | FormData | URLSearchParams | Blob | Record<string, unknown>
+    body?: BodyInit | Record<string, unknown>
     timeout?: number
     raiseError?: boolean
   } = {}

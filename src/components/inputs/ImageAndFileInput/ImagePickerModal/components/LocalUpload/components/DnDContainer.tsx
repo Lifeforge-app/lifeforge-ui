@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react'
+import { DropzoneInputProps, DropzoneRootProps } from 'react-dropzone'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@components/buttons'
@@ -8,8 +9,8 @@ function DnDContainer({
   getInputProps,
   isDragActive
 }: {
-  getRootProps: any
-  getInputProps: any
+  getRootProps: (props?: DropzoneRootProps) => DropzoneRootProps
+  getInputProps: (props?: DropzoneInputProps) => DropzoneInputProps
   isDragActive: boolean
 }) {
   const { t } = useTranslation('common.misc')

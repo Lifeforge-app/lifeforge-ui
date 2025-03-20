@@ -1,6 +1,5 @@
 // Plugin imports grouped by type
 import pluginJs from '@eslint/js'
-import importPlugin from 'eslint-plugin-import'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import pluginReact from 'eslint-plugin-react'
 import reactCompiler from 'eslint-plugin-react-compiler'
@@ -45,36 +44,8 @@ export default [
     }
   },
 
-  // Import plugin configuration
-  importPlugin.flatConfigs.recommended,
-
   // SonarJS
   sonarjs.configs.recommended,
-
-  // Consolidated rules
-  {
-    rules: {
-      // TypeScript rules
-      '@typescript-eslint/no-explicit-any': 'off',
-
-      // React rules
-      'react/jsx-sort-props': [
-        'error',
-        {
-          callbacksLast: true,
-          shorthandFirst: true,
-          shorthandLast: false,
-          ignoreCase: true,
-          noSortAlphabetically: false,
-          reservedFirst: true
-        }
-      ],
-
-      // Import rules
-      'import/no-named-as-default': 'off',
-      'import/no-named-as-default-member': 'off'
-    }
-  },
 
   // Consolidated settings
   {
