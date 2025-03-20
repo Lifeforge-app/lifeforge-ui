@@ -1,7 +1,7 @@
 {
   "name": "@lifeforge/ui",
   "description": "LifeForge UI component library",
-  "version": "0.25.12-27",
+  "version": "0.25.12-29p",
   "moduleResolution": "node",
   "sideEffects": false,
   "scripts": {
@@ -20,13 +20,6 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    }
-  },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
     "@eslint/js": "^9.22.0",
@@ -79,7 +72,7 @@
     "file-type-mime": "^0.4.6",
     "javascript-color-gradient": "^2.5.0",
     "lodash": "^4.17.21",
-    "pocketbase": "^0.21.5",
+    "pocketbase": "^0.25.2",
     "react-currency-input-field": "^3.10.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-date-picker": "^11.0.0",
