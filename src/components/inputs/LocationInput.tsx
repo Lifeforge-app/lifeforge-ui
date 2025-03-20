@@ -1,4 +1,5 @@
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
+import { useQuery } from '@tanstack/react-query'
 import { useDebounce } from '@uidotdev/usehooks'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -7,9 +8,7 @@ import {
   ListboxOrComboboxInput,
   ListboxOrComboboxOption
 } from '@components/inputs'
-import { APIFallbackComponent } from '@components/screens'
-
-import useFetch from '@hooks/useFetch'
+import { QueryWrapper } from '@components/screens'
 
 import fetchAPI from '@utils/fetchAPI'
 
@@ -63,14 +62,22 @@ function LocationInput({
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebounce(query, 500)
   const [enabled, setEnabled] = useState(false)
-  const [data, , setData] = useFetch<{
+  const dataQuery = useQuery<{
     predictions: Prediction[]
     status: string
-  }>(`/locations?q=${debouncedQuery}`, debouncedQuery.trim() !== '')
+  }>({
+    queryKey: ['locations', debouncedQuery],
+    queryFn: () =>
+      fetchAPI<ILocationAutoComplete>(
+        apiHost,
+        `/locations?q=${debouncedQuery}`
+      ),
+    enabled: debouncedQuery.trim() !== ''
+  })
 
   useEffect(() => {
     if (query.trim() === '') {
-      setData('loading')
+      dataQuery.refetch()
     }
   }, [query])
 
@@ -97,7 +104,7 @@ function LocationInput({
         value={location}
       >
         {query.trim() !== '' && (
-          <APIFallbackComponent data={data}>
+          <QueryWrapper query={dataQuery}>
             {data => (
               <>
                 {data.predictions.map((prediction: Prediction) => (
@@ -111,7 +118,7 @@ function LocationInput({
                 ))}
               </>
             )}
-          </APIFallbackComponent>
+          </QueryWrapper>
         )}
       </ListboxOrComboboxInput>
       {!enabled && (

@@ -4,12 +4,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y'
 import pluginReact from 'eslint-plugin-react'
 import reactCompiler from 'eslint-plugin-react-compiler'
 import sonarjs from 'eslint-plugin-sonarjs'
-import path from 'path'
-import process from 'process'
 import tseslint from 'typescript-eslint'
-
-const projectRoot = process.cwd()
-const srcPath = path.resolve(projectRoot, 'src')
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -45,31 +40,5 @@ export default [
   },
 
   // SonarJS
-  sonarjs.configs.recommended,
-
-  // Consolidated settings
-  {
-    settings: {
-      'import/resolver': {
-        node: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts'],
-          moduleDirectory: ['node_modules', 'src']
-        },
-        alias: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts'],
-          map: [
-            ['@components', path.resolve(srcPath, 'components')],
-            ['@providers', path.resolve(srcPath, 'providers')],
-            ['@hooks', path.resolve(srcPath, 'hooks')],
-            ['@interfaces', path.resolve(srcPath, 'interfaces')],
-            ['@utils', path.resolve(srcPath, 'utils')],
-            ['@constants', path.resolve(srcPath, 'constants')]
-          ]
-        }
-      },
-      react: {
-        version: 'detect'
-      }
-    }
-  }
+  sonarjs.configs.recommended
 ]
