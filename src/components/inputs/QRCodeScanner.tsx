@@ -5,10 +5,12 @@ import { ModalHeader, ModalWrapper } from '@components/modals'
 function QRCodeScanner({
   isOpen,
   onClose,
+  formats,
   onScanned
 }: {
   isOpen: boolean
   onClose: () => void
+  formats: BarcodeFormat[]
   onScanned: (data: string) => void
 }) {
   return (
@@ -22,6 +24,7 @@ function QRCodeScanner({
         <div className="relative aspect-square h-full w-full">
           <Scanner
             allowMultiple={false}
+            formats={formats}
             classNames={{
               container:
                 'size-full! [&_svg]:size-full! [&_div_div_div:has(svg)]:hidden',
