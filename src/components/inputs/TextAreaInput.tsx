@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import InputIcon from './shared/InputIcon'
@@ -39,12 +39,19 @@ function TextAreaInput({
   const { t } = useTranslation(namespace ? namespace : undefined)
   const ref = useRef<HTMLTextAreaElement>(null)
 
+  useEffect(() => {
+    if (!ref.current) return
+
+    ref.current.style.height = 'auto'
+    ref.current.style.height = ref.current.scrollHeight + 'px'
+  }, [value])
+
   return (
     <InputWrapper
+      inputRef={ref}
       className={className}
       darker={darker}
       disabled={disabled}
-      inputRef={ref}
     >
       <InputIcon active={!!value && String(value).length > 0} icon={icon} />
       <div className="flex w-full items-center gap-2">
@@ -64,7 +71,7 @@ function TextAreaInput({
         />
         <textarea
           ref={ref}
-          className="mt-6 min-h-8 w-full resize-none rounded-lg bg-transparent p-6 pl-4 tracking-wide outline-hidden placeholder:text-transparent focus:outline-hidden focus:placeholder:text-bg-500"
+          className="mt-3 -mb-3 min-h-8 w-full resize-none rounded-lg bg-transparent p-6 pl-4 tracking-wide outline-hidden placeholder:text-transparent focus:outline-hidden focus:placeholder:text-bg-500"
           placeholder={placeholder}
           value={value}
           onInput={e => {
