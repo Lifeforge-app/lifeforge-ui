@@ -77,6 +77,11 @@ function TextAreaInput({
           onInput={e => {
             setValue(e.currentTarget.value)
           }}
+          onKeyDown={e => {
+            if (e.key === 'Enter') {
+              setValue(value + '\n')
+            }
+          }}
         />
       </div>
     </InputWrapper>
