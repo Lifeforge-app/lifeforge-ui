@@ -2,14 +2,14 @@ import _ from 'lodash'
 import { memo, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Button from '../../buttons/Button'
-import InputActionButton from '../shared/InputActionButton'
-import InputBox from '../shared/InputBox'
-import InputIcon from '../shared/InputIcon'
-import InputLabel from '../shared/InputLabel'
-import InputWrapper from '../shared/InputWrapper'
+import { Button } from '../buttons'
+import InputActionButton from './shared/InputActionButton'
+import InputBox from './shared/InputBox'
+import InputIcon from './shared/InputIcon'
+import InputLabel from './shared/InputLabel'
+import InputWrapper from './shared/InputWrapper'
 
-export interface IInputProps {
+export interface ITextInputProps {
   icon: string
   name: string
   placeholder: string
@@ -58,11 +58,11 @@ function TextInput({
   placeholder,
   ref,
   required,
-  setValue: setValue,
+  setValue,
   value,
   namespace,
   tKey
-}: IInputProps) {
+}: ITextInputProps) {
   const { t } = useTranslation(namespace ? namespace : undefined)
   const [showPassword, setShowPassword] = useState(false)
   const inputRef = useRef<HTMLInputElement | null>(null)

@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import Index from './index'
+import TextInput from './TextInput'
 
 const meta = {
-  component: Index
-} satisfies Meta<typeof Index>
+  component: TextInput
+} satisfies Meta<typeof TextInput>
 
 export default meta
 

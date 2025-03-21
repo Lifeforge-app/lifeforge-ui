@@ -1,4 +1,5 @@
 export { default as TextInput } from './TextInput'
+export { default as TextAreaInput } from './TextAreaInput'
 export { default as IconInput } from './IconInput'
 export { default as ColorInput } from './ColorInput'
 export { default as ImageAndFileInput } from './ImageAndFileInput'
