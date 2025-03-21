@@ -10,7 +10,7 @@ function QRCodeScanner({
 }: {
   isOpen: boolean
   onClose: () => void
-  formats: BarcodeFormat[]
+  formats?: BarcodeFormat[]
   onScanned: (data: string) => void
 }) {
   return (
