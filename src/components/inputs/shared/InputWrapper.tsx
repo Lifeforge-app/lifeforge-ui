@@ -24,7 +24,7 @@ function InputWrapper({
 
     if (inputRef?.current !== undefined && inputRef.current !== null) {
       inputRef.current.focus()
-      if ((e.target as HTMLElement).tagName !== 'INPUT') {
+      if (!['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
         inputRef.current.setSelectionRange(
           inputRef.current.value.length,
           inputRef.current.value.length
