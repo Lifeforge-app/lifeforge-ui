@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
-  entry: ['!src/**/*.stories.*', '!src/stories/**', '!scripts/**'],
+  entry: ['!scripts/**'],
   outDir: 'dist',
   format: ['esm', 'cjs'],
   minify: true,
