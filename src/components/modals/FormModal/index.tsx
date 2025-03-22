@@ -104,7 +104,9 @@ function FormModal<T extends IFormState, U extends RecordModel>({
         if (customUpdateDataList?.create) {
           customUpdateDataList.create(newData)
         } else {
-          queryClient.setQueryData(queryKey ?? [], (old: U[]) => {
+          queryClient.setQueryData<U[]>(queryKey ?? [], old => {
+            if (!old) return []
+
             return [...old, newData].sort((a, b) => {
               if (sortBy) {
                 if (sortMode === 'asc') {
@@ -132,7 +134,9 @@ function FormModal<T extends IFormState, U extends RecordModel>({
         if (customUpdateDataList?.update) {
           customUpdateDataList.update(newData)
         } else {
-          queryClient.setQueryData(queryKey ?? [], (old: U[]) => {
+          queryClient.setQueryData<U[]>(queryKey ?? [], old => {
+            if (!old) return []
+
             return old
               .map(entry => {
                 if (entry.id === newData.id) {
