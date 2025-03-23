@@ -148,7 +148,7 @@ function DeleteConfirmationModal<T extends RecordModel>({
           icon="tabler:alert-triangle"
           name="Confirmation"
           namespace="common.modals"
-          placeholder={t('deleteConfirmation.confirmationPlaceholder', {
+          placeholder={t('deleteConfirmation.inputs.confirmation.placeholder', {
             text: confirmationText
           })}
           setValue={setConfirmationTextState}
