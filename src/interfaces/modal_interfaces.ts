@@ -45,7 +45,7 @@ interface IImageAndFileInputFieldProps {
   type: 'file'
   onFileRemoved?: () => void
   enableAIImageGeneration?: boolean
-  defaultImageGenerationPrompt: string
+  defaultImageGenerationPrompt?: string
 }
 
 interface ILocationInputFieldProps {

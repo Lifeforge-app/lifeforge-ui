@@ -4,6 +4,8 @@ import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
 import Zoom from 'react-medium-image-zoom'
 
+import useThemeColors from '@lifeforge/ui/hooks/useThemeColor'
+
 import { Button } from '@components/buttons'
 
 function ImageAndFileInput({
@@ -33,12 +35,14 @@ function ImageAndFileInput({
   namespace: string
   disabled?: boolean
 }) {
+  const { componentBgLighter } = useThemeColors()
   const { t } = useTranslation([namespace, 'common.buttons'])
 
   return (
     <div
       className={clsx(
-        'flex w-full flex-col rounded-md bg-bg-200/50 p-6 shadow-custom dark:bg-bg-800/50',
+        'flex w-full flex-col rounded-md p-6 shadow-custom',
+        componentBgLighter,
         disabled ? 'pointer-events-none! opacity-50' : 'cursor-pointer'
       )}
     >
