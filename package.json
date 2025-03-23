@@ -1,7 +1,7 @@
 {
   "name": "@lifeforge/ui",
   "description": "LifeForge UI component library",
-  "version": "0.25.13-5",
+  "version": "0.25.13-6",
   "moduleResolution": "node",
   "sideEffects": false,
   "scripts": {
