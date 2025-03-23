@@ -90,13 +90,13 @@ function ImageAndFileInput({
         <div className="mt-6 flex flex-col items-center gap-3">
           <Button
             className="w-full"
-            icon="tabler:upload"
+            icon="tabler:photo"
             variant="secondary"
             onClick={() => {
               setImagePickerModalOpen(true)
             }}
           >
-            {t('common.buttons:upload')}
+            {t('common.buttons:select')}
           </Button>
           <p className="text-xs text-bg-500">{reminderText}</p>
         </div>
