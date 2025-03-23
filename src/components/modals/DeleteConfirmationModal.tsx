@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import fetchAPI from '@utils/fetchAPI'
 
 import Button from '../buttons/Button'
+import { TextInput } from '../inputs'
 import ModalWrapper from './ModalWrapper'
 
 function DeleteConfirmationModal<T extends RecordModel>({
@@ -26,7 +27,8 @@ function DeleteConfirmationModal<T extends RecordModel>({
   customOnClick,
   queryKey,
   queryUpdateType = 'mutate',
-  multiQueryKey = false
+  multiQueryKey = false,
+  confirmationText = ''
 }: {
   itemName?: string
   isOpen: boolean
@@ -44,11 +46,14 @@ function DeleteConfirmationModal<T extends RecordModel>({
   queryKey?: unknown[] | unknown[][]
   queryUpdateType?: 'mutate' | 'invalidate'
   multiQueryKey?: boolean
+  confirmationText?: string
 }) {
   const { apiHost } = useLifeforgeUIContext()
   const { t } = useTranslation('common.modals')
   const [loading, setLoading] = useState(false)
   const queryClient = useQueryClient()
+  const [confirmationTextState, setConfirmationTextState] = useState('')
+
   const finalItemName = useMemo(() => {
     if (Array.isArray(data)) {
       return `${data.length} ${itemName}`
@@ -137,6 +142,21 @@ function DeleteConfirmationModal<T extends RecordModel>({
       <p className="mt-2 text-bg-500">
         {customText ?? t('deleteConfirmation.desc', { itemName })}
       </p>
+      {confirmationText && (
+        <TextInput
+          darker
+          icon="tabler:alert-triangle"
+          name="Confirmation"
+          namespace="common.modals"
+          placeholder={t('deleteConfirmation.confirmationPlaceholder', {
+            text: confirmationText
+          })}
+          setValue={setConfirmationTextState}
+          tKey="deleteConfirmation"
+          className="mt-4"
+          value={confirmationTextState}
+        />
+      )}
       <div className="mt-6 flex w-full flex-col-reverse justify-around gap-2 sm:flex-row">
         <Button
           className="w-full"
@@ -148,6 +168,10 @@ function DeleteConfirmationModal<T extends RecordModel>({
         </Button>
         <Button
           isRed
+          disabled={
+            confirmationText !== '' &&
+            confirmationText !== confirmationTextState
+          }
           className="w-full"
           icon={customConfirmButtonIcon ?? 'tabler:trash'}
           loading={loading}
