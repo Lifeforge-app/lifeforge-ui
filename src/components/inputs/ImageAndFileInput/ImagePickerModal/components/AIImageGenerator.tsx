@@ -41,6 +41,7 @@ function AIImageGenerator({
       )
 
       setFile(response)
+      setPreview(response)
     } catch {
       toast.error('Failed to generate image')
     }
