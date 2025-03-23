@@ -74,11 +74,13 @@ function AIImageGenerator({
     </>
   ) : (
     <div>
-      <img
-        alt=""
-        className="h-96 h-full rounded-lg object-contain shadow-custom"
-        src={file as string}
-      />
+      <div className="flex h-96 w-full items-center justify-center rounded-lg bg-bg-200 p-8 shadow-custom dark:bg-bg-800/50">
+        <img
+          alt=""
+          className="h-full rounded-lg object-contain"
+          src={file as string}
+        />
+      </div>
       <Button
         className="mt-6 w-full"
         icon="tabler:refresh"
