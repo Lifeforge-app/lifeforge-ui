@@ -155,6 +155,7 @@ function ImagePickerModal({
               case 'ai':
                 return (
                   <AIImageGenerator
+                    file={file}
                     setFile={setFile}
                     setPreview={setPreview}
                     defaultPrompt={defaultAIPrompt || ''}

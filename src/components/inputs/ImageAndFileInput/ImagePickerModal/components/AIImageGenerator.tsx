@@ -8,10 +8,12 @@ import fetchAPI from '@lifeforge/ui/utils/fetchAPI'
 import TextAreaInput from '../../../TextAreaInput'
 
 function AIImageGenerator({
+  file,
   setFile,
   setPreview,
   defaultPrompt
 }: {
+  file: string | File | null
   setFile: React.Dispatch<React.SetStateAction<string | File | null>>
   setPreview: React.Dispatch<React.SetStateAction<string | null>>
   defaultPrompt: string
@@ -19,7 +21,6 @@ function AIImageGenerator({
   const { apiHost } = useLifeforgeUIContext()
   const [prompt, setPrompt] = useState('')
   const [loading, setLoading] = useState(false)
-  const [generatedImage, setGeneratedImage] = useState<string | null>(null)
 
   async function onSubmit() {
     if (prompt === '') {
@@ -39,7 +40,7 @@ function AIImageGenerator({
         }
       )
 
-      setGeneratedImage(response)
+      setFile(response)
     } catch {
       toast.error('Failed to generate image')
     }
@@ -49,7 +50,7 @@ function AIImageGenerator({
     setPrompt(defaultPrompt)
   }, [defaultPrompt])
 
-  return !generatedImage ? (
+  return !file ? (
     <>
       <TextAreaInput
         icon="tabler:edit"
@@ -76,17 +77,18 @@ function AIImageGenerator({
       <img
         alt=""
         className="h-96 h-full rounded-lg object-contain shadow-custom"
-        src={generatedImage}
+        src={file as string}
       />
       <Button
         className="mt-6 w-full"
-        icon="tabler:check"
+        icon="tabler:refresh"
         onClick={() => {
-          setFile(generatedImage)
-          setPreview(generatedImage)
+          setFile(null)
+          setPreview(null)
         }}
+        variant="secondary"
       >
-        Select
+        Regenerate
       </Button>
     </div>
   )
