@@ -56,7 +56,8 @@ function AIImageGenerator({
       <TextAreaInput
         icon="tabler:edit"
         name="Prompt"
-        namespace="common.misc"
+        tKey="imagePicker"
+        namespace="common.modals"
         placeholder="A description of the image you want to generate"
         value={prompt}
         setValue={setPrompt}
