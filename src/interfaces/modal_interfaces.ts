@@ -44,6 +44,8 @@ interface IImageAndFileInputFieldProps {
   label: string
   type: 'file'
   onFileRemoved?: () => void
+  enableAIImageGeneration?: boolean
+  defaultImageGenerationPrompt: string
 }
 
 interface ILocationInputFieldProps {

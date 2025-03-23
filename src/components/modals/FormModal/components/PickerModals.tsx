@@ -67,6 +67,20 @@ function PickerModals<T extends IFormState>({
         <ImagePickerModal
           enablePixabay
           enableUrl
+          enableAI={
+            (
+              fields.find(
+                f => f.id === imagePickerModalOpen
+              ) as IFieldProps<T> & { type: 'file' }
+            )?.enableAIImageGeneration
+          }
+          defaultAIPrompt={
+            (
+              fields.find(
+                f => f.id === imagePickerModalOpen
+              ) as IFieldProps<T> & { type: 'file' }
+            )?.defaultImageGenerationPrompt
+          }
           acceptedMimeTypes={{
             images: ['image/png', 'image/jpeg', 'image/webp']
           }}
