@@ -9,6 +9,7 @@ import {
   type IPixabaySearchFilter,
   type PixabaySearchFilterAction
 } from '../../../../interfaces/pixabay_interfaces'
+import AIImageGenerator from './components/AIImageGenerator'
 import ImageURL from './components/ImageURL'
 import LocalUpload from './components/LocalUpload'
 import Pixabay from './components/Pixabay'
@@ -44,6 +45,8 @@ function ImagePickerModal({
   onClose,
   enablePixabay = false,
   enableUrl = false,
+  enableAI = false,
+  defaultAIPrompt = '',
   acceptedMimeTypes,
   onSelect
 }: {
@@ -51,13 +54,15 @@ function ImagePickerModal({
   onClose: () => void
   enablePixabay?: boolean
   enableUrl?: boolean
+  enableAI?: boolean
+  defaultAIPrompt?: string
   acceptedMimeTypes: Record<string, string[]>
   onSelect: (file: string | File, preview: string | null) => Promise<void>
 }) {
   const { t } = useTranslation('common.modals')
   const [file, setFile] = useState<File | string | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
-  const [mode, setMode] = useState<'local' | 'url' | 'pixabay'>('local')
+  const [mode, setMode] = useState<'local' | 'url' | 'pixabay' | 'ai'>('local')
   const [loading, setLoading] = useState(false)
 
   const [isSearchFilterModalOpen, setIsSearchFilterModalOpen] = useState(false)
@@ -81,11 +86,12 @@ function ImagePickerModal({
         {(enablePixabay || enableUrl) && (
           <Tabs
             active={mode}
-            enabled={(['local', 'url', 'pixabay'] as const).filter(
+            enabled={(['local', 'url', 'pixabay', 'ai'] as const).filter(
               name =>
                 name === 'local' ||
                 (name === 'pixabay' && enablePixabay) ||
-                (name === 'url' && enableUrl)
+                (name === 'url' && enableUrl) ||
+                (name === 'ai' && enableAI)
             )}
             items={[
               {
@@ -102,9 +108,14 @@ function ImagePickerModal({
                 name: t('imagePicker.pixabay'),
                 icon: 'simple-icons:pixabay',
                 id: 'pixabay'
+              },
+              {
+                name: t('imagePicker.ai'),
+                icon: 'tabler:robot',
+                id: 'ai'
               }
             ]}
-            onNavClick={(id: 'local' | 'url' | 'pixabay') => {
+            onNavClick={(id: 'local' | 'url' | 'pixabay' | 'ai') => {
               setMode(id)
               setFile(null)
             }}
@@ -139,6 +150,14 @@ function ImagePickerModal({
                     setFile={setFile}
                     setIsSearchFilterModalOpen={setIsSearchFilterModalOpen}
                     setPreview={setPreview}
+                  />
+                )
+              case 'ai':
+                return (
+                  <AIImageGenerator
+                    setFile={setFile}
+                    setPreview={setPreview}
+                    defaultPrompt={defaultAIPrompt || ''}
                   />
                 )
             }
