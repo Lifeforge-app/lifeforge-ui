@@ -74,7 +74,7 @@ function ListboxOrComboboxInput<T>(
             />
             <InputLabel
               isListboxOrCombobox
-              active={!!value || customActive === true}
+              active={!!value || value === 0 || customActive === true}
               label={t(
                 namespace !== false
                   ? t([
