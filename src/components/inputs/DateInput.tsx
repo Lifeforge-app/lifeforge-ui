@@ -1,6 +1,7 @@
 import { Icon } from '@iconify/react'
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import clsx from 'clsx'
+import dayjs from 'dayjs'
 import _ from 'lodash'
 import { useRef } from 'react'
 import DatePicker from 'react-date-picker'
@@ -129,7 +130,7 @@ function DateInput({
           value={date}
           onCalendarOpen={updateCalendarLocation}
           onChange={(newDate: Value) => {
-            setDate(newDate?.toString() ?? '')
+            setDate(dayjs(newDate as Date).toISOString())
           }}
           onClockOpen={updateCalendarLocation}
         />
