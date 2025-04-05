@@ -7,6 +7,13 @@ interface ITextInputFieldProps {
   qrScanner?: boolean
 }
 
+interface ITextAreaInputFieldProps {
+  label: string
+  icon: string
+  type: 'textarea'
+  placeholder: string
+}
+
 interface IDateInputFieldProps {
   label: string
   icon: string
@@ -55,6 +62,7 @@ interface ILocationInputFieldProps {
 
 type IFieldProps<T> = (
   | ITextInputFieldProps
+  | ITextAreaInputFieldProps
   | IDateInputFieldProps
   | IListboxInputFieldProps
   | IColorInputFieldProps
@@ -77,6 +85,7 @@ export type {
   IFieldProps,
   IFormState,
   ITextInputFieldProps,
+  ITextAreaInputFieldProps,
   IDateInputFieldProps,
   IListboxInputFieldProps,
   IColorInputFieldProps,
