@@ -95,7 +95,7 @@ function ListboxOrComboboxInput<T>(
             <span className="pointer-events-none absolute inset-y-0 right-0 mt-1 mr-2 flex items-center pr-4">
               <Icon
                 className="size-5 text-zinc-500"
-                icon="tabler:chevron-down"
+                icon="heroicons:chevron-up-down-16-solid"
               />
             </span>
           </ListboxButton>
