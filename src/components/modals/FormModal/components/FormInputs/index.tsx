@@ -6,6 +6,7 @@ import FormFileInput from './components/FormFileInput'
 import FormIconInput from './components/FormIconInput'
 import FormListboxInput from './components/FormListboxInput'
 import FormLocationInput from './components/FormLocationInput'
+import FormTextAreaInput from './components/FormTextAreaInput'
 import FormTextInput from './components/FormTextInput'
 
 function FormInputs<T>({
@@ -60,6 +61,16 @@ function FormInputs<T>({
                 namespace={namespace}
                 selectedData={selectedData as string}
                 setQrScannerModalOpen={setQrScannerModalOpen}
+              />
+            )
+          case 'textarea':
+            return (
+              <FormTextAreaInput
+                key={field.id as string}
+                field={field as IFieldProps<T> & { type: 'textarea' }}
+                handleChange={handleChange(field)}
+                namespace={namespace}
+                selectedData={selectedData as string}
               />
             )
           case 'datetime':

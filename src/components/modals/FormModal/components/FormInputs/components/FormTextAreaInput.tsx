@@ -1,15 +1,15 @@
-import { TextAreaInput } from '@lifeforge/ui/components/inputs'
 import {
   IFieldProps,
   ITextAreaInputFieldProps
-} from '@lifeforge/ui/interfaces/modal_interfaces'
+} from '@interfaces/modal_interfaces'
+
+import { TextAreaInput } from '@components/inputs'
 
 interface FormTextAreaInputProps<T> {
   field: IFieldProps<T> & ITextAreaInputFieldProps
   selectedData: string
   namespace: string
   handleChange: (value: string) => void
-  setQrScannerModalOpen: (id: string) => void
 }
 
 function FormTextAreaInput<T>({
