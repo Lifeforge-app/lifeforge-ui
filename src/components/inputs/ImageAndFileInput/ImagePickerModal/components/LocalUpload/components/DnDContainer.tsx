@@ -7,13 +7,36 @@ import { Button } from '@components/buttons'
 function DnDContainer({
   getRootProps,
   getInputProps,
-  isDragActive
+  isDragActive,
+  setPreview,
+  setFile
 }: {
   getRootProps: (props?: DropzoneRootProps) => DropzoneRootProps
   getInputProps: (props?: DropzoneInputProps) => DropzoneInputProps
   isDragActive: boolean
+  setPreview: (preview: string | null) => void
+  setFile: (file: File | string | null) => void
 }) {
   const { t } = useTranslation('common.misc')
+
+  const pasteFromClipboard = async () => {
+    try {
+      const clipboardItems = await navigator.clipboard.read()
+      const items = Array.from(clipboardItems)
+      const imageItem = items.find(item =>
+        item.types.some(type => type.startsWith('image/'))
+      )
+
+      if (imageItem) {
+        const blob = await imageItem.getType('image/png')
+        const file = new File([blob], 'pasted-image.png', { type: 'image/png' })
+        setFile(file)
+        setPreview(URL.createObjectURL(file))
+      }
+    } catch (error) {
+      console.error('Failed to paste from clipboard:', error)
+    }
+  }
 
   return (
     <div
@@ -30,11 +53,20 @@ function DnDContainer({
       </div>
       <Button
         as="label"
-        className="mt-4 cursor-pointer"
+        className="mt-4 min-w-1/2 cursor-pointer"
         icon="tabler:upload"
         variant="secondary"
       >
         upload
+      </Button>
+      <Button
+        className="mt-2 min-w-1/2 cursor-pointer"
+        icon="tabler:clipboard"
+        variant="tertiary"
+        tKey="dnd"
+        onClick={pasteFromClipboard}
+      >
+        paste from clipboard
       </Button>
     </div>
   )
