@@ -67,10 +67,13 @@ function DnDContainer({
       >
         upload
       </Button>
+      <div className="mt-4 text-center text-lg font-semibold tracking-widest text-bg-500 uppercase">
+        {t('dnd.or')}
+      </div>
       <Button
         className="mt-2 min-w-1/2 cursor-pointer"
         icon="tabler:clipboard"
-        variant="tertiary"
+        variant="secondary"
         tKey="dnd"
         namespace="common.misc"
         onClick={pasteFromClipboard}
