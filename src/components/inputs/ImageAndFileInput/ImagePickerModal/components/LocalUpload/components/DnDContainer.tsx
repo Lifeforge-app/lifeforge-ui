@@ -72,6 +72,7 @@ function DnDContainer({
         icon="tabler:clipboard"
         variant="tertiary"
         tKey="dnd"
+        namespace="common.misc"
         onClick={pasteFromClipboard}
       >
         paste from clipboard
