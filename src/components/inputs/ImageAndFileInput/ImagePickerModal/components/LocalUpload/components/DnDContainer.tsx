@@ -19,7 +19,15 @@ function DnDContainer({
 }) {
   const { t } = useTranslation('common.misc')
 
-  const pasteFromClipboard = async () => {
+  const pasteFromClipboard = async (e: React.MouseEvent) => {
+    if (!navigator.clipboard) {
+      console.error('Clipboard API not supported')
+      return
+    }
+
+    e.preventDefault()
+    e.stopPropagation()
+
     try {
       const clipboardItems = await navigator.clipboard.read()
       const items = Array.from(clipboardItems)
