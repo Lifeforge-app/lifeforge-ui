@@ -121,7 +121,7 @@ function DateInput({
             prev2Label: <Icon icon="tabler:chevrons-left" />,
             next2Label: <Icon icon="tabler:chevrons-right" />
           }}
-          className="mt-6 h-10 w-full rounded-lg border-none bg-transparent px-4 tracking-wider outline-hidden placeholder:text-transparent focus:outline-hidden focus:placeholder:text-bg-500"
+          className="mt-6 h-13 w-full rounded-lg border-none bg-transparent px-4 tracking-wider outline-hidden placeholder:text-transparent focus:outline-hidden focus:placeholder:text-bg-500"
           clearIcon={null}
           format={hasTime ? 'dd-MM-yyyy HH:mm' : 'dd-MM-yyyy'}
           portalContainer={
