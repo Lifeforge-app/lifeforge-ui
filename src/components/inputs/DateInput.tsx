@@ -27,7 +27,7 @@ interface DateInputProps {
   index?: number
   required?: boolean
   hasTime?: boolean
-  namespace: string
+  namespace: string | false
   disabled?: boolean
 }
 
@@ -47,7 +47,7 @@ function DateInput({
   disabled
 }: DateInputProps) {
   const FinalComponent = hasTime ? DateTimePicker : DatePicker
-  const { t } = useTranslation(namespace)
+  const { t } = useTranslation(namespace ? namespace : undefined)
   const { language } = useLifeforgeUIContext()
   const ref = useRef<HTMLInputElement | null>(null)
 
@@ -105,7 +105,16 @@ function DateInput({
       <div ref={ref} className="flex w-full items-center gap-2">
         <InputLabel
           active
-          label={t(`inputs.${_.camelCase(name)}`)}
+          label={
+            namespace !== false
+              ? t([
+                  ['inputs', _.camelCase(name), 'label']
+                    .filter(e => e)
+                    .join('.'),
+                  ['inputs', _.camelCase(name)].filter(e => e).join('.')
+                ])
+              : name
+          }
           required={required === true}
         />
         <FinalComponent
