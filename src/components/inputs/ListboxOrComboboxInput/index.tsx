@@ -90,7 +90,8 @@ function ListboxOrComboboxInput<T>(
               required={required === true}
             />
             <div className="relative mt-10 mb-3 flex min-h-[1.2rem] w-full items-center gap-2 rounded-lg pr-10 pl-5 text-left focus:outline-hidden">
-              {(!!value || props.customActive === true) && props.buttonContent}
+              {((value !== 0 && !!value) || props.customActive === true) &&
+                props.buttonContent}
             </div>
             <span className="pointer-events-none absolute inset-y-0 right-0 mt-1 mr-2 flex items-center pr-4">
               <Icon
