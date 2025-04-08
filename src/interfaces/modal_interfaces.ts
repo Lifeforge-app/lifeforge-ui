@@ -60,6 +60,12 @@ interface ILocationInputFieldProps {
   type: 'location'
 }
 
+interface IFormCheckboxFieldProps {
+  label: string
+  icon: string
+  type: 'checkbox'
+}
+
 type IFieldProps<T> = (
   | ITextInputFieldProps
   | ITextAreaInputFieldProps
@@ -69,6 +75,7 @@ type IFieldProps<T> = (
   | IIconInputFieldProps
   | IImageAndFileInputFieldProps
   | ILocationInputFieldProps
+  | IFormCheckboxFieldProps
 ) & {
   id: keyof T
   hidden?: boolean
@@ -91,5 +98,6 @@ export type {
   IColorInputFieldProps,
   IIconInputFieldProps,
   IImageAndFileInputFieldProps,
-  ILocationInputFieldProps
+  ILocationInputFieldProps,
+  IFormCheckboxFieldProps
 }

@@ -1,5 +1,6 @@
 import { IFieldProps } from '@interfaces/modal_interfaces'
 
+import FormCheckboxInput from './components/FormCheckboxInput'
 import FormColorInput from './components/FormColorInput'
 import FormDateInput from './components/FormDateInput'
 import FormFileInput from './components/FormFileInput'
@@ -37,6 +38,7 @@ function FormInputs<T>({
             image: string | File | null
             preview: string | null
           }
+        | boolean
     ) => {
       setData(prev => ({ ...prev, [field.id]: value }))
     }
@@ -127,6 +129,16 @@ function FormInputs<T>({
                 handleChange={handleChange(field)}
                 namespace={namespace}
                 selectedData={selectedData as string}
+              />
+            )
+          case 'checkbox':
+            return (
+              <FormCheckboxInput
+                key={field.id as string}
+                field={field as IFieldProps<T> & { type: 'checkbox' }}
+                handleChange={handleChange(field)}
+                namespace={namespace}
+                selectedData={selectedData as boolean}
               />
             )
           case 'file':
