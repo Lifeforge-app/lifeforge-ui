@@ -1,8 +1,8 @@
-import { Switch } from '@headlessui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
 
+import { Switch } from '@lifeforge/ui/components/buttons'
 import {
   IFieldProps,
   IFormCheckboxFieldProps
@@ -24,7 +24,7 @@ function FormCheckboxInput<T>({
   const { t } = useTranslation(namespace)
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between py-2">
       <div className="flex items-center gap-2">
         <Icon className="size-6" icon={field.icon} />
         <span className="text-lg">
