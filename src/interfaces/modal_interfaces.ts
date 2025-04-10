@@ -85,7 +85,10 @@ type IFieldProps<T> = (
 
 type IFormState = Record<
   string,
-  string | string[] | { image: File | string | null; preview: string | null }
+  | string
+  | string[]
+  | { image: File | string | null; preview: string | null }
+  | boolean
 >
 
 export type {

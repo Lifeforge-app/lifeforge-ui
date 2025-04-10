@@ -1,4 +1,4 @@
-import { IFieldProps } from '@interfaces/modal_interfaces'
+import { IFieldProps, IFormState } from '@interfaces/modal_interfaces'
 
 import FormCheckboxInput from './components/FormCheckboxInput'
 import FormColorInput from './components/FormColorInput'
@@ -30,16 +30,7 @@ function FormInputs<T>({
   setQrScannerModalOpen: (id: string) => void
 }) {
   const handleChange = (field: IFieldProps<T>) => {
-    return (
-      value:
-        | string
-        | string[]
-        | {
-            image: string | File | null
-            preview: string | null
-          }
-        | boolean
-    ) => {
+    return (value: IFormState[string]) => {
       setData(prev => ({ ...prev, [field.id]: value }))
     }
   }
