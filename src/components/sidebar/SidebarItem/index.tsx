@@ -201,10 +201,8 @@ function SidebarItem({
       {subsection !== undefined && (
         <SidebarItemSubsection
           name={name}
-          sidebarExpanded={sidebarExpanded}
           subsection={subsection}
           subsectionExpanded={subsectionExpanded}
-          toggleSidebar={toggleSidebar}
         />
       )}
     </>
