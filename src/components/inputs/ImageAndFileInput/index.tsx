@@ -4,9 +4,9 @@ import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
 import Zoom from 'react-medium-image-zoom'
 
-import useThemeColors from '@lifeforge/ui/hooks/useThemeColor'
-
 import { Button } from '@components/buttons'
+
+import useThemeColors from '@hooks/useThemeColor'
 
 function ImageAndFileInput({
   icon,

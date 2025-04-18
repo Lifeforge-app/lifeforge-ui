@@ -5,15 +5,30 @@
     "module": "NodeNext",
     "moduleResolution": "nodenext",
     "baseUrl": ".",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "paths": {
-      "@lifeforge/ui/*": ["./src/*"],
-      "@providers/*": ["./src/providers/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@constants/*": ["./src/constants/*"],
-      "@components/*": ["./src/components/*"],
-      "@interfaces/*": ["./src/interfaces/*"]
+      "@providers/*": [
+        "./src/providers/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@constants/*": [
+        "./src/constants/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@interfaces/*": [
+        "./src/interfaces/*"
+      ]
     },
     "declaration": true,
     "emitDeclarationOnly": false,
@@ -23,5 +38,7 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["./src/**/*"]
+  "include": [
+    "./src/**/*"
+  ]
 }

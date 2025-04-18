@@ -2,11 +2,12 @@ import { Icon } from '@iconify/react/dist/iconify.js'
 import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
 
-import { Switch } from '@lifeforge/ui/components/buttons'
 import {
   IFieldProps,
   IFormCheckboxFieldProps
-} from '@lifeforge/ui/interfaces/modal_interfaces'
+} from '@interfaces/modal_interfaces'
+
+import { Switch } from '@components/buttons'
 
 interface FormCheckboxInputProps<T> {
   field: IFieldProps<T> & IFormCheckboxFieldProps

@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { useSidebarState } from '@providers/SidebarStateProvider'
+import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import clsx from 'clsx'
 import _ from 'lodash'
 import { useCallback, useMemo } from 'react'
@@ -17,7 +17,7 @@ function SidebarSubsectionItem({
   name: string
   path: string
 }) {
-  const { sidebarExpanded, toggleSidebar } = useSidebarState()
+  const { sidebarExpanded, toggleSidebar } = useLifeforgeUIContext()
   const { t } = useTranslation('common.sidebar')
 
   const locationDependentStyles = useMemo(
@@ -34,7 +34,7 @@ function SidebarSubsectionItem({
 
   const handleClick = useCallback(() => {
     if (window.innerWidth < 1024) {
-      toggleSidebar()
+      toggleSidebar?.()
     }
   }, [])
 
@@ -42,7 +42,7 @@ function SidebarSubsectionItem({
     <Link
       key={subsectionName}
       className={clsx(
-        'hover:bg-bg-100/50 dark:hover:bg-bg-800/50 mx-4 flex w-full items-center gap-4 rounded-lg py-4 font-medium transition-all',
+        'mx-4 flex w-full items-center gap-4 rounded-lg py-4 font-medium transition-all hover:bg-bg-100/50 dark:hover:bg-bg-800/50',
         !sidebarExpanded ? 'justify-center' : '',
         sidebarExpanded ? 'pl-[3.8rem]' : 'px-2',
         locationDependentStyles
