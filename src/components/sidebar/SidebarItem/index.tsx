@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
 
 import SidebarCancelButton from './components/SidebarCancelButton'
@@ -119,32 +119,38 @@ function SidebarItem({
     [location.pathname, prefix, name]
   )
 
+  const handleNavigation = useCallback(() => {
+    if (onClick !== undefined) {
+      onClick()
+      return
+    }
+
+    if (isMainSidebarItem) {
+      setSubsectionExpanded(!subsectionExpanded)
+
+      if (subsection?.length) {
+        return
+      }
+
+      navigate(`./${prefix !== '' ? prefix + '/' : ''}${_.kebabCase(name)}`)
+    }
+
+    if (window.innerWidth < 1024) {
+      toggleSidebar?.()
+    }
+  }, [isMainSidebarItem, subsectionExpanded, subsection, prefix, name])
+
+  const handleToggleSubsection = useCallback(() => {
+    if (subsection !== undefined) {
+      setSubsectionExpanded(!subsectionExpanded)
+    }
+  }, [subsection, subsectionExpanded])
+
   return (
     <>
       <SidebarItemWrapper
         active={autoActive ? isLocationMatched : active}
-        onClick={() => {
-          if (onClick !== undefined) {
-            onClick()
-            return
-          }
-
-          if (isMainSidebarItem) {
-            setSubsectionExpanded(!subsectionExpanded)
-
-            if (subsection?.length) {
-              return
-            }
-
-            navigate(
-              `./${prefix !== '' ? prefix + '/' : ''}${_.kebabCase(name)}`
-            )
-          }
-
-          if (window.innerWidth < 1024) {
-            toggleSidebar?.()
-          }
-        }}
+        onClick={handleNavigation}
       >
         {onCollapseButtonClick && (
           <>
@@ -185,9 +191,7 @@ function SidebarItem({
         {sidebarExpanded && subsection !== undefined && (
           <SidebarItemSubsectionExpandIcon
             subsectionExpanded={subsectionExpanded}
-            toggleSubsection={() => {
-              setSubsectionExpanded(!subsectionExpanded)
-            }}
+            toggleSubsection={handleToggleSubsection}
           />
         )}
         {active && onCancelButtonClick !== undefined && (
