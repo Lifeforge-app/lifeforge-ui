@@ -79,9 +79,7 @@ function ModalHeader({
           icon="tabler:x"
           iconClassName="size-6"
           variant="plain"
-          onClick={() => {
-            onClose()
-          }}
+          onClick={onClose}
         />
       </div>
     </div>
