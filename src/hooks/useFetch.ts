@@ -30,7 +30,7 @@ function useFetch<T>(
       body: method === 'POST' ? JSON.stringify(body) : undefined,
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${cookieParse(document.cookie).token}`
+        Authorization: `Bearer ${cookieParse(document.cookie).session}`
       }
     })
       .then(async res => {
