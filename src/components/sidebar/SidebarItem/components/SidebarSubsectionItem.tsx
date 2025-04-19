@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import _ from 'lodash'
 import { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router'
+import { Link, useLocation } from 'react-router'
 
 function SidebarSubsectionItem({
   subsectionName,
@@ -17,6 +17,7 @@ function SidebarSubsectionItem({
   name: string
   path: string
 }) {
+  const location = useLocation()
   const { sidebarExpanded, toggleSidebar } = useLifeforgeUIContext()
   const { t } = useTranslation('common.sidebar')
 
@@ -29,7 +30,7 @@ function SidebarSubsectionItem({
           subsectionName === 'Dashboard'))
         ? 'bg-bg-200/30 shadow-custom dark:bg-bg-800'
         : 'text-bg-500',
-    [name, path, subsectionName]
+    [name, path, subsectionName, location.pathname]
   )
 
   const handleClick = useCallback(() => {
