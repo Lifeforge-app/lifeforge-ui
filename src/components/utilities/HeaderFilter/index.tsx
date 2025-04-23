@@ -26,7 +26,7 @@ function HeaderFilter({
       isColored?: boolean
     }
   >
-  values: Record<string, string>
+  values: Record<string, string | null>
   setValues: Record<string, (value: string | null) => void>
 }) {
   const { theme } = useThemeColors()
