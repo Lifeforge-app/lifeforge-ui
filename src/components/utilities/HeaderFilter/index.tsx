@@ -1,5 +1,4 @@
 import { useMemo } from 'react'
-import { useSearchParams } from 'react-router'
 
 import useThemeColors from '@hooks/useThemeColor'
 
@@ -8,7 +7,9 @@ import { rgbToHex } from '@utils/colors'
 import FilterChip from './components/HeaderFilterChip'
 
 function HeaderFilter({
-  items
+  items,
+  values,
+  setValues
 }: {
   items: Record<
     string,
@@ -25,8 +26,9 @@ function HeaderFilter({
       isColored?: boolean
     }
   >
+  values: Record<string, string>
+  setValues: Record<string, (value: string | null) => void>
 }) {
-  const [searchParams, setSearchParams] = useSearchParams()
   const { theme } = useThemeColors()
   const themeColorHex = useMemo(() => {
     if (theme.startsWith('#')) {
@@ -39,7 +41,7 @@ function HeaderFilter({
   if (
     !(
       Object.values(items).every(({ data }) => typeof data !== 'string') &&
-      Object.keys(items).some(query => Boolean(searchParams.get(query)))
+      Object.keys(items).some(query => Boolean(values[query]))
     )
   ) {
     return <></>
@@ -48,11 +50,9 @@ function HeaderFilter({
   return (
     <div className="mt-2 flex flex-wrap items-center gap-2">
       {Object.entries(items).map(([query, { data, isColored }]) => {
-        return typeof data !== 'string' && Boolean(searchParams.get(query))
+        return typeof data !== 'string' && Boolean(values[query])
           ? (() => {
-              const target = data.find(
-                item => item.id === searchParams.get(query)
-              )
+              const target = data.find(item => item.id === values[query])
               if (target === undefined) {
                 return null
               }
@@ -68,8 +68,7 @@ function HeaderFilter({
                   icon={target.icon ?? ''}
                   text={target.name ?? ''}
                   onRemove={() => {
-                    searchParams.delete(query)
-                    setSearchParams(searchParams)
+                    setValues[query](null)
                   }}
                 />
               )
