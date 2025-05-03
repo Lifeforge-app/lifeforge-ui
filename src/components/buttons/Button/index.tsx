@@ -1,5 +1,3 @@
-import { Icon } from '@iconify/react'
-import clsx from 'clsx'
 import _ from 'lodash'
 import { memo, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -7,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import useThemeColors from '@hooks/useThemeColor'
 
 import { generateClassName } from './buttonUtils'
+import ButtonIcon from './components/ButtonIcon'
 
 export interface ButtonProps {
   children?: React.ReactNode
@@ -39,13 +38,6 @@ const defaultProps = {
   namespace: 'common.buttons'
 }
 
-const renderIcon = (icon: string, loading: boolean, iconClassName?: string) => (
-  <Icon
-    className={clsx('size-5 shrink-0', iconClassName)}
-    icon={loading ? 'svg-spinners:180-ring' : icon}
-  />
-)
-
 function Button<C extends React.ElementType = 'button'>({
   as,
   children,
@@ -70,7 +62,7 @@ function Button<C extends React.ElementType = 'button'>({
     (e: React.MouseEvent<HTMLButtonElement>) => {
       if (onClick) onClick(e)
     },
-    [onClick]
+    []
   )
 
   return (
@@ -81,8 +73,14 @@ function Button<C extends React.ElementType = 'button'>({
       type="button"
       onClick={memoizedOnClick}
     >
-      {!finalProps.iconAtEnd &&
-        renderIcon(icon, finalProps.loading, finalProps.iconClassName)}
+      {!finalProps.iconAtEnd && (
+        <ButtonIcon
+          icon={icon}
+          disabled={finalProps.disabled}
+          loading={finalProps.loading}
+          iconClassName={finalProps.iconClassName}
+        />
+      )}
       {children && typeof children === 'string'
         ? t(
             [
@@ -94,8 +92,14 @@ function Button<C extends React.ElementType = 'button'>({
             finalProps.tProps
           )
         : children}
-      {finalProps.iconAtEnd &&
-        renderIcon(icon, finalProps.loading, finalProps.iconClassName)}
+      {finalProps.iconAtEnd && (
+        <ButtonIcon
+          icon={icon}
+          disabled={finalProps.disabled}
+          loading={finalProps.loading}
+          iconClassName={finalProps.iconClassName}
+        />
+      )}
     </Component>
   )
 }

@@ -75,7 +75,6 @@ export const Disabled: Story = {
     icon: 'tabler:arrow-right',
     children: 'Submit',
     tProps: {},
-    iconAtEnd: true,
     loading: false,
     disabled: true
   },

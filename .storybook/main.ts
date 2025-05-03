@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/react-vite'
-import tailwindcss from '@tailwindcss/vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 const config: StorybookConfig = {
@@ -15,7 +14,8 @@ const config: StorybookConfig = {
     options: {}
   },
   viteFinal: async config => {
-    config.plugins = [...(config.plugins ?? []), tsconfigPaths(), tailwindcss()]
+    config.plugins = [...(config.plugins ?? []), tsconfigPaths()]
+    config.plugins.push((await import('@tailwindcss/vite')).default())
     return {
       ...config
     }

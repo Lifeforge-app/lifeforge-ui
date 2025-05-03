@@ -139,7 +139,8 @@ const oklch2rgb = (lch: number[]) =>
 
 export function oklchToHex(oklch: string): string {
   const numbersInParentheses = oklch.match(/\(([^)]+)\)/)![1]
-  const [l, c, h] = numbersInParentheses.split(' ').map(x => parseFloat(x))
+  let [l, c, h] = numbersInParentheses.split(' ').map(x => parseFloat(x))
+  l /= 100
   const rgb = oklch2rgb([l, c, h]).map(x => Math.max(0, Math.min(1, x)))
   return rgbToHex(
     Math.round(rgb[0] * 255),
