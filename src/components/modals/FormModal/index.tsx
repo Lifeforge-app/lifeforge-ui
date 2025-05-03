@@ -210,10 +210,10 @@ function FormModal<T extends IFormState, U extends RecordModel>({
     [entryCreateMutation, entryUpdateMutation, getFinalData, onSubmit, openType]
   )
 
-  const memoizedOnSubmitButtonClick = useCallback(
-    async () => onSubmitButtonClick(data),
-    [data]
-  )
+  const memoizedOnSubmitButtonClick = useCallback(async () => {
+    console.log(data)
+    onSubmitButtonClick(data)
+  }, [data])
 
   return (
     <>
