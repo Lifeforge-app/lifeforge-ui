@@ -173,6 +173,8 @@ function FormModal<T extends IFormState, U extends RecordModel>({
       )
     })
 
+    console.log(data)
+
     if (missingFields.length) {
       toast.error(
         `The following fields are required: ${missingFields
