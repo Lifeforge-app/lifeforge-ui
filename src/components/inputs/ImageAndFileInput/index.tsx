@@ -6,6 +6,8 @@ import Zoom from 'react-medium-image-zoom'
 
 import { Button } from '@components/buttons'
 
+import useThemeColors from '@hooks/useThemeColor'
+
 function ImageAndFileInput({
   icon,
   name,
@@ -33,12 +35,14 @@ function ImageAndFileInput({
   namespace: string
   disabled?: boolean
 }) {
+  const { componentBgLighter } = useThemeColors()
   const { t } = useTranslation([namespace, 'common.buttons'])
 
   return (
     <div
       className={clsx(
-        'flex w-full flex-col rounded-md bg-bg-200/50 p-6 shadow-custom dark:bg-bg-800/50',
+        'flex w-full flex-col rounded-md p-6 shadow-custom',
+        componentBgLighter,
         disabled ? 'pointer-events-none! opacity-50' : 'cursor-pointer'
       )}
     >
@@ -90,13 +94,13 @@ function ImageAndFileInput({
         <div className="mt-6 flex flex-col items-center gap-3">
           <Button
             className="w-full"
-            icon="tabler:upload"
+            icon="tabler:photo"
             variant="secondary"
             onClick={() => {
               setImagePickerModalOpen(true)
             }}
           >
-            {t('common.buttons:upload')}
+            {t('common.buttons:select')}
           </Button>
           <p className="text-xs text-bg-500">{reminderText}</p>
         </div>

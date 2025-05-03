@@ -1,14 +1,11 @@
-import { Icon } from '@iconify/react'
+import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import clsx from 'clsx'
-import _ from 'lodash'
-import { useTranslation } from 'react-i18next'
-import { Link, useLocation } from 'react-router'
+
+import SidebarSubsectionItem from './SidebarSubsectionItem'
 
 function SidebarItemSubsection({
   subsection,
   name,
-  sidebarExpanded,
-  toggleSidebar,
   subsectionExpanded
 }: {
   subsection: {
@@ -17,12 +14,9 @@ function SidebarItemSubsection({
     path: string
   }[]
   name: string
-  sidebarExpanded: boolean
-  toggleSidebar: () => void
   subsectionExpanded: boolean
 }) {
-  const { t } = useTranslation('common.sidebar')
-  const location = useLocation()
+  const { sidebarExpanded } = useLifeforgeUIContext()
 
   return (
     <li
@@ -38,46 +32,13 @@ function SidebarItemSubsection({
         )}
       >
         {subsection.map(({ name: subsectionName, icon, path }) => (
-          <Link
+          <SidebarSubsectionItem
             key={subsectionName}
-            className={clsx(
-              'mx-4 flex w-full items-center gap-4 rounded-lg py-4 font-medium transition-all hover:bg-bg-100/50 dark:hover:bg-bg-800/50',
-              !sidebarExpanded ? 'justify-center' : '',
-              sidebarExpanded ? 'pl-[3.8rem]' : 'px-2',
-              location.pathname.split('/').slice(1)[0] === _.kebabCase(name) &&
-                (location.pathname.split('/').slice(1)[1] === path ||
-                  (location.pathname
-                    .replace(_.kebabCase(name), '')
-                    .replace(/\//g, '') === '' &&
-                    subsectionName === 'Dashboard'))
-                ? 'bg-bg-200/30 shadow-custom dark:bg-bg-800'
-                : 'text-bg-500'
-            )}
-            to={`./${_.kebabCase(name)}/${path}`}
-            onClick={() => {
-              if (window.innerWidth < 1024) {
-                toggleSidebar()
-              }
-            }}
-          >
-            <div className="flex size-7 items-center justify-center">
-              {typeof icon === 'string' ? (
-                <Icon className="size-6" icon={icon} />
-              ) : (
-                icon
-              )}
-            </div>
-
-            {sidebarExpanded && (
-              <span className="w-full truncate pr-4">
-                {t(
-                  `apps.${_.camelCase(name)}.subsections.${_.camelCase(
-                    subsectionName
-                  )}`
-                )}{' '}
-              </span>
-            )}
-          </Link>
+            icon={icon}
+            name={name}
+            path={path}
+            subsectionName={subsectionName}
+          />
         ))}
       </ul>
     </li>

@@ -1,6 +1,7 @@
 import { Icon } from '@iconify/react'
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import clsx from 'clsx'
+import dayjs from 'dayjs'
 import _ from 'lodash'
 import { useRef } from 'react'
 import DatePicker from 'react-date-picker'
@@ -26,7 +27,7 @@ interface DateInputProps {
   index?: number
   required?: boolean
   hasTime?: boolean
-  namespace: string
+  namespace: string | false
   disabled?: boolean
 }
 
@@ -46,7 +47,7 @@ function DateInput({
   disabled
 }: DateInputProps) {
   const FinalComponent = hasTime ? DateTimePicker : DatePicker
-  const { t } = useTranslation(namespace)
+  const { t } = useTranslation(namespace ? namespace : undefined)
   const { language } = useLifeforgeUIContext()
   const ref = useRef<HTMLInputElement | null>(null)
 
@@ -104,7 +105,16 @@ function DateInput({
       <div ref={ref} className="flex w-full items-center gap-2">
         <InputLabel
           active
-          label={t(`inputs.${_.camelCase(name)}`)}
+          label={
+            namespace !== false
+              ? t([
+                  ['inputs', _.camelCase(name), 'label']
+                    .filter(e => e)
+                    .join('.'),
+                  ['inputs', _.camelCase(name)].filter(e => e).join('.')
+                ])
+              : name
+          }
           required={required === true}
         />
         <FinalComponent
@@ -120,7 +130,7 @@ function DateInput({
             prev2Label: <Icon icon="tabler:chevrons-left" />,
             next2Label: <Icon icon="tabler:chevrons-right" />
           }}
-          className="mt-6 h-10 w-full rounded-lg border-none bg-transparent px-4 tracking-wider outline-hidden placeholder:text-transparent focus:outline-hidden focus:placeholder:text-bg-500"
+          className="mt-6 h-13 w-full rounded-lg border-none bg-transparent px-4 tracking-wider outline-hidden placeholder:text-transparent focus:outline-hidden focus:placeholder:text-bg-500"
           clearIcon={null}
           format={hasTime ? 'dd-MM-yyyy HH:mm' : 'dd-MM-yyyy'}
           portalContainer={
@@ -129,7 +139,7 @@ function DateInput({
           value={date}
           onCalendarOpen={updateCalendarLocation}
           onChange={(newDate: Value) => {
-            setDate(newDate?.toString() ?? '')
+            setDate(dayjs(newDate as Date).toISOString())
           }}
           onClockOpen={updateCalendarLocation}
         />

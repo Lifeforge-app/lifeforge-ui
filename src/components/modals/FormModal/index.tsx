@@ -20,6 +20,7 @@ import SubmitButton from './components/SubmitButton'
 function FormModal<T extends IFormState, U extends RecordModel>({
   // fields stuff
   fields,
+  additionalFields,
   data,
   setData,
 
@@ -56,6 +57,7 @@ function FormModal<T extends IFormState, U extends RecordModel>({
 }: {
   modalRef?: React.RefObject<HTMLDivElement | null>
   fields: IFieldProps<T>[]
+  additionalFields?: React.ReactNode
   data: T
   setData: React.Dispatch<React.SetStateAction<T>>
   title: string
@@ -104,7 +106,9 @@ function FormModal<T extends IFormState, U extends RecordModel>({
         if (customUpdateDataList?.create) {
           customUpdateDataList.create(newData)
         } else {
-          queryClient.setQueryData(queryKey ?? [], (old: U[]) => {
+          queryClient.setQueryData<U[]>(queryKey ?? [], old => {
+            if (!old) return []
+
             return [...old, newData].sort((a, b) => {
               if (sortBy) {
                 if (sortMode === 'asc') {
@@ -132,7 +136,9 @@ function FormModal<T extends IFormState, U extends RecordModel>({
         if (customUpdateDataList?.update) {
           customUpdateDataList.update(newData)
         } else {
-          queryClient.setQueryData(queryKey ?? [], (old: U[]) => {
+          queryClient.setQueryData<U[]>(queryKey ?? [], old => {
+            if (!old) return []
+
             return old
               .map(entry => {
                 if (entry.id === newData.id) {
@@ -225,6 +231,7 @@ function FormModal<T extends IFormState, U extends RecordModel>({
               setImagePickerModalOpen={setImagePickerModalOpen}
               setQrScannerModalOpen={setQRCodeScannerModalOpen}
             />
+            {additionalFields}
             <SubmitButton
               openType={openType}
               submitButtonProps={submitButtonProps}

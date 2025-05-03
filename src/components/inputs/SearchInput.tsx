@@ -5,6 +5,8 @@ import _ from 'lodash'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { Button } from '../buttons'
+
 function SearchInput({
   searchQuery,
   setSearchQuery,
@@ -15,6 +17,7 @@ function SearchInput({
   onFilterIconClick,
   filterAmount,
   sideButtonIcon,
+  sideButtonLoading,
   onSideButtonClick,
   className,
   namespace,
@@ -29,6 +32,7 @@ function SearchInput({
   onFilterIconClick?: () => void
   filterAmount?: number
   sideButtonIcon?: string
+  sideButtonLoading?: boolean
   onSideButtonClick?: () => void
   className?: string
   namespace: string
@@ -94,12 +98,13 @@ function SearchInput({
         </button>
       )}
       {sideButtonIcon !== undefined && onSideButtonClick !== undefined && (
-        <button
-          className="flex items-center gap-1 rounded-lg p-2 text-bg-500 transition-all hover:bg-bg-200 hover:text-bg-900 dark:hover:bg-bg-700/50 dark:hover:text-bg-100"
+        <Button
+          icon={sideButtonIcon}
+          loading={sideButtonLoading}
+          className="p-2!"
+          variant="plain"
           onClick={onSideButtonClick}
-        >
-          <Icon className="text-xl" icon={sideButtonIcon} />
-        </button>
+        />
       )}
     </search>
   )

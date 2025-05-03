@@ -50,6 +50,8 @@ function LocalUpload({
       getInputProps={getInputProps}
       getRootProps={getRootProps}
       isDragActive={isDragActive}
+      setPreview={setPreview}
+      setFile={setFile}
     />
   ) : (
     <PreviewContainer

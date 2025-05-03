@@ -79,7 +79,19 @@ function TextAreaInput({
           }}
           onKeyDown={e => {
             if (e.key === 'Enter') {
-              setValue(value + '\n')
+              const cursorPosition = e.currentTarget.selectionStart
+              const text = e.currentTarget.value
+              const newText =
+                text.slice(0, cursorPosition) +
+                '\n' +
+                text.slice(cursorPosition)
+              setValue(newText)
+              e.currentTarget.value = newText
+              e.currentTarget.setSelectionRange(
+                cursorPosition + 1,
+                cursorPosition + 1
+              )
+              e.preventDefault()
             }
           }}
         />

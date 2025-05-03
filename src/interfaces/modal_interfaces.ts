@@ -7,6 +7,13 @@ interface ITextInputFieldProps {
   qrScanner?: boolean
 }
 
+interface ITextAreaInputFieldProps {
+  label: string
+  icon: string
+  type: 'textarea'
+  placeholder: string
+}
+
 interface IDateInputFieldProps {
   label: string
   icon: string
@@ -44,6 +51,8 @@ interface IImageAndFileInputFieldProps {
   label: string
   type: 'file'
   onFileRemoved?: () => void
+  enableAIImageGeneration?: boolean
+  defaultImageGenerationPrompt?: string
 }
 
 interface ILocationInputFieldProps {
@@ -51,14 +60,22 @@ interface ILocationInputFieldProps {
   type: 'location'
 }
 
+interface IFormCheckboxFieldProps {
+  label: string
+  icon: string
+  type: 'checkbox'
+}
+
 type IFieldProps<T> = (
   | ITextInputFieldProps
+  | ITextAreaInputFieldProps
   | IDateInputFieldProps
   | IListboxInputFieldProps
   | IColorInputFieldProps
   | IIconInputFieldProps
   | IImageAndFileInputFieldProps
   | ILocationInputFieldProps
+  | IFormCheckboxFieldProps
 ) & {
   id: keyof T
   hidden?: boolean
@@ -68,17 +85,22 @@ type IFieldProps<T> = (
 
 type IFormState = Record<
   string,
-  string | string[] | { image: File | string | null; preview: string | null }
+  | string
+  | string[]
+  | { image: File | string | null; preview: string | null }
+  | boolean
 >
 
 export type {
   IFieldProps,
   IFormState,
   ITextInputFieldProps,
+  ITextAreaInputFieldProps,
   IDateInputFieldProps,
   IListboxInputFieldProps,
   IColorInputFieldProps,
   IIconInputFieldProps,
   IImageAndFileInputFieldProps,
-  ILocationInputFieldProps
+  ILocationInputFieldProps,
+  IFormCheckboxFieldProps
 }

@@ -1,11 +1,13 @@
-import { IFieldProps } from '@interfaces/modal_interfaces'
+import { IFieldProps, IFormState } from '@interfaces/modal_interfaces'
 
+import FormCheckboxInput from './components/FormCheckboxInput'
 import FormColorInput from './components/FormColorInput'
 import FormDateInput from './components/FormDateInput'
 import FormFileInput from './components/FormFileInput'
 import FormIconInput from './components/FormIconInput'
 import FormListboxInput from './components/FormListboxInput'
 import FormLocationInput from './components/FormLocationInput'
+import FormTextAreaInput from './components/FormTextAreaInput'
 import FormTextInput from './components/FormTextInput'
 
 function FormInputs<T>({
@@ -28,15 +30,7 @@ function FormInputs<T>({
   setQrScannerModalOpen: (id: string) => void
 }) {
   const handleChange = (field: IFieldProps<T>) => {
-    return (
-      value:
-        | string
-        | string[]
-        | {
-            image: string | File | null
-            preview: string | null
-          }
-    ) => {
+    return (value: IFormState[string]) => {
       setData(prev => ({ ...prev, [field.id]: value }))
     }
   }
@@ -60,6 +54,16 @@ function FormInputs<T>({
                 namespace={namespace}
                 selectedData={selectedData as string}
                 setQrScannerModalOpen={setQrScannerModalOpen}
+              />
+            )
+          case 'textarea':
+            return (
+              <FormTextAreaInput
+                key={field.id as string}
+                field={field as IFieldProps<T> & { type: 'textarea' }}
+                handleChange={handleChange(field)}
+                namespace={namespace}
+                selectedData={selectedData as string}
               />
             )
           case 'datetime':
@@ -116,6 +120,16 @@ function FormInputs<T>({
                 handleChange={handleChange(field)}
                 namespace={namespace}
                 selectedData={selectedData as string}
+              />
+            )
+          case 'checkbox':
+            return (
+              <FormCheckboxInput
+                key={field.id as string}
+                field={field as IFieldProps<T> & { type: 'checkbox' }}
+                handleChange={handleChange(field)}
+                namespace={namespace}
+                selectedData={selectedData as boolean}
               />
             )
           case 'file':

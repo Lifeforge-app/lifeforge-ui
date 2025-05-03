@@ -59,7 +59,7 @@ function InputBox({
         }}
         autoComplete={noAutoComplete ? 'false' : 'true'}
         className={clsx(
-          'mt-6 h-8 w-full rounded-lg bg-transparent p-6 pl-4 tracking-wider caret-custom-500 placeholder:text-transparent focus:outline-hidden focus:placeholder:text-bg-500',
+          'mt-6 h-13 w-full rounded-lg bg-transparent p-6 pl-4 tracking-wider caret-custom-500 placeholder:text-transparent focus:outline-hidden focus:placeholder:text-bg-500',
           className
         )}
         disabled={disabled}

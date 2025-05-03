@@ -41,7 +41,7 @@ function ModuleHeader({
   const { toggleSidebar, sidebarExpanded } = useLifeforgeUIContext()
 
   return (
-    <header className="z-9980 flex-between flex w-full min-w-0 gap-8">
+    <header className="z-80 flex-between flex w-full min-w-0 gap-8">
       <div className="flex w-full min-w-0 items-center gap-2">
         {!sidebarExpanded && (
           <Button

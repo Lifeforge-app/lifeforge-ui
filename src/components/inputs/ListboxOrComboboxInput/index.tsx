@@ -1,6 +1,7 @@
 import { ComboboxInput, ListboxButton } from '@headlessui/react'
 import { Icon } from '@iconify/react'
 import _ from 'lodash'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import InputIcon from '../shared/InputIcon'
@@ -54,6 +55,21 @@ function ListboxOrComboboxInput<T>(
     tKey = ''
   } = props
   const { t } = useTranslation(namespace ? namespace : undefined)
+  const isActive = useMemo(() => {
+    if (typeof customActive === 'boolean') {
+      return customActive
+    }
+
+    if (Array.isArray(value)) {
+      return value.length > 0
+    }
+
+    if (typeof value === 'number') {
+      return true
+    }
+
+    return !!value
+  }, [value, customActive])
 
   switch (type) {
     case 'listbox':
@@ -68,13 +84,13 @@ function ListboxOrComboboxInput<T>(
         >
           <ListboxButton className="group flex w-full min-w-64 items-center pl-6">
             <InputIcon
-              active={!!value || customActive === true}
+              active={isActive}
               icon={icon}
               listboxOrCombobox="listbox"
             />
             <InputLabel
               isListboxOrCombobox
-              active={!!value || customActive === true}
+              active={isActive}
               label={t(
                 namespace !== false
                   ? t([
@@ -90,12 +106,12 @@ function ListboxOrComboboxInput<T>(
               required={required === true}
             />
             <div className="relative mt-10 mb-3 flex min-h-[1.2rem] w-full items-center gap-2 rounded-lg pr-10 pl-5 text-left focus:outline-hidden">
-              {(!!value || props.customActive === true) && props.buttonContent}
+              {isActive && props.buttonContent}
             </div>
             <span className="pointer-events-none absolute inset-y-0 right-0 mt-1 mr-2 flex items-center pr-4">
               <Icon
-                className="size-5 text-zinc-500"
-                icon="tabler:chevron-down"
+                className="size-6 text-zinc-500"
+                icon="heroicons:chevron-up-down-16-solid"
               />
             </span>
           </ListboxButton>

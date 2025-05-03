@@ -6,10 +6,6 @@ interface ApiResponse<T> {
   message?: string
 }
 
-interface CookieData {
-  token?: string
-}
-
 function getRequestBody(
   body: BodyInit | Record<string, unknown>,
   isJSON: boolean
@@ -40,8 +36,8 @@ export default async function fetchAPI<T>(
       body instanceof Blob
     )
 
-  const cookies = cookieParse(document.cookie) as CookieData
-  const token = cookies.token ?? ''
+  const cookies = cookieParse(document.cookie)
+  const token = cookies.session ?? ''
 
   try {
     const url = new URL(endpoint, apiHost)

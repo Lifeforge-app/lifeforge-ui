@@ -1,7 +1,7 @@
 {
   "name": "@lifeforge/ui",
   "description": "LifeForge UI component library",
-  "version": "0.25.12-46",
+  "version": "0.25.17-6",
   "moduleResolution": "node",
   "sideEffects": false,
   "scripts": {
@@ -70,7 +70,9 @@
     "clsx": "^2.1.1",
     "color-sorter": "^6.2.0",
     "crypto-js": "^4.2.0",
+    "dayjs": "^1.11.13",
     "file-type-mime": "^0.4.6",
+    "i18next-http-backend": "^3.0.2",
     "javascript-color-gradient": "^2.5.0",
     "lodash": "^4.17.21",
     "pocketbase": "^0.25.2",

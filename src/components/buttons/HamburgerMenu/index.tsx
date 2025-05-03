@@ -8,7 +8,7 @@ import {
 } from '@headlessui/react'
 import clsx from 'clsx'
 import { AnchorProps } from 'node_modules/@headlessui/react/dist/internal/floating'
-import { useState } from 'react'
+import { useCallback } from 'react'
 
 import Button from '../Button'
 
@@ -30,7 +30,15 @@ interface MenuProps {
 function HamburgerMenu(props: MenuProps) {
   const { children, anchor, classNames, customIcon, onClick, onClose } = props
 
-  const [isOpen, setIsOpen] = useState(false)
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation()
+      if (onClick !== undefined) {
+        onClick(e)
+      }
+    },
+    [onClick]
+  )
 
   return (
     <Menu as="div" className={classNames?.wrapper}>
@@ -40,26 +48,16 @@ function HamburgerMenu(props: MenuProps) {
         icon={customIcon ?? 'tabler:dots-vertical'}
         iconClassName={classNames?.icon}
         variant="plain"
-        onClick={e => {
-          e.stopPropagation()
-          setIsOpen(!isOpen)
-          if (onClick !== undefined) {
-            onClick(e)
-          }
-        }}
+        onClick={handleClick}
       />
       <Transition
-        afterLeave={() => {
-          if (onClose !== undefined) {
-            onClose()
-          }
-        }}
         enter="transition-opacity duration-200"
         enterFrom="opacity-0"
         enterTo="opacity-100"
         leave="transition-opacity duration-150"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
+        afterLeave={onClose}
       >
         <TransitionChild>
           <MenuItems

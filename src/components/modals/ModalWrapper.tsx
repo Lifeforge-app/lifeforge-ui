@@ -23,7 +23,7 @@ function ModalWrapper({
       className={clsx(
         'fixed top-0 left-0 h-dvh w-full overscroll-contain bg-black/10 backdrop-blur-xs transition-opacity ease-linear dark:bg-bg-950/40',
         isOpen
-          ? 'z-9990 opacity-100'
+          ? 'z-9992 opacity-100'
           : 'z-[-1] opacity-0 [transition:z-index_0.1s_linear_0.5s,opacity_0.1s_linear_0.1s]'
       )}
     >
