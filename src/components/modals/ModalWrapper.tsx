@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { createPortal } from 'react-dom'
 
 function ModalWrapper({
   isOpen,
@@ -17,7 +18,7 @@ function ModalWrapper({
   className?: string
   modalRef?: React.RefObject<HTMLDivElement | null>
 }) {
-  return (
+  return createPortal(
     <div
       ref={modalRef}
       className={clsx(
@@ -41,7 +42,8 @@ function ModalWrapper({
       >
         {children}
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
