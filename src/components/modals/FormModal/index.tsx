@@ -162,57 +162,53 @@ function FormModal<T extends IFormState, U extends RecordModel>({
     }
   )
 
-  const onSubmitButtonClick = useCallback(async () => {
-    const requiredFields = fields.filter(field => field.required)
-    const missingFields = requiredFields.filter(field => {
-      const value = data[field.id]
-      return (
-        !value ||
-        (typeof value === 'string' && !value.trim()) ||
-        (typeof value === 'object' && !Array.isArray(value) && !value.image)
-      )
-    })
+  const onSubmitButtonClick = useCallback(
+    async (data: T) => {
+      const requiredFields = fields.filter(field => field.required)
+      const missingFields = requiredFields.filter(field => {
+        const value = data[field.id]
+        return (
+          !value ||
+          (typeof value === 'string' && !value.trim()) ||
+          (typeof value === 'object' && !Array.isArray(value) && !value.image)
+        )
+      })
 
-    if (missingFields.length) {
-      toast.error(
-        `The following fields are required: ${missingFields
-          .map(field => field.label)
-          .join(', ')}`
-      )
-      return
-    }
+      if (missingFields.length) {
+        toast.error(
+          `The following fields are required: ${missingFields
+            .map(field => field.label)
+            .join(', ')}`
+        )
+        return
+      }
 
-    setSubmitLoading(true)
+      setSubmitLoading(true)
 
-    const finalData = Object.fromEntries(
-      Object.entries(getFinalData ? await getFinalData(data) : data).map(
-        ([key, value]) => {
-          if (typeof value === 'object' && 'image' in (value ?? {})) {
-            return [key, (value as { image: string | File | null }).image]
+      const finalData = Object.fromEntries(
+        Object.entries(getFinalData ? await getFinalData(data) : data).map(
+          ([key, value]) => {
+            if (typeof value === 'object' && 'image' in (value ?? {})) {
+              return [key, (value as { image: string | File | null }).image]
+            }
+            return JSON.parse(JSON.stringify([key, value]))
           }
-          return JSON.parse(JSON.stringify([key, value]))
-        }
+        )
       )
-    )
 
-    if (openType === 'create') {
-      entryCreateMutation.mutate(finalData as Partial<U>)
-    } else if (openType === 'update') {
-      entryUpdateMutation.mutate(finalData as Partial<U>)
-    }
+      if (openType === 'create') {
+        entryCreateMutation.mutate(finalData as Partial<U>)
+      } else if (openType === 'update') {
+        entryUpdateMutation.mutate(finalData as Partial<U>)
+      }
 
-    if (onSubmit) {
-      await onSubmit()
-      setSubmitLoading(false)
-    }
-  }, [
-    data,
-    entryCreateMutation,
-    entryUpdateMutation,
-    getFinalData,
-    onSubmit,
-    openType
-  ])
+      if (onSubmit) {
+        await onSubmit()
+        setSubmitLoading(false)
+      }
+    },
+    [entryCreateMutation, entryUpdateMutation, getFinalData, onSubmit, openType]
+  )
 
   return (
     <>
@@ -243,7 +239,7 @@ function FormModal<T extends IFormState, U extends RecordModel>({
               openType={openType}
               submitButtonProps={submitButtonProps}
               submitLoading={submitLoading}
-              onSubmitButtonClick={onSubmitButtonClick}
+              onSubmitButtonClick={async () => onSubmitButtonClick(data)}
             />
           </>
         ) : (
