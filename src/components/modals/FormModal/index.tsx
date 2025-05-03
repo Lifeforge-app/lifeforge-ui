@@ -1,7 +1,7 @@
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import { useQueryClient } from '@tanstack/react-query'
 import type { RecordModel } from 'pocketbase'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import type { IFieldProps, IFormState } from '@interfaces/modal_interfaces'
@@ -162,9 +162,7 @@ function FormModal<T extends IFormState, U extends RecordModel>({
     }
   )
 
-  console.log(data)
-
-  async function onSubmitButtonClick(): Promise<void> {
+  const onSubmitButtonClick = useCallback(async () => {
     const requiredFields = fields.filter(field => field.required)
     const missingFields = requiredFields.filter(field => {
       const value = data[field.id]
@@ -207,7 +205,14 @@ function FormModal<T extends IFormState, U extends RecordModel>({
       await onSubmit()
       setSubmitLoading(false)
     }
-  }
+  }, [
+    data,
+    entryCreateMutation,
+    entryUpdateMutation,
+    getFinalData,
+    onSubmit,
+    openType
+  ])
 
   return (
     <>
