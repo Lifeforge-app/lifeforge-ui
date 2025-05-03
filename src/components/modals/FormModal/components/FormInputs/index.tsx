@@ -1,3 +1,5 @@
+import { useCallback } from 'react'
+
 import { IFieldProps, IFormState } from '@interfaces/modal_interfaces'
 
 import FormCheckboxInput from './components/FormCheckboxInput'
@@ -29,11 +31,11 @@ function FormInputs<T>({
   setImagePickerModalOpen: (id: string) => void
   setQrScannerModalOpen: (id: string) => void
 }) {
-  const handleChange = (field: IFieldProps<T>) => {
+  const handleChange = useCallback((field: IFieldProps<T>) => {
     return (value: IFormState[string]) => {
       setData(prev => ({ ...prev, [field.id]: value }))
     }
-  }
+  }, [])
 
   return (
     <div className="space-y-4">

@@ -161,10 +161,8 @@ function FormModal<T extends IFormState, U extends RecordModel>({
       }
     }
   )
-  console.log(data)
 
-  async function onSubmitButtonClick(): Promise<void> {
-    console.log(data)
+  async function onSubmitButtonClick(data: T): Promise<void> {
     const requiredFields = fields.filter(field => field.required)
     const missingFields = requiredFields.filter(field => {
       const value = data[field.id]
@@ -238,7 +236,9 @@ function FormModal<T extends IFormState, U extends RecordModel>({
               openType={openType}
               submitButtonProps={submitButtonProps}
               submitLoading={submitLoading}
-              onSubmitButtonClick={onSubmitButtonClick}
+              onSubmitButtonClick={async () => {
+                onSubmitButtonClick(data)
+              }}
             />
           </>
         ) : (
