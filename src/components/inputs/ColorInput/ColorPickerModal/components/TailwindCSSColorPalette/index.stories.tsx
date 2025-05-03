@@ -15,6 +15,6 @@ export const Default: Story = {
     isOpen: true,
     onClose: () => {},
     color: 'color',
-    setColor: {}
+    setColor: () => {}
   }
 }
