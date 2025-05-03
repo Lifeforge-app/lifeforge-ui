@@ -16,7 +16,6 @@ function ColorItem({
   selected: string
   onSelect: (color: string) => void
 }) {
-  console.log(value)
   const colorHex = useMemo(() => oklchToHex(value), [value])
 
   return (
