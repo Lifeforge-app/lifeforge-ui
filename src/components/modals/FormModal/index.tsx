@@ -210,6 +210,11 @@ function FormModal<T extends IFormState, U extends RecordModel>({
     [entryCreateMutation, entryUpdateMutation, getFinalData, onSubmit, openType]
   )
 
+  const memoizedOnSubmitButtonClick = useCallback(
+    async () => onSubmitButtonClick(data),
+    [data]
+  )
+
   return (
     <>
       <ModalWrapper isOpen={isOpen} minWidth="50vw" modalRef={modalRef}>
@@ -239,7 +244,7 @@ function FormModal<T extends IFormState, U extends RecordModel>({
               openType={openType}
               submitButtonProps={submitButtonProps}
               submitLoading={submitLoading}
-              onSubmitButtonClick={async () => onSubmitButtonClick(data)}
+              onSubmitButtonClick={memoizedOnSubmitButtonClick}
             />
           </>
         ) : (
