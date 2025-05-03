@@ -28,7 +28,7 @@ interface MenuProps {
 }
 
 function HamburgerMenu(props: MenuProps) {
-  const { children, anchor, classNames, customIcon, onClick } = props
+  const { children, anchor, classNames, customIcon, onClick, onClose } = props
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -57,6 +57,7 @@ function HamburgerMenu(props: MenuProps) {
         leave="transition-opacity duration-150"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
+        afterLeave={onClose}
       >
         <TransitionChild>
           <MenuItems
