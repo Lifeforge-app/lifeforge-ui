@@ -1,7 +1,7 @@
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import { useQueryClient } from '@tanstack/react-query'
 import type { RecordModel } from 'pocketbase'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { toast } from 'react-toastify'
 
 import type { IFieldProps, IFormState } from '@interfaces/modal_interfaces'
@@ -161,59 +161,53 @@ function FormModal<T extends IFormState, U extends RecordModel>({
       }
     }
   )
+  console.log(data)
 
-  const onSubmitButtonClick = useCallback(
-    async (data: T) => {
-      const requiredFields = fields.filter(field => field.required)
-      const missingFields = requiredFields.filter(field => {
-        const value = data[field.id]
-        return (
-          !value ||
-          (typeof value === 'string' && !value.trim()) ||
-          (typeof value === 'object' && !Array.isArray(value) && !value.image)
-        )
-      })
-
-      if (missingFields.length) {
-        toast.error(
-          `The following fields are required: ${missingFields
-            .map(field => field.label)
-            .join(', ')}`
-        )
-        return
-      }
-
-      setSubmitLoading(true)
-
-      const finalData = Object.fromEntries(
-        Object.entries(getFinalData ? await getFinalData(data) : data).map(
-          ([key, value]) => {
-            if (typeof value === 'object' && 'image' in (value ?? {})) {
-              return [key, (value as { image: string | File | null }).image]
-            }
-            return JSON.parse(JSON.stringify([key, value]))
-          }
-        )
-      )
-
-      if (openType === 'create') {
-        entryCreateMutation.mutate(finalData as Partial<U>)
-      } else if (openType === 'update') {
-        entryUpdateMutation.mutate(finalData as Partial<U>)
-      }
-
-      if (onSubmit) {
-        await onSubmit()
-        setSubmitLoading(false)
-      }
-    },
-    [entryCreateMutation, entryUpdateMutation, getFinalData, onSubmit, openType]
-  )
-
-  const memoizedOnSubmitButtonClick = useCallback(async () => {
+  async function onSubmitButtonClick(): Promise<void> {
     console.log(data)
-    onSubmitButtonClick(data)
-  }, [data])
+    const requiredFields = fields.filter(field => field.required)
+    const missingFields = requiredFields.filter(field => {
+      const value = data[field.id]
+      return (
+        !value ||
+        (typeof value === 'string' && !value.trim()) ||
+        (typeof value === 'object' && !Array.isArray(value) && !value.image)
+      )
+    })
+
+    if (missingFields.length) {
+      toast.error(
+        `The following fields are required: ${missingFields
+          .map(field => field.label)
+          .join(', ')}`
+      )
+      return
+    }
+
+    setSubmitLoading(true)
+
+    const finalData = Object.fromEntries(
+      Object.entries(getFinalData ? await getFinalData(data) : data).map(
+        ([key, value]) => {
+          if (typeof value === 'object' && 'image' in (value ?? {})) {
+            return [key, (value as { image: string | File | null }).image]
+          }
+          return JSON.parse(JSON.stringify([key, value]))
+        }
+      )
+    )
+
+    if (openType === 'create') {
+      entryCreateMutation.mutate(finalData as Partial<U>)
+    } else if (openType === 'update') {
+      entryUpdateMutation.mutate(finalData as Partial<U>)
+    }
+
+    if (onSubmit) {
+      await onSubmit()
+      setSubmitLoading(false)
+    }
+  }
 
   return (
     <>
@@ -244,7 +238,7 @@ function FormModal<T extends IFormState, U extends RecordModel>({
               openType={openType}
               submitButtonProps={submitButtonProps}
               submitLoading={submitLoading}
-              onSubmitButtonClick={memoizedOnSubmitButtonClick}
+              onSubmitButtonClick={onSubmitButtonClick}
             />
           </>
         ) : (
