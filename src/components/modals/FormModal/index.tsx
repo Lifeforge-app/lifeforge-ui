@@ -162,6 +162,8 @@ function FormModal<T extends IFormState, U extends RecordModel>({
     }
   )
 
+  console.log(data)
+
   async function onSubmitButtonClick(): Promise<void> {
     const requiredFields = fields.filter(field => field.required)
     const missingFields = requiredFields.filter(field => {
@@ -172,8 +174,6 @@ function FormModal<T extends IFormState, U extends RecordModel>({
         (typeof value === 'object' && !Array.isArray(value) && !value.image)
       )
     })
-
-    console.log(data)
 
     if (missingFields.length) {
       toast.error(
