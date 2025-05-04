@@ -48,7 +48,7 @@ function IconPickerModal({
   }
 
   return (
-    <ModalWrapper isOpen={isOpen} minHeight="80vh" minWidth="80vw">
+    <ModalWrapper isOpen={isOpen} minHeight="80vh" minWidth="80vw" zIndex={10}>
       {currentIconSet !== null ? (
         <div className="mb-8 flex-between flex w-full">
           <GoBackButton onClick={() => setCurrentIconSet(null)} />

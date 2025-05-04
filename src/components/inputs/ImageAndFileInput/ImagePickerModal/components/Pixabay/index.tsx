@@ -1,5 +1,5 @@
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
-import { useState } from 'react'
+import { useReducer, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import { Button } from '@components/buttons'
@@ -14,22 +14,45 @@ import fetchAPI from '@utils/fetchAPI'
 
 import {
   type IPixabaySearchFilter,
-  type IPixabaySearchResult
+  type IPixabaySearchResult,
+  PixabaySearchFilterAction
 } from '../../../../../../interfaces/pixabay_interfaces'
+import SearchFilterModal from './components/SearchFilterModal'
 import SearchResults from './components/SearchResults'
+
+const initialFilter: IPixabaySearchFilter = {
+  imageType: 'all',
+  category: '',
+  colors: '',
+  isEditorsChoice: false
+}
+
+function reducer(
+  state: IPixabaySearchFilter,
+  action: PixabaySearchFilterAction
+): typeof initialFilter {
+  switch (action.type) {
+    case 'SET_IMAGE_TYPE':
+      return { ...state, imageType: action.payload }
+    case 'SET_CATEGORY':
+      return { ...state, category: action.payload }
+    case 'SET_COLORS':
+      return { ...state, colors: action.payload }
+    case 'SET_IS_EDITORS_CHOICE':
+      return { ...state, isEditorsChoice: action.payload }
+    default:
+      return state
+  }
+}
 
 function Pixabay({
   file,
   setFile,
-  setPreview,
-  filters,
-  setIsSearchFilterModalOpen
+  setPreview
 }: {
   file: string | File | null
   setFile: React.Dispatch<React.SetStateAction<string | File | null>>
   setPreview: React.Dispatch<React.SetStateAction<string | null>>
-  filters: IPixabaySearchFilter
-  setIsSearchFilterModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const { apiHost } = useLifeforgeUIContext()
   const [query, setQuery] = useState('')
@@ -39,6 +62,8 @@ function Pixabay({
   )
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
+  const [filters, updateFilters] = useReducer(reducer, initialFilter)
+  const [isSearchFilterModalOpen, setIsSearchFilterModalOpen] = useState(false)
 
   async function onSearch(page: number): Promise<void> {
     if (loading) return
@@ -160,6 +185,14 @@ function Pixabay({
           }
         })()}
       </div>
+      <SearchFilterModal
+        filters={filters}
+        isOpen={isSearchFilterModalOpen}
+        updateFilters={updateFilters}
+        onClose={() => {
+          setIsSearchFilterModalOpen(false)
+        }}
+      />
     </>
   )
 }

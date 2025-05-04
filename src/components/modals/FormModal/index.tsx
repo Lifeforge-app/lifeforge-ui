@@ -14,7 +14,6 @@ import useModifyMutation from '@hooks/useModifyMutation'
 import ModalHeader from '../ModalHeader'
 import ModalWrapper from '../ModalWrapper'
 import FormInputs from './components/FormInputs'
-import PickerModals from './components/PickerModals'
 import SubmitButton from './components/SubmitButton'
 
 function FormModal<T extends IFormState, U extends RecordModel>({
@@ -85,13 +84,6 @@ function FormModal<T extends IFormState, U extends RecordModel>({
 }) {
   const { apiHost } = useLifeforgeUIContext()
   const queryClient = useQueryClient()
-  const [iconSelectorOpen, setIconSelectorOpen] = useState<string | null>(null)
-  const [imagePickerModalOpen, setImagePickerModalOpen] = useState<
-    string | null
-  >(null)
-  const [qrCodeScannerModalOpen, setQRCodeScannerModalOpen] = useState<
-    string | null
-  >(null)
   const [submitLoading, setSubmitLoading] = useState(false)
   const entryCreateMutation = useModifyMutation<U>(
     'create',
@@ -225,9 +217,6 @@ function FormModal<T extends IFormState, U extends RecordModel>({
               fields={fields}
               namespace={namespace}
               setData={setData}
-              setIconSelectorOpen={setIconSelectorOpen}
-              setImagePickerModalOpen={setImagePickerModalOpen}
-              setQrScannerModalOpen={setQRCodeScannerModalOpen}
             />
             {additionalFields}
             <SubmitButton
@@ -241,16 +230,6 @@ function FormModal<T extends IFormState, U extends RecordModel>({
           <LoadingScreen />
         )}
       </ModalWrapper>
-      <PickerModals
-        fields={fields}
-        iconSelectorOpen={iconSelectorOpen}
-        imagePickerModalOpen={imagePickerModalOpen}
-        qrScannerModalOpen={qrCodeScannerModalOpen}
-        setData={setData}
-        setIconSelectorOpen={setIconSelectorOpen}
-        setImagePickerModalOpen={setImagePickerModalOpen}
-        setQRScannerModalOpen={setQRCodeScannerModalOpen}
-      />
     </>
   )
 }
