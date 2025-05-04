@@ -17,8 +17,7 @@ export const Default: Story = {
     name: 'name',
     image: null,
     preview: null,
-    setPreview: () => {},
-    setImage: () => {},
+    setData: () => {},
     namespace: 'namespace',
     acceptedMimeTypes: {}
   },
@@ -31,9 +30,11 @@ export const Default: Story = {
         <Index
           {...args}
           image={image}
-          setImage={setImage}
           preview={preview}
-          setPreview={setPreview}
+          setData={({ image, preview }) => {
+            setImage(image)
+            setPreview(preview)
+          }}
         />
       </div>
     )

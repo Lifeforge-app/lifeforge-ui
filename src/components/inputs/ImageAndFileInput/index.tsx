@@ -17,8 +17,7 @@ function ImageAndFileInput({
   reminderText,
   image,
   preview,
-  setPreview,
-  setImage,
+  setData,
   onImageRemoved,
   required,
   namespace,
@@ -34,8 +33,10 @@ function ImageAndFileInput({
   reminderText?: string
   image: string | File | null
   preview: string | null
-  setPreview: (value: string | null) => void
-  setImage: (value: string | File | null) => void
+  setData: (data: {
+    image: string | File | null
+    preview: string | null
+  }) => void
   onImageRemoved?: () => void
   required?: boolean
   namespace: string
@@ -82,8 +83,7 @@ function ImageAndFileInput({
             className="mt-6 w-full"
             icon="tabler:x"
             onClick={() => {
-              setPreview(null)
-              setImage(null)
+              setData({ image: null, preview: null })
               onImageRemoved?.()
             }}
           >
@@ -98,7 +98,7 @@ function ImageAndFileInput({
               icon="tabler:x"
               variant="plain"
               onClick={() => {
-                setImage(null)
+                setData({ image: null, preview: null })
                 onImageRemoved?.()
               }}
             />
@@ -131,8 +131,7 @@ function ImageAndFileInput({
           setImagePickerModalOpen(false)
         }}
         onSelect={async (file, preview) => {
-          setImage(file)
-          setPreview(preview)
+          setData({ image: file, preview })
         }}
       />
     </>

@@ -33,18 +33,7 @@ function FormFileInput<T>({
       namespace={namespace}
       preview={selectedData.preview}
       required={field.required}
-      setImage={value =>
-        handleChange({
-          ...selectedData,
-          image: value
-        })
-      }
-      setPreview={value =>
-        handleChange({
-          ...selectedData,
-          preview: value
-        })
-      }
+      setData={handleChange}
       onImageRemoved={() =>
         handleChange({
           image: null,
