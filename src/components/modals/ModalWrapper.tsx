@@ -63,7 +63,7 @@ function ModalWrapper({
         {innerOpen && children}
       </div>
     </div>,
-    document.body
+    document.querySelector('#root') ?? document.body
   )
 }
 
