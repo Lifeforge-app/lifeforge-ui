@@ -12,7 +12,7 @@ import ColorPickerModal from './ColorPickerModal'
 function ColorInput({
   name,
   color,
-  setColor: updateColor,
+  setColor,
   hasTopMargin = true,
   className,
   namespace,
@@ -64,7 +64,7 @@ function ColorInput({
               placeholder="#FFFFFF"
               value={color}
               onChange={e => {
-                updateColor(e.target.value)
+                setColor(e.target.value)
               }}
             />
           </div>
@@ -81,7 +81,7 @@ function ColorInput({
         isOpen={colorPickerOpen}
         setOpen={setColorPickerOpen}
         color={color}
-        setColor={updateColor}
+        setColor={setColor}
       />
     </>
   )
