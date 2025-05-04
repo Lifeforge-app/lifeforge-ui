@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { memo, useCallback, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import useThemeColors from '@hooks/useThemeColor'
@@ -58,20 +58,13 @@ function Button<C extends React.ElementType = 'button'>({
   )
   const { t } = useTranslation(finalProps.namespace)
 
-  const memoizedOnClick = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (onClick) onClick(e)
-    },
-    []
-  )
-
   return (
     <Component
       {...props}
       className={finalClassName}
       disabled={finalProps.loading || finalProps.disabled}
       type="button"
-      onClick={memoizedOnClick}
+      onClick={onClick}
     >
       {!finalProps.iconAtEnd && (
         <ButtonIcon

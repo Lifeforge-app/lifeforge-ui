@@ -1,5 +1,5 @@
 import { type ColorResult, Colorful, EditableInput } from '@uiw/react-color'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button } from '@components/buttons'
 import { ModalHeader } from '@components/modals'
@@ -49,6 +49,12 @@ function ColorPickerModal({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInnerColor(`#${e.target.value}`)
   }
+
+  useEffect(() => {
+    if (isOpen) {
+      setInnerColor(color.toLowerCase() || '#000000')
+    }
+  }, [isOpen, color])
 
   return (
     <>
