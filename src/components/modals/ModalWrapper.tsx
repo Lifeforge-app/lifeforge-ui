@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 function ModalWrapper({
@@ -20,6 +21,20 @@ function ModalWrapper({
   modalRef?: React.RefObject<HTMLDivElement | null>
   zIndex?: number
 }) {
+  const [innerOpen, setInnerOpen] = useState(isOpen)
+
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        setInnerOpen(true)
+      }, 100)
+    } else {
+      setTimeout(() => {
+        setInnerOpen(false)
+      }, 500)
+    }
+  }, [isOpen])
+
   return createPortal(
     <div
       ref={modalRef}
@@ -45,7 +60,7 @@ function ModalWrapper({
           maxWidth: maxWidth
         }}
       >
-        {children}
+        {innerOpen && children}
       </div>
     </div>,
     document.body

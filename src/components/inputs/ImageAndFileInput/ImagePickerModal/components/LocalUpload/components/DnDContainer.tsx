@@ -52,7 +52,7 @@ function DnDContainer({
       {...getRootProps()}
     >
       <input {...getInputProps()} />
-      <Icon className="size-20 text-bg-500" icon="tabler:drag-drop" />
+      <Icon className="size-20 shrink-0 text-bg-500" icon="tabler:drag-drop" />
       <div className="mt-4 text-center text-2xl font-medium text-bg-500">
         {isDragActive ? t('dnd.dropHere') : t('dnd.dragAndDropToUpload')}
       </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@components/buttons'
@@ -32,6 +32,8 @@ function ImagePickerModal({
   const { t } = useTranslation('common.modals')
   const [file, setFile] = useState<File | string | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
+  const fileRef = useRef<File | string | null>(null)
+  const filePreviewRef = useRef<string | null>(null)
   const [mode, setMode] = useState<'local' | 'url' | 'pixabay' | 'ai'>('local')
   const [loading, setLoading] = useState(false)
 
@@ -41,6 +43,18 @@ function ImagePickerModal({
       setMode('local')
     }
   }, [isOpen])
+
+  useEffect(() => {
+    if (fileRef.current !== file) {
+      fileRef.current = file
+    }
+  }, [file])
+
+  useEffect(() => {
+    if (filePreviewRef.current !== preview) {
+      filePreviewRef.current = preview
+    }
+  }, [preview])
 
   return (
     <ModalWrapper
@@ -140,7 +154,7 @@ function ImagePickerModal({
         loading={loading}
         onClick={() => {
           setLoading(true)
-          onSelect(file as string | File, preview)
+          onSelect(fileRef.current as string | File, filePreviewRef.current)
             .catch(console.error)
             .finally(() => {
               setLoading(false)

@@ -12,7 +12,7 @@ const withBodyClass = (Story, context) => {
       'items-center',
       'justify-center',
       'min-h-dvh',
-      'theme-lime',
+      'theme-blue',
       'bg-zinc',
       'transition-all',
       ...(context.globals.theme === 'dark'
