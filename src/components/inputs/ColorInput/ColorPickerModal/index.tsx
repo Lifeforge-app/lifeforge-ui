@@ -1,5 +1,5 @@
 import { type ColorResult, Colorful, EditableInput } from '@uiw/react-color'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 
 import { Button } from '@components/buttons'
 import { ModalHeader } from '@components/modals'
@@ -28,14 +28,13 @@ function ColorPickerModal({
   setColor: (color: string) => void
 }) {
   const [innerColor, setInnerColor] = useState(color.toLowerCase() || '#000000')
-  const colorRef = useRef(innerColor)
   const [morandiColorPaletteModalOpen, setMorandiColorPaletteModalOpen] =
     useState(false)
   const [tailwindCSSColorsModalOpen, setTailwindCSSColorsModalOpen] =
     useState(false)
 
   const confirmColor = () => {
-    setColor(colorRef.current)
+    setColor(innerColor)
     setOpen(false)
   }
 
@@ -45,16 +44,11 @@ function ColorPickerModal({
 
   const handleColorChange = (color: ColorResult) => {
     setInnerColor(color.hex)
-    colorRef.current = color.hex
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInnerColor(`#${e.target.value}`)
   }
-
-  useEffect(() => {
-    colorRef.current = innerColor
-  }, [innerColor])
 
   return (
     <>
