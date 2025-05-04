@@ -26,7 +26,7 @@ function SubmitButton({
         </Button>
       ) : (
         <Button
-          className="mt-4"
+          className="mt-4 w-full"
           {...submitButtonProps}
           loading={submitLoading}
           onClick={() => {
