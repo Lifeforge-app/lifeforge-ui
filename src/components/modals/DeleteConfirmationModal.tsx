@@ -11,39 +11,43 @@ import Button from '../buttons/Button'
 import { TextInput } from '../inputs'
 
 function DeleteConfirmationModal<T extends RecordModel>({
-  itemName,
   onClose,
-  data,
-  updateDataList,
-  apiEndpoint,
-  customTitle,
-  customText,
-  nameKey,
-  customCallback,
-  customConfirmButtonIcon,
-  customConfirmButtonText,
-  customOnClick,
-  queryKey,
-  queryUpdateType = 'mutate',
-  multiQueryKey = false,
-  confirmationText = ''
+  data: {
+    itemName,
+    data,
+    updateDataList,
+    apiEndpoint,
+    customTitle,
+    customText,
+    nameKey,
+    customCallback,
+    customConfirmButtonIcon,
+    customConfirmButtonText,
+    customOnClick,
+    queryKey,
+    queryUpdateType = 'mutate',
+    multiQueryKey = false,
+    confirmationText = ''
+  }
 }: {
-  itemName?: string
   onClose: () => void
-  data?: T | T[]
-  updateDataList?: () => void
-  apiEndpoint?: string
-  customTitle?: string
-  customText?: string
-  nameKey?: keyof T
-  customCallback?: () => Promise<void>
-  customConfirmButtonIcon?: string
-  customConfirmButtonText?: string
-  customOnClick?: () => Promise<void>
-  queryKey?: unknown[] | unknown[][]
-  queryUpdateType?: 'mutate' | 'invalidate'
-  multiQueryKey?: boolean
-  confirmationText?: string
+  data: {
+    itemName?: string
+    data?: T | T[]
+    updateDataList?: () => void
+    apiEndpoint?: string
+    customTitle?: string
+    customText?: string
+    nameKey?: keyof T
+    customCallback?: () => Promise<void>
+    customConfirmButtonIcon?: string
+    customConfirmButtonText?: string
+    customOnClick?: () => Promise<void>
+    queryKey?: unknown[] | unknown[][]
+    queryUpdateType?: 'mutate' | 'invalidate'
+    multiQueryKey?: boolean
+    confirmationText?: string
+  }
 }) {
   const { apiHost } = useLifeforgeUIContext()
   const { t } = useTranslation('common.modals')
