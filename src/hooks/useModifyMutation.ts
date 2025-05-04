@@ -16,7 +16,6 @@ function useModifyMutation<T>(
 ): UseMutationResult<T, Error, Partial<T>, unknown> {
   return useMutation<T, Error, Partial<T>>({
     mutationFn: async (data: Partial<T>) => {
-      console.log('data', data)
       if (
         Object.values(data).some(
           value =>
