@@ -58,7 +58,6 @@ function FormModal<T extends IFormState, U extends RecordModel>({
   setData: React.Dispatch<React.SetStateAction<T>>
   title: string
   icon: string
-  isOpen: boolean
   openType?: 'create' | 'update' | null
   onClose: () => void
   submitButtonProps?: React.ComponentProps<typeof Button>
