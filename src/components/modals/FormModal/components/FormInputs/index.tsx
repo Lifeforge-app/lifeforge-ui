@@ -1,5 +1,3 @@
-import { useCallback } from 'react'
-
 import { IFieldProps, IFormState } from '@interfaces/modal_interfaces'
 
 import FormCheckboxInput from './components/FormCheckboxInput'
@@ -23,11 +21,11 @@ function FormInputs<T>({
   setData: React.Dispatch<React.SetStateAction<T>>
   namespace: string
 }) {
-  const handleChange = useCallback((field: IFieldProps<T>) => {
+  const handleChange = (field: IFieldProps<T>) => {
     return (value: IFormState[string]) => {
       setData(prev => ({ ...prev, [field.id]: value }))
     }
-  }, [])
+  }
 
   return (
     <div className="space-y-4">
