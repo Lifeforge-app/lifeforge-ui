@@ -1,8 +1,8 @@
-import { useEffect, useReducer, useState } from 'react'
+import { useEffect, useMemo, useReducer, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@components/buttons'
-import { ModalHeader, ModalWrapper } from '@components/modals'
+import { ModalHeader } from '@components/modals'
 import { Tabs } from '@components/utilities'
 
 import {
@@ -75,14 +75,22 @@ function ImagePickerModal({
     }
   }, [isOpen])
 
-  return (
-    <>
-      <ModalWrapper className="overflow-hidden" isOpen={isOpen} minWidth="70vw">
-        <ModalHeader
-          icon="tabler:photo"
-          title="imagePicker.title"
-          onClose={onClose}
+  const finalRenderedComponent = useMemo(() => {
+    if (isSearchFilterModalOpen) {
+      return (
+        <SearchFilterModal
+          filters={filters}
+          isOpen={isSearchFilterModalOpen}
+          updateFilters={updateFilters}
+          onClose={() => {
+            setIsSearchFilterModalOpen(false)
+          }}
         />
+      )
+    }
+
+    return (
+      <>
         {(enablePixabay || enableUrl) && (
           <Tabs
             active={mode}
@@ -181,15 +189,34 @@ function ImagePickerModal({
         >
           select
         </Button>
-      </ModalWrapper>
-      <SearchFilterModal
-        filters={filters}
-        isOpen={isSearchFilterModalOpen}
-        updateFilters={updateFilters}
-        onClose={() => {
-          setIsSearchFilterModalOpen(false)
-        }}
+      </>
+    )
+  }, [
+    acceptedMimeTypes,
+    defaultAIPrompt,
+    enableAI,
+    enablePixabay,
+    enableUrl,
+    file,
+    filters,
+    loading,
+    mode,
+    onClose,
+    onSelect,
+    preview,
+    setFile,
+    setPreview,
+    t
+  ])
+
+  return (
+    <>
+      <ModalHeader
+        icon="tabler:photo"
+        title="imagePicker.title"
+        onClose={onClose}
       />
+      {finalRenderedComponent}
     </>
   )
 }

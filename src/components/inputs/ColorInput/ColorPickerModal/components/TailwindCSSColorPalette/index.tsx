@@ -1,22 +1,20 @@
 import colors from 'tailwindcss/colors'
 
-import { ModalHeader, ModalWrapper } from '@components/modals'
+import { ModalHeader } from '@components/modals'
 
 import ColorItem from './components/ColorItem'
 
 function TailwindCSSColorsModal({
-  isOpen,
   onClose,
   color,
   setColor
 }: {
-  isOpen: boolean
   onClose: () => void
   color: string
   setColor: React.Dispatch<React.SetStateAction<string>>
 }) {
   return (
-    <ModalWrapper isOpen={isOpen} minWidth="70vw">
+    <>
       <ModalHeader
         icon="tabler:brand-tailwind"
         title="colorPicker.modals.morandiColorPalette"
@@ -62,7 +60,7 @@ function TailwindCSSColorsModal({
             </div>
           ))}
       </div>
-    </ModalWrapper>
+    </>
   )
 }
 

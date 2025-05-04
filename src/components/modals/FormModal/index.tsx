@@ -1,12 +1,18 @@
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import { useQueryClient } from '@tanstack/react-query'
 import type { RecordModel } from 'pocketbase'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import type { IFieldProps, IFormState } from '@interfaces/modal_interfaces'
 
 import { Button } from '@components/buttons'
+import {
+  ColorPickerModal,
+  IconPickerModal,
+  ImagePickerModal,
+  QRCodeScanner
+} from '@components/inputs'
 import { LoadingScreen } from '@components/screens'
 
 import useModifyMutation from '@hooks/useModifyMutation'
@@ -14,7 +20,6 @@ import useModifyMutation from '@hooks/useModifyMutation'
 import ModalHeader from '../ModalHeader'
 import ModalWrapper from '../ModalWrapper'
 import FormInputs from './components/FormInputs'
-import PickerModals from './components/PickerModals'
 import SubmitButton from './components/SubmitButton'
 
 function FormModal<T extends IFormState, U extends RecordModel>({
@@ -207,56 +212,141 @@ function FormModal<T extends IFormState, U extends RecordModel>({
     }
   }
 
-  return (
-    <>
-      <ModalWrapper isOpen={isOpen} minWidth="50vw" modalRef={modalRef}>
-        <ModalHeader
-          actionButtonIcon={actionButtonIcon}
-          actionButtonIsRed={actionButtonIsRed}
-          icon={icon}
-          namespace={namespace}
-          title={title}
-          onActionButtonClick={onActionButtonClick}
-          onClose={onClose}
+  const finalRenderedComponents = useMemo(() => {
+    if (colorPickerOpen) {
+      return (
+        <ColorPickerModal
+          color={(data[colorPickerOpen ?? ''] as string) ?? '#FFFFFF'}
+          setColor={value => {
+            setData(prev => ({
+              ...prev,
+              [colorPickerOpen ?? '']: value
+            }))
+          }}
+          setOpen={() => {
+            setColorPickerOpen(null)
+          }}
         />
-        {!loading ? (
-          <>
-            <FormInputs
-              data={data}
-              fields={fields}
-              namespace={namespace}
-              setColorPickerOpen={setColorPickerOpen}
-              setData={setData}
-              setIconSelectorOpen={setIconSelectorOpen}
-              setImagePickerModalOpen={setImagePickerModalOpen}
-              setQrScannerModalOpen={setQRCodeScannerModalOpen}
-            />
-            {additionalFields}
-            <SubmitButton
-              openType={openType}
-              submitButtonProps={submitButtonProps}
-              submitLoading={submitLoading}
-              onSubmitButtonClick={onSubmitButtonClick}
-            />
-          </>
-        ) : (
-          <LoadingScreen />
-        )}
-      </ModalWrapper>
-      <PickerModals
-        colorPickerOpen={colorPickerOpen}
-        data={data}
-        fields={fields}
-        iconSelectorOpen={iconSelectorOpen}
-        imagePickerModalOpen={imagePickerModalOpen}
-        qrScannerModalOpen={qrCodeScannerModalOpen}
-        setColorPickerOpen={setColorPickerOpen}
-        setData={setData}
-        setIconSelectorOpen={setIconSelectorOpen}
-        setImagePickerModalOpen={setImagePickerModalOpen}
-        setQRScannerModalOpen={setQRCodeScannerModalOpen}
+      )
+    }
+
+    if (iconSelectorOpen) {
+      return (
+        <IconPickerModal
+          setOpen={() => {
+            setIconSelectorOpen(null)
+          }}
+          setSelectedIcon={value => {
+            setData(prev => ({
+              ...prev,
+              [iconSelectorOpen ?? '']: value
+            }))
+          }}
+        />
+      )
+    }
+
+    if (imagePickerModalOpen) {
+      return (
+        <ImagePickerModal
+          enablePixabay
+          enableUrl
+          enableAI={
+            (
+              fields.find(
+                f => f.id === imagePickerModalOpen
+              ) as IFieldProps<T> & { type: 'file' }
+            )?.enableAIImageGeneration
+          }
+          defaultAIPrompt={
+            (
+              fields.find(
+                f => f.id === imagePickerModalOpen
+              ) as IFieldProps<T> & { type: 'file' }
+            )?.defaultImageGenerationPrompt
+          }
+          acceptedMimeTypes={{
+            images: ['image/png', 'image/jpeg', 'image/webp']
+          }}
+          isOpen={imagePickerModalOpen !== null}
+          onClose={() => {
+            setImagePickerModalOpen(null)
+          }}
+          onSelect={async (file, preview) => {
+            setData(prev => ({
+              ...prev,
+              [imagePickerModalOpen ?? '']: {
+                image: file,
+                preview
+              }
+            }))
+          }}
+        />
+      )
+    }
+
+    if (qrCodeScannerModalOpen) {
+      return (
+        <QRCodeScanner
+          isOpen={qrCodeScannerModalOpen !== null}
+          onClose={() => {
+            setQRCodeScannerModalOpen(null)
+          }}
+          onScanned={data => {
+            setData(prev => ({
+              ...prev,
+              [qrCodeScannerModalOpen ?? '']: data
+            }))
+          }}
+        />
+      )
+    }
+
+    return (
+      <>
+        <FormInputs
+          data={data}
+          fields={fields}
+          namespace={namespace}
+          setColorPickerOpen={setColorPickerOpen}
+          setData={setData}
+          setIconSelectorOpen={setIconSelectorOpen}
+          setImagePickerModalOpen={setImagePickerModalOpen}
+          setQrScannerModalOpen={setQRCodeScannerModalOpen}
+        />
+        {additionalFields}
+        <SubmitButton
+          openType={openType}
+          submitButtonProps={submitButtonProps}
+          submitLoading={submitLoading}
+          onSubmitButtonClick={onSubmitButtonClick}
+        />
+      </>
+    )
+  }, [
+    data,
+    fields,
+    namespace,
+    additionalFields,
+    openType,
+    submitButtonProps,
+    submitLoading,
+    onSubmitButtonClick
+  ])
+
+  return (
+    <ModalWrapper isOpen={isOpen} minWidth="50vw" modalRef={modalRef}>
+      <ModalHeader
+        actionButtonIcon={actionButtonIcon}
+        actionButtonIsRed={actionButtonIsRed}
+        icon={icon}
+        namespace={namespace}
+        title={title}
+        onActionButtonClick={onActionButtonClick}
+        onClose={onClose}
       />
-    </>
+      {!loading ? <>{finalRenderedComponents}</> : <LoadingScreen />}
+    </ModalWrapper>
   )
 }
 

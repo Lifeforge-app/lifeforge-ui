@@ -1,10 +1,9 @@
 import { type ColorResult, Colorful, EditableInput } from '@uiw/react-color'
-import { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { Button } from '@components/buttons'
 import { ModalHeader } from '@components/modals'
 
-import ModalWrapper from '../../../modals/ModalWrapper'
 import MorandiColorPaletteModal from './components/MorandiColorPaletteModal'
 import TailwindCSSColorsModal from './components/TailwindCSSColorPalette'
 
@@ -17,12 +16,10 @@ function checkContrast(hexColor: string): string {
 }
 
 function ColorPickerModal({
-  isOpen,
   setOpen,
   color,
   setColor
 }: {
-  isOpen: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   color: string
   setColor: (color: string) => void
@@ -53,18 +50,33 @@ function ColorPickerModal({
     []
   )
 
-  useEffect(() => {
-    setInnerColor(color.toLowerCase())
-  }, [color])
-
-  return (
-    <>
-      <ModalWrapper className="sm:min-w-[28rem]!" isOpen={isOpen}>
-        <ModalHeader
-          icon="tabler:color-picker"
-          title="colorPicker.title"
-          onClose={handleClose}
+  const finalRenderedComponent = useMemo(() => {
+    if (tailwindCSSColorsModalOpen) {
+      return (
+        <TailwindCSSColorsModal
+          color={innerColor}
+          setColor={setInnerColor}
+          onClose={() => {
+            setTailwindCSSColorsModalOpen(false)
+          }}
         />
+      )
+    }
+
+    if (morandiColorPaletteModalOpen) {
+      return (
+        <MorandiColorPaletteModal
+          color={innerColor}
+          setColor={setInnerColor}
+          onClose={() => {
+            setMorandiColorPaletteModalOpen(false)
+          }}
+        />
+      )
+    }
+
+    return (
+      <>
         <Colorful
           disableAlpha
           className="w-full!"
@@ -74,9 +86,9 @@ function ColorPickerModal({
         <style
           dangerouslySetInnerHTML={{
             __html: `.w-color-editable-input input {
-          background-color: ${innerColor} !important;
-          color: ${checkContrast(innerColor)} !important;
-        }`
+        background-color: ${innerColor} !important;
+        color: ${checkContrast(innerColor)} !important;
+      }`
           }}
         />
         <EditableInput
@@ -108,23 +120,29 @@ function ColorPickerModal({
         <Button icon="tabler:check" onClick={confirmColor}>
           Select
         </Button>
-      </ModalWrapper>
-      <MorandiColorPaletteModal
-        color={innerColor}
-        isOpen={morandiColorPaletteModalOpen}
-        setColor={setInnerColor}
-        onClose={() => {
-          setMorandiColorPaletteModalOpen(false)
-        }}
+      </>
+    )
+  }, [
+    confirmColor,
+    handleColorChange,
+    handleInputChange,
+    innerColor,
+    morandiColorPaletteModalOpen,
+    tailwindCSSColorsModalOpen
+  ])
+
+  useEffect(() => {
+    setInnerColor(color.toLowerCase())
+  }, [color])
+
+  return (
+    <>
+      <ModalHeader
+        icon="tabler:color-picker"
+        title="colorPicker.title"
+        onClose={handleClose}
       />
-      <TailwindCSSColorsModal
-        color={innerColor}
-        isOpen={tailwindCSSColorsModalOpen}
-        setColor={setInnerColor}
-        onClose={() => {
-          setTailwindCSSColorsModalOpen(false)
-        }}
-      />
+      {finalRenderedComponent}
     </>
   )
 }

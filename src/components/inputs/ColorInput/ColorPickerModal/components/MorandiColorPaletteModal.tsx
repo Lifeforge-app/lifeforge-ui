@@ -4,21 +4,19 @@ import clsx from 'clsx'
 import { sortFn } from 'color-sorter'
 import tinycolor from 'tinycolor2'
 
-import { ModalHeader, ModalWrapper } from '@components/modals'
+import { ModalHeader } from '@components/modals'
 
 function MorandiColorPaletteModal({
-  isOpen,
   onClose,
   color,
   setColor
 }: {
-  isOpen: boolean
   onClose: () => void
   color: string
   setColor: React.Dispatch<React.SetStateAction<string>>
 }) {
   return (
-    <ModalWrapper isOpen={isOpen} minWidth="60vw">
+    <>
       <ModalHeader
         icon="tabler:flower"
         title="colorPicker.modals.morandiColorPalette"
@@ -53,7 +51,7 @@ function MorandiColorPaletteModal({
           </button>
         ))}
       </div>
-    </ModalWrapper>
+    </>
   )
 }
 

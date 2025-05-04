@@ -2,18 +2,16 @@ import { Icon } from '@iconify/react'
 import { useState } from 'react'
 
 import { GoBackButton } from '@components/buttons'
-import { ModalHeader, ModalWrapper } from '@components/modals'
+import { ModalHeader } from '@components/modals'
 
 import IconSet from './pages/IconSet'
 import IconSetList from './pages/IconSetList/index'
 import Search from './pages/Search'
 
 function IconPickerModal({
-  isOpen,
   setOpen,
   setSelectedIcon
 }: {
-  isOpen: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   setSelectedIcon: (icon: string) => void
 }) {
@@ -48,7 +46,7 @@ function IconPickerModal({
   }
 
   return (
-    <ModalWrapper isOpen={isOpen} minHeight="80vh" minWidth="80vw">
+    <>
       {currentIconSet !== null ? (
         <div className="mb-8 flex-between flex w-full">
           <GoBackButton onClick={() => setCurrentIconSet(null)} />
@@ -86,7 +84,7 @@ function IconPickerModal({
         />
       )}
       {renderContent()}
-    </ModalWrapper>
+    </>
   )
 }
 
