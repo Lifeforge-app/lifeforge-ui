@@ -42,7 +42,7 @@ function DeleteConfirmationModal<T extends RecordModel>({
     customCallback?: () => Promise<void>
     customConfirmButtonIcon?: string
     customConfirmButtonText?: string
-    customOnClick?: () => Promise<void>
+    customOnClick?: (close: () => void) => Promise<void>
     queryKey?: unknown[] | unknown[][]
     queryUpdateType?: 'mutate' | 'invalidate'
     multiQueryKey?: boolean
@@ -179,7 +179,7 @@ function DeleteConfirmationModal<T extends RecordModel>({
           onClick={() => {
             if (customOnClick !== undefined) {
               setLoading(true)
-              customOnClick().finally(() => setLoading(false))
+              customOnClick(onClose).finally(() => setLoading(false))
               return
             }
             deleteData().catch(console.error)
