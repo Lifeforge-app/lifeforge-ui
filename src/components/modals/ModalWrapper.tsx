@@ -9,7 +9,8 @@ function ModalWrapper({
   maxWidth,
   className,
   modalRef,
-  zIndex = 0
+  zIndex = 0,
+  onExited
 }: {
   isOpen: boolean
   children: React.ReactNode
@@ -19,6 +20,7 @@ function ModalWrapper({
   className?: string
   modalRef?: React.RefObject<HTMLDivElement | null>
   zIndex?: number
+  onExited?: () => void
 }) {
   return createPortal(
     <div
@@ -27,11 +29,12 @@ function ModalWrapper({
         'fixed top-0 left-0 h-dvh w-full overscroll-contain bg-black/10 backdrop-blur-xs transition-opacity ease-linear dark:bg-bg-950/40',
         isOpen
           ? 'opacity-100'
-          : 'opacity-0 [transition:z-index_0.1s_linear_0.5s,opacity_0.1s_linear_0.1s]'
+          : 'opacity-0 [transition:z-index_0.1s_linear_0.4s,opacity_0.1s_linear_0.1s]'
       )}
       style={{
         zIndex: isOpen ? zIndex : -1
       }}
+      onTransitionEnd={onExited}
     >
       <div
         className={clsx(
@@ -48,7 +51,7 @@ function ModalWrapper({
         {children}
       </div>
     </div>,
-    document.getElementById('root') as HTMLElement
+    document.querySelector('#app') as HTMLElement
   )
 }
 
