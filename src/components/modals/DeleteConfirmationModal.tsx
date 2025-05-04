@@ -9,11 +9,9 @@ import fetchAPI from '@utils/fetchAPI'
 
 import Button from '../buttons/Button'
 import { TextInput } from '../inputs'
-import ModalWrapper from './ModalWrapper'
 
 function DeleteConfirmationModal<T extends RecordModel>({
   itemName,
-  isOpen,
   onClose,
   data,
   updateDataList,
@@ -31,7 +29,6 @@ function DeleteConfirmationModal<T extends RecordModel>({
   confirmationText = ''
 }: {
   itemName?: string
-  isOpen: boolean
   onClose: () => void
   data?: T | T[]
   updateDataList?: () => void
@@ -132,7 +129,7 @@ function DeleteConfirmationModal<T extends RecordModel>({
   }
 
   return (
-    <ModalWrapper isOpen={isOpen}>
+    <>
       <h1 className="text-2xl font-semibold">
         {customTitle ??
           t('deleteConfirmation.title', {
@@ -187,7 +184,7 @@ function DeleteConfirmationModal<T extends RecordModel>({
           {customConfirmButtonText ?? 'Delete'}
         </Button>
       </div>
-    </ModalWrapper>
+    </>
   )
 }
 
