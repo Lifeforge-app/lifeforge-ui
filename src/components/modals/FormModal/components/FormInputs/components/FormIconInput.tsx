@@ -7,15 +7,13 @@ interface FormIconInputProps<T> {
   selectedData: string
   namespace: string
   handleChange: (value: string) => void
-  setIconSelectorOpen: () => void
 }
 
 function FormIconInput<T>({
   field,
   selectedData,
   namespace,
-  handleChange,
-  setIconSelectorOpen
+  handleChange
 }: FormIconInputProps<T>) {
   return (
     <IconInput
@@ -25,7 +23,6 @@ function FormIconInput<T>({
       namespace={namespace}
       required={field.required}
       setIcon={handleChange}
-      setIconSelectorOpen={setIconSelectorOpen}
     />
   )
 }

@@ -16,18 +16,12 @@ function FormInputs<T>({
   fields,
   data,
   setData,
-  namespace,
-  setIconSelectorOpen,
-  setImagePickerModalOpen,
-  setQrScannerModalOpen
+  namespace
 }: {
   fields: IFieldProps<T>[]
   data: T
   setData: React.Dispatch<React.SetStateAction<T>>
   namespace: string
-  setIconSelectorOpen: (id: string) => void
-  setImagePickerModalOpen: (id: string) => void
-  setQrScannerModalOpen: (id: string) => void
 }) {
   const handleChange = useCallback((field: IFieldProps<T>) => {
     return (value: IFormState[string]) => {
@@ -53,7 +47,6 @@ function FormInputs<T>({
                 handleChange={handleChange(field)}
                 namespace={namespace}
                 selectedData={selectedData as string}
-                setQrScannerModalOpen={setQrScannerModalOpen}
               />
             )
           case 'textarea':
@@ -104,9 +97,6 @@ function FormInputs<T>({
                 handleChange={handleChange(field)}
                 namespace={namespace}
                 selectedData={selectedData as string}
-                setIconSelectorOpen={() =>
-                  setIconSelectorOpen(field.id as string)
-                }
               />
             )
           case 'location':
@@ -141,9 +131,6 @@ function FormInputs<T>({
                     image: string | File | null
                     preview: string | null
                   }
-                }
-                setImagePickerModalOpen={() =>
-                  setImagePickerModalOpen(field.id as string)
                 }
               />
             )

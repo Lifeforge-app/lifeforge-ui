@@ -16,15 +16,13 @@ interface FormFileInputProps<T> {
     image: string | File | null
     preview: string | null
   }) => void
-  setImagePickerModalOpen: () => void
 }
 
 function FormFileInput<T>({
   field,
   selectedData,
   namespace,
-  handleChange,
-  setImagePickerModalOpen
+  handleChange
 }: FormFileInputProps<T>) {
   return (
     <ImageAndFileInput
@@ -41,10 +39,6 @@ function FormFileInput<T>({
           image: value
         })
       }
-      setImagePickerModalOpen={() => {
-        setImagePickerModalOpen()
-        field.onFileRemoved?.()
-      }}
       setPreview={value =>
         handleChange({
           ...selectedData,
@@ -57,6 +51,13 @@ function FormFileInput<T>({
           preview: null
         })
       }
+      enablePixabay
+      enableUrl
+      enableAI={field.enableAIImageGeneration}
+      defaultAIPrompt={field.defaultImageGenerationPrompt}
+      acceptedMimeTypes={{
+        images: ['image/png', 'image/jpeg', 'image/webp']
+      }}
     />
   )
 }

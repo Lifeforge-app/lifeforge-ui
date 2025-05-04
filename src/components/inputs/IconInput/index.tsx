@@ -1,19 +1,19 @@
 import { Icon } from '@iconify/react'
 import clsx from 'clsx'
 import _ from 'lodash'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import InputIcon from '../shared/InputIcon'
 import InputLabel from '../shared/InputLabel'
 import InputWrapper from '../shared/InputWrapper'
+import IconPickerModal from './IconPickerModal'
 
 function IconInput({
   name,
   icon,
   disabled,
   setIcon,
-  setIconSelectorOpen,
   namespace,
   required
 }: {
@@ -21,12 +21,12 @@ function IconInput({
   icon: string
   disabled?: boolean
   setIcon: (icon: string) => void
-  setIconSelectorOpen: React.Dispatch<React.SetStateAction<boolean>>
   namespace: string
   required?: boolean
 }) {
   const { t } = useTranslation(namespace)
   const ref = useRef<HTMLInputElement | null>(null)
+  const [iconSelectorOpen, setIconSelectorOpen] = useState(false)
 
   function updateIcon(e: React.ChangeEvent<HTMLInputElement>): void {
     setIcon(e.target.value)
@@ -69,6 +69,11 @@ function IconInput({
           </button>
         </div>
       </InputWrapper>
+      <IconPickerModal
+        isOpen={iconSelectorOpen}
+        setOpen={setIconSelectorOpen}
+        setSelectedIcon={setIcon}
+      />
     </>
   )
 }
