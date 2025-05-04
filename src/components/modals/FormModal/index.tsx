@@ -12,7 +12,6 @@ import { LoadingScreen } from '@components/screens'
 import useModifyMutation from '@hooks/useModifyMutation'
 
 import ModalHeader from '../ModalHeader'
-import ModalWrapper from '../ModalWrapper'
 import FormInputs from './components/FormInputs'
 import SubmitButton from './components/SubmitButton'
 
@@ -26,7 +25,6 @@ function FormModal<T extends IFormState, U extends RecordModel>({
   // modal stuff
   title,
   icon,
-  isOpen,
   openType,
   onClose,
   loading = false,
@@ -51,8 +49,7 @@ function FormModal<T extends IFormState, U extends RecordModel>({
   onActionButtonClick,
 
   // misc stuff
-  namespace,
-  modalRef
+  namespace
 }: {
   modalRef?: React.RefObject<HTMLDivElement | null>
   fields: IFieldProps<T>[]
@@ -200,36 +197,34 @@ function FormModal<T extends IFormState, U extends RecordModel>({
 
   return (
     <>
-      <ModalWrapper isOpen={isOpen} minWidth="50vw" modalRef={modalRef}>
-        <ModalHeader
-          actionButtonIcon={actionButtonIcon}
-          actionButtonIsRed={actionButtonIsRed}
-          icon={icon}
-          namespace={namespace}
-          title={title}
-          onActionButtonClick={onActionButtonClick}
-          onClose={onClose}
-        />
-        {!loading ? (
-          <>
-            <FormInputs
-              data={data}
-              fields={fields}
-              namespace={namespace}
-              setData={setData}
-            />
-            {additionalFields}
-            <SubmitButton
-              openType={openType}
-              submitButtonProps={submitButtonProps}
-              submitLoading={submitLoading}
-              onSubmitButtonClick={onSubmitButtonClick}
-            />
-          </>
-        ) : (
-          <LoadingScreen />
-        )}
-      </ModalWrapper>
+      <ModalHeader
+        actionButtonIcon={actionButtonIcon}
+        actionButtonIsRed={actionButtonIsRed}
+        icon={icon}
+        namespace={namespace}
+        title={title}
+        onActionButtonClick={onActionButtonClick}
+        onClose={onClose}
+      />
+      {!loading ? (
+        <>
+          <FormInputs
+            data={data}
+            fields={fields}
+            namespace={namespace}
+            setData={setData}
+          />
+          {additionalFields}
+          <SubmitButton
+            openType={openType}
+            submitButtonProps={submitButtonProps}
+            submitLoading={submitLoading}
+            onSubmitButtonClick={onSubmitButtonClick}
+          />
+        </>
+      ) : (
+        <LoadingScreen />
+      )}
     </>
   )
 }
