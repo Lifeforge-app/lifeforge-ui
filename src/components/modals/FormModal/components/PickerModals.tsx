@@ -1,7 +1,6 @@
 import { IFieldProps, IFormState } from '@interfaces/modal_interfaces'
 
 import {
-  ColorPickerModal,
   IconPickerModal,
   ImagePickerModal,
   QRCodeScanner
@@ -9,10 +8,7 @@ import {
 
 function PickerModals<T extends IFormState>({
   fields,
-  data,
   setData,
-  colorPickerOpen,
-  setColorPickerOpen,
   iconSelectorOpen,
   setIconSelectorOpen,
   imagePickerModalOpen,
@@ -21,10 +17,7 @@ function PickerModals<T extends IFormState>({
   setQRScannerModalOpen
 }: {
   fields: IFieldProps<T>[]
-  data: T
   setData: React.Dispatch<React.SetStateAction<T>>
-  colorPickerOpen: string | null
-  setColorPickerOpen: (id: string | null) => void
   iconSelectorOpen: string | null
   setIconSelectorOpen: (id: string | null) => void
   imagePickerModalOpen: string | null
@@ -34,21 +27,6 @@ function PickerModals<T extends IFormState>({
 }) {
   return (
     <>
-      {fields.some(f => f.type === 'color') && (
-        <ColorPickerModal
-          color={(data[colorPickerOpen ?? ''] as string) ?? '#FFFFFF'}
-          isOpen={colorPickerOpen !== null}
-          setColor={value => {
-            setData(prev => ({
-              ...prev,
-              [colorPickerOpen ?? '']: value
-            }))
-          }}
-          setOpen={() => {
-            setColorPickerOpen(null)
-          }}
-        />
-      )}
       {fields.some(f => f.type === 'icon') && (
         <IconPickerModal
           isOpen={iconSelectorOpen !== null}

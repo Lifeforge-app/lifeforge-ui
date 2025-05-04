@@ -85,7 +85,6 @@ function FormModal<T extends IFormState, U extends RecordModel>({
 }) {
   const { apiHost } = useLifeforgeUIContext()
   const queryClient = useQueryClient()
-  const [colorPickerOpen, setColorPickerOpen] = useState<string | null>(null)
   const [iconSelectorOpen, setIconSelectorOpen] = useState<string | null>(null)
   const [imagePickerModalOpen, setImagePickerModalOpen] = useState<
     string | null
@@ -225,7 +224,6 @@ function FormModal<T extends IFormState, U extends RecordModel>({
               data={data}
               fields={fields}
               namespace={namespace}
-              setColorPickerOpen={setColorPickerOpen}
               setData={setData}
               setIconSelectorOpen={setIconSelectorOpen}
               setImagePickerModalOpen={setImagePickerModalOpen}
@@ -244,13 +242,10 @@ function FormModal<T extends IFormState, U extends RecordModel>({
         )}
       </ModalWrapper>
       <PickerModals
-        colorPickerOpen={colorPickerOpen}
-        data={data}
         fields={fields}
         iconSelectorOpen={iconSelectorOpen}
         imagePickerModalOpen={imagePickerModalOpen}
         qrScannerModalOpen={qrCodeScannerModalOpen}
-        setColorPickerOpen={setColorPickerOpen}
         setData={setData}
         setIconSelectorOpen={setIconSelectorOpen}
         setImagePickerModalOpen={setImagePickerModalOpen}

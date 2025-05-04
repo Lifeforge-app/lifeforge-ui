@@ -28,6 +28,27 @@
   --color-bg-800: rgb(var(--color-bg-800)) !important;
   --color-bg-900: rgb(var(--color-bg-900)) !important;
   --color-bg-950: rgb(var(--color-bg-950)) !important;
+
+  --animate-dialog-overlay-in: fadeIn;
+  --animate-dialog-overlay-out: fadeOut;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
 }
 
 @utility flex-center {

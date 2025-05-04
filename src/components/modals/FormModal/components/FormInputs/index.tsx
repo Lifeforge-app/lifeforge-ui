@@ -17,7 +17,6 @@ function FormInputs<T>({
   data,
   setData,
   namespace,
-  setColorPickerOpen,
   setIconSelectorOpen,
   setImagePickerModalOpen,
   setQrScannerModalOpen
@@ -26,7 +25,6 @@ function FormInputs<T>({
   data: T
   setData: React.Dispatch<React.SetStateAction<T>>
   namespace: string
-  setColorPickerOpen: (id: string) => void
   setIconSelectorOpen: (id: string) => void
   setImagePickerModalOpen: (id: string) => void
   setQrScannerModalOpen: (id: string) => void
@@ -96,9 +94,6 @@ function FormInputs<T>({
                 handleChange={handleChange(field)}
                 namespace={namespace}
                 selectedData={selectedData as string}
-                setColorPickerOpen={() =>
-                  setColorPickerOpen(field.id as string)
-                }
               />
             )
           case 'icon':

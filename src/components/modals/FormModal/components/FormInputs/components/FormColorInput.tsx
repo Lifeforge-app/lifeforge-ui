@@ -10,15 +10,13 @@ interface FormColorInputProps<T> {
   selectedData: string
   namespace: string
   handleChange: (value: string) => void
-  setColorPickerOpen: () => void
 }
 
 function FormColorInput<T>({
   field,
   selectedData,
   namespace,
-  handleChange,
-  setColorPickerOpen
+  handleChange
 }: FormColorInputProps<T>) {
   return (
     <ColorInput
@@ -28,7 +26,6 @@ function FormColorInput<T>({
       namespace={namespace}
       required={field.required}
       setColor={handleChange}
-      setColorPickerOpen={setColorPickerOpen}
     />
   )
 }
