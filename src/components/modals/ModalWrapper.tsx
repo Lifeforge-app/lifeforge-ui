@@ -9,7 +9,7 @@ function ModalWrapper({
   maxWidth,
   className,
   modalRef,
-  zIndex
+  zIndex = 0
 }: {
   isOpen: boolean
   children: React.ReactNode
