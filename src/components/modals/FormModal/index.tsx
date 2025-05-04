@@ -196,7 +196,7 @@ function FormModal<T extends IFormState, U extends RecordModel>({
   }
 
   return (
-    <>
+    <div className="min-w-[50vw]">
       <ModalHeader
         actionButtonIcon={actionButtonIcon}
         actionButtonIsRed={actionButtonIsRed}
@@ -225,7 +225,7 @@ function FormModal<T extends IFormState, U extends RecordModel>({
       ) : (
         <LoadingScreen />
       )}
-    </>
+    </div>
   )
 }
 
