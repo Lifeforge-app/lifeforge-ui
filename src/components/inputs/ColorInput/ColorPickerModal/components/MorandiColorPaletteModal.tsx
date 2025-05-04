@@ -18,7 +18,7 @@ function MorandiColorPaletteModal({
   setColor: React.Dispatch<React.SetStateAction<string>>
 }) {
   return (
-    <ModalWrapper isOpen={isOpen} minWidth="60vw">
+    <ModalWrapper zIndex={20} isOpen={isOpen} minWidth="60vw">
       <ModalHeader
         icon="tabler:flower"
         title="colorPicker.modals.morandiColorPalette"

@@ -59,7 +59,7 @@ function ColorPickerModal({
 
   return (
     <>
-      <ModalWrapper className="sm:min-w-[28rem]!" isOpen={isOpen} zIndex={9993}>
+      <ModalWrapper className="sm:min-w-[28rem]!" isOpen={isOpen} zIndex={10}>
         <ModalHeader
           icon="tabler:color-picker"
           title="colorPicker.title"

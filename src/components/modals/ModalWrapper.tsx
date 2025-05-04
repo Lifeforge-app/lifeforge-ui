@@ -9,7 +9,7 @@ function ModalWrapper({
   maxWidth,
   className,
   modalRef,
-  zIndex = 9992
+  zIndex
 }: {
   isOpen: boolean
   children: React.ReactNode
@@ -30,7 +30,7 @@ function ModalWrapper({
           : 'opacity-0 [transition:z-index_0.1s_linear_0.5s,opacity_0.1s_linear_0.1s]'
       )}
       style={{
-        zIndex: isOpen ? (zIndex ?? 9992) : -1
+        zIndex: isOpen ? zIndex : -1
       }}
     >
       <div
