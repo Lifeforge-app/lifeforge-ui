@@ -11,7 +11,7 @@ import { LoadingScreen } from '@components/screens'
 
 import useModifyMutation from '@hooks/useModifyMutation'
 
-import ModalHeader from '../ModalHeader'
+import ModalHeader from '../../components/ModalHeader'
 import FormInputs from './components/FormInputs'
 import SubmitButton from './components/SubmitButton'
 

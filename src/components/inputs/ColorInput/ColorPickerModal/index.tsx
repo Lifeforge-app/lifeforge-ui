@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Button } from '@components/buttons'
 import { ModalHeader } from '@components/modals'
 
-import ModalWrapper from '../../../modals/ModalWrapper'
+import ModalWrapper from '../../../modals/components/ModalWrapper'
 import MorandiColorPaletteModal from './components/MorandiColorPaletteModal'
 import TailwindCSSColorsModal from './components/TailwindCSSColorPalette'
 

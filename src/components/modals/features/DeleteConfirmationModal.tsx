@@ -7,8 +7,8 @@ import { toast } from 'react-toastify'
 
 import fetchAPI from '@utils/fetchAPI'
 
-import Button from '../buttons/Button'
-import { TextInput } from '../inputs'
+import Button from '../../buttons/Button'
+import { TextInput } from '../../inputs'
 
 function DeleteConfirmationModal<T extends RecordModel>({
   onClose,
