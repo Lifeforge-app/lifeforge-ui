@@ -16,7 +16,7 @@ function TailwindCSSColorsModal({
   setColor: React.Dispatch<React.SetStateAction<string>>
 }) {
   return (
-    <ModalWrapper zIndex={20} isOpen={isOpen} minWidth="70vw">
+    <ModalWrapper zIndex={1010} isOpen={isOpen} minWidth="70vw">
       <ModalHeader
         icon="tabler:brand-tailwind"
         title="colorPicker.modals.morandiColorPalette"

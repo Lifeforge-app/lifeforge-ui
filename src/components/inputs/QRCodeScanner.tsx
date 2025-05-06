@@ -14,7 +14,7 @@ function QRCodeScanner({
   onScanned: (data: string) => void
 }) {
   return (
-    <ModalWrapper isOpen={isOpen} minHeight="30rem" zIndex={10}>
+    <ModalWrapper isOpen={isOpen} minHeight="30rem" zIndex={1000}>
       <ModalHeader
         icon="tabler:qrcode"
         title="qrCodeScanner"

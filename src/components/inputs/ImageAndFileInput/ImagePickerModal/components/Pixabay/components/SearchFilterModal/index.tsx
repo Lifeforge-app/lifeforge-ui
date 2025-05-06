@@ -25,7 +25,7 @@ function SearchFilterModal({
   updateFilters: React.ActionDispatch<[action: PixabaySearchFilterAction]>
 }) {
   return (
-    <ModalWrapper isOpen={isOpen} minWidth="30vw" zIndex={20}>
+    <ModalWrapper isOpen={isOpen} minWidth="30vw" zIndex={1010}>
       <ModalHeader
         icon="tabler:filter"
         title="Search Filters"

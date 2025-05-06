@@ -47,7 +47,7 @@ function ImagePickerModal({
       className="overflow-hidden"
       isOpen={isOpen}
       minWidth="70vw"
-      zIndex={10}
+      zIndex={1000}
     >
       <ModalHeader
         icon="tabler:photo"
