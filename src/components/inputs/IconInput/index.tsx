@@ -45,18 +45,20 @@ function IconInput({
       <div className="flex w-full items-center gap-2">
         <InputLabel
           active={!!icon}
-          label={t(`inputs.${_.camelCase(name)}`)}
+          label={t([`inputs.${_.camelCase(name)}`, name])}
           required={required}
         />
         <div className="mt-6 mr-12 flex w-full items-center gap-2 pl-4">
-          <Icon
-            className={clsx(
-              'size-4 shrink-0',
-              !icon &&
-                'pointer-events-none opacity-0 group-focus-within:opacity-100'
-            )}
-            icon={icon || 'tabler:question-mark'}
-          />
+          <div className="icon-input-icon size-4 shrink-0">
+            <Icon
+              className={clsx(
+                'size-4 shrink-0',
+                !icon &&
+                  'pointer-events-none opacity-0 group-focus-within:opacity-100'
+              )}
+              icon={icon || 'tabler:question-mark'}
+            />
+          </div>
           <input
             ref={ref}
             className="h-8 w-full rounded-lg bg-transparent p-6 pl-0 tracking-wide placeholder:text-transparent focus:outline-hidden focus:placeholder:text-bg-500"

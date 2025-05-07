@@ -14,7 +14,7 @@ export { default as ListboxOrComboboxOption } from './ListboxOrComboboxInput/com
 export { default as ListboxOrComboboxOptions } from './ListboxOrComboboxInput/components/ListboxOrComboboxOptions'
 export { default as ListboxNullOption } from './ListboxOrComboboxInput/components/ListboxNullOption'
 
-export { default as ImagePickerModal } from './ImageAndFileInput/ImagePickerModal'
+export { default as FileAndImagePickerModal } from './ImageAndFileInput/FileAndImagePickerModal'
 export { default as ColorPickerModal } from './ColorInput/ColorPickerModal'
 export { default as IconPickerModal } from './IconInput/IconPickerModal'
 
@@ -24,5 +24,5 @@ export { default as InputLabel } from './shared/InputLabel'
 
 export { default as QRCodeScanner } from './QRCodeScanner'
 
-export { default as DnDContainer } from './ImageAndFileInput/ImagePickerModal/components/LocalUpload/components/DnDContainer'
-export { default as PreviewContainer } from './ImageAndFileInput/ImagePickerModal/components/LocalUpload/components/PreviewContainer'
+export { default as DnDContainer } from './ImageAndFileInput/FileAndImagePickerModal/components/LocalUpload/components/DnDContainer'
+export { default as PreviewContainer } from './ImageAndFileInput/FileAndImagePickerModal/components/LocalUpload/components/PreviewContainer'

@@ -3,9 +3,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import React from 'react'
 
+import { FileAndImagePickerModal } from '../src/components/inputs'
 import ColorPickerModal from '../src/components/inputs/ColorInput/ColorPickerModal'
 import IconPickerModal from '../src/components/inputs/IconInput/IconPickerModal'
 import ModalManager from '../src/components/modals/core/ModalManager'
+import { ModalComponent } from '../src/components/modals/core/useModalStore'
 import useModalsEffect from '../src/components/modals/core/useModalsEffect'
 import DeleteConfirmationModal from '../src/components/modals/features/DeleteConfirmationModal'
 import '../src/index.css'
@@ -13,10 +15,11 @@ import { LifeforgeUIProvider } from '../src/providers/LifeforgeUIProvider'
 
 const queryClient = new QueryClient()
 
-const DEFAULT_MODALS = {
+const DEFAULT_MODALS: Record<string, ModalComponent> = {
   deleteConfirmation: DeleteConfirmationModal,
   iconPicker: IconPickerModal,
-  colorPicker: ColorPickerModal
+  colorPicker: ColorPickerModal,
+  fileAndImagePicker: FileAndImagePickerModal
 }
 
 const withBodyClass = (Story, context) => {

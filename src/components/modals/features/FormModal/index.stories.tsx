@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 
+import ModalWrapper from '@components/modals/core/components/ModalWrapper'
+
 import Index from './index'
 import FormModal from './index'
 
@@ -15,8 +17,8 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     fields: [],
-    title: 'title',
-    icon: 'tabler:plus',
+    title: 'Some Form',
+    icon: 'tabler:list',
     onClose: () => {},
     namespace: 'namespace',
     data: {},
@@ -30,33 +32,35 @@ export const Default: Story = {
     })
 
     return (
-      <FormModal
-        {...args}
-        data={data}
-        setData={setData}
-        fields={[
-          {
-            id: 'name',
-            label: 'Name',
-            type: 'text',
-            required: true,
-            placeholder: 'Name',
-            icon: 'tabler:text-caption'
-          },
-          {
-            id: 'icon',
-            label: 'Icon',
-            type: 'icon',
-            required: true
-          },
-          {
-            id: 'color',
-            label: 'Color',
-            type: 'color',
-            required: true
-          }
-        ]}
-      />
+      <ModalWrapper isOpen={true}>
+        <FormModal
+          {...args}
+          data={data}
+          setData={setData}
+          fields={[
+            {
+              id: 'name',
+              label: 'Name',
+              type: 'text',
+              required: true,
+              placeholder: 'Name',
+              icon: 'tabler:text-caption'
+            },
+            {
+              id: 'icon',
+              label: 'Icon',
+              type: 'icon',
+              required: true
+            },
+            {
+              id: 'color',
+              label: 'Color',
+              type: 'color',
+              required: true
+            }
+          ]}
+        />
+      </ModalWrapper>
     )
   }
 }

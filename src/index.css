@@ -135,3 +135,7 @@
 .w-color-editable-input span {
   font-size: 0.9rem !important;
 }
+
+.icon-input-icon > span {
+  @apply block size-4 rounded-full border border-dashed border-bg-300 dark:border-bg-700;
+}

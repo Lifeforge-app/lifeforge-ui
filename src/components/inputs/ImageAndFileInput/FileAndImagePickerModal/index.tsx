@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@components/buttons'
-import { ModalHeader, ModalWrapper } from '@components/modals'
+import { ModalHeader } from '@components/modals'
 import { Tabs } from '@components/utilities'
 
 import AIImageGenerator from './components/AIImageGenerator'
@@ -10,24 +10,26 @@ import ImageURL from './components/ImageURL'
 import LocalUpload from './components/LocalUpload'
 import Pixabay from './components/Pixabay'
 
-function ImagePickerModal({
-  isOpen,
-  onClose,
-  enablePixabay = false,
-  enableUrl = false,
-  enableAI = false,
-  defaultAIPrompt = '',
-  acceptedMimeTypes,
-  onSelect
+function FileAndImagePickerModal({
+  data: {
+    enablePixabay = false,
+    enableUrl = false,
+    enableAI = false,
+    defaultAIPrompt = '',
+    acceptedMimeTypes,
+    onSelect
+  },
+  onClose
 }: {
-  isOpen: boolean
+  data: {
+    enablePixabay?: boolean
+    enableUrl?: boolean
+    enableAI?: boolean
+    defaultAIPrompt?: string
+    acceptedMimeTypes: Record<string, string[]>
+    onSelect: (file: string | File, preview: string | null) => Promise<void>
+  }
   onClose: () => void
-  enablePixabay?: boolean
-  enableUrl?: boolean
-  enableAI?: boolean
-  defaultAIPrompt?: string
-  acceptedMimeTypes: Record<string, string[]>
-  onSelect: (file: string | File, preview: string | null) => Promise<void>
 }) {
   const { t } = useTranslation('common.modals')
   const [file, setFile] = useState<File | string | null>(null)
@@ -36,19 +38,12 @@ function ImagePickerModal({
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (!isOpen) {
-      setFile(null)
-      setMode('local')
-    }
-  }, [isOpen])
+    setFile(null)
+    setMode('local')
+  }, [])
 
   return (
-    <ModalWrapper
-      className="overflow-hidden"
-      isOpen={isOpen}
-      minWidth="70vw"
-      zIndex={1000}
-    >
+    <div className="min-w-[70vw] overflow-hidden">
       <ModalHeader
         icon="tabler:photo"
         title="imagePicker.title"
@@ -134,7 +129,7 @@ function ImagePickerModal({
         })()}
       </div>
       <Button
-        className="mt-4"
+        className="mt-4 w-full"
         disabled={file === null}
         icon="tabler:check"
         loading={loading}
@@ -150,8 +145,8 @@ function ImagePickerModal({
       >
         select
       </Button>
-    </ModalWrapper>
+    </div>
   )
 }
 
-export default ImagePickerModal
+export default FileAndImagePickerModal

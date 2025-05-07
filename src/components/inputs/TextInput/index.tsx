@@ -74,7 +74,7 @@ function TextInput({
       .join('.')
     const fallbackKey = [tKey, 'inputs', nameKey].filter(Boolean).join('.')
 
-    return t([labelKey, fallbackKey])
+    return t([labelKey, fallbackKey, name])
   }, [namespace, name, tKey, t])
 
   return (

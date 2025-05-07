@@ -1,4 +1,3 @@
-import MillionCompiler from '@million/lint'
 import type { StorybookConfig } from '@storybook/react-vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
@@ -24,11 +23,7 @@ const config: StorybookConfig = {
     config.plugins.push(['babel-plugin-react-compiler', ReactCompilerConfig])
   },
   viteFinal: async config => {
-    config.plugins = [
-      ...(config.plugins ?? []),
-      MillionCompiler.vite(),
-      tsconfigPaths()
-    ]
+    config.plugins = [...(config.plugins ?? []), tsconfigPaths()]
     config.plugins.push((await import('@tailwindcss/vite')).default())
     return {
       ...config

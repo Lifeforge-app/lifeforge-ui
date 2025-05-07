@@ -50,7 +50,8 @@ function ModalHeader({
                 `${innerTitle}.title`,
                 `${innerTitle}`,
                 `modals.${innerTitle}.title`,
-                `modals.${innerTitle}`
+                `modals.${innerTitle}`,
+                innerTitle
               ])
             : innerTitle}
         </span>
