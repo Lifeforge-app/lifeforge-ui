@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext } from 'react'
+import { ReactNode, createContext, useContext, useMemo } from 'react'
 
 interface IContextData {
   apiHost: string
@@ -26,24 +26,34 @@ export const LifeforgeUIProvider: React.FC<LifeforgeUIProviderProps> = ({
   children,
   personalization
 }: LifeforgeUIProviderProps) => {
+  const memoizedValue = useMemo<IContextData>(() => {
+    return {
+      apiHost: '',
+      theme: 'dark',
+      themeColor: 'lime',
+      bgTemp: 'zinc',
+      bgImage: '',
+      setTheme: () => {},
+      setThemeColor: () => {},
+      setBgTemp: () => {},
+      setBgImage: () => {},
+      language: 'en',
+      toggleSidebar: () => {},
+      sidebarExpanded: true,
+      ...personalization
+    }
+  }, [
+    personalization?.apiHost,
+    personalization?.theme,
+    personalization?.themeColor,
+    personalization?.bgTemp,
+    personalization?.bgImage,
+    personalization?.language,
+    personalization?.sidebarExpanded
+  ])
+
   return (
-    <LifeforgeUIContext.Provider
-      value={{
-        apiHost: '',
-        theme: 'dark',
-        themeColor: 'lime',
-        bgTemp: 'zinc',
-        bgImage: '',
-        setTheme: () => {},
-        setThemeColor: () => {},
-        setBgTemp: () => {},
-        setBgImage: () => {},
-        language: 'en',
-        toggleSidebar: () => {},
-        sidebarExpanded: true,
-        ...personalization
-      }}
-    >
+    <LifeforgeUIContext.Provider value={memoizedValue}>
       {children}
     </LifeforgeUIContext.Provider>
   )

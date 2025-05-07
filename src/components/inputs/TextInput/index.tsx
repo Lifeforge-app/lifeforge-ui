@@ -1,13 +1,13 @@
 import _ from 'lodash'
-import { memo, useEffect, useRef, useState } from 'react'
+import { memo, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { Button } from '../buttons'
-import InputActionButton from './shared/InputActionButton'
-import InputBox from './shared/InputBox'
-import InputIcon from './shared/InputIcon'
-import InputLabel from './shared/InputLabel'
-import InputWrapper from './shared/InputWrapper'
+import { Button } from '../../buttons'
+import InputActionButton from '../shared/InputActionButton'
+import InputIcon from '../shared/InputIcon'
+import InputLabel from '../shared/InputLabel'
+import InputWrapper from '../shared/InputWrapper'
+import Text from './components/TextInputBox'
 
 export interface ITextInputProps {
   icon: string
@@ -44,7 +44,6 @@ export interface ITextInputProps {
 function TextInput({
   actionButtonIcon = '',
   actionButtonLoading = false,
-  autoFocus = false,
   className = '',
   darker = false,
   disabled = false,
@@ -66,12 +65,17 @@ function TextInput({
   const { t } = useTranslation(namespace ? namespace : undefined)
   const [showPassword, setShowPassword] = useState(false)
   const inputRef = useRef<HTMLInputElement | null>(null)
+  const inputLabel = useMemo(() => {
+    if (!namespace) return name
 
-  useEffect(() => {
-    if (autoFocus && inputRef.current) {
-      inputRef.current.focus()
-    }
-  }, [autoFocus])
+    const nameKey = _.camelCase(name)
+    const labelKey = [tKey, 'inputs', nameKey, 'label']
+      .filter(Boolean)
+      .join('.')
+    const fallbackKey = [tKey, 'inputs', nameKey].filter(Boolean).join('.')
+
+    return t([labelKey, fallbackKey])
+  }, [namespace, name, tKey, t])
 
   return (
     <InputWrapper
@@ -84,19 +88,10 @@ function TextInput({
       <div className="flex w-full items-center gap-2">
         <InputLabel
           active={!!value && String(value).length > 0}
-          label={
-            namespace !== false
-              ? t([
-                  [tKey, 'inputs', _.camelCase(name), 'label']
-                    .filter(e => e)
-                    .join('.'),
-                  [tKey, 'inputs', _.camelCase(name)].filter(e => e).join('.')
-                ])
-              : name
-          }
+          label={inputLabel}
           required={required === true}
         />
-        <InputBox
+        <Text
           disabled={disabled}
           inputMode={inputMode}
           inputRef={inputRef}

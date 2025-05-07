@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { useState } from 'react'
 
-import TextInput from './TextInput'
+import TextInput from '.'
 
 const meta = {
   component: TextInput
@@ -19,5 +20,9 @@ export const Default: Story = {
     darker: true,
     namespace: false,
     value: ''
+  },
+  render: args => {
+    const [value, setValue] = useState('')
+    return <TextInput {...args} value={value} setValue={setValue} />
   }
 }

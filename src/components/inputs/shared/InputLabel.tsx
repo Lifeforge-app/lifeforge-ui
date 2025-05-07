@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
 
 interface InputLabelProps {
   label: string
@@ -49,4 +49,4 @@ function InputLabel({
   )
 }
 
-export default InputLabel
+export default memo(InputLabel)

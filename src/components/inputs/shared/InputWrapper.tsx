@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useCallback } from 'react'
 
 import useThemeColors from '@hooks/useThemeColor'
 
@@ -17,21 +18,38 @@ function InputWrapper({
 }) {
   const { componentBgWithHover, componentBgLighterWithHover } = useThemeColors()
 
-  function focusInput(e: React.MouseEvent | React.FocusEvent) {
-    if ((e.target as HTMLElement).tagName === 'BUTTON') {
-      return
-    }
-
-    if (inputRef?.current !== undefined && inputRef.current !== null) {
-      inputRef.current.focus()
-      if (!['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
-        inputRef.current.setSelectionRange(
-          inputRef.current.value.length,
-          inputRef.current.value.length
-        )
+  const focusInput = useCallback(
+    (e: React.MouseEvent | React.FocusEvent) => {
+      if ((e.target as HTMLElement).tagName === 'BUTTON') {
+        return
       }
-    }
-  }
+
+      if (inputRef?.current !== undefined && inputRef.current !== null) {
+        inputRef.current.focus()
+        if (
+          !['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)
+        ) {
+          inputRef.current.setSelectionRange(
+            inputRef.current.value.length,
+            inputRef.current.value.length
+          )
+        }
+      }
+    },
+    [inputRef]
+  )
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        e.preventDefault()
+        if (inputRef?.current !== undefined && inputRef.current !== null) {
+          inputRef.current.focus()
+        }
+      }
+    },
+    [inputRef]
+  )
 
   return (
     <div
@@ -45,14 +63,7 @@ function InputWrapper({
       tabIndex={0}
       onClick={focusInput}
       onFocus={focusInput}
-      onKeyDown={e => {
-        if (e.key === 'Enter') {
-          e.preventDefault()
-          if (inputRef?.current !== undefined && inputRef.current !== null) {
-            inputRef.current.focus()
-          }
-        }
-      }}
+      onKeyDown={handleKeyDown}
     >
       {children}
     </div>
