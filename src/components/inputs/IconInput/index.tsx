@@ -34,7 +34,7 @@ function IconInput({
   }
 
   const handleIconSelectorOpen = useCallback(() => {
-    open('formModal.iconPicker', {
+    open('iconPicker', {
       setSelectedIcon: setIcon
     })
   }, [])

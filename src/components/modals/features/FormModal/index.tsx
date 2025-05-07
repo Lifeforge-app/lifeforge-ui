@@ -7,7 +7,6 @@ import { toast } from 'react-toastify'
 import type { IFieldProps, IFormState } from '@interfaces/modal_interfaces'
 
 import { Button } from '@components/buttons'
-import useModalsEffect from '@components/modals/core/useModalsEffect'
 import { LoadingScreen } from '@components/screens'
 
 import useModifyMutation from '@hooks/useModifyMutation'
@@ -15,7 +14,6 @@ import useModifyMutation from '@hooks/useModifyMutation'
 import ModalHeader from '../../core/components/ModalHeader'
 import FormInputs from './components/FormInputs'
 import SubmitButton from './components/SubmitButton'
-import { FormModalModals } from './modals'
 
 function FormModal<T extends IFormState, U extends RecordModel>({
   // fields stuff
@@ -195,8 +193,6 @@ function FormModal<T extends IFormState, U extends RecordModel>({
       setSubmitLoading(false)
     }
   }
-
-  useModalsEffect(FormModalModals)
 
   return (
     <div className="min-w-[50vw]">

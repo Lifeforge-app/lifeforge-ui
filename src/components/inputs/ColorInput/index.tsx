@@ -34,7 +34,7 @@ function ColorInput({
   const ref = useRef<HTMLInputElement | null>(null)
 
   const handleColorPickerOpen = useCallback(() => {
-    open('formModal.colorPicker', {
+    open('colorPicker', {
       color,
       setColor
     })
