@@ -51,7 +51,7 @@ function IconPickerModal({
   }
 
   return (
-    <div className="min-h-[80vh] min-w-[80vw]">
+    <div className="flex min-h-[80vh] min-w-[80vw] flex-col">
       {currentIconSet !== null ? (
         <div className="mb-8 flex-between flex w-full">
           <GoBackButton onClick={() => setCurrentIconSet(null)} />

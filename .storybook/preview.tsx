@@ -3,11 +3,21 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import React from 'react'
 
+import ColorPickerModal from '../src/components/inputs/ColorInput/ColorPickerModal'
+import IconPickerModal from '../src/components/inputs/IconInput/IconPickerModal'
 import ModalManager from '../src/components/modals/core/ModalManager'
+import useModalsEffect from '../src/components/modals/core/useModalsEffect'
+import DeleteConfirmationModal from '../src/components/modals/features/DeleteConfirmationModal'
 import '../src/index.css'
 import { LifeforgeUIProvider } from '../src/providers/LifeforgeUIProvider'
 
 const queryClient = new QueryClient()
+
+const DEFAULT_MODALS = {
+  deleteConfirmation: DeleteConfirmationModal,
+  iconPicker: IconPickerModal,
+  colorPicker: ColorPickerModal
+}
 
 const withBodyClass = (Story, context) => {
   useEffect(() => {
@@ -31,6 +41,8 @@ const withBodyClass = (Story, context) => {
       document.body.classList.remove('dark')
     }
   }, [context.globals.theme])
+
+  useModalsEffect(DEFAULT_MODALS)
 
   return (
     <QueryClientProvider client={queryClient}>
