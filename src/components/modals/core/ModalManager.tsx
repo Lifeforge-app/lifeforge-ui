@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import ModalWrapper from '../components/ModalWrapper'
+import ModalWrapper from './components/ModalWrapper'
 import { useModalStore } from './useModalStore'
 
 function FinalElement({ index }: { index: number }) {

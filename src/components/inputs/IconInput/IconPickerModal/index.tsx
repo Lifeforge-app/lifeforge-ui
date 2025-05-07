@@ -1,26 +1,31 @@
 import { Icon } from '@iconify/react'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { GoBackButton } from '@components/buttons'
-import { ModalHeader, ModalWrapper } from '@components/modals'
+import { ModalHeader } from '@components/modals'
 
 import IconSet from './pages/IconSet'
 import IconSetList from './pages/IconSetList/index'
 import Search from './pages/Search'
 
 function IconPickerModal({
-  isOpen,
-  setOpen,
-  setSelectedIcon
+  data: { setSelectedIcon },
+  onClose
 }: {
-  isOpen: boolean
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
-  setSelectedIcon: (icon: string) => void
+  data: {
+    setSelectedIcon: (icon: string) => void
+  }
+  onClose: () => void
 }) {
   const [currentIconSet, setCurrentIconSet] = useState<{
     iconSet?: string
     search?: string
   } | null>(null)
+
+  const handleIconSelected = useCallback((icon: string) => {
+    setSelectedIcon(icon)
+    onClose()
+  }, [])
 
   function renderContent() {
     if (currentIconSet === null) {
@@ -32,8 +37,7 @@ function IconPickerModal({
         <Search
           searchTerm={currentIconSet.search}
           setCurrentIconSetProp={setCurrentIconSet}
-          setOpen={setOpen}
-          setSelectedIcon={setSelectedIcon}
+          onIconSelected={handleIconSelected}
         />
       )
     }
@@ -41,19 +45,13 @@ function IconPickerModal({
     return (
       <IconSet
         iconSet={currentIconSet.iconSet ?? ''}
-        setOpen={setOpen}
-        setSelectedIcon={setSelectedIcon}
+        onIconSelected={handleIconSelected}
       />
     )
   }
 
   return (
-    <ModalWrapper
-      isOpen={isOpen}
-      minHeight="80vh"
-      minWidth="80vw"
-      zIndex={1000}
-    >
+    <div className="min-h-[80vh] min-w-[80vw]">
       {currentIconSet !== null ? (
         <div className="mb-8 flex-between flex w-full">
           <GoBackButton onClick={() => setCurrentIconSet(null)} />
@@ -62,7 +60,7 @@ function IconPickerModal({
             onClick={() => {
               setCurrentIconSet(null)
               setSelectedIcon('')
-              setOpen(false)
+              onClose()
             }}
           >
             <Icon className="size-6" icon="tabler:x" />
@@ -85,13 +83,11 @@ function IconPickerModal({
           }
           icon="tabler:icons"
           title="iconPicker.title"
-          onClose={() => {
-            setOpen(false)
-          }}
+          onClose={onClose}
         />
       )}
       {renderContent()}
-    </ModalWrapper>
+    </div>
   )
 }
 

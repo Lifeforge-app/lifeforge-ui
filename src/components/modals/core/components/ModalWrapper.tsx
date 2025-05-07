@@ -51,7 +51,7 @@ function ModalWrapper({
         {children}
       </div>
     </div>,
-    document.querySelector('#app') as HTMLElement
+    (document.querySelector('#app') as HTMLElement) || document.body
   )
 }
 

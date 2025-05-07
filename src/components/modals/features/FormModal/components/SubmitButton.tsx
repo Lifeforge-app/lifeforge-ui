@@ -18,9 +18,7 @@ function SubmitButton({
           className="mt-6 w-full"
           icon={openType === 'create' ? 'tabler:plus' : 'tabler:pencil'}
           loading={submitLoading}
-          onClick={() => {
-            onSubmitButtonClick().catch(console.error)
-          }}
+          onClick={onSubmitButtonClick}
         >
           {openType === 'create' ? 'Create' : 'Update'}
         </Button>
@@ -29,9 +27,7 @@ function SubmitButton({
           className="mt-4 w-full"
           {...submitButtonProps}
           loading={submitLoading}
-          onClick={() => {
-            onSubmitButtonClick().catch(console.error)
-          }}
+          onClick={onSubmitButtonClick}
         />
       )}
     </>

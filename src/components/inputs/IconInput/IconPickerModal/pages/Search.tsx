@@ -65,20 +65,18 @@ async function getIconSet(
 }
 
 function Search({
-  setOpen,
   searchTerm,
-  setSelectedIcon,
-  setCurrentIconSetProp
+  setCurrentIconSetProp,
+  onIconSelected
 }: {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
   searchTerm: string
-  setSelectedIcon: (icon: string) => void
   setCurrentIconSetProp: React.Dispatch<
     React.SetStateAction<{
       iconSet?: string
       search?: string
     } | null>
   >
+  onIconSelected: (icon: string) => void
 }) {
   const [currentIconSet, setCurrentIconSet] = useState<string | null>(null)
   const [iconData, setIconData] = useState<IIconSearchResult | null>(null)
@@ -181,8 +179,7 @@ function Search({
                               key={icon}
                               icon={icon.split(':').pop() ?? ''}
                               iconSet={icon.split(':').shift() ?? ''}
-                              setOpen={setOpen}
-                              setSelectedIcon={setSelectedIcon}
+                              onIconSelected={onIconSelected}
                             />
                           ))}
                       </div>

@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react'
 import { useDebounce } from '@uidotdev/usehooks'
 import clsx from 'clsx'
 import _ from 'lodash'
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@components/buttons'
@@ -86,4 +87,13 @@ function ModalHeader({
   )
 }
 
-export default ModalHeader
+export default memo(ModalHeader, (prevProps, nextProps) => {
+  return (
+    prevProps.title === nextProps.title &&
+    prevProps.icon === nextProps.icon &&
+    prevProps.actionButtonIcon === nextProps.actionButtonIcon &&
+    prevProps.actionButtonIsRed === nextProps.actionButtonIsRed &&
+    prevProps.className === nextProps.className &&
+    prevProps.appendTitle === nextProps.appendTitle
+  )
+})

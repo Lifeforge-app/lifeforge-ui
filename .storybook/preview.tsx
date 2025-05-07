@@ -1,8 +1,13 @@
 import type { Preview } from '@storybook/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useEffect } from 'react'
+import React from 'react'
 
+import ModalManager from '../src/components/modals/core/ModalManager'
 import '../src/index.css'
 import { LifeforgeUIProvider } from '../src/providers/LifeforgeUIProvider'
+
+const queryClient = new QueryClient()
 
 const withBodyClass = (Story, context) => {
   useEffect(() => {
@@ -28,22 +33,25 @@ const withBodyClass = (Story, context) => {
   }, [context.globals.theme])
 
   return (
-    <LifeforgeUIProvider
-      personalization={{
-        theme: context.globals.theme,
-        themeColor: 'blue'
-      }}
-    >
-      <div className="bg-white">
-        <div
-          className={`bg-zinc theme-blue flex min-h-dvh w-full items-center justify-center transition-all ${
-            context.globals.theme === 'dark' ? 'dark' : ''
-          } ${context.globals.theme === 'dark' ? 'bg-bg-900' : 'bg-bg-200/50'}`}
-        >
-          <Story />
+    <QueryClientProvider client={queryClient}>
+      <LifeforgeUIProvider
+        personalization={{
+          theme: context.globals.theme,
+          themeColor: 'blue'
+        }}
+      >
+        <div className="bg-white">
+          <div
+            className={`bg-zinc theme-blue flex min-h-dvh w-full items-center justify-center transition-all ${
+              context.globals.theme === 'dark' ? 'dark' : ''
+            } ${context.globals.theme === 'dark' ? 'bg-bg-900' : 'bg-bg-200/50'}`}
+          >
+            <Story />
+          </div>
         </div>
-      </div>
-    </LifeforgeUIProvider>
+        <ModalManager />
+      </LifeforgeUIProvider>
+    </QueryClientProvider>
   )
 }
 

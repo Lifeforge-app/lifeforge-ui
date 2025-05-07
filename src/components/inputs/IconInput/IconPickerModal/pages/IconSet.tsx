@@ -29,13 +29,11 @@ async function getIconSet(prefix: string): Promise<IIconSetData | null> {
 }
 
 function IconSet({
-  setOpen,
   iconSet,
-  setSelectedIcon
+  onIconSelected
 }: {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
   iconSet: string
-  setSelectedIcon: (icon: string) => void
+  onIconSelected: (icon: string) => void
 }) {
   const [searchTerm, setSearchTerm] = useState('')
   const [currentTag, setCurrentTag] = useState<string | null>(null)
@@ -123,8 +121,7 @@ function IconSet({
                               key={icon}
                               icon={icon}
                               iconSet={iconSet}
-                              setOpen={setOpen}
-                              setSelectedIcon={setSelectedIcon}
+                              onIconSelected={onIconSelected}
                             />
                           ))}
                       </div>

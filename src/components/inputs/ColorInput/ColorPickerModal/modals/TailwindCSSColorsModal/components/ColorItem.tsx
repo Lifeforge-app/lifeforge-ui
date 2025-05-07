@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react'
 import clsx from 'clsx'
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import tinycolor from 'tinycolor2'
 
 import { oklchToHex } from '@utils/colors'
@@ -45,4 +45,9 @@ function ColorItem({
   )
 }
 
-export default ColorItem
+export default memo(ColorItem, (prevProps, nextProps) => {
+  return (
+    prevProps.selected === nextProps.selected &&
+    prevProps.value === nextProps.value
+  )
+})

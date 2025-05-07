@@ -1,24 +1,24 @@
 import { Icon } from '@iconify/react'
+import { useCallback } from 'react'
 
 function IconEntry({
   icon,
   iconSet,
-  setSelectedIcon,
-  setOpen
+  onIconSelected
 }: {
   icon: string
   iconSet: string
-  setSelectedIcon: (icon: string) => void
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  onIconSelected: (icon: string) => void
 }) {
+  const handleIconSelected = useCallback(() => {
+    onIconSelected(icon)
+  }, [icon])
+
   return (
     <button
       className="flex h-min w-full cursor-pointer flex-col items-center rounded-lg p-4 transition-all hover:bg-bg-200/70 dark:hover:bg-bg-800"
       type="button"
-      onClick={() => {
-        setSelectedIcon(`${iconSet}:${icon}`)
-        setOpen(false)
-      }}
+      onClick={handleIconSelected}
     >
       <Icon height="32" icon={`${iconSet}:${icon}`} width="32" />
       <p className="mt-4 -mb-0.5 text-center text-xs font-medium tracking-wide break-all">
