@@ -26,7 +26,7 @@ function FAB({
       alwaysShow={alwaysShow}
       as={as ?? 'button'}
       className={clsx(
-        'fixed right-6 bottom-6 z-10 shadow-lg',
+        'fixed right-6 bottom-6 z-[9950] shadow-lg',
         !alwaysShow &&
           {
             sm: 'sm:hidden',
