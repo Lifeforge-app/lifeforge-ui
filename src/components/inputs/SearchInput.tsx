@@ -103,7 +103,11 @@ function SearchInput({
           loading={sideButtonLoading}
           className="p-2!"
           variant="plain"
-          onClick={onSideButtonClick}
+          onClick={e => {
+            e.stopPropagation()
+            e.preventDefault()
+            onSideButtonClick()
+          }}
         />
       )}
     </search>
