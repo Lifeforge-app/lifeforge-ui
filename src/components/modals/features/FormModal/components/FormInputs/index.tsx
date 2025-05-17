@@ -27,8 +27,6 @@ function FormInputs<T>({
     }
   }
 
-  console.log(data)
-
   return (
     <div className="space-y-4">
       {fields.map(field => {
