@@ -1,5 +1,6 @@
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import { useQueryClient } from '@tanstack/react-query'
+import dayjs from 'dayjs'
 import type { RecordModel } from 'pocketbase'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
@@ -174,6 +175,10 @@ function FormModal<T extends IFormState, U extends RecordModel>({
     const finalData = Object.fromEntries(
       Object.entries(getFinalData ? await getFinalData(data) : data).map(
         ([key, value]) => {
+          if (value instanceof Date) {
+            return [key, dayjs(value).format('YYYY-MM-DDTHH:mm:ssZ')]
+          }
+
           if (typeof value === 'object' && 'image' in (value ?? {})) {
             return [key, (value as { image: string | File | null }).image]
           }
