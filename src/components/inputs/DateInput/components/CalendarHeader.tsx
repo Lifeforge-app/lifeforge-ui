@@ -63,7 +63,7 @@ function CalendarHeader({
           </Select>
           <Icon
             icon="uil:angle-down"
-            className="text-bg-500 dark:text-bg-300 size-4.5 absolute right-3 top-1/2 -translate-y-1/2"
+            className="text-bg-500 size-4.5 absolute right-3 top-1/2 -translate-y-1/2"
           />
         </div>
         <div className="relative">
@@ -82,7 +82,7 @@ function CalendarHeader({
           </Select>
           <Icon
             icon="uil:angle-down"
-            className="text-bg-500 dark:text-bg-300 size-4.5 absolute right-3 top-1/2 -translate-y-1/2"
+            className="text-bg-500 size-4.5 absolute right-3 top-1/2 -translate-y-1/2"
           />
         </div>
       </div>
