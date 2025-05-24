@@ -1,0 +1,20 @@
+::global {
+  --toastify-color-light: var(--color-custom-500);
+}
+
+.Toastify__progress-bar--default {
+  background: var(--color-custom-500);
+  opacity: 1 !important;
+}
+
+.Toastify__toast-container {
+  @apply w-full sm:w-min sm:min-w-96;
+}
+
+.Toastify__toast-container * {
+  font-family: inherit !important;
+}
+
+.Toastify__toast {
+  @apply bg-bg-50 dark:bg-bg-800 text-bg-800 dark:text-bg-50;
+}

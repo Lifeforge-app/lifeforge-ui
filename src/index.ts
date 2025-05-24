@@ -1,3 +1,5 @@
+import './styles/index.css'
+
 export * from './components/buttons'
 export * from './components/inputs'
 export * from './components/modals'
