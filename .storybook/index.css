@@ -2,6 +2,7 @@
 @import 'tailwindcss';
 
 @import 'react-datepicker/dist/react-datepicker.css';
+@import '../src/styles/index.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -131,7 +132,7 @@
   color: rgb(244 244 245) !important;
   font-weight: 500 !important;
   letter-spacing: 0.1rem !important;
-  @apply rounded-lg! py-2! text-center focus:outline-hidden;
+  @apply rounded-lg! py-2! focus:outline-hidden text-center;
 }
 
 .w-color-editable-input span {
@@ -139,7 +140,7 @@
 }
 
 .icon-input-icon > span {
-  @apply block size-4 rounded-full border border-dashed border-bg-300 dark:border-bg-700;
+  @apply border-bg-300 dark:border-bg-700 block size-4 rounded-full border border-dashed;
 }
 
 aside .sidebar-item svg {

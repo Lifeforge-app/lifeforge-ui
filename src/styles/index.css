@@ -1,3 +1,6 @@
+@import '../components/inputs/DateInput/index.css';
+@import '../components/inputs/ColorInput/ColorPickerModal/index.css';
+
 ::global {
   --toastify-color-light: var(--color-custom-500);
 }
@@ -16,5 +19,5 @@
 }
 
 .Toastify__toast {
-  @apply bg-bg-50 dark:bg-bg-800 text-bg-800 dark:text-bg-50;
+  @apply bg-bg-50 text-bg-800 dark:bg-bg-800 dark:text-bg-50;
 }
