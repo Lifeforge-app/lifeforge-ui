@@ -1,6 +1,8 @@
 import { type ColorResult, Colorful, EditableInput } from '@uiw/react-color'
 import { useCallback, useEffect, useState } from 'react'
 
+import './index.css'
+
 import { Button } from '@components/buttons'
 import { ModalHeader, useModalStore, useModalsEffect } from '@components/modals'
 
