@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import _ from 'lodash'
 import { useRef, useState } from 'react'
 import DatePicker from 'react-datepicker'
@@ -64,15 +65,21 @@ function DateInput({
           required={required === true}
         />
         <DatePicker
-          className="mt-6 h-13 w-full rounded-lg border-none bg-transparent px-4 tracking-wider outline-hidden placeholder:text-transparent focus:outline-hidden focus:placeholder:text-bg-500"
+          className="h-13 outline-hidden focus:outline-hidden focus:placeholder:text-bg-500 mt-6 w-full rounded-lg border-none bg-transparent px-4 tracking-wider placeholder:text-transparent"
           selected={date}
           calendarClassName={
             tinycolor(theme).isLight() ? 'theme-light' : 'theme-dark'
           }
+          placeholderText={`August 7, ${dayjs().year()}${
+            hasTime ? ' 08:07 AM' : ''
+          }`}
           onChange={setDate}
           dateFormat={hasTime ? 'MMMM d, yyyy h:mm aa' : 'MMMM d, yyyy'}
           portalId="app"
           shouldCloseOnSelect
+          formatWeekDay={(date: string) => {
+            return date.slice(0, 3)
+          }}
           showTimeSelect={hasTime}
           onCalendarOpen={() => {
             setCalendarOpen(true)
@@ -94,7 +101,7 @@ function DateInput({
               setDate(null)
             }}
             icon="tabler:x"
-            className="mr-4 p-2! hover:bg-bg-300 dark:hover:bg-bg-700/30!"
+            className="p-2! hover:bg-bg-300 dark:hover:bg-bg-700/30! mr-4"
           />
         )}
       </div>

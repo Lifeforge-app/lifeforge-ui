@@ -1,4 +1,5 @@
 import { Select } from '@headlessui/react'
+import { Icon } from '@iconify/react/dist/iconify.js'
 import dayjs from 'dayjs'
 import { range } from 'lodash'
 import React from 'react'
@@ -39,7 +40,7 @@ function CalendarHeader({
   ]
 
   return (
-    <div className="flex-between px-4 py-2 text-bg-800 dark:text-bg-100">
+    <div className="flex-between text-bg-800 dark:text-bg-100 px-4 py-2">
       <Button
         icon="tabler:chevron-left"
         className="p-2! dark:hover:bg-bg-700/30!"
@@ -48,30 +49,42 @@ function CalendarHeader({
         disabled={prevMonthButtonDisabled}
       />
       <div className="flex items-center gap-2">
-        <Select
-          className="rounded-md p-2 pr-3 text-base font-medium transition-all hover:bg-bg-200/30 dark:hover:bg-bg-700/30"
-          value={dayjs(date).year()}
-          onChange={({ target: { value } }) => changeYear(+value)}
-        >
-          {years.map(option => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </Select>
-        <Select
-          className="rounded-md p-2 pr-3 text-base font-medium transition-all hover:bg-bg-200/30 dark:hover:bg-bg-700/30"
-          value={months[dayjs(date).month()]}
-          onChange={({ target: { value } }) =>
-            changeMonth(months.indexOf(value))
-          }
-        >
-          {months.map(option => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </Select>
+        <div className="relative">
+          <Select
+            className="hover:bg-bg-200/30 dark:hover:bg-bg-700/30 appearance-none rounded-md px-3 py-2 pr-8 text-base font-medium transition-all"
+            value={dayjs(date).year()}
+            onChange={({ target: { value } }) => changeYear(+value)}
+          >
+            {years.map(option => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </Select>
+          <Icon
+            icon="uil:angle-down"
+            className="text-bg-500 dark:text-bg-300 size-4.5 absolute right-3 top-1/2 -translate-y-1/2"
+          />
+        </div>
+        <div className="relative">
+          <Select
+            className="hover:bg-bg-200/30 dark:hover:bg-bg-700/30 appearance-none rounded-md px-3 py-2 pr-8 text-base font-medium transition-all"
+            value={months[dayjs(date).month()]}
+            onChange={({ target: { value } }) =>
+              changeMonth(months.indexOf(value))
+            }
+          >
+            {months.map(option => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </Select>
+          <Icon
+            icon="uil:angle-down"
+            className="text-bg-500 dark:text-bg-300 size-4.5 absolute right-3 top-1/2 -translate-y-1/2"
+          />
+        </div>
       </div>
       <Button
         icon="tabler:chevron-right"
