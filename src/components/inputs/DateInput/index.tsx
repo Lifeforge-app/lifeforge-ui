@@ -4,6 +4,9 @@ import DatePicker from 'react-datepicker'
 import { useTranslation } from 'react-i18next'
 import tinycolor from 'tinycolor2'
 
+import './index.css'
+import 'react-datepicker/dist/react-datepicker.css'
+
 import { Button } from '@components/buttons'
 
 import useThemeColors from '@hooks/useThemeColor'

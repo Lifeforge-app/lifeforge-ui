@@ -1,11 +1,11 @@
 {
   "name": "@lifeforge/ui",
   "description": "LifeForge UI component library",
-  "version": "0.25.22-4",
+  "version": "0.25.22-3",
   "moduleResolution": "node",
   "sideEffects": false,
   "scripts": {
-    "build": "rm -rf dist && tsc --noEmit && tsup src/index.ts && tailwindcss -i ./src/index.css -o ./dist/index.css --minify",
+    "build": "rm -rf dist && tsc --noEmit && tsup src/index.ts",
     "lint": "eslint ./src --ext .ts,.tsx",
     "lint:fix": "eslint ./src --ext .ts,.tsx --fix",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
