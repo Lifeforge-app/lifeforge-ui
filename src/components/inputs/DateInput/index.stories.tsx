@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 
-import DateInput from './DateInput'
+import DateInput from '.'
 
 const meta = {
   component: DateInput

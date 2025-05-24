@@ -222,6 +222,10 @@
   @apply bg-custom-600!;
 }
 
+.react-datepicker-wrapper {
+  @apply w-full!;
+}
+
 aside .sidebar-item svg {
   @apply text-custom-500!;
 }
