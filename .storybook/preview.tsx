@@ -24,7 +24,12 @@ const DEFAULT_MODALS: Record<string, ModalComponent> = {
 
 const withBodyClass = (Story, context) => {
   useEffect(() => {
-    document.body.classList.remove('bg-bg-50', 'bg-bg-900')
+    document.body.classList.remove(
+      'bg-bg-50!',
+      'bg-bg-900!',
+      'text-bg-800!',
+      'text-bg-100!'
+    )
     document.body.classList.add(
       'flex',
       'items-center',
@@ -34,8 +39,8 @@ const withBodyClass = (Story, context) => {
       'bg-zinc',
       'transition-all',
       ...(context.globals.theme === 'dark'
-        ? ['bg-bg-900', 'text-bg-100']
-        : ['bg-bg-50', 'text-bg-800'])
+        ? ['bg-bg-900!', 'text-bg-100!']
+        : ['bg-bg-50!', 'text-bg-800!'])
     )
 
     if (context.globals.theme === 'dark') {
@@ -55,7 +60,7 @@ const withBodyClass = (Story, context) => {
           themeColor: 'blue'
         }}
       >
-        <div className="bg-white">
+        <main id="app" className="bg-white">
           <div
             className={`bg-zinc theme-blue flex min-h-dvh w-full items-center justify-center transition-all ${
               context.globals.theme === 'dark' ? 'dark' : ''
@@ -63,7 +68,7 @@ const withBodyClass = (Story, context) => {
           >
             <Story />
           </div>
-        </div>
+        </main>
         <ModalManager />
       </LifeforgeUIProvider>
     </QueryClientProvider>

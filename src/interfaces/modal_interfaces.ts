@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface ITextInputFieldProps {
   label: string
   icon: string
@@ -18,9 +19,7 @@ interface IDateInputFieldProps {
   label: string
   icon: string
   type: 'datetime'
-  index: number
   hasTime?: boolean
-  modalRef: React.RefObject<HTMLDivElement | null>
 }
 
 interface IListboxInputFieldProps {
@@ -83,13 +82,7 @@ type IFieldProps<T> = (
   disabled?: boolean
 }
 
-type IFormState = Record<
-  string,
-  | string
-  | string[]
-  | { image: File | string | null; preview: string | null }
-  | boolean
->
+type IFormState = Record<string, any>
 
 export type {
   IFieldProps,

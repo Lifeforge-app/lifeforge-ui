@@ -4,6 +4,7 @@ import { memo, useMemo } from 'react'
 interface InputLabelProps {
   label: string
   active: boolean
+  focused?: boolean
   isCombobox?: boolean
   isListboxOrCombobox?: boolean
   required?: boolean
@@ -12,6 +13,7 @@ interface InputLabelProps {
 function InputLabel({
   label,
   active,
+  focused,
   isListboxOrCombobox = false,
   isCombobox = false,
   required = false
@@ -27,19 +29,11 @@ function InputLabel({
     return 'top-5 -translate-y-1/2 text-[14px]'
   }, [active, isListboxOrCombobox, isCombobox])
 
-  const labelColorClasses = useMemo(
-    () =>
-      isListboxOrCombobox
-        ? `${isCombobox && 'group-focus-within:text-custom-500!'} group-data-open:text-custom-500!`
-        : 'group-focus-within:text-custom-500!',
-    [isListboxOrCombobox]
-  )
-
   return (
     <span
       className={clsx(
-        'pointer-events-none absolute left-[4.2rem] font-medium tracking-wide text-bg-500 transition-all',
-        labelColorClasses,
+        'pointer-events-none absolute left-[4.2rem] font-medium tracking-wide text-bg-500 transition-all group-focus-within:text-custom-500! group-data-open:text-custom-500!',
+        focused && 'text-custom-500',
         labelPositionClasses
       )}
     >

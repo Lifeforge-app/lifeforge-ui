@@ -1,8 +1,3 @@
-import 'react-calendar/dist/Calendar.css'
-import 'react-clock/dist/Clock.css'
-import 'react-date-picker/dist/DatePicker.css'
-import 'react-datetime-picker/dist/DateTimePicker.css'
-
 export * from './components/buttons'
 export * from './components/inputs'
 export * from './components/modals'

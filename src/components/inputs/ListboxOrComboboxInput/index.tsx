@@ -83,11 +83,7 @@ function ListboxOrComboboxInput<T>(
           onChange={setValue}
         >
           <ListboxButton className="group flex w-full min-w-64 items-center pl-6">
-            <InputIcon
-              active={isActive}
-              icon={icon}
-              listboxOrCombobox="listbox"
-            />
+            <InputIcon active={isActive} icon={icon} />
             <InputLabel
               isListboxOrCombobox
               active={isActive}
@@ -129,11 +125,9 @@ function ListboxOrComboboxInput<T>(
         >
           <div className="group relative flex w-full items-center">
             <InputIcon
-              isCombobox
               active={!!value || customActive === true}
               className="absolute left-6"
               icon={icon}
-              listboxOrCombobox="combobox"
             />
             <InputLabel
               isCombobox

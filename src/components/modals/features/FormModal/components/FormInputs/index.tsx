@@ -64,7 +64,7 @@ function FormInputs<T>({
                 field={field as IFieldProps<T> & { type: 'datetime' }}
                 handleChange={handleChange(field)}
                 namespace={namespace}
-                selectedData={selectedData as string}
+                selectedData={selectedData as Date | null}
               />
             )
           case 'listbox':

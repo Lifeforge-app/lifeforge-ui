@@ -4,9 +4,9 @@ import { DateInput } from '@components/inputs'
 
 interface FormDateInputProps<T> {
   field: IFieldProps<T> & IDateInputFieldProps
-  selectedData: string
+  selectedData: Date | null
   namespace: string
-  handleChange: (value: string) => void
+  handleChange: (value: Date | null) => void
 }
 
 function FormDateInput<T>({
@@ -22,8 +22,6 @@ function FormDateInput<T>({
       disabled={field.disabled}
       hasTime={field.hasTime}
       icon={field.icon}
-      index={field.index}
-      modalRef={field.modalRef}
       name={field.label}
       namespace={namespace}
       required={field.required}
