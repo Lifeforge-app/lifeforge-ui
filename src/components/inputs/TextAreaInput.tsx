@@ -48,10 +48,10 @@ function TextAreaInput({
 
   return (
     <InputWrapper
-      inputRef={ref}
       className={className}
       darker={darker}
       disabled={disabled}
+      inputRef={ref}
     >
       <InputIcon active={!!value && String(value).length > 0} icon={icon} />
       <div className="flex w-full items-center gap-2">

@@ -26,7 +26,18 @@ export default [
     },
     rules: {
       'react-compiler/react-compiler': 'error',
-      'react/react-in-jsx-scope': 'off'
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-sort-props': [
+        'error',
+        {
+          callbacksLast: true,
+          shorthandFirst: true,
+          shorthandLast: false,
+          ignoreCase: true,
+          noSortAlphabetically: false,
+          reservedFirst: true
+        }
+      ]
     }
   },
 

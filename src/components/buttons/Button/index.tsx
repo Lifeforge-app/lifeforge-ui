@@ -68,10 +68,10 @@ function Button<C extends React.ElementType = 'button'>({
     >
       {!finalProps.iconAtEnd && (
         <ButtonIcon
-          icon={icon}
           disabled={finalProps.disabled}
-          loading={finalProps.loading}
+          icon={icon}
           iconClassName={finalProps.iconClassName}
+          loading={finalProps.loading}
         />
       )}
       {children && typeof children === 'string'
@@ -87,10 +87,10 @@ function Button<C extends React.ElementType = 'button'>({
         : children}
       {finalProps.iconAtEnd && (
         <ButtonIcon
-          icon={icon}
           disabled={finalProps.disabled}
-          loading={finalProps.loading}
+          icon={icon}
           iconClassName={finalProps.iconClassName}
+          loading={finalProps.loading}
         />
       )}
     </Component>

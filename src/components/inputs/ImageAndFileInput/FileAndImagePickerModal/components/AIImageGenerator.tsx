@@ -55,20 +55,20 @@ function AIImageGenerator({
   return !file ? (
     <>
       <TextAreaInput
-        icon="tabler:edit"
-        name="Prompt"
-        tKey="imagePicker"
-        namespace="common.modals"
-        placeholder="A description of the image you want to generate"
-        value={prompt}
-        setValue={setPrompt}
         darker
         required
+        icon="tabler:edit"
+        name="Prompt"
+        namespace="common.modals"
+        placeholder="A description of the image you want to generate"
+        setValue={setPrompt}
+        tKey="imagePicker"
+        value={prompt}
       />
       <Button
-        icon="mage:stars-c"
         className="mt-6 w-full"
         disabled={prompt === ''}
+        icon="mage:stars-c"
         loading={loading}
         onClick={onSubmit}
       >
@@ -87,11 +87,11 @@ function AIImageGenerator({
       <Button
         className="mt-6 w-full"
         icon="tabler:refresh"
+        variant="secondary"
         onClick={() => {
           setFile(null)
           setPreview(null)
         }}
-        variant="secondary"
       >
         Regenerate
       </Button>

@@ -99,9 +99,9 @@ function SearchInput({
       )}
       {sideButtonIcon !== undefined && onSideButtonClick !== undefined && (
         <Button
+          className="p-2!"
           icon={sideButtonIcon}
           loading={sideButtonLoading}
-          className="p-2!"
           variant="plain"
           onClick={e => {
             e.stopPropagation()

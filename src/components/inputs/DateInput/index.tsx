@@ -65,43 +65,44 @@ function DateInput({
           required={required === true}
         />
         <DatePicker
-          className="h-13 outline-hidden focus:outline-hidden focus:placeholder:text-bg-500 mt-6 w-full rounded-lg border-none bg-transparent px-4 tracking-wider placeholder:text-transparent"
-          selected={date}
+          shouldCloseOnSelect
           calendarClassName={
             tinycolor(theme).isLight() ? 'theme-light' : 'theme-dark'
           }
-          placeholderText={`August 7, ${dayjs().year()}${
-            hasTime ? ' 08:07 AM' : ''
-          }`}
-          onChange={setDate}
+          className="h-13 outline-hidden focus:outline-hidden focus:placeholder:text-bg-500 mt-6 w-full rounded-lg border-none bg-transparent px-4 tracking-wider placeholder:text-transparent"
           dateFormat={hasTime ? 'MMMM d, yyyy h:mm aa' : 'MMMM d, yyyy'}
-          portalId="app"
-          shouldCloseOnSelect
           formatWeekDay={(date: string) => {
             return date.slice(0, 3)
           }}
-          showTimeSelect={hasTime}
-          onCalendarOpen={() => {
-            setCalendarOpen(true)
-          }}
-          onCalendarClose={() => {
-            setCalendarOpen(false)
-          }}
-          showPopperArrow={false}
+          placeholderText={`August 7, ${dayjs().year()}${
+            hasTime ? ' 08:07 AM' : ''
+          }`}
+          popperPlacement="bottom-start"
+          portalId="app"
           renderCustomHeader={CalendarHeader}
+          selected={date}
+          showPopperArrow={false}
+          showTimeSelect={hasTime}
           weekDayClassName={(date: Date) => {
             const isWeekend = date.getDay() === 0
             return isWeekend ? 'text-red-500!' : 'text-bg-500!'
           }}
+          onCalendarClose={() => {
+            setCalendarOpen(false)
+          }}
+          onCalendarOpen={() => {
+            setCalendarOpen(true)
+          }}
+          onChange={setDate}
         />
         {!!date && (
           <Button
+            className="p-2! hover:bg-bg-300 dark:hover:bg-bg-700/30! mr-4"
+            icon="tabler:x"
             variant="plain"
             onClick={() => {
               setDate(null)
             }}
-            icon="tabler:x"
-            className="p-2! hover:bg-bg-300 dark:hover:bg-bg-700/30! mr-4"
           />
         )}
       </div>

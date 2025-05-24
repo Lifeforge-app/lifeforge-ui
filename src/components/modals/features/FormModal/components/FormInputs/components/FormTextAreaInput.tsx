@@ -22,13 +22,13 @@ function FormTextAreaInput<T>({
     <TextAreaInput
       darker
       disabled={field.disabled}
+      icon={field.icon}
       name={field.label}
       namespace={namespace}
       placeholder={field.placeholder}
       required={field.required}
       setValue={handleChange}
       value={selectedData}
-      icon={field.icon}
     />
   )
 }

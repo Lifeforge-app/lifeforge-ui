@@ -73,9 +73,9 @@ function DnDContainer({
       <Button
         className="mt-2 min-w-1/2 cursor-pointer"
         icon="tabler:clipboard"
-        variant="secondary"
-        tKey="dnd"
         namespace="common.misc"
+        tKey="dnd"
+        variant="secondary"
         onClick={pasteFromClipboard}
       >
         paste from clipboard

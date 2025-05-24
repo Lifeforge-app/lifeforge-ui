@@ -26,7 +26,14 @@ function FormFileInput<T>({
 }: FormFileInputProps<T>) {
   return (
     <ImageAndFileInput
+      enablePixabay
+      enableUrl
+      acceptedMimeTypes={{
+        images: ['image/png', 'image/jpeg', 'image/webp']
+      }}
+      defaultAIPrompt={field.defaultImageGenerationPrompt}
       disabled={field.disabled}
+      enableAI={field.enableAIImageGeneration}
       icon="tabler:file"
       image={selectedData.image}
       name={field.label}
@@ -40,13 +47,6 @@ function FormFileInput<T>({
           preview: null
         })
       }
-      enablePixabay
-      enableUrl
-      enableAI={field.enableAIImageGeneration}
-      defaultAIPrompt={field.defaultImageGenerationPrompt}
-      acceptedMimeTypes={{
-        images: ['image/png', 'image/jpeg', 'image/webp']
-      }}
     />
   )
 }

@@ -36,7 +36,6 @@ export const Default: Story = {
         <FormModal
           {...args}
           data={data}
-          setData={setData}
           fields={[
             {
               id: 'name',
@@ -59,6 +58,7 @@ export const Default: Story = {
               required: true
             }
           ]}
+          setData={setData}
         />
       </ModalWrapper>
     )

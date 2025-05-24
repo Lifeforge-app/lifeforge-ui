@@ -42,11 +42,11 @@ function CalendarHeader({
   return (
     <div className="flex-between text-bg-800 dark:text-bg-100 px-4 py-2">
       <Button
-        icon="tabler:chevron-left"
         className="p-2! dark:hover:bg-bg-700/30!"
+        disabled={prevMonthButtonDisabled}
+        icon="tabler:chevron-left"
         variant="plain"
         onClick={decreaseMonth}
-        disabled={prevMonthButtonDisabled}
       />
       <div className="flex items-center gap-2">
         <div className="relative">
@@ -62,8 +62,8 @@ function CalendarHeader({
             ))}
           </Select>
           <Icon
-            icon="uil:angle-down"
             className="text-bg-500 size-4.5 absolute right-3 top-1/2 -translate-y-1/2"
+            icon="uil:angle-down"
           />
         </div>
         <div className="relative">
@@ -81,17 +81,17 @@ function CalendarHeader({
             ))}
           </Select>
           <Icon
-            icon="uil:angle-down"
             className="text-bg-500 size-4.5 absolute right-3 top-1/2 -translate-y-1/2"
+            icon="uil:angle-down"
           />
         </div>
       </div>
       <Button
-        icon="tabler:chevron-right"
         className="p-2! dark:hover:bg-bg-700/30!"
+        disabled={nextMonthButtonDisabled}
+        icon="tabler:chevron-right"
         variant="plain"
         onClick={increaseMonth}
-        disabled={nextMonthButtonDisabled}
       />
     </div>
   )

@@ -146,6 +146,7 @@ function DeleteConfirmationModal<T extends RecordModel>({
       {confirmationText && (
         <TextInput
           darker
+          className="mt-4"
           icon="tabler:alert-triangle"
           name="Confirmation"
           namespace="common.modals"
@@ -154,7 +155,6 @@ function DeleteConfirmationModal<T extends RecordModel>({
           })}
           setValue={setConfirmationTextState}
           tKey="deleteConfirmation"
-          className="mt-4"
           value={confirmationTextState}
         />
       )}
@@ -169,11 +169,11 @@ function DeleteConfirmationModal<T extends RecordModel>({
         </Button>
         <Button
           isRed
+          className="w-full"
           disabled={
             confirmationText !== '' &&
             confirmationText !== confirmationTextState
           }
-          className="w-full"
           icon={customConfirmButtonIcon ?? 'tabler:trash'}
           loading={loading}
           onClick={() => {

@@ -119,10 +119,10 @@ function FileAndImagePickerModal({
             case 'ai':
               return (
                 <AIImageGenerator
+                  defaultPrompt={defaultAIPrompt || ''}
                   file={file}
                   setFile={setFile}
                   setPreview={setPreview}
-                  defaultPrompt={defaultAIPrompt || ''}
                 />
               )
           }

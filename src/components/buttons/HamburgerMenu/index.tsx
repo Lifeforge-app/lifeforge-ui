@@ -51,13 +51,13 @@ function HamburgerMenu(props: MenuProps) {
         onClick={handleClick}
       />
       <Transition
+        afterLeave={onClose}
         enter="transition-opacity duration-200"
         enterFrom="opacity-0"
         enterTo="opacity-100"
         leave="transition-opacity duration-150"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
-        afterLeave={onClose}
       >
         <TransitionChild>
           <MenuItems
