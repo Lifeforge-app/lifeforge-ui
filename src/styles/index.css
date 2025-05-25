@@ -1,6 +1,8 @@
 @import '../components/inputs/DateInput/index.css';
 @import '../components/inputs/ColorInput/ColorPickerModal/index.css';
 
+@import 'react-datepicker/dist/react-datepicker.css';
+
 ::global {
   --toastify-color-light: var(--color-custom-500);
 }
