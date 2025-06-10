@@ -85,6 +85,12 @@ function Pixabay({
       editors_choice: filters.isEditorsChoice ? 'true' : 'false'
     })
 
+    params.forEach((value, key) => {
+      if (value === '') {
+        params.delete(key)
+      }
+    })
+
     try {
       const data = await fetchAPI<IPixabaySearchResult>(
         apiHost,
@@ -154,7 +160,7 @@ function Pixabay({
                   <LoadingScreen />
                 </div>
               ) : (
-                <div className="mb-6 flex-center size-full flex-1">
+                <div className="flex-center mb-6 size-full flex-1">
                   <EmptyStateScreen
                     icon="simple-icons:pixabay"
                     name="pixabay"
