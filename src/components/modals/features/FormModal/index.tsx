@@ -187,15 +187,16 @@ function FormModal<T extends IFormState, U extends RecordModel>({
       )
     )
 
+    if (onSubmit) {
+      await onSubmit()
+      setSubmitLoading(false)
+      return
+    }
+
     if (openType === 'create') {
       entryCreateMutation.mutate(finalData as Partial<U>)
     } else if (openType === 'update') {
       entryUpdateMutation.mutate(finalData as Partial<U>)
-    }
-
-    if (onSubmit) {
-      await onSubmit()
-      setSubmitLoading(false)
     }
   }
 
