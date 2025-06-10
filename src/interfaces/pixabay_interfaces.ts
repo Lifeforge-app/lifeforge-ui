@@ -21,7 +21,7 @@ interface IPixabaySearchFilter {
     | 'buildings'
     | 'business'
     | 'music'
-    | ''
+    | undefined
   colors:
     | 'grayscale'
     | 'transparent'
@@ -37,7 +37,7 @@ interface IPixabaySearchFilter {
     | 'gray'
     | 'black'
     | 'brown'
-    | ''
+    | undefined
   isEditorsChoice: boolean
 }
 

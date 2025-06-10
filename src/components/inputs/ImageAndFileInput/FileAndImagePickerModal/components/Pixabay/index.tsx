@@ -22,8 +22,8 @@ import SearchResults from './components/SearchResults'
 
 const initialFilter: IPixabaySearchFilter = {
   imageType: 'all',
-  category: '',
-  colors: '',
+  category: undefined,
+  colors: undefined,
   isEditorsChoice: false
 }
 
@@ -80,8 +80,8 @@ function Pixabay({
       q: query,
       page: page.toString(),
       type: filters.imageType,
-      category: filters.category,
-      colors: filters.colors,
+      category: filters.category ?? '',
+      colors: filters.colors ?? '',
       editors_choice: filters.isEditorsChoice ? 'true' : 'false'
     })
 

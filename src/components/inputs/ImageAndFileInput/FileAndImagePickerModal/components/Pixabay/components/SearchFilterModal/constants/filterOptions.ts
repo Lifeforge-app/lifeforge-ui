@@ -6,7 +6,7 @@ export const IMAGE_TYPES = [
 ]
 
 export const CATEGORIES = [
-  { name: 'None', id: '', icon: 'tabler:circle' },
+  { name: 'None', id: undefined, icon: 'tabler:circle' },
   { name: 'Backgrounds', id: 'backgrounds', icon: 'tabler:background' },
   { name: 'Fashion', id: 'fashion', icon: 'tabler:shirt' },
   { name: 'Nature', id: 'nature', icon: 'tabler:leaf' },
@@ -30,7 +30,7 @@ export const CATEGORIES = [
 ]
 
 export const COLORS = [
-  { name: 'None', id: '', color: 'transparent' },
+  { name: 'None', id: undefined, color: 'transparent' },
   { name: 'Grayscale', id: 'grayscale', color: 'gray' },
   { name: 'Transparent', id: 'transparent', color: 'transparent' },
   { name: 'Red', id: 'red', color: 'red' },
