@@ -86,7 +86,7 @@ function Pixabay({
     })
 
     params.forEach((value, key) => {
-      if (value === '') {
+      if (!value) {
         params.delete(key)
       }
     })
