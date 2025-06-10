@@ -76,25 +76,21 @@ function Pixabay({
     setResults(null)
     setLoading(true)
 
-    const params = new URLSearchParams({
-      q: query,
-      page: page.toString(),
-      type: filters.imageType,
-      category: filters.category ?? '',
-      colors: filters.colors ?? '',
-      editors_choice: filters.isEditorsChoice ? 'true' : 'false'
-    })
-
-    params.forEach((value, key) => {
-      if (!value) {
-        params.delete(key)
-      }
-    })
+    const params = Object.fromEntries(
+      Object.entries({
+        q: query,
+        page: page.toString(),
+        type: filters.imageType,
+        category: filters.category,
+        colors: filters.colors,
+        editors_choice: filters.isEditorsChoice ? 'true' : 'false'
+      }).filter(([, v]) => Boolean(v))
+    ) as Record<string, string>
 
     try {
       const data = await fetchAPI<IPixabaySearchResult>(
         apiHost,
-        `pixabay/search?${params.toString()}`
+        `pixabay/search?${new URLSearchParams(params).toString()}`
       )
       setResults(data)
     } catch {
