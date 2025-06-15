@@ -42,7 +42,7 @@ function Pagination({
             className={clsx(
               'hidden rounded-md px-3 py-2 lg:block',
               currentPage === 1
-                ? 'font-semibold text-custom-500'
+                ? 'text-custom-500 font-semibold'
                 : 'text-bg-500 hover:bg-bg-200 dark:hover:bg-bg-800'
             )}
             onClick={() => {
@@ -51,7 +51,7 @@ function Pagination({
           >
             {1}
           </button>
-          <Icon className="hidden text-bg-500 lg:block" icon="uil:ellipsis-h" />
+          <Icon className="text-bg-500 hidden lg:block" icon="uil:ellipsis-h" />
         </>
       )
     }
@@ -63,8 +63,8 @@ function Pagination({
           className={clsx(
             'rounded-md px-5 py-3',
             currentPage === i
-              ? 'font-semibold lg:text-custom-500'
-              : 'hidden text-bg-500 hover:bg-bg-200 lg:block dark:hover:bg-bg-800'
+              ? 'lg:text-custom-500 font-semibold'
+              : 'text-bg-500 hover:bg-bg-200 dark:hover:bg-bg-800 hidden lg:block'
           )}
           onClick={() => {
             onPageChange(i)
@@ -82,7 +82,7 @@ function Pagination({
         <>
           {endPage < totalPages - 1 && (
             <Icon
-              className="hidden text-bg-500 lg:block"
+              className="text-bg-500 hidden lg:block"
               icon="uil:ellipsis-h"
             />
           )}
@@ -91,7 +91,7 @@ function Pagination({
             className={clsx(
               'hidden rounded-md px-5 py-3 lg:block',
               currentPage === totalPages
-                ? 'font-semibold text-custom-500'
+                ? 'text-custom-500 font-semibold'
                 : 'text-bg-500 hover:bg-bg-200 dark:hover:bg-bg-800'
             )}
             onClick={() => {

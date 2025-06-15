@@ -12,7 +12,7 @@ function IconSetEntry({
   return (
     <button
       key={iconSet.prefix}
-      className="flex w-full grow flex-col overflow-hidden rounded-md bg-bg-50 shadow-custom transition-all hover:bg-bg-200/70 dark:bg-bg-800 dark:hover:bg-bg-700/50"
+      className="bg-bg-50 shadow-custom hover:bg-bg-200/70 dark:bg-bg-800 dark:hover:bg-bg-700/50 flex w-full grow flex-col overflow-hidden rounded-md transition-all"
       type="button"
       onClick={() => {
         setCurrentIconSet({ iconSet: iconSet.prefix })
@@ -35,7 +35,7 @@ function IconSetEntry({
           By&nbsp;
           <span className="underline">{iconSet.author.name}</span>
         </p>
-        <div className="sssm:py-0 mt-4 flex-between flex w-full border-t border-bg-200 pt-4 text-sm dark:border-bg-500">
+        <div className="sssm:py-0 flex-between border-bg-200 dark:border-bg-500 mt-4 flex w-full border-t pt-4 text-sm">
           <p>{iconSet.total?.toLocaleString()} icons</p>
           {iconSet.height !== undefined && (
             <div className="flex items-center">

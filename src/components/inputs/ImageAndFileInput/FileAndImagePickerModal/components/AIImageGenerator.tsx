@@ -77,7 +77,7 @@ function AIImageGenerator({
     </>
   ) : (
     <div>
-      <div className="flex h-96 w-full items-center justify-center rounded-lg bg-bg-200 p-8 shadow-custom dark:bg-bg-800/50">
+      <div className="bg-bg-200 shadow-custom dark:bg-bg-800/50 flex h-96 w-full items-center justify-center rounded-lg p-8">
         <img
           alt=""
           className="h-full rounded-lg object-contain"

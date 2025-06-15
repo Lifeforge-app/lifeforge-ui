@@ -20,7 +20,7 @@ function ComboboxInputWrapper<T>({
     <Combobox
       as="div"
       className={clsx(
-        'relative flex items-center gap-1 rounded-t-lg border-b-2 border-bg-500 bg-bg-200/50 shadow-custom transition-all focus-within:border-custom-500! hover:bg-bg-200 data-[open]:border-custom-500! dark:bg-bg-800/50 dark:hover:bg-bg-800/80',
+        'border-bg-500 bg-bg-200/50 shadow-custom focus-within:border-custom-500! hover:bg-bg-200 data-[open]:border-custom-500! dark:bg-bg-800/50 dark:hover:bg-bg-800/80 relative flex items-center gap-1 rounded-t-lg border-b-2 transition-all',
         className,
         disabled ? 'pointer-events-none! opacity-50' : ''
       )}

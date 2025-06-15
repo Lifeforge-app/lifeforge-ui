@@ -16,7 +16,7 @@ export default function Tooltip({
   return (
     <>
       <span data-tooltip-id={`tooltip-${_.kebabCase(id)}`}>
-        <Icon className="size-5 text-bg-500" icon={icon} />
+        <Icon className="text-bg-500 size-5" icon={icon} />
       </span>
       <ReactTooltip
         className="z-9999 rounded-md! bg-bg-50 p-4! text-base! text-bg-800 shadow-custom dark:bg-bg-900 dark:text-bg-50"

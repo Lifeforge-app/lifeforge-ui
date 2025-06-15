@@ -17,7 +17,7 @@ function SidebarWrapper({
   return (
     <aside
       className={clsx(
-        'absolute top-0 z-[9993] size-full shrink-0 rounded-lg bg-bg-50 py-4 shadow-custom backdrop-blur-xs transition-all duration-300 xl:static xl:w-1/4 xl:min-w-96 xl:bg-bg-50/50 xl:backdrop-blur-xs dark:bg-bg-900 xl:dark:bg-bg-900/50',
+        'bg-bg-50 shadow-custom backdrop-blur-xs xl:bg-bg-50/50 xl:backdrop-blur-xs dark:bg-bg-900 xl:dark:bg-bg-900/50 absolute top-0 z-[9993] size-full shrink-0 rounded-lg py-4 transition-all duration-300 xl:static xl:w-1/4 xl:min-w-96',
         isOpen ? 'left-0' : 'left-full',
         customHeight ?? 'xl:h-[calc(100%-2rem)]'
       )}

@@ -16,7 +16,7 @@ function InputIcon({
   return (
     <Icon
       className={clsx(
-        'size-6 shrink-0 transition-all group-focus-within:text-custom-500! group-data-open:text-custom-500!',
+        'group-focus-within:text-custom-500! group-data-open:text-custom-500! size-6 shrink-0 transition-all',
         !active && 'text-bg-500',
         isFocused && 'text-custom-500',
         className

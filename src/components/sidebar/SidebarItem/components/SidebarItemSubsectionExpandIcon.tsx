@@ -9,14 +9,14 @@ function SidebarItemSubsectionExpandIcon({
   subsectionExpanded: boolean
 }) {
   return (
-    <div className="relative flex-between flex">
+    <div className="flex-between relative flex">
       <button
-        className="rounded-full p-1 hover:bg-bg-100 dark:hover:bg-bg-700/50"
+        className="hover:bg-bg-100 dark:hover:bg-bg-700/50 rounded-full p-1"
         onClick={toggleSubsection}
       >
         <Icon
           className={clsx(
-            'stroke-[2px] text-bg-500 transition-all',
+            'text-bg-500 stroke-[2px] transition-all',
             subsectionExpanded && 'rotate-90'
           )}
           icon="tabler:chevron-right"

@@ -7,7 +7,7 @@ function GoBackButton({ onClick }: { onClick: () => void }) {
 
   return (
     <Button
-      className="mb-2 w-min px-0 py-2 pl-2 hover:bg-transparent! dark:hover:bg-transparent!"
+      className="hover:bg-transparent! dark:hover:bg-transparent! mb-2 w-min px-0 py-2 pl-2"
       icon="tabler:chevron-left"
       variant="plain"
       onClick={onClick}

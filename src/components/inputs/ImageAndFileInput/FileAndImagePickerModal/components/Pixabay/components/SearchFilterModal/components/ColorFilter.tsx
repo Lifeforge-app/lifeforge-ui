@@ -21,7 +21,7 @@ function ColorFilter({ colors, updateFilters }: ColorFilterProps) {
       buttonContent={
         <>
           <div
-            className="size-3 rounded-full border border-bg-200 dark:border-bg-700"
+            className="border-bg-200 dark:border-bg-700 size-3 rounded-full border"
             style={{
               backgroundColor: COLORS.find(l => l.id === colors)?.color
             }}

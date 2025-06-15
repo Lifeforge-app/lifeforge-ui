@@ -92,7 +92,7 @@ function ColorPickerModal({
           Morandi Color Palette
         </Button>
         <Button
-          className="w-full bg-teal-500! hover:bg-teal-600!"
+          className="bg-teal-500! hover:bg-teal-600! w-full"
           icon="tabler:brand-tailwind"
           variant="primary"
           onClick={handleColorPaletteModalOpen('tailwind')}

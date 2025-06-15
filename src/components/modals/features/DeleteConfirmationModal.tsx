@@ -140,7 +140,7 @@ function DeleteConfirmationModal<T extends RecordModel>({
             itemName: finalItemName
           })}
       </h1>
-      <p className="mt-2 text-bg-500">
+      <p className="text-bg-500 mt-2">
         {customText ?? t('deleteConfirmation.desc', { itemName })}
       </p>
       {confirmationText && (
