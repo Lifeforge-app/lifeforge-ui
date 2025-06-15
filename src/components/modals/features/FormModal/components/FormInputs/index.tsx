@@ -28,7 +28,7 @@ function FormInputs<T>({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {fields.map(field => {
         const selectedData = data[field.id]
 
