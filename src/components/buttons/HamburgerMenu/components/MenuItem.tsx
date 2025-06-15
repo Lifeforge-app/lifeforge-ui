@@ -33,7 +33,8 @@ function MenuItem({
   disabled,
   preventDefault = false,
   namespace = 'common.buttons',
-  loading = false
+  loading = false,
+  className
 }: {
   icon?: string | React.ReactElement
   text: string
@@ -44,6 +45,7 @@ function MenuItem({
   preventDefault?: boolean
   namespace?: string | false
   loading?: boolean
+  className?: string
 }) {
   const { t } = useTranslation(namespace ? namespace : 'common.buttons')
 
@@ -57,7 +59,8 @@ function MenuItem({
               !disabled &&
                 !loading &&
                 'hover:bg-bg-200 dark:hover:bg-bg-700/50',
-              'flex w-full items-center gap-4 p-4 text-left transition-all'
+              'flex w-full items-center gap-4 p-4 text-left transition-all',
+              className
             )}
             disabled={disabled || loading}
             onClick={e => {
