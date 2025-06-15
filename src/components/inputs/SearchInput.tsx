@@ -13,7 +13,6 @@ function SearchInput({
   stuffToSearch,
   onKeyUp,
   customIcon,
-  hasTopMargin = true,
   onFilterIconClick,
   filterAmount,
   sideButtonIcon,
@@ -28,7 +27,6 @@ function SearchInput({
   stuffToSearch: string
   onKeyUp?: (e: React.KeyboardEvent<HTMLInputElement>) => void
   customIcon?: string
-  hasTopMargin?: boolean
   onFilterIconClick?: () => void
   filterAmount?: number
   sideButtonIcon?: string
@@ -50,9 +48,8 @@ function SearchInput({
   return (
     <search
       className={clsx(
-        'flex min-h-14 w-full cursor-text items-center gap-4 rounded-lg px-4 shadow-custom transition-all',
+        'shadow-custom flex min-h-14 w-full cursor-text items-center gap-3 rounded-lg px-4 transition-all',
         componentBgLighterWithHover,
-        hasTopMargin && 'mt-4',
         className
       )}
       onClick={e => {
@@ -60,11 +57,11 @@ function SearchInput({
       }}
     >
       <Icon
-        className="size-5 shrink-0 text-bg-500"
+        className="text-bg-500 size-5 shrink-0"
         icon={customIcon ?? 'tabler:search'}
       />
       <input
-        className="w-full bg-transparent caret-custom-500 placeholder:text-bg-500"
+        className="caret-custom-500 placeholder:text-bg-500 w-full bg-transparent"
         placeholder={t(`search`, {
           item: t([
             `${namespace}:${[tKey, 'items', _.camelCase(stuffToSearch)]
@@ -87,7 +84,7 @@ function SearchInput({
             filterAmount !== undefined && filterAmount > 0
               ? 'text-bg-900 dark:text-bg-100'
               : 'text-bg-500 hover:text-bg-900 dark:hover:text-bg-100',
-            'transition-all hover:bg-bg-200 dark:hover:bg-bg-700/50'
+            'hover:bg-bg-200 dark:hover:bg-bg-700/50 transition-all'
           )}
           onClick={onFilterIconClick}
         >

@@ -1,5 +1,4 @@
 import { Icon } from '@iconify/react'
-import clsx from 'clsx'
 import _ from 'lodash'
 import { useCallback, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -14,7 +13,6 @@ function ColorInput({
   name,
   color,
   setColor,
-  hasTopMargin = true,
   className,
   namespace,
   required,
@@ -23,7 +21,6 @@ function ColorInput({
   name: string
   color: string
   setColor: (value: string) => void
-  hasTopMargin?: boolean
   className?: string
   namespace: string
   required?: boolean
@@ -43,7 +40,7 @@ function ColorInput({
   return (
     <InputWrapper
       darker
-      className={clsx(hasTopMargin && 'mt-4', className)}
+      className={className}
       disabled={disabled}
       inputRef={ref}
     >

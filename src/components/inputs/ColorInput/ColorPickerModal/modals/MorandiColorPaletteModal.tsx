@@ -23,14 +23,14 @@ function MorandiColorPaletteModal({
         title="colorPicker.modals.morandiColorPalette"
         onClose={onClose}
       />
-      <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(4rem,1fr))] gap-4 p-4 pt-0">
+      <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(4rem,1fr))] gap-3 p-4 pt-0">
         {MORANDI_COLORS.sort(sortFn).map((morandiColor, index) => (
           <button
             key={index}
             className={clsx(
-              'flex-center aspect-square size-full cursor-pointer rounded-md shadow-custom',
+              'flex-center shadow-custom aspect-square size-full cursor-pointer rounded-md',
               color === morandiColor &&
-                'ring-2 ring-bg-900 ring-offset-2 ring-offset-bg-100 dark:ring-bg-50 dark:ring-offset-bg-900'
+                'ring-bg-900 ring-offset-bg-100 dark:ring-bg-50 dark:ring-offset-bg-900 ring-2 ring-offset-2'
             )}
             style={{ backgroundColor: morandiColor }}
             onClick={() => {

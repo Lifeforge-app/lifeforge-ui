@@ -66,12 +66,12 @@ function ImageAndFileInput({
   return (
     <div
       className={clsx(
-        'flex w-full flex-col rounded-md p-6 shadow-custom',
+        'shadow-custom flex w-full flex-col rounded-md p-6',
         componentBgLighter,
         disabled ? 'pointer-events-none! opacity-50' : 'cursor-pointer'
       )}
     >
-      <div className="flex items-center gap-4 text-bg-500">
+      <div className="text-bg-500 flex items-center gap-3">
         <Icon className="size-6" icon={icon} />
         <span className="font-medium">
           {t(`${namespace}:inputs.${_.camelCase(name)}`)}{' '}
@@ -124,7 +124,7 @@ function ImageAndFileInput({
           >
             {t('common.buttons:select')}
           </Button>
-          <p className="text-xs text-bg-500">{reminderText}</p>
+          <p className="text-bg-500 text-xs">{reminderText}</p>
         </div>
       )}
     </div>

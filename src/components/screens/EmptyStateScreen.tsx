@@ -37,14 +37,14 @@ function EmptyStateScreen({
     <div
       className={clsx(
         'flex-center size-full flex-col',
-        smaller ? 'gap-4' : 'gap-6'
+        smaller ? 'gap-3' : 'gap-6'
       )}
     >
       {icon !== undefined &&
         (typeof icon === 'string' ? (
           <Icon
             className={clsx(
-              'shrink-0 text-bg-300 dark:text-bg-500',
+              'text-bg-300 dark:text-bg-500 shrink-0',
               smaller ? 'size-24' : 'size-32'
             )}
             icon={icon}
@@ -54,7 +54,7 @@ function EmptyStateScreen({
         ))}
       <h2
         className={clsx(
-          'px-6 text-center font-semibold text-bg-500',
+          'text-bg-500 px-6 text-center font-semibold',
           smaller ? 'text-3xl' : 'text-4xl'
         )}
       >
@@ -64,7 +64,7 @@ function EmptyStateScreen({
       </h2>
       <p
         className={clsx(
-          '-mt-2 px-6 text-center whitespace-pre-wrap text-bg-500',
+          'text-bg-500 -mt-2 whitespace-pre-wrap px-6 text-center',
           smaller ? 'text-base' : 'text-lg'
         )}
       >

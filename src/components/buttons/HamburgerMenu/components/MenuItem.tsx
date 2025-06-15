@@ -59,7 +59,7 @@ function MenuItem({
               !disabled &&
                 !loading &&
                 'hover:bg-bg-200 dark:hover:bg-bg-700/50',
-              'flex w-full items-center gap-4 p-4 text-left transition-all',
+              'flex w-full items-center gap-3 p-4 text-left transition-all',
               className
             )}
             disabled={disabled || loading}

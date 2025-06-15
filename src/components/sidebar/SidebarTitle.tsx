@@ -31,11 +31,11 @@ function SidebarTitle({
   return (
     <li
       className={clsx(
-        'flex-between flex gap-4 pt-2 pr-5 pl-8 transition-all',
+        'flex-between flex gap-3 pl-8 pr-5 pt-2 transition-all',
         actionButtonIcon !== undefined ? 'pb-2' : 'pb-4'
       )}
     >
-      <h3 className="text-sm font-semibold tracking-widest whitespace-nowrap text-bg-600 uppercase">
+      <h3 className="text-bg-600 whitespace-nowrap text-sm font-semibold uppercase tracking-widest">
         {t([
           `sidebar.${_.camelCase(name)}`,
           `common.sidebar:categories.${_.camelCase(name)}`,
@@ -46,7 +46,7 @@ function SidebarTitle({
         (actionButtonIcon !== undefined && (
           <button
             className={clsx(
-              'flex items-center rounded-md p-2 text-bg-600 transition-all',
+              'text-bg-600 flex items-center rounded-md p-2 transition-all',
               'hover:bg-bg-100 dark:hover:bg-bg-800 dark:hover:text-bg-50'
             )}
             onClick={actionButtonOnClick}

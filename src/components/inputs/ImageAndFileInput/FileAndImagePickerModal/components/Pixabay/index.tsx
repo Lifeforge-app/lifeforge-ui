@@ -112,7 +112,6 @@ function Pixabay({
               filters.isEditorsChoice
             ].filter(e => e).length
           }
-          hasTopMargin={false}
           namespace="common.modals"
           searchQuery={query}
           setSearchQuery={setQuery}

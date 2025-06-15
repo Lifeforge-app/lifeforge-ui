@@ -16,7 +16,7 @@ function ListboxNullOption({
   return (
     <ListboxOption
       key="none"
-      className="relative flex-between flex cursor-pointer p-4 transition-all select-none hover:bg-bg-200 dark:hover:bg-bg-700/50"
+      className="flex-between hover:bg-bg-200 dark:hover:bg-bg-700/50 relative flex cursor-pointer select-none p-4 transition-all"
       value={value}
     >
       {({ selected }) => (
@@ -24,7 +24,7 @@ function ListboxNullOption({
           <div
             className={clsx(
               'flex items-center font-medium',
-              hasBgColor ? 'gap-4' : 'gap-2',
+              hasBgColor ? 'gap-3' : 'gap-2',
               selected && 'text-bg-800 dark:text-bg-100'
             )}
           >
@@ -32,7 +32,7 @@ function ListboxNullOption({
               className={clsx(
                 'rounded-md',
                 hasBgColor
-                  ? 'bg-bg-200 p-2 text-bg-500 dark:bg-bg-700/50'
+                  ? 'bg-bg-200 text-bg-500 dark:bg-bg-700/50 p-2'
                   : 'pr-2'
               )}
             >
@@ -42,7 +42,7 @@ function ListboxNullOption({
           </div>
           {selected && (
             <Icon
-              className="block text-lg text-custom-500"
+              className="text-custom-500 block text-lg"
               icon="tabler:check"
             />
           )}

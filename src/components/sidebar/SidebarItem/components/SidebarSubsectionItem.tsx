@@ -43,7 +43,7 @@ function SidebarSubsectionItem({
     <Link
       key={subsectionName}
       className={clsx(
-        'mx-4 flex w-full items-center gap-4 rounded-lg py-4 font-medium transition-all hover:bg-bg-100/50 dark:hover:bg-bg-800/50',
+        'hover:bg-bg-100/50 dark:hover:bg-bg-800/50 mx-4 flex w-full items-center gap-3 rounded-lg py-4 font-medium transition-all',
         !sidebarExpanded ? 'justify-center' : '',
         sidebarExpanded ? 'pl-[3.8rem]' : 'px-2',
         locationDependentStyles

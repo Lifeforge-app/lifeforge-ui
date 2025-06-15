@@ -37,7 +37,7 @@ function ModalHeader({
   const innerIcon = useDebounce(icon, 100)
 
   return (
-    <div className={clsx('mb-4 flex-between flex gap-4', className)}>
+    <div className={clsx('flex-between mb-4 flex gap-3', className)}>
       <h1 className="flex w-full min-w-0 items-center gap-3 text-2xl font-semibold">
         <Icon className="size-7 shrink-0" icon={innerIcon} />
         <span className="min-w-0 truncate">
@@ -67,7 +67,7 @@ function ModalHeader({
         {actionButtonIcon !== undefined && (
           <button
             className={clsx(
-              'rounded-md p-2 transition-all hover:bg-bg-100 dark:hover:bg-bg-800',
+              'hover:bg-bg-100 dark:hover:bg-bg-800 rounded-md p-2 transition-all',
               actionButtonIsRed
                 ? 'text-red-500 hover:text-red-600'
                 : 'text-bg-500 hover:text-bg-200'

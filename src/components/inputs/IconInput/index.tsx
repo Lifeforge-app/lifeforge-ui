@@ -40,7 +40,7 @@ function IconInput({
   }, [])
 
   return (
-    <InputWrapper darker className="mt-4" disabled={disabled} inputRef={ref}>
+    <InputWrapper darker disabled={disabled} inputRef={ref}>
       <InputIcon active={!!icon} icon="tabler:icons" />
       <div className="flex w-full items-center gap-2">
         <InputLabel
@@ -48,7 +48,7 @@ function IconInput({
           label={t([`inputs.${_.camelCase(name)}`, name])}
           required={required}
         />
-        <div className="mt-6 mr-12 flex w-full items-center gap-2 pl-4">
+        <div className="mr-12 mt-6 flex w-full items-center gap-2 pl-4">
           <div className="icon-input-icon size-4 shrink-0">
             <Icon
               className={clsx(
@@ -61,14 +61,14 @@ function IconInput({
           </div>
           <input
             ref={ref}
-            className="h-8 w-full rounded-lg bg-transparent p-6 pl-0 tracking-wide placeholder:text-transparent focus:outline-hidden focus:placeholder:text-bg-500"
+            className="focus:outline-hidden focus:placeholder:text-bg-500 h-8 w-full rounded-lg bg-transparent p-6 pl-0 tracking-wide placeholder:text-transparent"
             placeholder="tabler:cube"
             value={icon}
             onChange={updateIcon}
           />
         </div>
         <button
-          className="mr-4 shrink-0 rounded-lg p-2 text-bg-500 transition-all hover:bg-bg-300 hover:text-bg-800 focus:outline-hidden dark:hover:bg-bg-700/70 dark:hover:text-bg-200"
+          className="text-bg-500 hover:bg-bg-300 hover:text-bg-800 focus:outline-hidden dark:hover:bg-bg-700/70 dark:hover:text-bg-200 mr-4 shrink-0 rounded-lg p-2 transition-all"
           onClick={handleIconSelectorOpen}
         >
           <Icon className="size-5" icon="tabler:chevron-down" />

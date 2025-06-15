@@ -113,7 +113,6 @@ function Search({
     <div className="flex min-h-0 w-full flex-1 flex-col">
       <div className="flex w-full gap-2">
         <SearchInput
-          hasTopMargin={false}
           namespace="common.modals"
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
@@ -169,7 +168,7 @@ function Search({
                     return (
                       <div
                         key={key}
-                        className="flex w-full gap-4"
+                        className="flex w-full gap-3"
                         style={style}
                       >
                         {filteredIconList

@@ -88,7 +88,7 @@ function LocationInput({
   }, [])
 
   return (
-    <div className="relative flex w-full items-center gap-4">
+    <div className="relative flex w-full items-center gap-3">
       <ListboxOrComboboxInput
         className="w-full"
         customActive={Boolean(location)}
@@ -122,7 +122,7 @@ function LocationInput({
         )}
       </ListboxOrComboboxInput>
       {!enabled && (
-        <div className="absolute top-1/2 right-6 flex-center -translate-y-1/2 gap-2 text-bg-500">
+        <div className="flex-center text-bg-500 absolute right-6 top-1/2 -translate-y-1/2 gap-2">
           {t('locationDisabled.title')}
           <Tooltip
             icon="tabler:info-circle"
@@ -133,10 +133,10 @@ function LocationInput({
               place: 'top-end'
             }}
           >
-            <p className="max-w-64 text-bg-500">
+            <p className="text-bg-500 max-w-64">
               {t('locationDisabled.description')}{' '}
               <a
-                className="font-medium text-custom-500 underline decoration-custom-500 decoration-2"
+                className="text-custom-500 decoration-custom-500 font-medium underline decoration-2"
                 href="https://docs.lifeforge.melvinchia.dev/user-guide/api-keys#location"
                 rel="noopener noreferrer"
                 target="_blank"

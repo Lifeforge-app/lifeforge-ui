@@ -72,7 +72,6 @@ function IconSet({
         {iconData.title}
       </h1>
       <SearchInput
-        hasTopMargin={false}
         namespace="common.modals"
         searchQuery={searchTerm}
         setSearchQuery={setSearchTerm}
@@ -111,7 +110,7 @@ function IconSet({
                     return (
                       <div
                         key={key}
-                        className="flex w-full gap-4"
+                        className="flex w-full gap-3"
                         style={style}
                       >
                         {filteredIconList
