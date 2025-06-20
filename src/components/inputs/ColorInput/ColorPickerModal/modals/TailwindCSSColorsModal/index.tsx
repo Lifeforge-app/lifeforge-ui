@@ -21,7 +21,7 @@ function TailwindCSSColorsModal({
         title="colorPicker.modals.morandiColorPalette"
         onClose={onClose}
       />
-      <div className="space-y-3 overflow-y-auto">
+      <div className="space-y-3">
         {([...Object.keys(colors)] as Array<keyof typeof colors>)
           .filter(
             colorGroup =>

@@ -43,7 +43,7 @@ function FileAndImagePickerModal({
   }, [])
 
   return (
-    <div className="min-w-[70vw] overflow-hidden">
+    <div className="min-w-[70vw]">
       <ModalHeader
         icon="tabler:photo"
         title="imagePicker.title"

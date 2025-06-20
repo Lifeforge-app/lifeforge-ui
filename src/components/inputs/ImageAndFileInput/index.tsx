@@ -1,3 +1,4 @@
+import FILE_ICONS from '@constants/file_icons'
 import { Icon } from '@iconify/react'
 import clsx from 'clsx'
 import _ from 'lodash'
@@ -102,7 +103,18 @@ function ImageAndFileInput({
       )}
       {image !== null && preview === null && (
         <div className="mt-4 flex items-center justify-between gap-8">
-          <p className="w-full truncate">{(image as File).name}</p>
+          <div className="flex w-full items-center gap-3">
+            <Icon
+              className="text-bg-500 size-6"
+              icon={
+                FILE_ICONS[
+                  ((image as File).name.split('.').pop() ||
+                    '') as keyof typeof FILE_ICONS
+                ] || 'tabler:file'
+              }
+            />
+            <p className="w-full truncate">{(image as File).name}</p>
+          </div>
           <Button
             className="p-2!"
             icon="tabler:x"

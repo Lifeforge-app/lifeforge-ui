@@ -51,7 +51,7 @@ function DnDContainer({
       className="flex-center border-bg-500 size-full min-h-96 flex-1 flex-col rounded-lg border-[3px] border-dashed py-12"
       {...getRootProps()}
     >
-      <input {...getInputProps()} />
+      <input {...getInputProps()} multiple={false} type="file" />
       <Icon className="text-bg-500 size-20 shrink-0" icon="tabler:drag-drop" />
       <div className="text-bg-500 mt-4 text-center text-2xl font-medium">
         {isDragActive ? t('dnd.dropHere') : t('dnd.dragAndDropToUpload')}
