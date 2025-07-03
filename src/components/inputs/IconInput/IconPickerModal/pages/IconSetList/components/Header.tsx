@@ -46,6 +46,7 @@ function Header({
     <>
       <div className="flex w-full flex-col gap-2 sm:flex-row">
         <SearchInput
+          lighter
           namespace="common.modals"
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
