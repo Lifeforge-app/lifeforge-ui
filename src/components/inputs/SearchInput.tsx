@@ -1,9 +1,9 @@
 import { Icon } from '@iconify/react'
-import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import clsx from 'clsx'
 import _ from 'lodash'
-import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+
+import useComponentBg from '@hooks/useComponentBg'
 
 import { Button } from '../buttons'
 
@@ -37,13 +37,7 @@ function SearchInput({
   tKey?: string
 }) {
   const { t } = useTranslation(['common.misc', namespace])
-  const { bgImage } = useLifeforgeUIContext()
-  const componentBgLighterWithHover = useMemo(() => {
-    if (bgImage !== '') {
-      return 'bg-bg-50 dark:bg-bg-800/50 hover:bg-bg-200/50 dark:hover:bg-bg-700/50 transition-all'
-    }
-    return 'bg-bg-50 dark:bg-bg-800/50 dark:hover:bg-bg-800/80 hover:bg-bg-50/50 transition-all'
-  }, [bgImage])
+  const { componentBgLighterWithHover } = useComponentBg()
 
   return (
     <search

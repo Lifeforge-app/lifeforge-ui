@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useCallback } from 'react'
 
-import useThemeColors from '@hooks/useThemeColor'
+import useComponentBg from '@hooks/useComponentBg'
 
 function InputWrapper({
   darker = false,
@@ -16,7 +16,7 @@ function InputWrapper({
   inputRef?: React.RefObject<HTMLInputElement | HTMLTextAreaElement | null>
   children: React.ReactNode
 }) {
-  const { componentBgWithHover, componentBgLighterWithHover } = useThemeColors()
+  const { componentBgWithHover, componentBgLighterWithHover } = useComponentBg()
 
   const focusInput = useCallback(
     (e: React.MouseEvent | React.FocusEvent) => {

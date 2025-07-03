@@ -2,6 +2,7 @@ import { Switch as HeadlessSwitch } from '@headlessui/react'
 import clsx from 'clsx'
 import tinycolor from 'tinycolor2'
 
+import useComponentBg from '@hooks/useComponentBg'
 import useThemeColors from '@hooks/useThemeColor'
 
 function Switch({
@@ -11,7 +12,8 @@ function Switch({
   checked: boolean
   onChange: () => void
 }) {
-  const { darkerComponentBgWithHover, theme } = useThemeColors()
+  const { darkerComponentBgWithHover } = useComponentBg()
+  const { theme } = useThemeColors()
 
   const getStateClassName = () => {
     if (checked) {

@@ -9,7 +9,7 @@ import Zoom from 'react-medium-image-zoom'
 import { Button } from '@components/buttons'
 import { useModalStore } from '@components/modals'
 
-import useThemeColors from '@hooks/useThemeColor'
+import useComponentBg from '@hooks/useComponentBg'
 
 function ImageAndFileInput({
   icon,
@@ -48,7 +48,7 @@ function ImageAndFileInput({
   acceptedMimeTypes: Record<string, string[]>
 }) {
   const open = useModalStore(state => state.open)
-  const { componentBgLighter } = useThemeColors()
+  const { componentBgLighter } = useComponentBg()
   const { t } = useTranslation([namespace, 'common.buttons'])
 
   const handleImagePickerOpen = useCallback(() => {

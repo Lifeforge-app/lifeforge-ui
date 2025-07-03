@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
 
-import useThemeColors from '@hooks/useThemeColor'
+import useComponentBg from '@hooks/useComponentBg'
 
 function DashboardItem({
   ref,
@@ -23,7 +23,7 @@ function DashboardItem({
   namespace?: string
 }) {
   const { t } = useTranslation(namespace)
-  const { componentBg } = useThemeColors()
+  const { componentBg } = useComponentBg()
 
   return (
     <div

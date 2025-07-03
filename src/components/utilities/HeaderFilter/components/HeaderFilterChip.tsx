@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react'
 import clsx from 'clsx'
 
-import useThemeColors from '@hooks/useThemeColor'
+import useComponentBg from '@hooks/useComponentBg'
 
 function FilterChip({
   icon,
@@ -14,7 +14,7 @@ function FilterChip({
   color?: string
   onRemove: () => void
 }) {
-  const { componentBgLighter } = useThemeColors()
+  const { componentBgLighter } = useComponentBg()
 
   return (
     <span

@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react'
 import clsx from 'clsx'
 
-import useThemeColors from '@hooks/useThemeColor'
+import useComponentBg from '@hooks/useComponentBg'
 
 function ViewModeSelector<T extends string>({
   viewMode,
@@ -14,7 +14,7 @@ function ViewModeSelector<T extends string>({
   options: Array<{ value: T; icon: string }>
   className?: string
 }) {
-  const { componentBg, componentBgLighter } = useThemeColors()
+  const { componentBg, componentBgLighter } = useComponentBg()
 
   return (
     <div
