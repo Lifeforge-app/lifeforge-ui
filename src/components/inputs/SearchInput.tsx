@@ -8,6 +8,7 @@ import useComponentBg from '@hooks/useComponentBg'
 import { Button } from '../buttons'
 
 function SearchInput({
+  lighter,
   searchQuery,
   setSearchQuery,
   stuffToSearch,
@@ -22,6 +23,7 @@ function SearchInput({
   namespace,
   tKey = ''
 }: {
+  lighter?: boolean
   searchQuery: string
   setSearchQuery: (query: string) => void
   stuffToSearch: string
@@ -37,13 +39,13 @@ function SearchInput({
   tKey?: string
 }) {
   const { t } = useTranslation(['common.misc', namespace])
-  const { componentBgLighterWithHover } = useComponentBg()
+  const { componentBgLighterWithHover, componentBgWithHover } = useComponentBg()
 
   return (
     <search
       className={clsx(
         'shadow-custom flex min-h-14 w-full cursor-text items-center gap-3 rounded-lg px-4 transition-all',
-        componentBgLighterWithHover,
+        lighter ? componentBgLighterWithHover : componentBgWithHover,
         className
       )}
       onClick={e => {
