@@ -4,23 +4,10 @@ import { useEffect } from 'react'
 
 import './index.css'
 
-import { FileAndImagePickerModal } from '../src/components/inputs'
-import ColorPickerModal from '../src/components/inputs/ColorInput/ColorPickerModal'
-import IconPickerModal from '../src/components/inputs/IconInput/IconPickerModal'
 import ModalManager from '../src/components/modals/core/ModalManager'
-import { ModalComponent } from '../src/components/modals/core/useModalStore'
-import useModalsEffect from '../src/components/modals/core/useModalsEffect'
-import DeleteConfirmationModal from '../src/components/modals/features/DeleteConfirmationModal'
 import { LifeforgeUIProvider } from '../src/providers/LifeforgeUIProvider'
 
 const queryClient = new QueryClient()
-
-const DEFAULT_MODALS: Record<string, ModalComponent> = {
-  deleteConfirmation: DeleteConfirmationModal,
-  iconPicker: IconPickerModal,
-  colorPicker: ColorPickerModal,
-  fileAndImagePicker: FileAndImagePickerModal
-}
 
 const withBodyClass = (Story, context) => {
   useEffect(() => {
@@ -50,8 +37,6 @@ const withBodyClass = (Story, context) => {
     }
   }, [context.globals.theme])
 
-  useModalsEffect(DEFAULT_MODALS)
-
   return (
     <QueryClientProvider client={queryClient}>
       <LifeforgeUIProvider
@@ -60,7 +45,7 @@ const withBodyClass = (Story, context) => {
           themeColor: 'blue'
         }}
       >
-        <main id="app" className="bg-white">
+        <main className="bg-white" id="app">
           <div
             className={`bg-zinc theme-blue flex min-h-dvh w-full items-center justify-center transition-all ${
               context.globals.theme === 'dark' ? 'dark' : ''

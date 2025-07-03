@@ -8,6 +8,7 @@ import { useModalStore } from '@components/modals'
 import InputIcon from '../shared/InputIcon'
 import InputLabel from '../shared/InputLabel'
 import InputWrapper from '../shared/InputWrapper'
+import ColorPickerModal from './ColorPickerModal'
 
 function ColorInput({
   name,
@@ -31,7 +32,7 @@ function ColorInput({
   const ref = useRef<HTMLInputElement | null>(null)
 
   const handleColorPickerOpen = useCallback(() => {
-    open('colorPicker', {
+    open(ColorPickerModal, {
       color,
       setColor
     })

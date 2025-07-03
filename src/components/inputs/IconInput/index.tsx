@@ -9,6 +9,7 @@ import { useModalStore } from '@components/modals'
 import InputIcon from '../shared/InputIcon'
 import InputLabel from '../shared/InputLabel'
 import InputWrapper from '../shared/InputWrapper'
+import IconPickerModal from './IconPickerModal'
 
 function IconInput({
   name,
@@ -34,7 +35,7 @@ function IconInput({
   }
 
   const handleIconSelectorOpen = useCallback(() => {
-    open('iconPicker', {
+    open(IconPickerModal, {
       setSelectedIcon: setIcon
     })
   }, [])

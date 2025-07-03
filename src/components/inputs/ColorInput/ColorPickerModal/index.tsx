@@ -2,9 +2,10 @@ import { type ColorResult, Colorful, EditableInput } from '@uiw/react-color'
 import { useCallback, useEffect, useState } from 'react'
 
 import { Button } from '@components/buttons'
-import { ModalHeader, useModalStore, useModalsEffect } from '@components/modals'
+import { ModalHeader, useModalStore } from '@components/modals'
 
-import { ColorPickerModals } from './modals'
+import MorandiColorPaletteModal from './modals/MorandiColorPaletteModal'
+import TailwindCSSColorsModal from './modals/TailwindCSSColorsModal'
 
 function checkContrast(hexColor: string): string {
   const r = parseInt(hexColor.substr(1, 2), 16)
@@ -42,18 +43,19 @@ function ColorPickerModal({
 
   const handleColorPaletteModalOpen = useCallback(
     (type: 'morandi' | 'tailwind') => () =>
-      open(`colorPicker.${type}`, {
-        color: innerColor,
-        setColor: setInnerColor
-      }),
+      open(
+        type === 'morandi' ? MorandiColorPaletteModal : TailwindCSSColorsModal,
+        {
+          color: innerColor,
+          setColor: setInnerColor
+        }
+      ),
     [innerColor]
   )
 
   useEffect(() => {
     setInnerColor(color.toLowerCase() || '#000000')
   }, [color])
-
-  useModalsEffect(ColorPickerModals)
 
   return (
     <div className="sm:min-w-[28rem]!">

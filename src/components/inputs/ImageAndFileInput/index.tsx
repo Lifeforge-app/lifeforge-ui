@@ -11,6 +11,8 @@ import { useModalStore } from '@components/modals'
 
 import useComponentBg from '@hooks/useComponentBg'
 
+import FileAndImagePickerModal from './FileAndImagePickerModal'
+
 function ImageAndFileInput({
   icon,
   name,
@@ -52,7 +54,7 @@ function ImageAndFileInput({
   const { t } = useTranslation([namespace, 'common.buttons'])
 
   const handleImagePickerOpen = useCallback(() => {
-    open('fileAndImagePicker', {
+    open(FileAndImagePickerModal, {
       enablePixabay,
       enableUrl,
       enableAI,
