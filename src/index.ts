@@ -9,4 +9,5 @@ export * from './components/utilities'
 export * from './components/layouts'
 export * from './providers/LifeforgeUIProvider'
 
+export type { ILocationEntry } from './components/inputs/LocationInput'
 export type { IFieldProps, IFormState } from './interfaces/modal_interfaces'
