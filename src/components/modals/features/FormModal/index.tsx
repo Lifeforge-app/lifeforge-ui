@@ -157,7 +157,10 @@ function FormModal<T extends IFormState, U extends RecordModel>({
       return (
         !value ||
         (typeof value === 'string' && !value.trim()) ||
-        (typeof value === 'object' && !Array.isArray(value) && !value.image)
+        (typeof value === 'object' &&
+          !Array.isArray(value) &&
+          !value.image &&
+          JSON.stringify(value) === '{}')
       )
     })
 
