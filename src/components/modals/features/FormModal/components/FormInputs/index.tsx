@@ -1,5 +1,7 @@
 import { IFieldProps, IFormState } from '@interfaces/modal_interfaces'
 
+import { ILocationEntry } from '@components/inputs/LocationInput'
+
 import FormCheckboxInput from './components/FormCheckboxInput'
 import FormColorInput from './components/FormColorInput'
 import FormDateInput from './components/FormDateInput'
@@ -104,7 +106,7 @@ function FormInputs<T>({
                 field={field as IFieldProps<T> & { type: 'location' }}
                 handleChange={handleChange(field)}
                 namespace={namespace}
-                selectedData={selectedData as string}
+                selectedData={selectedData as ILocationEntry | null}
               />
             )
           case 'checkbox':

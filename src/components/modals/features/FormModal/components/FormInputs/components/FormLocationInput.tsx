@@ -4,12 +4,13 @@ import {
 } from '@interfaces/modal_interfaces'
 
 import { LocationInput } from '@components/inputs'
+import { ILocationEntry } from '@components/inputs/LocationInput'
 
 interface FormLocationInputProps<T> {
   field: IFieldProps<T> & ILocationInputFieldProps
-  selectedData: string
+  selectedData: ILocationEntry | null
   namespace: string
-  handleChange: (value: string) => void
+  handleChange: (value: ILocationEntry | null) => void
 }
 
 function FormLocationInput<T>({
@@ -25,7 +26,7 @@ function FormLocationInput<T>({
       location={selectedData}
       namespace={namespace}
       required={field.required}
-      setLocation={value => handleChange(value ?? '')}
+      setLocation={value => handleChange(value)}
     />
   )
 }

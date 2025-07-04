@@ -7,7 +7,9 @@ function ListboxInputWrapper<T>({
   multiple = false,
   className,
   children,
-  disabled
+  disabled,
+  selfRef,
+  onClick
 }: {
   value: T
   onChange: (value: T) => void
@@ -15,9 +17,12 @@ function ListboxInputWrapper<T>({
   className?: string
   children: React.ReactNode
   disabled?: boolean
+  selfRef: React.RefObject<HTMLDivElement | null>
+  onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }) {
   return (
     <Listbox
+      ref={selfRef}
       as="div"
       className={clsx(
         'border-bg-500 bg-bg-200/50 shadow-custom hover:bg-bg-200 data-open:border-custom-500! dark:bg-bg-800/50 dark:hover:bg-bg-800/80 relative flex items-center gap-1 rounded-t-lg border-b-2 transition-all',
@@ -27,6 +32,7 @@ function ListboxInputWrapper<T>({
       multiple={multiple}
       value={value}
       onChange={onChange}
+      onClick={onClick}
     >
       {children}
     </Listbox>

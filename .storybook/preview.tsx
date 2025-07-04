@@ -41,6 +41,7 @@ const withBodyClass = (Story, context) => {
     <QueryClientProvider client={queryClient}>
       <LifeforgeUIProvider
         personalization={{
+          apiHost: 'https://lifeforge-api-proxy.onrender.com',
           theme: context.globals.theme,
           themeColor: 'blue'
         }}

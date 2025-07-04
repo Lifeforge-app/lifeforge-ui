@@ -12,35 +12,18 @@ function ListboxOrComboboxOption({
   iconAtEnd = false,
   color,
   type = 'listbox',
-  matchedSubstrings,
   noCheckmark = false
 }: {
   value: unknown
-  text: string
+  text: string | React.ReactElement
   icon?: string | React.ReactElement
   iconAtEnd?: boolean
   color?: string
   type?: 'listbox' | 'combobox'
-  matchedSubstrings?: Array<{ length: number; offset: number }>
   noCheckmark?: boolean
 }) {
   const Element =
     type === 'listbox' ? HeadlessListboxOption : HeadlessComboboxOption
-
-  const getCharClassNames = (
-    matchedSubstrings: Array<{ length: number; offset: number }> | undefined,
-    index: number
-  ) => {
-    if (
-      matchedSubstrings === undefined ||
-      !matchedSubstrings.some(
-        ({ offset, length }) => index >= offset && index < offset + length
-      )
-    )
-      return ''
-
-    return 'font-medium text-bg-800 dark:text-bg-100'
-  }
 
   return (
     <Element
@@ -83,16 +66,7 @@ function ListboxOrComboboxOption({
                 />
               )
             )}
-            <span>
-              {text.split('').map((char, index) => (
-                <span
-                  key={index}
-                  className={getCharClassNames(matchedSubstrings, index)}
-                >
-                  {char}
-                </span>
-              ))}
-            </span>
+            <div className="w-full min-w-0 truncate">{text}</div>
           </div>
           {!noCheckmark && selected && (
             <Icon

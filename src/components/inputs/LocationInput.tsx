@@ -14,32 +14,16 @@ import fetchAPI from '@utils/fetchAPI'
 
 import { Tooltip } from '../utilities'
 
-export interface ILocationAutoComplete {
-  predictions: Prediction[]
-  status: string
-}
-
-export interface Prediction {
-  description: string
-  matched_substrings: Array<{
-    length: number
-    offset: number
-  }>
-  place_id: string
-  reference: string
-  structured_formatting: {
-    main_text: string
-    main_text_matched_substrings: Array<{
-      length: number
-      offset: number
-    }>
-    secondary_text: string
+export interface ILocationEntry {
+  formattedAddress: string
+  location: {
+    longitude: number
+    latitude: number
   }
-  terms: Array<{
-    offset: number
-    value: string
-  }>
-  types: string[]
+  displayName: {
+    text: string
+    languageCode: string
+  }
 }
 
 function LocationInput({
@@ -50,8 +34,8 @@ function LocationInput({
   required,
   disabled
 }: {
-  location: string | null
-  setLocation: (value: string | null) => void
+  location: ILocationEntry | null
+  setLocation: (value: ILocationEntry | null) => void
   namespace: string
   label?: string
   required?: boolean
@@ -62,16 +46,10 @@ function LocationInput({
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebounce(query, 500)
   const [enabled, setEnabled] = useState(false)
-  const dataQuery = useQuery<{
-    predictions: Prediction[]
-    status: string
-  }>({
+  const dataQuery = useQuery<ILocationEntry[]>({
     queryKey: ['locations', debouncedQuery],
     queryFn: () =>
-      fetchAPI<ILocationAutoComplete>(
-        apiHost,
-        `/locations?q=${debouncedQuery}`
-      ),
+      fetchAPI<ILocationEntry[]>(apiHost, `/locations?q=${debouncedQuery}`),
     enabled: debouncedQuery.trim() !== ''
   })
 
@@ -89,11 +67,11 @@ function LocationInput({
 
   return (
     <div className="relative flex w-full items-center gap-3">
-      <ListboxOrComboboxInput
+      <ListboxOrComboboxInput<ILocationEntry | null>
         className="w-full"
         customActive={Boolean(location)}
         disabled={!enabled || disabled}
-        displayValue={value => value ?? ''}
+        displayValue={value => value?.displayName?.text ?? ''}
         icon="tabler:map-pin"
         name={label || 'Location'}
         namespace={namespace}
@@ -107,13 +85,19 @@ function LocationInput({
           <QueryWrapper query={dataQuery}>
             {data => (
               <>
-                {data.predictions.map((prediction: Prediction) => (
+                {data.map(loc => (
                   <ListboxOrComboboxOption
-                    key={prediction.place_id}
-                    matchedSubstrings={prediction.matched_substrings}
-                    text={prediction.description}
+                    key={JSON.stringify(loc.location)}
+                    text={
+                      <div className="w-full min-w-0">
+                        {loc.displayName.text}
+                        <p className="text-bg-400 dark:text-bg-600 w-full min-w-0 truncate text-sm">
+                          {loc.formattedAddress}
+                        </p>
+                      </div>
+                    }
                     type="combobox"
-                    value={prediction.description}
+                    value={loc}
                   />
                 ))}
               </>

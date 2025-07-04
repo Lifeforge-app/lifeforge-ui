@@ -1,7 +1,7 @@
 import { ComboboxInput, ListboxButton } from '@headlessui/react'
 import { Icon } from '@iconify/react'
 import _ from 'lodash'
-import { useMemo } from 'react'
+import { useCallback, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import InputIcon from '../shared/InputIcon'
@@ -54,6 +54,7 @@ function ListboxOrComboboxInput<T>(
     namespace,
     tKey = ''
   } = props
+  const selfRef = useRef<HTMLDivElement>(null)
   const { t } = useTranslation(namespace ? namespace : undefined)
   const isActive = useMemo(() => {
     if (typeof customActive === 'boolean') {
@@ -71,6 +72,20 @@ function ListboxOrComboboxInput<T>(
     return !!value
   }, [value, customActive])
 
+  const focusInput = useCallback((e: React.MouseEvent | React.FocusEvent) => {
+    if ((e.target as HTMLElement).tagName === 'BUTTON') {
+      return
+    }
+
+    const inputInside = (e.target as HTMLElement).querySelector('input') as
+      | HTMLInputElement
+      | HTMLTextAreaElement
+
+    if (inputInside && inputInside instanceof HTMLInputElement) {
+      inputInside.focus()
+    }
+  }, [])
+
   switch (type) {
     case 'listbox':
     case undefined:
@@ -79,8 +94,10 @@ function ListboxOrComboboxInput<T>(
           className={props.className}
           disabled={disabled}
           multiple={props.multiple}
+          selfRef={selfRef}
           value={value}
           onChange={setValue}
+          onClick={focusInput}
         >
           <ListboxButton className="group flex w-full min-w-64 items-center pl-6">
             <InputIcon active={isActive} icon={icon} />
@@ -119,9 +136,11 @@ function ListboxOrComboboxInput<T>(
         <ComboboxInputWrapper
           className={props.className}
           disabled={disabled}
+          selfRef={selfRef}
           setQuery={props.setQuery}
           value={value}
           onChange={setValue}
+          onClick={focusInput}
         >
           <div className="group relative flex w-full items-center">
             <InputIcon
@@ -137,7 +156,7 @@ function ListboxOrComboboxInput<T>(
               required={required === true}
             />
             <ComboboxInput
-              className="bg-transparent! pl-17.5 focus:outline-hidden relative mb-3 mt-10 flex w-full items-center gap-2 rounded-lg pr-5 text-left"
+              className="bg-transparent! pl-17 focus:outline-hidden relative mb-3 mt-10 flex w-full items-center gap-2 rounded-lg pr-5 text-left"
               displayValue={props.displayValue}
               onChange={e => {
                 props.setQuery(e.target.value)
