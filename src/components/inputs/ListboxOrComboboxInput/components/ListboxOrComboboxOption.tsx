@@ -42,7 +42,7 @@ function ListboxOrComboboxOption({
           >
             {icon !== undefined ? (
               <span
-                className={clsx('rounded-md', color ? 'p-2' : 'pr-2')}
+                className={clsx('shrink-0 rounded-md', color ? 'p-2' : 'pr-2')}
                 style={
                   color !== undefined
                     ? {
@@ -53,7 +53,7 @@ function ListboxOrComboboxOption({
                 }
               >
                 {typeof icon === 'string' ? (
-                  <Icon className="size-5" icon={icon} />
+                  <Icon className="size-5 shrink-0" icon={icon} />
                 ) : (
                   icon
                 )}
