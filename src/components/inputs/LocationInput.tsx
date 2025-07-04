@@ -1,3 +1,4 @@
+import { Icon } from '@iconify/react/dist/iconify.js'
 import { useLifeforgeUIContext } from '@providers/LifeforgeUIProvider'
 import { useQuery } from '@tanstack/react-query'
 import { useDebounce } from '@uidotdev/usehooks'
@@ -8,7 +9,6 @@ import {
   ListboxOrComboboxInput,
   ListboxOrComboboxOption
 } from '@components/inputs'
-import { QueryWrapper } from '@components/screens'
 
 import fetchAPI from '@utils/fetchAPI'
 
@@ -81,29 +81,33 @@ function LocationInput({
         type="combobox"
         value={location}
       >
-        {query.trim() !== '' && (
-          <QueryWrapper query={dataQuery}>
-            {data => (
-              <>
-                {data.map(loc => (
-                  <ListboxOrComboboxOption
-                    key={JSON.stringify(loc.location)}
-                    text={
-                      <div className="w-full min-w-0">
-                        {loc.displayName.text}
-                        <p className="text-bg-400 dark:text-bg-600 w-full min-w-0 truncate text-sm">
-                          {loc.formattedAddress}
-                        </p>
-                      </div>
-                    }
-                    type="combobox"
-                    value={loc}
-                  />
-                ))}
-              </>
-            )}
-          </QueryWrapper>
-        )}
+        {query.trim() !== '' &&
+          (dataQuery.data ? (
+            <>
+              {dataQuery.data.map(loc => (
+                <ListboxOrComboboxOption
+                  key={JSON.stringify(loc.location)}
+                  text={
+                    <div className="w-full min-w-0">
+                      {loc.displayName.text}
+                      <p className="text-bg-400 dark:text-bg-600 w-full min-w-0 truncate text-sm">
+                        {loc.formattedAddress}
+                      </p>
+                    </div>
+                  }
+                  type="combobox"
+                  value={loc}
+                />
+              ))}
+            </>
+          ) : (
+            <div className="flex-center my-6">
+              <Icon
+                className="text-bg-500 h-6 w-6"
+                icon="svg-spinners:180-ring"
+              />
+            </div>
+          ))}
       </ListboxOrComboboxInput>
       {!enabled && (
         <div className="flex-center text-bg-500 absolute right-6 top-1/2 -translate-y-1/2 gap-2">
