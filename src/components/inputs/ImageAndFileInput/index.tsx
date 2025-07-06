@@ -68,7 +68,7 @@ function ImageAndFileInput({
   return (
     <div
       className={clsx(
-        'shadow-custom flex w-full flex-col rounded-md p-6',
+        'bg-bg-200/50 shadow-custom flex w-full flex-col rounded-md p-6',
         darker ? 'component-bg-lighter' : 'component-bg',
         disabled ? 'pointer-events-none! opacity-50' : 'cursor-pointer'
       )}
