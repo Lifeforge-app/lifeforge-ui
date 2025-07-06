@@ -1,8 +1,6 @@
 import { Icon } from '@iconify/react'
 import clsx from 'clsx'
 
-import useComponentBg from '@hooks/useComponentBg'
-
 function FilterChip({
   icon,
   text,
@@ -14,14 +12,12 @@ function FilterChip({
   color?: string
   onRemove: () => void
 }) {
-  const { componentBgLighter } = useComponentBg()
-
   return (
     <span
       className={clsx(
         'flex-center gap-1 rounded-full px-2 py-1 text-sm',
         color === undefined &&
-          `text-bg-500 dark:text-bg-400 ${componentBgLighter}`
+          `text-bg-500 dark:text-bg-400 component-bg-lighter`
       )}
       style={
         color !== undefined ? { backgroundColor: color + '20', color } : {}

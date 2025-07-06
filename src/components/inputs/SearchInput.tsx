@@ -3,8 +3,6 @@ import clsx from 'clsx'
 import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
 
-import useComponentBg from '@hooks/useComponentBg'
-
 import { Button } from '../buttons'
 
 function SearchInput({
@@ -39,13 +37,12 @@ function SearchInput({
   tKey?: string
 }) {
   const { t } = useTranslation(['common.misc', namespace])
-  const { componentBgLighterWithHover, componentBgWithHover } = useComponentBg()
 
   return (
     <search
       className={clsx(
         'shadow-custom flex min-h-14 w-full cursor-text items-center gap-3 rounded-lg px-4 transition-all',
-        lighter ? componentBgLighterWithHover : componentBgWithHover,
+        lighter ? 'component-bg-lighter-with-hover' : 'component-bg-with-hover',
         className
       )}
       onClick={e => {

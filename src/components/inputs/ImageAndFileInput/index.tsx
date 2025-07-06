@@ -9,11 +9,10 @@ import Zoom from 'react-medium-image-zoom'
 import { Button } from '@components/buttons'
 import { useModalStore } from '@components/modals'
 
-import useComponentBg from '@hooks/useComponentBg'
-
 import FileAndImagePickerModal from './FileAndImagePickerModal'
 
 function ImageAndFileInput({
+  darker = true,
   icon,
   name,
   reminderText,
@@ -30,6 +29,7 @@ function ImageAndFileInput({
   defaultAIPrompt = '',
   acceptedMimeTypes
 }: {
+  darker?: boolean
   icon: string
   name: string
   reminderText?: string
@@ -50,7 +50,6 @@ function ImageAndFileInput({
   acceptedMimeTypes: Record<string, string[]>
 }) {
   const open = useModalStore(state => state.open)
-  const { componentBgLighter } = useComponentBg()
   const { t } = useTranslation([namespace, 'common.buttons'])
 
   const handleImagePickerOpen = useCallback(() => {
@@ -70,7 +69,7 @@ function ImageAndFileInput({
     <div
       className={clsx(
         'shadow-custom flex w-full flex-col rounded-md p-6',
-        componentBgLighter,
+        darker ? 'component-bg-lighter' : 'component-bg',
         disabled ? 'pointer-events-none! opacity-50' : 'cursor-pointer'
       )}
     >

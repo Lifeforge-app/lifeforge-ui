@@ -3,8 +3,6 @@ import clsx from 'clsx'
 import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
 
-import useComponentBg from '@hooks/useComponentBg'
-
 function DashboardItem({
   ref,
   className = '',
@@ -23,14 +21,12 @@ function DashboardItem({
   namespace?: string
 }) {
   const { t } = useTranslation(namespace)
-  const { componentBg } = useComponentBg()
 
   return (
     <div
       ref={ref}
       className={clsx(
-        'shadow-custom flex size-full flex-col gap-3 rounded-lg p-6',
-        componentBg,
+        'shadow-custom component-bg flex size-full flex-col gap-3 rounded-lg p-6',
         className
       )}
     >

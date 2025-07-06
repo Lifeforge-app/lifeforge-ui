@@ -1,8 +1,6 @@
 import { Icon } from '@iconify/react'
 import clsx from 'clsx'
 
-import useComponentBg from '@hooks/useComponentBg'
-
 function ViewModeSelector<T extends string>({
   viewMode,
   setViewMode,
@@ -14,13 +12,10 @@ function ViewModeSelector<T extends string>({
   options: Array<{ value: T; icon: string }>
   className?: string
 }) {
-  const { componentBg, componentBgLighter } = useComponentBg()
-
   return (
     <div
       className={clsx(
-        'shadow-custom mt-4 flex items-center gap-2 rounded-md p-2',
-        componentBg,
+        'shadow-custom component-bg mt-4 flex items-center gap-2 rounded-md p-2',
         className
       )}
     >
@@ -30,7 +25,7 @@ function ViewModeSelector<T extends string>({
           className={clsx(
             'flex items-center gap-2 rounded-md p-2 transition-all',
             value === viewMode
-              ? componentBgLighter
+              ? 'component-bg-lighter'
               : 'text-bg-500 hover:text-bg-800 dark:hover:text-bg-50'
           )}
           onClick={() => {
